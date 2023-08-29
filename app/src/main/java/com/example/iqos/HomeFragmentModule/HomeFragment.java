@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.iqos.AppointmentsModule.ActivityBookAppointment;
 import com.example.iqos.LeadsModule.ActivityLeads;
+import com.example.iqos.LeadsModule.ActivityLeadsDetail;
 import com.example.iqos.LoginModule.ActivityLogin;
 import com.example.iqos.MainActivity;
 import com.example.iqos.R;
@@ -59,6 +61,16 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ActivityLeads.class);
                  startActivity(intent);
+
+
+            }
+        });mBinding.rlAppoints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                        Intent intent = new Intent(getActivity(), ActivityBookAppointment.class);
+                        startActivity(intent);
+
 
 
             }

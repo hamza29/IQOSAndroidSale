@@ -33,6 +33,15 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:name=".MeetingModule.BookAppointmentDetailActivity"
+            android:exported="false" /> <activity
+            android:name=".AppointmentsModule.AppointmentBookingDetailActivity"
+            android:exported="false" /> <activity
+            android:name=".ActivityBookingAppointmentBinding"
+            android:exported="false" /> <activity
+            android:name=".MeetingModule.ActivityAppointmentMeetingCheckList"
+            android:exported="false" />
+        <activity
             android:name=".LoginModule.ActivityLogin"
             android:exported="true">
             <intent-filter>

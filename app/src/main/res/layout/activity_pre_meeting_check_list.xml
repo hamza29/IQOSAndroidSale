@@ -96,7 +96,7 @@
             <TextView
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
-                 android:text="Start"
+                 android:text="Done"
                 android:textAlignment="center"
                 android:background="@drawable/rectangle_background"
                  android:backgroundTint="@color/blue"
@@ -120,6 +120,7 @@
                 android:textAlignment="center"
                 android:paddingBottom="@dimen/_3sdp"
                  android:text="End"
+                android:visibility="gone"
                 android:background="@drawable/rectangle_background"
                 android:backgroundTint="@color/blue"
                 android:textColor="@color/white"

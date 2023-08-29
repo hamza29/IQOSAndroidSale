@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iqos.LeadsModule.ActivityLeadsDetail;
 import com.example.iqos.LeadsModule.LeadsAdapter;
+import com.example.iqos.MeetingModule.ActivityAppointmentMeetingCheckList;
+import com.example.iqos.MeetingModule.ActivityPreMeetingCheckList;
+import com.example.iqos.MeetingModule.BookAppointmentDetailActivity;
 import com.example.iqos.R;
 
 import java.util.ArrayList;
@@ -39,9 +43,29 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     public void onBindViewHolder(AppointmentAdapter.ViewHolder holder, int position) {
 
-        String item = items.get(position);
 
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, BookAppointmentDetailActivity.class);
+                context.startActivity(intent);
+            }
+        });
+     holder.tvStartAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityAppointmentMeetingCheckList.class);
+                context.startActivity(intent);
+            }
+        });
 
+        holder.tvPreMeeting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityPreMeetingCheckList.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -57,14 +81,17 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView name;
-
+        TextView name,tvPreMeeting,tvStartAppointment;
+        LinearLayout linearLayout;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.tvName);
+            linearLayout = itemView.findViewById(R.id.llMainAppointment);
+            tvStartAppointment = itemView.findViewById(R.id.tvStartAppointment);
+            tvPreMeeting = itemView.findViewById(R.id.tvPreMeeting);
 
 
         }
