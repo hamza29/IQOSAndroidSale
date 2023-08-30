@@ -10,19 +10,21 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iqos.R;
+import com.example.iqos.Retrofit.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder> {
     private Activity context;
 
 
 
-    ArrayList<String> items = new ArrayList<>();
+    List<Model.Lead> items;
 
 
 
-    public LeadsAdapter(Activity context, ArrayList<String> leads) {
+    public LeadsAdapter(Activity context, List<Model.Lead> leads) {
         this.context = context;
         this.items = leads;
 
@@ -37,12 +39,20 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
 
     public void onBindViewHolder(LeadsAdapter.ViewHolder holder, int position) {
 
-        String item = items.get(position);
+        Model.Lead item = items.get(position);
+        if (item.getFirstName() != null  && item.getLastName() != null) {
+            holder.name.setText(""+item.getFirstName().toString()+" "+item.getLastName().toString());
+        }
+
+        if (item.getLeadStatus() != null ) {
+            holder.name.setText(""+item.getLeadStatus().toString());
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ActivityLeadsDetail.class);
+                intent.putExtra("KEY_LEAD_ID",item.getId().toString());
                 context.startActivity(intent);
             }
         });
@@ -63,6 +73,7 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
 
 
         TextView name;
+        TextView tvStatus;
 
 
 
@@ -70,6 +81,7 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
             super(itemView);
 
             name = itemView.findViewById(R.id.tvName);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
 
 
         }

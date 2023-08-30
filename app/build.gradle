@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
+
 }
 
 android {
@@ -30,6 +32,9 @@ android {
         viewBinding true
     }
 
+
+
+
 }
 
 dependencies {
@@ -42,9 +47,56 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
 
-    /// SDP ////
+
+    // Library for Size management
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    // glide image library
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    // Api Calling Retrofit
+    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    // MultiDex Library
+    implementation 'com.android.support:multidex:1.0.3'
+    // Runtime Permissions
+    implementation 'com.karumi:dexter:6.2.3'
+    // Circle imageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // Light Material Spinner
+    implementation 'com.jaredrummler:material-spinner:1.3.1'
+    // Event Bus for Data handling /Local BroadCast Receiver
+    implementation 'org.greenrobot:eventbus:3.3.1'
+    // Side Menu Library for options
+    implementation 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
+    // Chart Library for options
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    // fluid slider
+    implementation 'com.ramotion.fluidslider:fluid-slider:0.3.1'
+    // slide navigation drawer
+    implementation 'com.google.android.material:material:1.7.0-alpha02'
 
+    
+    /////////////Firebase///////////////
+    implementation platform('com.google.firebase:firebase-bom:29.2.1')
+    implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-config'
+    implementation 'com.github.shichunlei:RulerView:1.0.0'
+    // firbase crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
 
+    // Retrofit use
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'io.github.sangcomz:fishbun:1.0.0-beta01'
 
 }

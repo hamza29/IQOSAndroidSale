@@ -154,6 +154,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="cold"
+                android:id="@+id/tvStatus"
                 android:textSize="@dimen/_8sdp"
 
                 android:textAlignment="center"

@@ -84,7 +84,13 @@
         android:layout_marginBottom="@dimen/_10sdp"
         />
 
-
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/color_primary"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

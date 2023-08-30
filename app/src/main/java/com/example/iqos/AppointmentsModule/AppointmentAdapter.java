@@ -10,25 +10,25 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.iqos.LeadsModule.ActivityLeadsDetail;
-import com.example.iqos.LeadsModule.LeadsAdapter;
 import com.example.iqos.MeetingModule.ActivityAppointmentMeetingCheckList;
 import com.example.iqos.MeetingModule.ActivityPreMeetingCheckList;
 import com.example.iqos.MeetingModule.BookAppointmentDetailActivity;
 import com.example.iqos.R;
+import com.example.iqos.Retrofit.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.ViewHolder> {
     private Activity context;
 
 
 
-    ArrayList<String> items = new ArrayList<>();
+    List<Model.Appointment> items = new ArrayList<>();
 
 
 
-    public AppointmentAdapter(Activity context, ArrayList<String> leads) {
+    public AppointmentAdapter(Activity context, List<Model.Appointment> leads) {
         this.context = context;
         this.items = leads;
 
