@@ -3,6 +3,7 @@ package com.example.iqos.LoginModule;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +23,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,24 +52,42 @@ public class ActivityLogin extends AppCompatActivity {
         setContentView(view);
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
        // FirebaseApp.initializeApp(ActivityLogin.this);
+            if(mSharedPreferences.getString(Constants.API_KEY,"").contains("skip")){
+            Intent intent = new Intent(ActivityLogin.this,MainActivity.class);
+            startActivity(intent);
+            }else{
+                mBinding.ivLogin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Dexter.withContext(ActivityLogin.this)
+                                .withPermissions(
+                                        Manifest.permission.ACCESS_FINE_LOCATION,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                                        Manifest.permission.RECORD_AUDIO
+                                ).withListener(new MultiplePermissionsListener() {
+                                    @Override public void onPermissionsChecked(MultiplePermissionsReport report) {
 
-        mBinding.ivLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                  username = mBinding.etUsername.getText().toString();
-                  password = mBinding.etPassword.getText().toString();
-                if (username.isEmpty()){
-                    mBinding.etUsername.setError("Enter Username");
-                }else if (password.isEmpty()){
-                    mBinding.etUsername.setError("Enter Password");
-                }else {
-                    getDeviceToken();
-                }
-                /*Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
-                startActivity(intent);*/
+                                        username = mBinding.etUsername.getText().toString();
+                                        password = mBinding.etPassword.getText().toString();
+                                        if (username.isEmpty()){
+                                            mBinding.etUsername.setError("Enter Username");
+                                        }else if (password.isEmpty()){
+                                            mBinding.etUsername.setError("Enter Password");
+                                        }else {
+                                            getDeviceToken();
+                                        }
+
+
+                                        /* ... */}
+                                    @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+                                }).check();
+                            /*Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
+                            startActivity(intent);*/
+                    }
+                });
+
             }
-        });
 
 
 
@@ -105,6 +131,10 @@ public class ActivityLogin extends AppCompatActivity {
 
                                     mBinding.progress.setVisibility(View.GONE);
                                     mSharedPreferences.edit().putString(Constants.BAREAR_TOKEN, "Bearer " + keyModel.getAccessToken().toString()).commit();
+                                    mSharedPreferences.edit().putString(Constants.API_KEY, "skip").commit();
+                                    mSharedPreferences.edit().putString(Constants.USER_NAME, ""+ keyModel.getData().getName()).commit();
+                                    mSharedPreferences.edit().putString(Constants.EMAIL, ""+ keyModel.getData().getCity()).commit();
+                                    mSharedPreferences.edit().putString(Constants.HYPER_CARE, ""+ keyModel.getData().getHyper_care()).commit();
 
                                     Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
                                     startActivity(intent);
@@ -114,7 +144,7 @@ public class ActivityLogin extends AppCompatActivity {
                                 }
 
                             } else {
-                                Toast.makeText(ActivityLogin.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityLogin.this, "Invalid Email/Password", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
 
                             }

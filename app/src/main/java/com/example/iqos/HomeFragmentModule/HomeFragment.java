@@ -1,7 +1,9 @@
 package com.example.iqos.HomeFragmentModule;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,11 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.iqos.AppointmentsModule.ActivityBookAppointment;
+import com.example.iqos.Constants;
+import com.example.iqos.InventoryActivity;
+import com.example.iqos.LeadsModule.ActivityHyperCareLeads;
 import com.example.iqos.LeadsModule.ActivityLeads;
 import com.example.iqos.LeadsModule.ActivityLeadsDetail;
 import com.example.iqos.LoginModule.ActivityLogin;
 import com.example.iqos.MainActivity;
 import com.example.iqos.R;
+import com.example.iqos.SalesModule.PerformanceActivity;
 import com.example.iqos.databinding.FragmentHomeBinding;
 
 
@@ -25,12 +31,7 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding mBinding;
 
     HomeFragment activity;
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
+    SharedPreferences mSharedPreferences;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -41,10 +42,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -53,8 +51,20 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         mBinding = FragmentHomeBinding.inflate(inflater, container, false);
         View view = mBinding.getRoot();
+        mSharedPreferences = getActivity().getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
 
         activity = this;
+        if(mSharedPreferences.getString(Constants.HYPER_CARE,"").equalsIgnoreCase("1")){
+             mBinding.rlAppoints.setVisibility(View.GONE);
+            mBinding.rlHyperCare.setVisibility(View.GONE);
+            mBinding.rlInvent.setVisibility(View.GONE);
+            mBinding.rlPerf.setVisibility(View.GONE);
+        }else{
+             mBinding.rlAppoints.setVisibility(View.VISIBLE);
+            mBinding.rlHyperCare.setVisibility(View.VISIBLE);
+            mBinding.rlInvent.setVisibility(View.VISIBLE);
+            mBinding.rlPerf.setVisibility(View.VISIBLE);
+        }
 
         mBinding.rlLeads.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +79,39 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
                         Intent intent = new Intent(getActivity(), ActivityBookAppointment.class);
+                        startActivity(intent);
+
+
+
+            }
+        });
+mBinding.rlHyperCare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                        Intent intent = new Intent(getActivity(), ActivityHyperCareLeads.class);
+                        startActivity(intent);
+
+
+
+            }
+        });
+mBinding.rlInvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                        Intent intent = new Intent(getActivity(), InventoryActivity.class);
+                        startActivity(intent);
+
+
+
+            }
+        });
+mBinding.rlPerf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                        Intent intent = new Intent(getActivity(), PerformanceActivity.class);
                         startActivity(intent);
 
 

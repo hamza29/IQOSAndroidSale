@@ -1,6 +1,10 @@
 package com.example.iqos.Retrofit;
 
 
+import com.example.iqos.MeetingModule.ActivityPackages;
+import com.example.iqos.SalesModule.ActivitySales;
+import com.example.iqos.SalesModule.PerformanceActivity;
+
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -12,21 +16,23 @@ import retrofit2.http.POST;
 
 public interface ApiService {
 
-    @GET("login")
+    @POST("login")
     @FormUrlEncoded
     Call<Model.LoginModel> login(@Field("email") String full_name,
                                  @Field("password") String password,
                                  @Field("device_token") String device_token
     );
-
-    @GET("qoach/leads")
+    @FormUrlEncoded
+    @POST("qoach/leads")
     Call<Model.GetLeadsModel> getLeads(
             @Header("Accept") String accept,
-            @Header("Authorization") String token
+            @Header("Authorization") String token,
+            @Field("type") String type
+
     );
 
     @FormUrlEncoded
-    @POST("qoach/lead/detail")
+    @POST("qoach/leads/detail")
     Call<Model.LeadDetailsModel> getLeadsDetails(
             @Header("Accept") String accept,
             @Header("Authorization") String token,
@@ -34,7 +40,7 @@ public interface ApiService {
     );
 
 
-    @GET("qoach/appoinments")
+    @GET("qoach/appointments")
     Call<Model.GetAppointmentModel> getAppointment(
             @Header("Accept") String accept,
             @Header("Authorization") String token);
@@ -48,53 +54,127 @@ public interface ApiService {
             @Field("id") String id,
             @Field("appointment_status") String appointment_status,
             @Field("appointment_at") String appointment_at,
-            @Field("appointment_location") String appointment_location
+            @Field("appointment_location") String appointment_location,
+            @Field("lead_status") String lead_status
     );
 
 
-    @FormUrlEncoded
-    @POST("qoach/appointments/update")
-    Call<Model.GenerealModel> updateAppointment(
+
+
+    @POST("qoach/lead/sale-information")
+    Call<ActivitySales.UpdateSaleModel> updateSale(
             @Header("Accept") String accept,
             @Header("Authorization") String token,
-            @Field("id") String id,
-            @Field("appointment_status") String appointment_status,
-            @Field("appointment_at") String appointment_at,
-            @Field("appointment_location") String appointment_location
+            @Body RequestBody body
+
+
+    );
+
+
+
+    @POST("qoach/lead/update-sale-info")
+    Call<ActivitySales.UpdateSaleModel> updateinfoSale(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token,
+            @Body RequestBody body
+
+
+    );
+
+     @POST("qoach/lead/pre-checklist")
+    Call<Model.GenerealModel> updatePreMeetingChecklist(
+
+            @Header("Authorization") String token,
+            @Body RequestBody body
+
+
+    );
+
+     @POST("qoach/lead/meeting")
+    Call<Model.GenerealModel> updateMeetingChecklist(
+
+            @Header("Authorization") String token,
+            @Body RequestBody body
+
+
     );
 
 
     @FormUrlEncoded
     @POST("qoach/appointments/detail")
-    Call<Model.BookAppointmentDetailsModel> bookAppointmentDetails(
+    Call<Model.AppointmentDetailsModel> appointmentDetails(
             @Header("Accept") String accept,
             @Header("Authorization") String token,
             @Field("id") String id
     );
 
 
+    ///// Request Product Image ////
+    @POST("qoach/lead/update")
+    Call<Model.GenerealModel> updateLead(
+            @Header("Authorization") String auth,
+            @Body RequestBody body
 
-  /*  @POST("auth/logout")
-    Call<Model.GeneralModel> logout(
+
+    );
+
+    ///// Request Product Image ////
+    @POST("qoach/lead/ic-update")
+    Call<Model.GenerealModel> ic_update(
+            @Header("Authorization") String auth,
+            @Body RequestBody body
+
+
+    );
+
+
+    ///// Request Product Image ////
+    @GET("qoach/discounts")
+    Call<ActivitySales.DiscountsModel> getdiscounts(
+            @Header("Authorization") String auth,
+            @Header("Accept") String accept
+
+    );
+
+
+    ///// Request Product Image ////
+    @FormUrlEncoded
+    @POST("qoach/consumables")
+    Call<ActivitySales.ConsumeableModel> getConsumeables(
+            @Header("Authorization") String auth,
+//            @Header("Accept") String accept
+            @Field("type") String type
+
+    );
+
+    @GET("qoach/inventories")
+    Call<ActivitySales.GetInventoriesModel> getInventories(
+            @Header("Accept") String accept,
             @Header("Authorization") String token
-            , @Header("Accept") String accept
 
     );
 
-    @POST("auth/resend-otp")
-    @FormUrlEncoded
-    Call<Model.ResendOtpModel> resendOTp(  // cd
-                                           @Field("phone") String phone
-            , @Header("Accept") String accept
+
+    @POST("qoach/lead/performance")
+    Call<PerformanceActivity.GetPerformanceModel> getPerformance(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token
+
     );
 
+    @POST("qoach/lead/get-packages")
+    Call<ActivityPackages.PackagesModel> getpackages(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token
 
-    @POST("auth/verify-otp")
+    );
     @FormUrlEncoded
-    Call<Model.LoginModel> verifyOtp(@Field("otp") String otp,
-                                     @Field("id") String id
-            , @Header("Accept") String accept
+    @POST("qoach/lead/get-package-detail")
+    Call<ActivitySales.PackageDetail> getpackageDetails(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token,
+            @Field("id") String id
 
-    );*/
 
+    );
 }

@@ -18,7 +18,9 @@ public class Model {
         private Integer id;
         @SerializedName("name")
         @Expose
-        private String name;
+        private String name;     @SerializedName("city")
+        @Expose
+        private String city;
         @SerializedName("email")
         @Expose
         private String email;
@@ -73,6 +75,17 @@ public class Model {
         @SerializedName("day_started")
         @Expose
         private String dayStarted;
+        @SerializedName("hyper_care")
+        @Expose
+        private String hyper_care;
+
+        public String getHyper_care() {
+            return hyper_care;
+        }
+
+        public void setHyper_care(String hyper_care) {
+            this.hyper_care = hyper_care;
+        }
 
         public Integer getId() {
             return id;
@@ -88,6 +101,14 @@ public class Model {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
         }
 
         public String getEmail() {
@@ -282,8 +303,7 @@ public class Model {
         }
 
     }
-
-    //Lead
+ 
     public class DataLead {
 
         @SerializedName("leads")
@@ -298,7 +318,7 @@ public class Model {
             this.leads = leads;
         }
 
-    }
+    } 
     public class GetLeadsModel {
 
         @SerializedName("status")
@@ -335,15 +355,21 @@ public class Model {
             this.data = data;
         }
 
-    }
+    } 
     public class Lead {
 
         @SerializedName("id")
         @Expose
-        private String id;
+        private Integer id;
+        @SerializedName("assigned_at")
+        @Expose
+        private String assigned_at;
         @SerializedName("first_name")
         @Expose
         private String firstName;
+        @SerializedName("is_appointment")
+        @Expose
+        private String is_appointment;
         @SerializedName("last_name")
         @Expose
         private String lastName;
@@ -352,37 +378,59 @@ public class Model {
         private String leadStatus;
         @SerializedName("opening_msg")
         @Expose
-        private Object openingMsg;
+        private String openingMsg;
         @SerializedName("call1")
         @Expose
-        private Object call1;
+        private String call1;
         @SerializedName("call1_outcome")
         @Expose
-        private Object call1Outcome;
+        private String call1Outcome;
         @SerializedName("call2")
         @Expose
-        private Object call2;
+        private String call2;
         @SerializedName("call2_outcome")
         @Expose
-        private Object call2Outcome;
+        private String call2Outcome;
         @SerializedName("call3")
         @Expose
-        private Object call3;
+        private String call3;
         @SerializedName("call3_outcome")
         @Expose
-        private Object call3Outcome;
+        private String call3Outcome;
         @SerializedName("call4")
         @Expose
-        private Object call4;
+        private String call4;
         @SerializedName("call4_outcome")
         @Expose
-        private Object call4Outcome;
+        private String call4Outcome;
+        @SerializedName("last_action")
+        @Expose
+        private LastAction lastAction;
+        @SerializedName("next_action")
+        @Expose
+        private NextAction nextAction;
 
-        public String getId() {
+        public String getAssigned_at() {
+            return assigned_at;
+        }
+
+        public void setAssigned_at(String assigned_at) {
+            this.assigned_at = assigned_at;
+        }
+
+        public String getIs_appointment() {
+            return is_appointment;
+        }
+
+        public void setIs_appointment(String is_appointment) {
+            this.is_appointment = is_appointment;
+        }
+
+        public Integer getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(Integer id) {
             this.id = id;
         }
 
@@ -410,80 +458,147 @@ public class Model {
             this.leadStatus = leadStatus;
         }
 
-        public Object getOpeningMsg() {
+        public String getOpeningMsg() {
             return openingMsg;
         }
 
-        public void setOpeningMsg(Object openingMsg) {
+        public void setOpeningMsg(String openingMsg) {
             this.openingMsg = openingMsg;
         }
 
-        public Object getCall1() {
+        public String getCall1() {
             return call1;
         }
 
-        public void setCall1(Object call1) {
+        public void setCall1(String call1) {
             this.call1 = call1;
         }
 
-        public Object getCall1Outcome() {
+        public String getCall1Outcome() {
             return call1Outcome;
         }
 
-        public void setCall1Outcome(Object call1Outcome) {
+        public void setCall1Outcome(String call1Outcome) {
             this.call1Outcome = call1Outcome;
         }
 
-        public Object getCall2() {
+        public String getCall2() {
             return call2;
         }
 
-        public void setCall2(Object call2) {
+        public void setCall2(String call2) {
             this.call2 = call2;
         }
 
-        public Object getCall2Outcome() {
+        public String getCall2Outcome() {
             return call2Outcome;
         }
 
-        public void setCall2Outcome(Object call2Outcome) {
+        public void setCall2Outcome(String call2Outcome) {
             this.call2Outcome = call2Outcome;
         }
 
-        public Object getCall3() {
+        public String getCall3() {
             return call3;
         }
 
-        public void setCall3(Object call3) {
+        public void setCall3(String call3) {
             this.call3 = call3;
         }
 
-        public Object getCall3Outcome() {
+        public String getCall3Outcome() {
             return call3Outcome;
         }
 
-        public void setCall3Outcome(Object call3Outcome) {
+        public void setCall3Outcome(String call3Outcome) {
             this.call3Outcome = call3Outcome;
         }
 
-        public Object getCall4() {
+        public String getCall4() {
             return call4;
         }
 
-        public void setCall4(Object call4) {
+        public void setCall4(String call4) {
             this.call4 = call4;
         }
 
-        public Object getCall4Outcome() {
+        public String getCall4Outcome() {
             return call4Outcome;
         }
 
-        public void setCall4Outcome(Object call4Outcome) {
+        public void setCall4Outcome(String call4Outcome) {
             this.call4Outcome = call4Outcome;
         }
 
-    }
+        public LastAction getLastAction() {
+            return lastAction;
+        }
 
+        public void setLastAction(LastAction lastAction) {
+            this.lastAction = lastAction;
+        }
+
+        public NextAction getNextAction() {
+            return nextAction;
+        }
+
+        public void setNextAction(NextAction nextAction) {
+            this.nextAction = nextAction;
+        }
+
+    }
+    public class LastAction {
+
+        @SerializedName("type")
+        @Expose
+        private String type;
+        @SerializedName("time")
+        @Expose
+        private String time;
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
+
+    }
+    public class NextAction {
+
+        @SerializedName("type")
+        @Expose
+        private String type;
+        @SerializedName("time")
+        @Expose
+        private String time;
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
+
+    }
     //Lead Details
 
     public class DataLeadDetail {
@@ -558,10 +673,10 @@ public class Model {
         private String leadStatus;
         @SerializedName("last_update")
         @Expose
-        private Object lastUpdate;
+        private String lastUpdate;
         @SerializedName("upload_time")
         @Expose
-        private Object uploadTime;
+        private String uploadTime;
         @SerializedName("approval_status")
         @Expose
         private String approvalStatus;
@@ -570,166 +685,198 @@ public class Model {
         private String approvalTime;
         @SerializedName("assigned_by")
         @Expose
-        private Object assignedBy;
+        private String assignedBy;
         @SerializedName("assigned_at")
         @Expose
-        private Object assignedAt;
+        private String assignedAt;
         @SerializedName("qoach_id")
         @Expose
         private String qoachId;
         @SerializedName("opening_msg")
         @Expose
-        private Object openingMsg;
+        private String openingMsg;
         @SerializedName("call1")
         @Expose
-        private Object call1;
+        private String call1;
         @SerializedName("call1_outcome")
         @Expose
-        private Object call1Outcome;
+        private String call1Outcome;
         @SerializedName("call2")
         @Expose
-        private Object call2;
+        private String call2;
         @SerializedName("call2_outcome")
         @Expose
-        private Object call2Outcome;
+        private String call2Outcome;
         @SerializedName("call3")
         @Expose
-        private Object call3;
+        private String call3;
         @SerializedName("call3_outcome")
         @Expose
-        private Object call3Outcome;
+        private String call3Outcome;
         @SerializedName("call4")
         @Expose
-        private Object call4;
+        private String call4;
         @SerializedName("call4_outcome")
         @Expose
-        private Object call4Outcome;
+        private String call4Outcome;
         @SerializedName("appointment_status")
         @Expose
-        private Object appointmentStatus;
+        private String appointmentStatus;
         @SerializedName("appointment_date")
         @Expose
-        private Object appointmentDate;
+        private String appointmentDate;
         @SerializedName("appointment_time")
         @Expose
-        private Object appointmentTime;
+        private String appointmentTime;
         @SerializedName("appointment_at")
         @Expose
-        private Object appointmentAt;
+        private String appointmentAt;
         @SerializedName("appointment_location")
         @Expose
-        private Object appointmentLocation;
+        private String appointmentLocation;
         @SerializedName("pre_meeting_checklist_item1")
         @Expose
-        private Object preMeetingChecklistItem1;
+        private String preMeetingChecklistItem1;
         @SerializedName("pre_meeting_checklist_item2")
         @Expose
-        private Object preMeetingChecklistItem2;
+        private String preMeetingChecklistItem2;
         @SerializedName("pre_meeting_checklist_item3")
         @Expose
-        private Object preMeetingChecklistItem3;
+        private String preMeetingChecklistItem3;
         @SerializedName("pre_meeting_checklist_item4")
         @Expose
-        private Object preMeetingChecklistItem4;
+        private String preMeetingChecklistItem4;
         @SerializedName("pre_meeting_checklist_item5")
         @Expose
-        private Object preMeetingChecklistItem5;
+        private String preMeetingChecklistItem5;
         @SerializedName("pre_meeting_checklist_item6")
         @Expose
-        private Object preMeetingChecklistItem6;
+        private String preMeetingChecklistItem6;
         @SerializedName("start_meeting")
         @Expose
-        private Object startMeeting;
+        private String startMeeting;
         @SerializedName("checklist_item1")
         @Expose
-        private Object checklistItem1;
+        private String checklistItem1;
         @SerializedName("checklist_item2")
         @Expose
-        private Object checklistItem2;
+        private String checklistItem2;
         @SerializedName("checklist_item3")
         @Expose
-        private Object checklistItem3;
+        private String checklistItem3;
         @SerializedName("checklist_item4")
         @Expose
-        private Object checklistItem4;
+        private String checklistItem4;
         @SerializedName("checklist_item5")
         @Expose
-        private Object checklistItem5;
+        private String checklistItem5;
         @SerializedName("checklist_item6")
         @Expose
-        private Object checklistItem6;
+        private String checklistItem6;
         @SerializedName("checklist_item7")
         @Expose
-        private Object checklistItem7;
+        private String checklistItem7;
         @SerializedName("checklist_item8")
         @Expose
-        private Object checklistItem8;
+        private String checklistItem8;
         @SerializedName("checklist_item9")
         @Expose
-        private Object checklistItem9;
+        private String checklistItem9;
         @SerializedName("checklist_item10")
         @Expose
-        private Object checklistItem10;
+        private String checklistItem10;
         @SerializedName("video1")
         @Expose
-        private Object video1;
+        private String video1;
         @SerializedName("video2")
         @Expose
-        private Object video2;
+        private String video2;
         @SerializedName("video3")
         @Expose
-        private Object video3;
+        private String video3;
         @SerializedName("q1")
         @Expose
-        private Object q1;
+        private String q1;
         @SerializedName("q2")
         @Expose
-        private Object q2;
+        private String q2;
         @SerializedName("q3")
         @Expose
-        private Object q3;
+        private String q3;
         @SerializedName("q4")
         @Expose
-        private Object q4;
+        private String q4;
         @SerializedName("meeting_outcome")
         @Expose
-        private Object meetingOutcome;
+        private String meetingOutcome;
         @SerializedName("sku_sold_color")
         @Expose
-        private Object skuSoldColor;
+        private String skuSoldColor;
         @SerializedName("sku_sr_no")
         @Expose
-        private Object skuSrNo;
+        private String skuSrNo;
         @SerializedName("amber")
         @Expose
-        private Object amber;
+        private String amber;
         @SerializedName("terq")
         @Expose
-        private Object terq;
+        private String terq;
         @SerializedName("existing_device")
         @Expose
-        private Object existingDevice;
+        private String existingDevice;
         @SerializedName("existing_device_sr_no")
         @Expose
-        private Object existingDeviceSrNo;
+        private String existingDeviceSrNo;
         @SerializedName("existing_device_image_link")
         @Expose
-        private Object existingDeviceImageLink;
+        private String existingDeviceImageLink;
         @SerializedName("discount_offered")
         @Expose
-        private Object discountOffered;
+        private String discountOffered;
         @SerializedName("payment_method")
         @Expose
-        private Object paymentMethod;
+        private String paymentMethod;
         @SerializedName("total_payment")
         @Expose
-        private Object totalPayment;
+        private String totalPayment;
         @SerializedName("created_at")
         @Expose
         private String createdAt;
         @SerializedName("updated_at")
         @Expose
         private String updatedAt;
+        @SerializedName("email_message")
+        @Expose
+        private String email_message;
+        @SerializedName("last_action")
+        @Expose
+        private LastAction lastAction;
+        @SerializedName("next_action")
+        @Expose
+        private NextAction nextAction;
+        public String getEmail_message() {
+            return email_message;
+        }
+
+        public LastAction getLastAction() {
+            return lastAction;
+        }
+
+        public void setLastAction(LastAction lastAction) {
+            this.lastAction = lastAction;
+        }
+
+        public NextAction getNextAction() {
+            return nextAction;
+        }
+
+        public void setNextAction(NextAction nextAction) {
+            this.nextAction = nextAction;
+        }
+
+        public void setEmail_message(String email_message) {
+            this.email_message = email_message;
+        }
 
         public Integer getId() {
             return id;
@@ -843,19 +990,19 @@ public class Model {
             this.leadStatus = leadStatus;
         }
 
-        public Object getLastUpdate() {
+        public String getLastUpdate() {
             return lastUpdate;
         }
 
-        public void setLastUpdate(Object lastUpdate) {
+        public void setLastUpdate(String lastUpdate) {
             this.lastUpdate = lastUpdate;
         }
 
-        public Object getUploadTime() {
+        public String getUploadTime() {
             return uploadTime;
         }
 
-        public void setUploadTime(Object uploadTime) {
+        public void setUploadTime(String uploadTime) {
             this.uploadTime = uploadTime;
         }
 
@@ -875,19 +1022,19 @@ public class Model {
             this.approvalTime = approvalTime;
         }
 
-        public Object getAssignedBy() {
+        public String getAssignedBy() {
             return assignedBy;
         }
 
-        public void setAssignedBy(Object assignedBy) {
+        public void setAssignedBy(String assignedBy) {
             this.assignedBy = assignedBy;
         }
 
-        public Object getAssignedAt() {
+        public String getAssignedAt() {
             return assignedAt;
         }
 
-        public void setAssignedAt(Object assignedAt) {
+        public void setAssignedAt(String assignedAt) {
             this.assignedAt = assignedAt;
         }
 
@@ -899,395 +1046,395 @@ public class Model {
             this.qoachId = qoachId;
         }
 
-        public Object getOpeningMsg() {
+        public String getOpeningMsg() {
             return openingMsg;
         }
 
-        public void setOpeningMsg(Object openingMsg) {
+        public void setOpeningMsg(String openingMsg) {
             this.openingMsg = openingMsg;
         }
 
-        public Object getCall1() {
+        public String getCall1() {
             return call1;
         }
 
-        public void setCall1(Object call1) {
+        public void setCall1(String call1) {
             this.call1 = call1;
         }
 
-        public Object getCall1Outcome() {
+        public String getCall1Outcome() {
             return call1Outcome;
         }
 
-        public void setCall1Outcome(Object call1Outcome) {
+        public void setCall1Outcome(String call1Outcome) {
             this.call1Outcome = call1Outcome;
         }
 
-        public Object getCall2() {
+        public String getCall2() {
             return call2;
         }
 
-        public void setCall2(Object call2) {
+        public void setCall2(String call2) {
             this.call2 = call2;
         }
 
-        public Object getCall2Outcome() {
+        public String getCall2Outcome() {
             return call2Outcome;
         }
 
-        public void setCall2Outcome(Object call2Outcome) {
+        public void setCall2Outcome(String call2Outcome) {
             this.call2Outcome = call2Outcome;
         }
 
-        public Object getCall3() {
+        public String getCall3() {
             return call3;
         }
 
-        public void setCall3(Object call3) {
+        public void setCall3(String call3) {
             this.call3 = call3;
         }
 
-        public Object getCall3Outcome() {
+        public String getCall3Outcome() {
             return call3Outcome;
         }
 
-        public void setCall3Outcome(Object call3Outcome) {
+        public void setCall3Outcome(String call3Outcome) {
             this.call3Outcome = call3Outcome;
         }
 
-        public Object getCall4() {
+        public String getCall4() {
             return call4;
         }
 
-        public void setCall4(Object call4) {
+        public void setCall4(String call4) {
             this.call4 = call4;
         }
 
-        public Object getCall4Outcome() {
+        public String getCall4Outcome() {
             return call4Outcome;
         }
 
-        public void setCall4Outcome(Object call4Outcome) {
+        public void setCall4Outcome(String call4Outcome) {
             this.call4Outcome = call4Outcome;
         }
 
-        public Object getAppointmentStatus() {
+        public String getAppointmentStatus() {
             return appointmentStatus;
         }
 
-        public void setAppointmentStatus(Object appointmentStatus) {
+        public void setAppointmentStatus(String appointmentStatus) {
             this.appointmentStatus = appointmentStatus;
         }
 
-        public Object getAppointmentDate() {
+        public String getAppointmentDate() {
             return appointmentDate;
         }
 
-        public void setAppointmentDate(Object appointmentDate) {
+        public void setAppointmentDate(String appointmentDate) {
             this.appointmentDate = appointmentDate;
         }
 
-        public Object getAppointmentTime() {
+        public String getAppointmentTime() {
             return appointmentTime;
         }
 
-        public void setAppointmentTime(Object appointmentTime) {
+        public void setAppointmentTime(String appointmentTime) {
             this.appointmentTime = appointmentTime;
         }
 
-        public Object getAppointmentAt() {
+        public String getAppointmentAt() {
             return appointmentAt;
         }
 
-        public void setAppointmentAt(Object appointmentAt) {
+        public void setAppointmentAt(String appointmentAt) {
             this.appointmentAt = appointmentAt;
         }
 
-        public Object getAppointmentLocation() {
+        public String getAppointmentLocation() {
             return appointmentLocation;
         }
 
-        public void setAppointmentLocation(Object appointmentLocation) {
+        public void setAppointmentLocation(String appointmentLocation) {
             this.appointmentLocation = appointmentLocation;
         }
 
-        public Object getPreMeetingChecklistItem1() {
+        public String getPreMeetingChecklistItem1() {
             return preMeetingChecklistItem1;
         }
 
-        public void setPreMeetingChecklistItem1(Object preMeetingChecklistItem1) {
+        public void setPreMeetingChecklistItem1(String preMeetingChecklistItem1) {
             this.preMeetingChecklistItem1 = preMeetingChecklistItem1;
         }
 
-        public Object getPreMeetingChecklistItem2() {
+        public String getPreMeetingChecklistItem2() {
             return preMeetingChecklistItem2;
         }
 
-        public void setPreMeetingChecklistItem2(Object preMeetingChecklistItem2) {
+        public void setPreMeetingChecklistItem2(String preMeetingChecklistItem2) {
             this.preMeetingChecklistItem2 = preMeetingChecklistItem2;
         }
 
-        public Object getPreMeetingChecklistItem3() {
+        public String getPreMeetingChecklistItem3() {
             return preMeetingChecklistItem3;
         }
 
-        public void setPreMeetingChecklistItem3(Object preMeetingChecklistItem3) {
+        public void setPreMeetingChecklistItem3(String preMeetingChecklistItem3) {
             this.preMeetingChecklistItem3 = preMeetingChecklistItem3;
         }
 
-        public Object getPreMeetingChecklistItem4() {
+        public String getPreMeetingChecklistItem4() {
             return preMeetingChecklistItem4;
         }
 
-        public void setPreMeetingChecklistItem4(Object preMeetingChecklistItem4) {
+        public void setPreMeetingChecklistItem4(String preMeetingChecklistItem4) {
             this.preMeetingChecklistItem4 = preMeetingChecklistItem4;
         }
 
-        public Object getPreMeetingChecklistItem5() {
+        public String getPreMeetingChecklistItem5() {
             return preMeetingChecklistItem5;
         }
 
-        public void setPreMeetingChecklistItem5(Object preMeetingChecklistItem5) {
+        public void setPreMeetingChecklistItem5(String preMeetingChecklistItem5) {
             this.preMeetingChecklistItem5 = preMeetingChecklistItem5;
         }
 
-        public Object getPreMeetingChecklistItem6() {
+        public String getPreMeetingChecklistItem6() {
             return preMeetingChecklistItem6;
         }
 
-        public void setPreMeetingChecklistItem6(Object preMeetingChecklistItem6) {
+        public void setPreMeetingChecklistItem6(String preMeetingChecklistItem6) {
             this.preMeetingChecklistItem6 = preMeetingChecklistItem6;
         }
 
-        public Object getStartMeeting() {
+        public String getStartMeeting() {
             return startMeeting;
         }
 
-        public void setStartMeeting(Object startMeeting) {
+        public void setStartMeeting(String startMeeting) {
             this.startMeeting = startMeeting;
         }
 
-        public Object getChecklistItem1() {
+        public String getChecklistItem1() {
             return checklistItem1;
         }
 
-        public void setChecklistItem1(Object checklistItem1) {
+        public void setChecklistItem1(String checklistItem1) {
             this.checklistItem1 = checklistItem1;
         }
 
-        public Object getChecklistItem2() {
+        public String getChecklistItem2() {
             return checklistItem2;
         }
 
-        public void setChecklistItem2(Object checklistItem2) {
+        public void setChecklistItem2(String checklistItem2) {
             this.checklistItem2 = checklistItem2;
         }
 
-        public Object getChecklistItem3() {
+        public String getChecklistItem3() {
             return checklistItem3;
         }
 
-        public void setChecklistItem3(Object checklistItem3) {
+        public void setChecklistItem3(String checklistItem3) {
             this.checklistItem3 = checklistItem3;
         }
 
-        public Object getChecklistItem4() {
+        public String getChecklistItem4() {
             return checklistItem4;
         }
 
-        public void setChecklistItem4(Object checklistItem4) {
+        public void setChecklistItem4(String checklistItem4) {
             this.checklistItem4 = checklistItem4;
         }
 
-        public Object getChecklistItem5() {
+        public String getChecklistItem5() {
             return checklistItem5;
         }
 
-        public void setChecklistItem5(Object checklistItem5) {
+        public void setChecklistItem5(String checklistItem5) {
             this.checklistItem5 = checklistItem5;
         }
 
-        public Object getChecklistItem6() {
+        public String getChecklistItem6() {
             return checklistItem6;
         }
 
-        public void setChecklistItem6(Object checklistItem6) {
+        public void setChecklistItem6(String checklistItem6) {
             this.checklistItem6 = checklistItem6;
         }
 
-        public Object getChecklistItem7() {
+        public String getChecklistItem7() {
             return checklistItem7;
         }
 
-        public void setChecklistItem7(Object checklistItem7) {
+        public void setChecklistItem7(String checklistItem7) {
             this.checklistItem7 = checklistItem7;
         }
 
-        public Object getChecklistItem8() {
+        public String getChecklistItem8() {
             return checklistItem8;
         }
 
-        public void setChecklistItem8(Object checklistItem8) {
+        public void setChecklistItem8(String checklistItem8) {
             this.checklistItem8 = checklistItem8;
         }
 
-        public Object getChecklistItem9() {
+        public String getChecklistItem9() {
             return checklistItem9;
         }
 
-        public void setChecklistItem9(Object checklistItem9) {
+        public void setChecklistItem9(String checklistItem9) {
             this.checklistItem9 = checklistItem9;
         }
 
-        public Object getChecklistItem10() {
+        public String getChecklistItem10() {
             return checklistItem10;
         }
 
-        public void setChecklistItem10(Object checklistItem10) {
+        public void setChecklistItem10(String checklistItem10) {
             this.checklistItem10 = checklistItem10;
         }
 
-        public Object getVideo1() {
+        public String getVideo1() {
             return video1;
         }
 
-        public void setVideo1(Object video1) {
+        public void setVideo1(String video1) {
             this.video1 = video1;
         }
 
-        public Object getVideo2() {
+        public String getVideo2() {
             return video2;
         }
 
-        public void setVideo2(Object video2) {
+        public void setVideo2(String video2) {
             this.video2 = video2;
         }
 
-        public Object getVideo3() {
+        public String getVideo3() {
             return video3;
         }
 
-        public void setVideo3(Object video3) {
+        public void setVideo3(String video3) {
             this.video3 = video3;
         }
 
-        public Object getQ1() {
+        public String getQ1() {
             return q1;
         }
 
-        public void setQ1(Object q1) {
+        public void setQ1(String q1) {
             this.q1 = q1;
         }
 
-        public Object getQ2() {
+        public String getQ2() {
             return q2;
         }
 
-        public void setQ2(Object q2) {
+        public void setQ2(String q2) {
             this.q2 = q2;
         }
 
-        public Object getQ3() {
+        public String getQ3() {
             return q3;
         }
 
-        public void setQ3(Object q3) {
+        public void setQ3(String q3) {
             this.q3 = q3;
         }
 
-        public Object getQ4() {
+        public String getQ4() {
             return q4;
         }
 
-        public void setQ4(Object q4) {
+        public void setQ4(String q4) {
             this.q4 = q4;
         }
 
-        public Object getMeetingOutcome() {
+        public String getMeetingOutcome() {
             return meetingOutcome;
         }
 
-        public void setMeetingOutcome(Object meetingOutcome) {
+        public void setMeetingOutcome(String meetingOutcome) {
             this.meetingOutcome = meetingOutcome;
         }
 
-        public Object getSkuSoldColor() {
+        public String getSkuSoldColor() {
             return skuSoldColor;
         }
 
-        public void setSkuSoldColor(Object skuSoldColor) {
+        public void setSkuSoldColor(String skuSoldColor) {
             this.skuSoldColor = skuSoldColor;
         }
 
-        public Object getSkuSrNo() {
+        public String getSkuSrNo() {
             return skuSrNo;
         }
 
-        public void setSkuSrNo(Object skuSrNo) {
+        public void setSkuSrNo(String skuSrNo) {
             this.skuSrNo = skuSrNo;
         }
 
-        public Object getAmber() {
+        public String getAmber() {
             return amber;
         }
 
-        public void setAmber(Object amber) {
+        public void setAmber(String amber) {
             this.amber = amber;
         }
 
-        public Object getTerq() {
+        public String getTerq() {
             return terq;
         }
 
-        public void setTerq(Object terq) {
+        public void setTerq(String terq) {
             this.terq = terq;
         }
 
-        public Object getExistingDevice() {
+        public String getExistingDevice() {
             return existingDevice;
         }
 
-        public void setExistingDevice(Object existingDevice) {
+        public void setExistingDevice(String existingDevice) {
             this.existingDevice = existingDevice;
         }
 
-        public Object getExistingDeviceSrNo() {
+        public String getExistingDeviceSrNo() {
             return existingDeviceSrNo;
         }
 
-        public void setExistingDeviceSrNo(Object existingDeviceSrNo) {
+        public void setExistingDeviceSrNo(String existingDeviceSrNo) {
             this.existingDeviceSrNo = existingDeviceSrNo;
         }
 
-        public Object getExistingDeviceImageLink() {
+        public String getExistingDeviceImageLink() {
             return existingDeviceImageLink;
         }
 
-        public void setExistingDeviceImageLink(Object existingDeviceImageLink) {
+        public void setExistingDeviceImageLink(String existingDeviceImageLink) {
             this.existingDeviceImageLink = existingDeviceImageLink;
         }
 
-        public Object getDiscountOffered() {
+        public String getDiscountOffered() {
             return discountOffered;
         }
 
-        public void setDiscountOffered(Object discountOffered) {
+        public void setDiscountOffered(String discountOffered) {
             this.discountOffered = discountOffered;
         }
 
-        public Object getPaymentMethod() {
+        public String getPaymentMethod() {
             return paymentMethod;
         }
 
-        public void setPaymentMethod(Object paymentMethod) {
+        public void setPaymentMethod(String paymentMethod) {
             this.paymentMethod = paymentMethod;
         }
 
-        public Object getTotalPayment() {
+        public String getTotalPayment() {
             return totalPayment;
         }
 
-        public void setTotalPayment(Object totalPayment) {
+        public void setTotalPayment(String totalPayment) {
             this.totalPayment = totalPayment;
         }
 
@@ -1308,6 +1455,7 @@ public class Model {
         }
 
     }
+
     public class LeadDetailsModel {
 
         @SerializedName("status")
@@ -1406,19 +1554,52 @@ public class Model {
         private String city;
         @SerializedName("appointment_status")
         @Expose
-        private Object appointmentStatus;
+        private String appointmentStatus;
         @SerializedName("appointment_date")
         @Expose
-        private Object appointmentDate;
+        private String appointmentDate;
         @SerializedName("appointment_time")
         @Expose
-        private Object appointmentTime;
+        private String appointmentTime;
         @SerializedName("appointment_at")
         @Expose
-        private Object appointmentAt;
+        private String appointmentAt;
         @SerializedName("appointment_location")
         @Expose
-        private Object appointmentLocation;
+        private String appointmentLocation;
+        @SerializedName("pre_meeting")
+        @Expose
+        private String pre_meeting;
+        @SerializedName("meeting_complete")
+        @Expose
+        private String meeting_complete;
+        @SerializedName("appointment_message")
+        @Expose
+        private String message;
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public String getPre_meeting() {
+            return pre_meeting;
+        }
+
+        public void setPre_meeting(String pre_meeting) {
+            this.pre_meeting = pre_meeting;
+        }
+
+        public String getMeeting_complete() {
+            return meeting_complete;
+        }
+
+        public void setMeeting_complete(String meeting_complete) {
+            this.meeting_complete = meeting_complete;
+        }
 
         public Integer getId() {
             return id;
@@ -1492,43 +1673,43 @@ public class Model {
             this.city = city;
         }
 
-        public Object getAppointmentStatus() {
+        public String getAppointmentStatus() {
             return appointmentStatus;
         }
 
-        public void setAppointmentStatus(Object appointmentStatus) {
+        public void setAppointmentStatus(String appointmentStatus) {
             this.appointmentStatus = appointmentStatus;
         }
 
-        public Object getAppointmentDate() {
+        public String getAppointmentDate() {
             return appointmentDate;
         }
 
-        public void setAppointmentDate(Object appointmentDate) {
+        public void setAppointmentDate(String appointmentDate) {
             this.appointmentDate = appointmentDate;
         }
 
-        public Object getAppointmentTime() {
+        public String getAppointmentTime() {
             return appointmentTime;
         }
 
-        public void setAppointmentTime(Object appointmentTime) {
+        public void setAppointmentTime(String appointmentTime) {
             this.appointmentTime = appointmentTime;
         }
 
-        public Object getAppointmentAt() {
+        public String getAppointmentAt() {
             return appointmentAt;
         }
 
-        public void setAppointmentAt(Object appointmentAt) {
+        public void setAppointmentAt(String appointmentAt) {
             this.appointmentAt = appointmentAt;
         }
 
-        public Object getAppointmentLocation() {
+        public String getAppointmentLocation() {
             return appointmentLocation;
         }
 
-        public void setAppointmentLocation(Object appointmentLocation) {
+        public void setAppointmentLocation(String appointmentLocation) {
             this.appointmentLocation = appointmentLocation;
         }
 
@@ -1624,6 +1805,42 @@ public class Model {
             this.data = data;
         }
 
+    }
+    public class GenereModel {
+
+        @SerializedName("status")
+        @Expose
+        private String status;
+        @SerializedName("message")
+        @Expose
+        private String message;
+        @SerializedName("invoice_pdf")
+        @Expose
+        private String pdf_invoice;
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public String getPdf_invoice() {
+            return pdf_invoice;
+        }
+
+        public void setPdf_invoice(String pdf_invoice) {
+            this.pdf_invoice = pdf_invoice;
+        }
     }
 
 
@@ -1789,7 +2006,7 @@ public class Model {
 
     }
 
-    public class BookAppointmentDetailsModel {
+    public class  AppointmentDetailsModel {
 
         @SerializedName("status")
         @Expose

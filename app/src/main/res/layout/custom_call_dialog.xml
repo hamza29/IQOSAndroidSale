@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
+
     android:background="@color/white"
     android:paddingBottom="@dimen/_10sdp"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -17,7 +20,8 @@
         android:layout_marginTop="@dimen/_20sdp"
         />
 <LinearLayout
-android:layout_below="@+id/tvTitle"    android:layout_width="match_parent"
+android:layout_below="@+id/tvTitle"
+    android:layout_width="match_parent"
     android:orientation="horizontal"
     android:layout_height="wrap_content">
 

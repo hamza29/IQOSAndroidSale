@@ -2,12 +2,16 @@ package com.example.iqos.AppointmentsModule;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.iqos.Constants;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
@@ -24,6 +28,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
 
 
     ActivityBookAppointmentBinding mBinding;
+    SharedPreferences mSharedPreferences;
 
 
     @Override
@@ -32,12 +37,25 @@ public class ActivityBookAppointment extends AppCompatActivity {
         mBinding = ActivityBookAppointmentBinding.inflate(getLayoutInflater());
         View view = mBinding.getRoot();
         setContentView(view);
+        mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
+        mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+mBinding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+    @Override
+    public void onRefresh() {
+        mBinding.swipe.setRefreshing(true);
+        getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
 
-
+    }
+});
 
         //  appointmentsRecycler();
 
-
+        getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
     }
 
     private void appointmentsRecycler(List<Model.Appointment> appointments) {
@@ -48,6 +66,8 @@ public class ActivityBookAppointment extends AppCompatActivity {
         mBinding.rvAppointments.setLayoutManager(new LinearLayoutManager(ActivityBookAppointment.this, LinearLayoutManager.VERTICAL, false));
         appointmentAdapter = new AppointmentAdapter(ActivityBookAppointment.this, appointments);
         mBinding.rvAppointments.setAdapter(appointmentAdapter);
+
+
     }
 
 
@@ -67,6 +87,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            mBinding.swipe.setRefreshing(false);
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             if (keyModel.getStatus().equals("1")) {
                                 if (keyModel.getData() != null) {
@@ -93,6 +114,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            mBinding.swipe.setRefreshing(false);
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             mBinding.progress.setVisibility(View.GONE);
                             Toast.makeText(ActivityBookAppointment.this, "key model null", Toast.LENGTH_SHORT).show();
@@ -107,6 +129,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        mBinding.swipe.setRefreshing(false);
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         mBinding.progress.setVisibility(View.GONE);
                         Toast.makeText(ActivityBookAppointment.this, "failure", Toast.LENGTH_SHORT).show();

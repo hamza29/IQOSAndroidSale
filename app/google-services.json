@@ -1,0 +1,126 @@
+{
+  "project_info": {
+    "project_number": "553506562470",
+    "project_id": "houseoftr-f7400",
+    "storage_bucket": "houseoftr-f7400.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553506562470:android:873b12e6592e69ac2b6f67",
+        "android_client_info": {
+          "package_name": "com.android.houseoftraders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553506562470-la1nf1slj9o1uctbqtgmq6i4huuiad2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAx__1-n8-RM191eEBjCoXhkn6rlE9Ylo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553506562470-la1nf1slj9o1uctbqtgmq6i4huuiad2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553506562470:android:490d99e4f8f5c59f2b6f67",
+        "android_client_info": {
+          "package_name": "com.example.houseoftraders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553506562470-la1nf1slj9o1uctbqtgmq6i4huuiad2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAx__1-n8-RM191eEBjCoXhkn6rlE9Ylo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553506562470-la1nf1slj9o1uctbqtgmq6i4huuiad2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553506562470:android:80bfa7b51dcb13072b6f67",
+        "android_client_info": {
+          "package_name": "com.example.iqos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553506562470-la1nf1slj9o1uctbqtgmq6i4huuiad2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAx__1-n8-RM191eEBjCoXhkn6rlE9Ylo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553506562470-la1nf1slj9o1uctbqtgmq6i4huuiad2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553506562470:android:04d34d22f544267f2b6f67",
+        "android_client_info": {
+          "package_name": "com.user.houseoftraders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553506562470-la1nf1slj9o1uctbqtgmq6i4huuiad2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAx__1-n8-RM191eEBjCoXhkn6rlE9Ylo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553506562470-la1nf1slj9o1uctbqtgmq6i4huuiad2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

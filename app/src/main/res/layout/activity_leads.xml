@@ -5,19 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LeadsModule.ActivityLeads">
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipeRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-
-    <RelativeLayout
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+   <RelativeLayout
         android:id="@+id/rlHeader"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_height="@dimen/_55sdp"
         android:background="@color/blue"
         >
 
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:foreground="@drawable/ripple" android:layout_height="@dimen/_20sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
@@ -37,11 +43,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Leads"
-            android:textSize="@dimen/_17sdp"
+            android:id="@+id/tvLeads"
+            android:textSize="@dimen/_13sdp"
             android:layout_below="@+id/ivLogo"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:textColor="@color/white"/>
+             android:textColor="@color/white"/>
 
 
     </RelativeLayout>
@@ -65,5 +71,8 @@
         android:layout_centerInParent="true"
         android:indeterminateTint="@color/color_primary"
         android:visibility="gone" />
+
+</RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

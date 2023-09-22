@@ -2,6 +2,7 @@ package com.example.iqos.LeadsModule;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -35,16 +36,29 @@ public class ActivityLeads extends AppCompatActivity {
         View view = mBinding.getRoot();
         setContentView(view);
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
+        getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
 
         //LeadsRecycler();
-
+mBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+    @Override
+    public void onRefresh() {
         getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+
+    }
+});
         mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
 
     }
 
@@ -63,7 +77,7 @@ public class ActivityLeads extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityLeads.this).create(ApiService.class);
-        Call<Model.GetLeadsModel> call = apiService.getLeads("application/json",token);
+        Call<Model.GetLeadsModel> call = apiService.getLeads("application/json",token,"");
         call.enqueue(new Callback<Model.GetLeadsModel>() {
             @Override
             public void onResponse(Call<Model.GetLeadsModel> call, Response<Model.GetLeadsModel> response) {
@@ -74,6 +88,7 @@ public class ActivityLeads extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            mBinding.swipeRefresh.setRefreshing(false);
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             if (keyModel.getStatus().equals("1")) {
                                 if (keyModel.getData() != null) {
@@ -100,6 +115,7 @@ public class ActivityLeads extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            mBinding.swipeRefresh.setRefreshing(false);
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             mBinding.progress.setVisibility(View.GONE);
                             Toast.makeText(ActivityLeads.this, "key model null", Toast.LENGTH_SHORT).show();
@@ -114,6 +130,7 @@ public class ActivityLeads extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        mBinding.swipeRefresh.setRefreshing(false);
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         mBinding.progress.setVisibility(View.GONE);
                         Toast.makeText(ActivityLeads.this, "failure", Toast.LENGTH_SHORT).show();

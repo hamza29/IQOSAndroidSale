@@ -10,10 +10,11 @@
     <RelativeLayout
         android:id="@+id/rlHeader"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_height="@dimen/_55sdp"
         android:background="@color/blue">
 
         <ImageView
+            android:foreground="@drawable/ripple"
             android:id="@+id/ivBack"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_20sdp"
@@ -37,22 +38,26 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivLogo"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_10sdp"
             android:text="Book Appointments"
             android:textColor="@color/white"
-            android:textSize="@dimen/_17sdp" />
+            android:textSize="@dimen/_13sdp" />
 
 
     </RelativeLayout>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+android:id="@+id/swipe"
+    android:layout_below="@id/rlHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
   <androidx.recyclerview.widget.RecyclerView
-      android:layout_below="@id/rlHeader"
       android:layout_marginTop="@dimen/_10sdp"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:id="@+id/rvAppointments">
 
   </androidx.recyclerview.widget.RecyclerView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="@dimen/_50sdp"

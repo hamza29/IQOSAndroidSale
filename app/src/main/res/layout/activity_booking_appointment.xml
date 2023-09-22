@@ -10,12 +10,13 @@
     <RelativeLayout
         android:id="@+id/rlHeader"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_height="@dimen/_55sdp"
         android:background="@color/blue">
 
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="@dimen/_25sdp"
+            android:foreground="@drawable/ripple"
             android:layout_height="@dimen/_20sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
@@ -37,10 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivLogo"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="Book Appointments"
+             android:text="Book Appointment"
             android:textColor="@color/white"
-            android:textSize="@dimen/_17sdp" />
+            android:textSize="@dimen/_13sdp" />
 
 
     </RelativeLayout>
@@ -48,8 +48,8 @@
         android:id="@+id/llAppoint"
         android:layout_width="match_parent"
         android:layout_below="@+id/rlHeader"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:orientation="vertical"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_height="wrap_content">
@@ -69,26 +69,35 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="name"
-                        android:textSize="@dimen/_10sdp"
+                        android:text="Name"
+                        android:textSize="@dimen/_11sdp"
                         android:textColor="@color/black"
                         android:textStyle="bold"/>
 
                     <EditText
-                        android:layout_width="0dp"
+                        android:id="@+id/tvName"
+
+                    android:background="@drawable/rounded_corner_meeting"
+
+                        android:layout_width="match_parent"
+
                         android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+
+                        android:padding="@dimen/_5sdp"
                         android:layout_height="wrap_content"
-                        android:text="Asghar"
-                        android:textSize="@dimen/_10sdp"
+                         android:textSize="@dimen/_10sdp"
                         android:textColor="@color/blue"
                         android:textStyle="bold"/>
 
@@ -102,20 +111,25 @@
 
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="Time"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_11sdp"
                         android:textColor="@color/black"
                         android:textStyle="bold"/>
 
-                    <EditText
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="match_parent"
+                        android:text="hh:mm:ss"
+android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/rounded_corner_meeting"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="10:00"
-                        android:textSize="@dimen/_10sdp"
+                         android:textSize="@dimen/_10sdp"
                         android:textColor="@color/blue"
                         android:textStyle="bold"/>
 
@@ -135,26 +149,33 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="Date"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_11sdp"
                         android:textColor="@color/black"
                         android:textStyle="bold"/>
 
-                    <EditText
-                        android:layout_width="0dp"
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:id="@+id/tvDate"
+                        android:layout_width="match_parent"
+                        android:text="yyyy-mm-dd"
+                        android:padding="@dimen/_5sdp"
                         android:layout_weight="1"
+                        android:background="@drawable/rounded_corner_meeting"
+
                         android:layout_height="wrap_content"
-                        android:text="12/12/23"
-                        android:textSize="@dimen/_10sdp"
+                         android:textSize="@dimen/_10sdp"
                         android:textColor="@color/blue"
                         android:textStyle="bold"/>
 
@@ -162,26 +183,30 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="Location"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_11sdp"
                         android:textColor="@color/black"
                         android:textStyle="bold"/>
 
                     <EditText
-                        android:layout_width="0dp"
+                        android:id="@+id/tvLocation"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
+                        android:padding="@dimen/_5sdp"
                         android:layout_height="wrap_content"
-                        android:text="Model town"
-                        android:textSize="@dimen/_10sdp"
+                         android:textSize="@dimen/_10sdp"
+                        android:hint="Enter Location"
+                        android:background="@drawable/rounded_corner_meeting"
                         android:textColor="@color/blue"
                         android:textStyle="bold"/>
 
@@ -189,6 +214,61 @@
                 </LinearLayout>
 
 
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Appointment Status"
+                        android:gravity="start"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                          android:background="@drawable/rounded_corner_tv_background"
+                        android:layout_height="wrap_content">
+
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"
+                            android:id="@+id/spinnerAppointStatus"
+                            android:background="@color/transparent"
+                            />
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            />
+
+                    </RelativeLayout>
+
+                    <!--        <TextView-->
+                    <!--            android:id="@+id/tvStatus"-->
+                    <!--            android:layout_width="0dp"-->
+                    <!--            android:layout_height="wrap_content"-->
+                    <!--            android:layout_marginStart="@dimen/_10sdp"-->
+                    <!--            android:layout_weight="1"-->
+                    <!--            android:text="Cold"-->
+                    <!--            android:textColor="@color/blue"-->
+                    <!--            android:textSize="@dimen/_11sdp"-->
+                    <!--            android:textStyle="bold" />-->
+
+                </LinearLayout>
 
 
 
@@ -207,15 +287,16 @@
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:id="@+id/confirmApp"
-
+        android:foreground="@drawable/ripple"
         android:layout_below="@+id/llAppoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="@dimen/_5sdp"
         android:text="Confirm Appointment"
         android:background="@drawable/rectangle_background"
         android:backgroundTint="@color/blue"
-android:padding="5dp"
+android:padding="@dimen/_10sdp"
         android:layout_gravity="bottom|end"
         android:textSize="@dimen/_10sdp"
         android:textColor="@color/white"

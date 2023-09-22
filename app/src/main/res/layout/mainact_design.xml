@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/rlHeader"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_height="@dimen/_55sdp"
         android:background="@color/blue"
         >
 
@@ -33,11 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Home"
-            android:textSize="@dimen/_17sdp"
+            android:textSize="@dimen/_13sdp"
             android:layout_below="@+id/ivLogo"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:textColor="@color/white"/>
+             android:textColor="@color/white"/>
 
 
     </RelativeLayout>
