@@ -148,12 +148,17 @@ public class ActivitySales extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         Log.e("TGED","id-> "+ newDeviceSrNo);
+                                        if(!newDeviceSrNo.isEmpty()){
                                         updateSale(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
                                                 appointment_id,newDeviceSrNo,package_id,amberid,terqid,mBinding.etEmail.getText().toString(), mBinding.etAmount.getText().toString());
+                                    }else {
+                                            Toast.makeText(ActivitySales.this, "Please select device", Toast.LENGTH_SHORT).show();
+
+                                        }
                                     }
                                 });
                             } else {
-                                Toast.makeText(ActivitySales.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivitySales.this, "No Device Found", Toast.LENGTH_SHORT).show();
  
                             }
                         }
@@ -376,8 +381,6 @@ if(!serials.get(position).equalsIgnoreCase("Select")){
 
             }
 
-
-
         }
         Collections.reverse(serials);
         Collections.reverse(amber);
@@ -396,8 +399,6 @@ if(!serials.get(position).equalsIgnoreCase("Select")){
 
                 Log.e("TGED","serials-> "+ serials.size());
                 Log.e("TGED","amber-> "+ amber.size());
-
-
 
 
     if(!serials.get(position).equalsIgnoreCase("Select")){
