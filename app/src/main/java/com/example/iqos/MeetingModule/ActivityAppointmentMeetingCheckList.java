@@ -18,6 +18,7 @@ import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
 import com.example.iqos.SalesModule.ActivityNoSales;
 import com.example.iqos.SalesModule.ActivitySales;
+import com.example.iqos.WebViewActivity;
 import com.example.iqos.databinding.ActivityAppointmentMeetingCheckListBinding;
 import com.example.iqos.databinding.ActivityAppointmentMeetingCheckListBinding;
 
@@ -86,8 +87,23 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
                  startActivity(intent);
              }
          });
-
-
+            //
+            mBinding.v1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+            Intent intent=new Intent(ActivityAppointmentMeetingCheckList.this, WebViewActivity.class);
+            intent.putExtra("video_link","https://iqoch.com/videos/B265970_IQOS_ILUMA_Premium_HD1080_.mp4");
+            startActivity(intent);
+                }
+            });
+            mBinding.v2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent=new Intent(ActivityAppointmentMeetingCheckList.this, WebViewActivity.class);
+                            intent.putExtra("video_link","https://iqoch.com/videos/B265970_ILUMA_Premium_Super_Restricted_How_to_Charging_video_744_A_en_GB_83_HD1080_25p_AE001.mp4");
+                            startActivity(intent);
+                        }
+                    });
          mBinding.tvComplete.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {

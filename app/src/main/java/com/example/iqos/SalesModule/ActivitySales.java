@@ -101,7 +101,6 @@ public class ActivitySales extends AppCompatActivity {
             }
 
 
-
         mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1303,6 +1302,17 @@ else{
 
             }else{
                 builder.addFormDataPart("customer_requested", "0");
+
+            }
+
+
+        }
+        if( mBinding.cbRequested  !=null) {
+            if( mBinding.cbRequested.isChecked()){
+                builder.addFormDataPart("customer_requested_account", "1");
+
+            }else{
+                builder.addFormDataPart("customer_requested_account", "0");
 
             }
 

@@ -600,6 +600,15 @@ android:visibility="gone"
             android:layout_height="wrap_content"
             android:buttonTint="@color/blue"
             />
+        <CheckBox
+            android:layout_margin="@dimen/_10sdp"
+            android:id="@+id/cbRequested"
+            android:textColor="@color/blue"
+            android:text="Customer has requested for e-commerce account creation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/blue"
+            />
 
         <TextView
             android:gravity="center"
