@@ -71,7 +71,7 @@ public interface ApiService {
     );
 
 
-
+////
     @POST("qoach/lead/update-sale-info")
     Call<ActivitySales.UpdateSaleModel> updateinfoSale(
             @Header("Accept") String accept,

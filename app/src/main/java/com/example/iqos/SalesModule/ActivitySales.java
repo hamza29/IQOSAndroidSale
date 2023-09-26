@@ -74,6 +74,7 @@ public class ActivitySales extends AppCompatActivity {
     String amberprice="0";
     String terqprice="0";
     String package_id;
+    String payment_method;
     String appointment_id;
 
 
@@ -89,6 +90,14 @@ public class ActivitySales extends AppCompatActivity {
 
           package_id=intent.getStringExtra("id");
          getPackageDetail(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),package_id);
+
+         List<String> payment_method = new ArrayList<>();
+         payment_method.add("cash");
+         payment_method.add("card");
+         payment_method.add("Bank Transfer");
+        setPaymentMethodSpinner(payment_method);
+
+
             mBinding.tvName.setText(""+intent.getStringExtra("name") );
 
             if(intent.getStringExtra("name") !=null) {
@@ -147,9 +156,11 @@ public class ActivitySales extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         Log.e("TGED","id-> "+ newDeviceSrNo);
+                                        Log.e("TGEeeeeD","payment_method---> "+ payment_method);
+                                        Toast.makeText(ActivitySales.this, ""+payment_method.toString(), Toast.LENGTH_SHORT).show();
                                         if(!newDeviceSrNo.isEmpty()){
                                         updateSale(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
-                                                appointment_id,newDeviceSrNo,package_id,amberid,terqid,mBinding.etEmail.getText().toString(), mBinding.etAmount.getText().toString());
+                                                appointment_id,newDeviceSrNo,package_id,amberid,terqid,mBinding.etEmail.getText().toString(), mBinding.etAmount.getText().toString(),payment_method);
                                     }else {
                                             Toast.makeText(ActivitySales.this, "Please select device", Toast.LENGTH_SHORT).show();
 
@@ -302,6 +313,50 @@ if(inventories.get(position).getSrNo().equalsIgnoreCase(""+ serials.get(position
 
 
     }
+
+
+
+
+
+    private void setPaymentMethodSpinner(List<String> payment_list){
+
+
+
+
+
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                payment_list);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        mBinding.spinnerPaymentMethod.setAdapter(ad);
+        mBinding.spinnerPaymentMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+               payment_method = payment_list.get(position).toString();
+
+
+
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+
+    }
+
+
+
      private void setTerqSpinner(List<Turqouise> turqouise){
 
          ArrayList<String > serials = new ArrayList<>();
@@ -1271,7 +1326,7 @@ else{
     }
     public void updateSale(String token,String id, String sku_id,
                            String package_id, String amber_id,
-                           String turqouise_id, String email, String total_amount   ) {
+                           String turqouise_id, String email, String total_amount,String payment_method   ) {
         ApiService apiService = ApiClient.getClient(ActivitySales.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
@@ -1292,6 +1347,11 @@ else{
 
         if(email !=null) {
             builder.addFormDataPart("email", email);
+        }
+
+
+        if(payment_method !=null) {
+            builder.addFormDataPart("payment_method", payment_method);
         }
 
 

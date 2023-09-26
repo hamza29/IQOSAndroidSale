@@ -550,6 +550,51 @@ android:visibility="gone"
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llPaymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment Method:"
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_10sdp"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="@dimen/_100sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_rectangle_border"
+                >
+
+                <Spinner
+                    android:id="@+id/spinnerPaymentMethod"
+
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="match_parent"
