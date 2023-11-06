@@ -1,0 +1,458 @@
+[
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_day_three_message_dialog.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\day_three_message_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_day_fourteen_dialog.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\day_fourteen_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_background_rectangle_border.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\background_rectangle_border.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_drawer_header.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\drawer_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_hyperleads.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_hyperleads.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_menu_icon.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\menu_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xxxhdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_round_round.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-hdpi\\ic_launcher_round_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round_foreground.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xxhdpi\\ic_launcher_round_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_inventory.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_inventory.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_iqoachapp.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\iqoachapp.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_inventory_home_pic.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\inventory_home_pic.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-hdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xxhdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher_round_foreground.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xhdpi\\ic_launcher_round_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_leads.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_leads.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_backgroundimage.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\backgroundimage.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-mdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_day_seven_dialog.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\day_seven_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_round_foreground.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xxxhdpi\\ic_launcher_round_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_rounded_corner_tv_background.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\rounded_corner_tv_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_homeicon.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\homeicon.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_border_background.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\border_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_feedback.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_feedback.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_day_one_dialog.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\day_one_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher_round_round.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xhdpi\\ic_launcher_round_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_appointment.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\appointment.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_consumables.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_consumables.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_day_ten_dialog.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\day_ten_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_hyper_appointments.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_hyper_appointments.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_mainact_design.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\mainact_design.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_ic_baseline_keyboard_arrow_down_24.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable-v24\\ic_baseline_keyboard_arrow_down_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_home.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_ecom_meeting.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_ecom_meeting.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_iqos_white_logo.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\iqos_white_logo.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_custom_call_dialog.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\custom_call_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_sales.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_sales.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_my_leads.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\my_leads.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_profile.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\ic_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_pml_logo_img.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\pml_logo_img.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_web_view.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_web_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_my_performance.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\my_performance.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_devices.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_devices.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_ecom_leads.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_ecom_leads.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_iqos_logo.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\iqos_logo.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_rounded_top_grey.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\rounded_top_grey.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_ec_appointments.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_ec_appointments.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_booking_appointment.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_booking_appointment.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_login_btn_img.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\login_btn_img.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_p2.PNG.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\p2.PNG"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher_round_round.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-anydpi-v26\\ic_launcher_round_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_no_sales.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_no_sales.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_verification.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_verification.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_leads_detail.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_leads_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_book_appointment_detail.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_book_appointment_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_packages.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_packages.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_eittext_background.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\eittext_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_hyper_leads.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_hyper_leads.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_leads.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_leads.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_arrow_back_white_24dp.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\ic_arrow_back_white_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_ripple.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\ripple.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round_round.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-mdpi\\ic_launcher_round_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_rectangle_background.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\rectangle_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_rounded_corner_device.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable-v24\\rounded_corner_device.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_book_appointment.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_book_appointment.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_cam.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\cam.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_performance.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\performance.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_appointment_hyper_meeting_check_list.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_appointment_hyper_meeting_check_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_appointment_meeting_check_list.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_appointment_meeting_check_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round_round.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xxhdpi\\ic_launcher_round_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xhdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_round_round.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-xxxhdpi\\ic_launcher_round_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_box.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\box.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_p3.PNG.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\p3.PNG"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_custom_text_dialog.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\custom_text_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_device_leads.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_device_leads.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round_foreground.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-mdpi\\ic_launcher_round_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\menu_activity_main_drawer.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_performance.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_performance.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_hyper_care_leads_detail.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_hyper_care_leads_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_rounded_corner_meeting.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\rounded_corner_meeting.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_day_three_dialog.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\day_three_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_round_foreground.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\debug\\res\\mipmap-hdpi\\ic_launcher_round_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_appointments.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_appointments.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_leads.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\leads.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_day_seven_message_dialog.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\day_seven_message_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_button_background.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\button_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_rounded_pacakge.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable-v24\\rounded_pacakge.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_pre_meeting_check_list.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_pre_meeting_check_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_rounded_top_blue.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\rounded_top_blue.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_p1.PNG.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\p1.PNG"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_day_custom_dialog.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\day_custom_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_leads_home_img.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\leads_home_img.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\drawable_list.png.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\drawable\\list.png"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_packages.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_packages.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_after_sales.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\activity_after_sales.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\build\\intermediates\\merged_res\\debug\\layout_item_meeting.xml.flat",
+        "source": "C:\\Users\\Hamza\\AndroidStudioProjects\\iQOACHAndroid\\app\\src\\main\\res\\layout\\item_meeting.xml"
+    }
+]

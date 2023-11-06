@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/_10sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<ImageView
+    android:id="@+id/ivBack"
+    android:layout_width="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_20sdp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_height="@dimen/_20sdp"
+    android:background="@drawable/ic_arrow_back_white_24dp"
+    android:backgroundTint="@color/blue"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+         android:id="@+id/tvTitle"
+        android:textSize="@dimen/_16sdp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        />
+
+    <EditText
+        android:id="@+id/tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_below="@+id/tvTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp"
+        android:gravity="start"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/eittext_background"
+        android:textColor="@color/black"
+         android:textSize="@dimen/_16sdp" />
+
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="match_parent"
+
+        android:layout_height="@dimen/_35sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/rectangle_background"
+        android:gravity="center"
+        android:text="Send"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp" />
+
+
+
+    </RelativeLayout>
