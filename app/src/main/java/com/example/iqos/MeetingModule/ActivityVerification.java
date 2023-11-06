@@ -1,5 +1,6 @@
 package com.example.iqos.MeetingModule;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,17 +47,20 @@ public class ActivityVerification extends AppCompatActivity {
     String q3Answer  ="";
     String q2Answer  ="";
     String q1Answer  ="";
-
+    String  name;
+    public  static Activity verificationAct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = ActivityVerificationBinding.inflate(getLayoutInflater());
         View view = mBinding.getRoot();
         setContentView(view);
+        verificationAct= this;
+
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
 
          appointment_id = getIntent().getStringExtra("appointment_id");
-       String  name = getIntent().getStringExtra("name");
+          name = getIntent().getStringExtra("name");
       mBinding.tvName.setText("1. Name Verified ("+ name+")");
 
          mBinding.tvDone.setOnClickListener(new View.OnClickListener() {
@@ -140,10 +144,11 @@ String cbSmoker="";
 
                                 Intent intent = new Intent(ActivityVerification.this, ActivityAppointmentMeetingCheckList.class);
                                 intent.putExtra("appointment_id",""+ appointment_id);
+                                intent.putExtra("name",""+ name);
                                   startActivity(intent);
-                                finish();
+//                                finish();
                             } else {
-                                Toast.makeText(ActivityVerification.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityVerification.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -154,7 +159,7 @@ String cbSmoker="";
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            Toast.makeText(ActivityVerification.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityVerification.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

@@ -84,7 +84,7 @@ public class ActivityLeadsDetail extends AppCompatActivity {
     String call3_outcome="";
     String call4_outcome="";
     String email_message="";
-public  static Activity  ivityLeads;
+    public  static Activity  ivityLeads;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -244,6 +244,7 @@ mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
                         .simple_spinner_dropdown_item);
         mBinding.spinnerLeadStatus.setAdapter(ad);
     }
+
     private void setCall2StatusSpinner(String status){
 
 
@@ -308,6 +309,7 @@ mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
 
 
     }
+
     private void setCall3StatusSpinner(String status){
 
 Log.e("TGED","CALL3outcome"+ status);
@@ -369,6 +371,7 @@ Log.e("TGED","CALL3outcome"+ status);
 
 
     }
+
     private void setCall4StatusSpinner(String status){
 
 Log.e("TGED","CALL3outcome"+ status);
@@ -430,6 +433,7 @@ Log.e("TGED","CALL3outcome"+ status);
 
 
     }
+
     private void setCallStatusSpinner(String status){
 
 
@@ -537,7 +541,7 @@ Log.e("TGED","CALL3outcome"+ status);
             public void onClick(View view) {
 
 
-                String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(new Date());
+                String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                    email_message = currentDate;
 
                 Uri emailUri = Uri.parse("mailto:"  +email );
@@ -562,7 +566,7 @@ Log.e("TGED","CALL3outcome"+ status);
 
         dialog.show();
     }
-    public void showCDialog(String title, String message , String number, String email ){
+    public void showCDialog(String title, String message , String number, String email )  {
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -592,18 +596,12 @@ Log.e("TGED","CALL3outcome"+ status);
             }
         });
 
-
-
-
-
-
-
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(new Date());
+                String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
                   opening_msg = currentDate;
                   Intent smsIntent = new Intent(Intent.ACTION_VIEW);
@@ -886,7 +884,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
 
                                                     if(keyModel.getData().getLead().getLastAction().getType().equalsIgnoreCase("N/A"))
                                                     {
-                                                        String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(new Date());
+                                                        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                                                         call1 = currentDate;
                                                         mBinding.tvCall.setEnabled(true);
 
@@ -904,7 +902,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                                                         Intent intent = new Intent(Intent.ACTION_DIAL);
                                                         intent.setData(Uri.parse("tel:"+ keyModel.getData().getLead().getNumber()));
                                                         startActivity(intent);
-                                                        String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(new Date());
+                                                        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                                                         call1 = currentDate;
                                                         mBinding.tvCall.setEnabled(true);
                                                         DateTimeFormatter formatter = null;
@@ -933,7 +931,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                                                         Intent intent = new Intent(Intent.ACTION_DIAL);
                                                         intent.setData(Uri.parse("tel:"+ keyModel.getData().getLead().getNumber()));
                                                         startActivity(intent);
-                                                        String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(new Date());
+                                                        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                                                         call2 = currentDate;
                                                         mBinding.tvCall.setEnabled(true);
                                                         DateTimeFormatter formatter = null;
@@ -961,7 +959,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                                                         Intent intent = new Intent(Intent.ACTION_DIAL);
                                                         intent.setData(Uri.parse("tel:"+ keyModel.getData().getLead().getNumber()));
                                                         startActivity(intent);
-                                                        String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(new Date());
+                                                        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                                                         call3 = currentDate;
                                                         mBinding.tvCall.setEnabled(true);
 
@@ -992,7 +990,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                                                         Intent intent = new Intent(Intent.ACTION_DIAL);
                                                         intent.setData(Uri.parse("tel:"+ keyModel.getData().getLead().getNumber()));
                                                         startActivity(intent);
-                                                        String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(new Date());
+                                                        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                                                         call4 = currentDate;
                                                         mBinding.tvCall.setEnabled(true);
 
@@ -1059,7 +1057,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                                     }
 
                             } else {
-                                Toast.makeText(ActivityLeadsDetail.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
 
                             }
@@ -1073,7 +1071,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             mBinding.swipeRefresh.setRefreshing(false);
                             mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(ActivityLeadsDetail.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -1165,7 +1163,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
 
 
                             } else {
-                                Toast.makeText(ActivityLeadsDetail.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
 
                             }
@@ -1178,7 +1176,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(ActivityLeadsDetail.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -1263,7 +1261,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
 
 
                             } else {
-                                Toast.makeText(ActivityLeadsDetail.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
 
                             }
@@ -1276,7 +1274,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(ActivityLeadsDetail.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

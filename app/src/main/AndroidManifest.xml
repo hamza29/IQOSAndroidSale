@@ -92,8 +92,20 @@
         <activity
             android:name=".MeetingModule.ActivityPreMeetingCheckList"
             android:exported="false" />
+         <activity
+            android:name=".LeadsModule.ActivityHyperCareLeadsDetail"
+            android:exported="false" />
+            <activity
+            android:name=".LeadsModule.AppointmentBookingDetailHyperActivity"
+            android:exported="false" />
+     <activity
+            android:name=".LeadsModule.ActivityHyperAppointments"
+            android:exported="false" />
+
         <activity
             android:name=".AppointmentsModule.ActivityBookAppointment"
+            android:exported="false" /> <activity
+            android:name=".LeadsModule.ActivityAppointmentHyperMeeting"
             android:exported="false" />
         <activity
             android:name=".LeadsModule.ActivityLeadsDetail"
@@ -104,6 +116,13 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".MeetingModule.ActivityEcomMeeting"
+            android:exported="false" />
+        <activity
+            android:name=".AppointmentsModule.BookEcommAppointmentActivity"
+            android:exported="false" />
+
         <activity
             android:name=".MeetingModule.BookAppointmentDetailActivity"
             android:exported="false" />

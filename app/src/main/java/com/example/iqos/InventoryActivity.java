@@ -116,7 +116,7 @@ public class InventoryActivity extends AppCompatActivity {
                                 devicesItem(keyModel.getData().getInventories());
 
                             } else {
-                                Toast.makeText(InventoryActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(InventoryActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -171,7 +171,7 @@ public class InventoryActivity extends AppCompatActivity {
 
 
                             } else {
-                                Toast.makeText(InventoryActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(InventoryActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                             }
                         }

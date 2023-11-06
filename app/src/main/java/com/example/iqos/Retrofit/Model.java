@@ -403,12 +403,23 @@ public class Model {
         @SerializedName("call4_outcome")
         @Expose
         private String call4Outcome;
+        @SerializedName("type")
+        @Expose
+        private String type;
         @SerializedName("last_action")
         @Expose
         private LastAction lastAction;
         @SerializedName("next_action")
         @Expose
         private NextAction nextAction;
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
 
         public String getAssigned_at() {
             return assigned_at;

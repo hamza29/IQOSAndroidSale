@@ -43,6 +43,7 @@
     </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
@@ -117,6 +118,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llSub"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
@@ -194,6 +197,22 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tvAddMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:foreground="@drawable/ripple"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:backgroundTint="@color/blue"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="Custom Message"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_7sdp"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"

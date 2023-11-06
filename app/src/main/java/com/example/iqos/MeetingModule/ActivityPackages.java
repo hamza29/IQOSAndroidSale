@@ -1,5 +1,6 @@
 package com.example.iqos.MeetingModule;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,8 +41,9 @@ public class ActivityPackages extends AppCompatActivity {
     ActivityPackagesBinding mBinding;
 
     SharedPreferences mSharedPreferences;
-    String appointment_id;
+    String appointment_id,a1,a2,a3,a4,meeting_outcome;
 
+    public static Activity  packagesActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +51,15 @@ public class ActivityPackages extends AppCompatActivity {
         mBinding = ActivityPackagesBinding.inflate(getLayoutInflater());
         View view = mBinding.getRoot();
         setContentView(view);
-
-      Intent intent = getIntent();
+        packagesActivity = this;
+        Intent intent = getIntent();
         appointment_id =intent.getStringExtra("appointment_id");
+        a1 =intent.getStringExtra("a1");
+        a2 =intent.getStringExtra("a2");
+        a3 =intent.getStringExtra("a3");
+        a4 =intent.getStringExtra("a4");
+        meeting_outcome =intent.getStringExtra("meeting_outcome");
+
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
         mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +85,11 @@ public class ActivityPackages extends AppCompatActivity {
 
         PackageAdapter appointmentAdapter;
         mBinding.rvPackages.setLayoutManager(new LinearLayoutManager(ActivityPackages.this, LinearLayoutManager.VERTICAL, false));
-        appointmentAdapter = new PackageAdapter(ActivityPackages.this, devices,appointment_id);
+        appointmentAdapter = new PackageAdapter(ActivityPackages.this, devices,appointment_id,a1 ,
+        a2,
+        a3,
+        a4,
+        meeting_outcome);
         mBinding.rvPackages.setAdapter(appointmentAdapter);
     }
     public void getPackages(String token ) {
@@ -100,7 +112,7 @@ public class ActivityPackages extends AppCompatActivity {
                                 devicesItem(keyModel.getData().getPackages());
 
                             } else {
-                                Toast.makeText(ActivityPackages.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityPackages.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -111,7 +123,7 @@ public class ActivityPackages extends AppCompatActivity {
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            Toast.makeText(ActivityPackages.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityPackages.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

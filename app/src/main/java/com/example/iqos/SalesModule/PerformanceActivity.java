@@ -136,7 +136,7 @@ public class PerformanceActivity extends AppCompatActivity {
 
 
                             } else {
-                                Toast.makeText(PerformanceActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PerformanceActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -147,7 +147,7 @@ public class PerformanceActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            Toast.makeText(PerformanceActivity.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PerformanceActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

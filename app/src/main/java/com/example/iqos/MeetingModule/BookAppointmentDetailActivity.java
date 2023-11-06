@@ -129,16 +129,7 @@ String appoint_status="Scheduled";
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 appoint_status = newLeads.get(position) ;
-//                Log.e("TGED","appoint_status-> "+appoint_status);
-//                Log.e("TGED","status-> "+status);
-//                if(!AppointStatus.toString().equalsIgnoreCase("Select")) {
-//
-//                    if(!status.equalsIgnoreCase(""+appoint_status)) {
-//
-//
-//
-//                    }
-//                }
+
 
             }
 
@@ -182,7 +173,7 @@ String appoint_status="Scheduled";
                                 if (keyModel.getData() != null) {
 
                                     mBinding.progress.setVisibility(View.GONE);
-mBinding.tvAppointment.setText("Appointment #"+keyModel.getData().getAppoinment().getId());
+mBinding.tvAppointment.setText("Appointment # "+keyModel.getData().getAppoinment().getId());
 
                                 if(keyModel.getData().getAppoinment().getFirstName() !=null ){
                                     mBinding.tvName.setText(""+ keyModel.getData().getAppoinment().getFirstName() );
@@ -217,7 +208,7 @@ mBinding.tvAppointment.setText("Appointment #"+keyModel.getData().getAppoinment(
 //
 //                                }
                            } else {
-                                Toast.makeText(BookAppointmentDetailActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BookAppointmentDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
 
                             }
@@ -230,7 +221,7 @@ mBinding.tvAppointment.setText("Appointment #"+keyModel.getData().getAppoinment(
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(BookAppointmentDetailActivity.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BookAppointmentDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -282,7 +273,7 @@ mBinding.tvAppointment.setText("Appointment #"+keyModel.getData().getAppoinment(
 
 
                             } else {
-                                Toast.makeText(BookAppointmentDetailActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BookAppointmentDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
 
                             }
@@ -295,7 +286,7 @@ mBinding.tvAppointment.setText("Appointment #"+keyModel.getData().getAppoinment(
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(BookAppointmentDetailActivity.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BookAppointmentDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

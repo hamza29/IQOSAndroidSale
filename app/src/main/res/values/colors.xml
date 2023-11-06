@@ -7,12 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="color_primary">#FF3700B3</color>
+    <color name="color_primary">#0d59b1</color>
     <color name="fields_hint_color">#667085</color>
     <color name="darkblue">#0c2c64</color>
     <color name="blue">#0d59b1</color>
     <color name="SkyBase">#CDCFD0</color>
     <color name="transparent">#0000ffff</color>
-    <color name="grey_light">#D3D1D1</color>
+    <color name="grey_light">#F3E4E4E4</color>
 
 </resources>

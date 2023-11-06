@@ -51,6 +51,8 @@ String appointment_id ="";
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
        Intent intent = getIntent();
         appointment_id = intent.getStringExtra("appointment_id");
+        String name = getIntent().getStringExtra("name");
+        mBinding.tvLeadName.setText("Lead Name: "+ name);
         mBinding.llCoach.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -99,7 +101,7 @@ mBinding.cbCoach.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeLi
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         Date todayDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayString = formatter.format(todayDate);
         if(mBinding.cbCoach.isChecked()){
             tvCoachTime =todayString;
@@ -111,7 +113,7 @@ mBinding.cbCoach.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeLi
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         Date todayDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayString = formatter.format(todayDate);
         if(mBinding.cbTools.isChecked()){
             tvToolsTime =todayString;
@@ -123,7 +125,7 @@ mBinding.cbCoach.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeLi
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         Date todayDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayString = formatter.format(todayDate);
         if(mBinding.cbConsumer.isChecked()){
             tvConsumerTime =todayString;
@@ -137,7 +139,7 @@ mBinding.cbSpace.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeLi
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         Date todayDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayString = formatter.format(todayDate);
         if(mBinding.cbSpace.isChecked()){
             tvSpaceTime =todayString;
@@ -211,7 +213,7 @@ mBinding.tvDone.setOnClickListener(new View.OnClickListener() {
 finish();
 
                             } else {
-                                Toast.makeText(ActivityPreMeetingCheckList.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityPreMeetingCheckList.this, "Something went wrong", Toast.LENGTH_SHORT).show();
  
                             }
                         }
@@ -222,7 +224,7 @@ finish();
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                             Toast.makeText(ActivityPreMeetingCheckList.this, "key model null", Toast.LENGTH_SHORT).show();
+                             Toast.makeText(ActivityPreMeetingCheckList.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

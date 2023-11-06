@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.iqos.AppointmentsModule.ActivityBookAppointment;
 import com.example.iqos.Constants;
 import com.example.iqos.InventoryActivity;
+import com.example.iqos.LeadsModule.ActivityHyperAppointments;
 import com.example.iqos.LeadsModule.ActivityHyperCareLeads;
 import com.example.iqos.LeadsModule.ActivityLeads;
 import com.example.iqos.LeadsModule.ActivityLeadsDetail;
@@ -59,11 +60,13 @@ public class HomeFragment extends Fragment {
             mBinding.rlHyperCare.setVisibility(View.GONE);
             mBinding.rlInvent.setVisibility(View.GONE);
             mBinding.rlPerf.setVisibility(View.GONE);
+            mBinding.rlHyperCareAppointment.setVisibility(View.GONE);
         }else{
              mBinding.rlAppoints.setVisibility(View.VISIBLE);
             mBinding.rlHyperCare.setVisibility(View.VISIBLE);
             mBinding.rlInvent.setVisibility(View.VISIBLE);
             mBinding.rlPerf.setVisibility(View.VISIBLE);
+            mBinding.rlHyperCareAppointment.setVisibility(View.VISIBLE);
         }
 
         mBinding.rlLeads.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +82,20 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
                         Intent intent = new Intent(getActivity(), ActivityBookAppointment.class);
+                        startActivity(intent);
+
+
+
+            }
+        });
+
+        mBinding.rlHyperCareAppointment.setVisibility(View.GONE);
+
+        mBinding.rlHyperCareAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                        Intent intent = new Intent(getActivity(), ActivityHyperAppointments.class);
                         startActivity(intent);
 
 

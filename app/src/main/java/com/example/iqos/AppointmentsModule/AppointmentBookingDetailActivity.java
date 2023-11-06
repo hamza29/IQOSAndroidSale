@@ -137,33 +137,6 @@ mBinding.confirmApp.setOnClickListener(new View.OnClickListener() {
 //        setAppointStatusSpinner();
 
     }
-    private void setAppointStatusSpinner( ){
-
-
-        mBinding.spinnerAppointStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                appoint_status = AppointStatus.get(position) ;
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        ArrayAdapter ad
-                = new ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                AppointStatus);
-        ad.setDropDownViewResource(
-                android.R.layout
-                        .simple_spinner_dropdown_item);
-        mBinding.spinnerAppointStatus.setAdapter(ad);
-    }
 
     public void boookApp(String token,String id,String status,String app_at,String location) {
         mBinding.progress.setVisibility(View.VISIBLE);
@@ -197,7 +170,7 @@ mBinding.confirmApp.setOnClickListener(new View.OnClickListener() {
 
 
                             } else {
-                                Toast.makeText(AppointmentBookingDetailActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AppointmentBookingDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
 
                             }
@@ -210,7 +183,7 @@ mBinding.confirmApp.setOnClickListener(new View.OnClickListener() {
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(AppointmentBookingDetailActivity.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AppointmentBookingDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -257,7 +230,7 @@ mBinding.confirmApp.setOnClickListener(new View.OnClickListener() {
 //                                }
 //
 //                            } else {
-//                                Toast.makeText(AppointmentBookingDetailActivity.this, "Error", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(AppointmentBookingDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 //                                mBinding.progress.setVisibility(View.GONE);
 //
 //                            }
@@ -270,7 +243,7 @@ mBinding.confirmApp.setOnClickListener(new View.OnClickListener() {
 //                        public void run() {
 //                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 //                            mBinding.progress.setVisibility(View.GONE);
-//                            Toast.makeText(AppointmentBookingDetailActivity.this, "key model null", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(AppointmentBookingDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 //                        }
 //                    });
 //                }

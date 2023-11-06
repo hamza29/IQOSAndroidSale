@@ -49,7 +49,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
             holder.tvTime.setText(""+items.get(position).getAssigned_at() );
         }
         if(items.get(position).getName()!=null){
-            holder.tvDevices.setText(""+items.get(position).getName() );
+            holder.tvDevices.setText(""+/*items.get(position).getName()+" | "+ */items.get(position).getSrNo() );
         }
         if(items.get(position).getColor()!=null){
             holder.tvColor.setText(""+items.get(position).getColor() );

@@ -1,25 +1,51 @@
 package com.example.iqos.LeadsModule;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.iqos.Constants;
 import com.example.iqos.R;
+import com.example.iqos.Retrofit.ApiClient;
+import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder> {
     private Activity context;
 
 
+    SharedPreferences mSharedPreferences;
 
     List<Model.Lead> items;
 
@@ -28,6 +54,7 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
     public LeadsAdapter(Activity context, List<Model.Lead> leads) {
         this.context = context;
         this.items = leads;
+        mSharedPreferences =context.getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
 
     }
 
@@ -42,7 +69,18 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
 
         Model.Lead item = items.get(position);
         if (item.getFirstName() != null  ) {
-            holder.name.setText(""+item.getFirstName().toString()+" ");
+            if(item.getType().equalsIgnoreCase("hc1") ) {
+                holder.name.setText("" + item.getFirstName().toString() + " | Device Care 1 | Day 7"  );
+            } else if(item.getType().equalsIgnoreCase("hc2") ) {
+                holder.name.setText("" + item.getFirstName().toString() + " | Device Care 1 | Day 14"  );
+            }else if(item.getType().equalsIgnoreCase("hc3") ) {
+                holder.name.setText("" + item.getFirstName().toString() + " | Device Care 2 | Day 21"  );
+            }else if(item.getType().equalsIgnoreCase("hc4") ) {
+                holder.name.setText("" + item.getFirstName().toString() + " | Device Care 2 | Day 30"  );
+            }else if(item.getType().equalsIgnoreCase("lead") ) {
+                holder.name.setText("" + item.getFirstName().toString()   );
+            }
+
         }
 
         if (item.getLeadStatus() != null ) {
@@ -51,28 +89,6 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
         holder.tvId.setText(""+ item.getId()+" Date: "+ item.getAssigned_at());
 
 
-//        if(item.getCall1()== null && item.getCall2()== null && item.getCall3()== null && item.getCall4()== null){
-//            holder.tvLastAction.setText("N/A");
-//            holder.tvNextAction.setText("N/A");
-//            holder.tvLastActionOutcome.setText("N/A");
-//            holder.tvNextActionOutcome.setText("N/A");
-//        }
-//        else if (item.getCall1()!= null&& item.getCall2()== null&& item.getCall3()== null){
-//            holder.tvLastAction.setText("Call 1");
-//            holder.tvNextAction.setText("N/A");
-//            holder.tvLastActionOutcome.setText(""+ item.getCall1());
-//            holder.tvNextActionOutcome.setText("N/A");
-//        }  else if (item.getCall1()!= null && item.getCall2()!= null&& item.getCall3()== null){
-//            holder.tvLastAction.setText("Call 1");
-//            holder.tvNextAction.setText("Call 2");
-//            holder.tvLastActionOutcome.setText(""+ item.getCall1());
-//            holder.tvNextActionOutcome.setText(""+ item.getCall2());
-//        }else if (item.getCall1()!= null && item.getCall2()!= null && item.getCall3()!= null){
-//            holder.tvLastAction.setText("Call 2");
-//            holder.tvNextAction.setText("Call 3");
-//            holder.tvLastActionOutcome.setText(""+ item.getCall2());
-//            holder.tvNextActionOutcome.setText(""+ item.getCall3());
-//        }
         holder.tvLastAction.setText(item.getLastAction().getType());
         holder.tvNextAction.setText(item.getNextAction().getType());
         holder.tvLastActionOutcome.setText(""+ item.getLastAction().getTime());
@@ -80,6 +96,27 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(item.getType().equalsIgnoreCase("hc1") || item.getType().equalsIgnoreCase("hc2")|| item.getType().equalsIgnoreCase("hc3")|| item.getType().equalsIgnoreCase("hc4")) {
+                    Intent intent = new Intent(context, AppointmentBookingDetailHyperActivity.class);
+                    intent.putExtra("lead_id", "" + item.getId().toString());
+                    intent.putExtra("name", "" + item.getFirstName().toString());
+                    intent.putExtra("type", item.getType());
+                    context.startActivity(intent);
+                }else{
+
+
+
+
+
+
+
+
+
+
+
+
+
                 if(item.getIs_appointment().equalsIgnoreCase("0")) {
                     Intent intent = new Intent(context, ActivityLeadsDetail.class);
                     intent.putExtra("KEY_LEAD_ID", item.getId().toString());
@@ -87,8 +124,41 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
                 }else{
                     Toast.makeText(context, "You have already booked an appointment", Toast.LENGTH_SHORT).show();
                 }
+                }
             }
         });
+
+if(item.getType() !=null){
+    if(item.getType().equalsIgnoreCase("hc1") || item.getType().equalsIgnoreCase("hc2")|| item.getType().equalsIgnoreCase("hc3")|| item.getType().equalsIgnoreCase("hc4"))
+    {
+      holder.  llMain.setVisibility(View.GONE);
+      holder.  llSub.setVisibility(View.GONE);
+    }else
+    {
+        holder.  llMain.setVisibility(View.VISIBLE);
+        holder.  llSub.setVisibility(View.VISIBLE);
+    }
+
+
+
+
+}else
+{
+    holder.  llMain.setVisibility(View.VISIBLE);
+    holder.  llSub.setVisibility(View.VISIBLE);
+}
+
+holder.tvAddMessage.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+
+
+
+        showOpenMessage(item.getId()+"");
+    }
+});
+
+
 
 
     }
@@ -98,7 +168,129 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
         return items.size();
     }
 
-    public void clearData() {
+    public void showOpenMessage(  String lead_id   ){
+        Dialog dialog = new Dialog( context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.day_custom_dialog);
+        dialog.getWindow().setGravity(Gravity.TOP);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        Button btnRefresh =   dialog.findViewById(R.id.btnDone);
+//        TextView tvTitle =   dialog.findViewById(R.id.tvTitle);
+        EditText tvMessage =   dialog.findViewById(R.id.tvMessage);
+
+        ImageView ivBack =   dialog.findViewById(R.id.ivBack);
+
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("QueryPermissionsNeeded")
+            @Override
+            public void onClick(View view) {
+
+
+
+                updateLeadMEssaage(mSharedPreferences.
+                                getString(Constants.BAREAR_TOKEN,""),lead_id,
+                        tvMessage.getText().toString());
+
+
+            }
+        });
+
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+
+        dialog.show();
+    }
+    public void updateLeadMEssaage(String token,String id, String message  ) {
+
+        ApiService apiService = ApiClient.getClient( context).create(ApiService.class);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        builder.addFormDataPart("lead_id", id);
+        builder.addFormDataPart("message", message);
+
+
+
+        RequestBody requestBody = builder.build();
+
+        Call<Model.GenerealModel> call = apiService.custom_message(token, requestBody);
+
+        call.enqueue(new Callback<Model.GenerealModel>() {
+            @Override
+            public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
+                final Model.GenerealModel listofhome = response.body();
+                if (listofhome != null) {
+
+                    context.    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            context.      getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+
+                            if (listofhome.getStatus().equals("1")) {
+
+//                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+
+                                Toast.makeText( context, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+//                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+
+
+                            } else {
+                                Toast.makeText( context, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+                } else {
+
+                    context.    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            context.     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                             Toast.makeText( context, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Model.GenerealModel> call, Throwable t) {
+
+
+                context.    runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                    }
+
+                });
+
+
+            }
+        });
     }
 
 
@@ -112,12 +304,18 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
         TextView tvId;
         TextView tvLastActionOutcome;
         TextView tvNextActionOutcome;
+        TextView tvAddMessage;
+        LinearLayout llMain;
+        LinearLayout llSub;
 
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
+            tvAddMessage = itemView.findViewById(R.id.tvAddMessage);
+            llSub = itemView.findViewById(R.id.llSub);
+            llMain = itemView.findViewById(R.id.llMain);
             name = itemView.findViewById(R.id.tvName);
             tvLastAction = itemView.findViewById(R.id.tvLastAction);
             name = itemView.findViewById(R.id.tvName);

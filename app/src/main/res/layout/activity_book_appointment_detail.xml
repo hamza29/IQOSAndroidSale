@@ -127,7 +127,7 @@
                     android:id="@+id/tvTime"
                         android:background="@drawable/rounded_corner_meeting"
 
-                        android:text="hh:mm:ss"
+                        android:text="HH:mm:ss"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                          android:textSize="@dimen/_10sdp"

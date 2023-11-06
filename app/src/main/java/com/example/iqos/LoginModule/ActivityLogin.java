@@ -140,7 +140,6 @@ public class ActivityLogin extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
 
-
                                 }
 
                             } else {
@@ -157,7 +156,7 @@ public class ActivityLogin extends AppCompatActivity {
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(ActivityLogin.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityLogin.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

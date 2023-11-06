@@ -26,12 +26,26 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
 
 
     List<ActivityPackages.Package> items = new ArrayList<>();
+    String app_id;
+    String a1 ;
+    String a2;
+    String a3;
+    String a4;
+    String meeting_outcome;
 
-
-String app_id;
-    public PackageAdapter(Activity context, List<ActivityPackages.Package> leads,String app_id) {
+    public PackageAdapter(Activity context, List<ActivityPackages.Package> leads,String app_id,String a1 ,
+                          String a2,
+                          String a3,
+                          String a4,
+                          String meeting_outcome) {
         this.context = context;
         this.items = leads;
+//        this.meeting_outcome = meeting_outcome;
+        this.a1 = a1;
+        this.a4 = a4;
+        this.a2 = a2;
+        this.a3 = a3;
+        this.meeting_outcome = meeting_outcome;
         this.app_id = app_id;
 
     }
@@ -56,7 +70,13 @@ holder.rlLayout.setOnClickListener(new View.OnClickListener() {
         intent.putExtra("app_id",""+ app_id);
         intent.putExtra("id",""+ items.get(position).getId());
         intent.putExtra("name",items.get(position).getName()+"");
+        intent.putExtra("a1",""+a1);
+        intent.putExtra("a2",""+a2);
+        intent.putExtra("a3",""+a3);
+        intent.putExtra("a4",""+a4);
+        intent.putExtra("meeting_outcome",""+meeting_outcome);
         context.startActivity(intent);
+//        context.finish();
     }
 });
     }

@@ -1,6 +1,8 @@
 package com.example.iqos.MeetingModule;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,9 +10,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.iqos.AppointmentsModule.ActivityBookAppointment;
 import com.example.iqos.Constants;
 import com.example.iqos.GPSTracker;
 import com.example.iqos.Retrofit.ApiClient;
@@ -44,11 +48,11 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
     SharedPreferences mSharedPreferences;
     String appointment_id;
     String q4Answer  ="";
-    String q5Answer  ="";
 
     String q3Answer  ="";
     String q2Answer  ="";
     String q1Answer  ="";
+    public  static Activity meetingcehck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
         View view = mBinding.getRoot();
         setContentView(view);
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
+        meetingcehck = this;
         GPSTracker gpsTracker = new GPSTracker(this);
         if (gpsTracker.getIsGPSTrackingEnabled())
         {
@@ -64,17 +69,118 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
 
         }
         Date todayDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayString = formatter.format(todayDate);
         starting_date =todayString;
          appointment_id = getIntent().getStringExtra("appointment_id");
-         mBinding.tvSales.setOnClickListener(new View.OnClickListener() {
+       String name = getIntent().getStringExtra("name");
+mBinding.tvLeadName.setText("Lead Name: "+ name);
+        updateMeetingChecklist(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
+                appointment_id,
+                starting_date,
+                starting_latitude,
+                mBinding. tvQuestion1.getText().toString(),"",
+                mBinding. tvQuestion2.getText().toString(),"",
+                mBinding. tvQuestion3.getText().toString(),"",
+                mBinding. tvQuestion4.getText().toString(),"",
+                "","","","","","","","");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        mBinding.tvSales.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
                  meeting_outcome ="sale";
+
+                 if(mBinding.rbQ1a1.isChecked()){
+                     q1Answer =mBinding.rbQ1a1.getText().toString();
+                 }else  if(mBinding.rbQ1a2.isChecked()){
+                     q1Answer =mBinding.rbQ1a2.getText().toString();
+                 }else  if(mBinding.rbQ1a3.isChecked()){
+                     q1Answer =mBinding.rbQ1a3.getText().toString();
+                 }else  if(mBinding.rbQ1a4.isChecked()){
+                     q1Answer =mBinding.rbQ1a4.getText().toString();
+                 }
+
+                 if(mBinding.rbQ2a1.isChecked()){
+                     q2Answer =mBinding.rbQ2a1Et.getText().toString();
+                 }else  if(mBinding.rbQ2a2.isChecked()){
+                     q2Answer =mBinding.rbQ2a2Et.getText().toString();
+                 }
+                 q3Answer =mBinding.etQ3a.getText().toString();
+                 q4Answer= mBinding.etbrand.getText().toString();
+
+
+//                 GPSTracker gpsTracker = new GPSTracker(ActivityAppointmentMeetingCheckList.this);
+//                 if (gpsTracker.getIsGPSTrackingEnabled())
+//                 {
+//                     ending_latitude = gpsTracker.getLatitude()+ "," + gpsTracker.getLongitude();
+//                 }
+
+
+
+//                 Date todayDate = Calendar.getInstance().getTime();
+//                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                 String todayString = formatter.format(todayDate);
+//                 ending_date =todayString;
+//
+//                 updateMeetingChecklist(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
+//                         appointment_id,
+//                         starting_date,
+//                         starting_latitude,
+//                         mBinding. tvQuestion1.getText().toString(),q1Answer,
+//                         mBinding. tvQuestion2.getText().toString(),q2Answer,
+//                         mBinding. tvQuestion3.getText().toString(),q3Answer,
+//                         mBinding. tvQuestion4.getText().toString(),q4Answer,
+//                         "","","","","",ending_date,ending_latitude,meeting_outcome);
+
+
                  Intent intent = new Intent(ActivityAppointmentMeetingCheckList.this, ActivityPackages.class);
               intent.putExtra("appointment_id",""+appointment_id);
+              intent.putExtra("a1",""+q1Answer);
+              intent.putExtra("a2",""+q2Answer);
+              intent.putExtra("a3",""+q3Answer);
+              intent.putExtra("a4",""+q4Answer);
+              intent.putExtra("meeting_outcome",""+meeting_outcome);
                  startActivity(intent);
+//                 finish();
              }
          });
 
@@ -84,7 +190,13 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
                  meeting_outcome ="no sale";
                  Intent intent = new Intent(ActivityAppointmentMeetingCheckList.this, ActivityNoSales.class);
                  intent.putExtra("appointment_id",""+appointment_id);
+                 intent.putExtra("a1",""+q1Answer);
+                 intent.putExtra("a2",""+q2Answer);
+                 intent.putExtra("a3",""+q3Answer);
+                 intent.putExtra("a4",""+q4Answer);
+                 intent.putExtra("meeting_outcome",""+meeting_outcome);
                  startActivity(intent);
+                 finish();
              }
          });
             //
@@ -142,7 +254,7 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
 
 
                  Date todayDate = Calendar.getInstance().getTime();
-                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                  String todayString = formatter.format(todayDate);
                  ending_date =todayString;
 
@@ -159,6 +271,36 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
              }
          });
 
+        mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityAppointmentMeetingCheckList.this);
+                builder.setTitle("Confirmation"); // Set the dialog title
+                builder.setMessage("Are you sure you want to exit? Your data will be lost!"); // Set the dialog message
+
+                // Set up the buttons
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                finish();
+
+
+
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // Create and show the AlertDialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
 
 
@@ -271,9 +413,9 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
 
                                 Toast.makeText(ActivityAppointmentMeetingCheckList.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
 
-                                finish();
+//                                finish();
                             } else {
-                                Toast.makeText(ActivityAppointmentMeetingCheckList.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityAppointmentMeetingCheckList.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -284,7 +426,7 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            Toast.makeText(ActivityAppointmentMeetingCheckList.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityAppointmentMeetingCheckList.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -308,6 +450,35 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityAppointmentMeetingCheckList.this);
+        builder.setTitle("Confirmation"); // Set the dialog title
+        builder.setMessage("Are you sure you want to exit? Your data will be lost!"); // Set the dialog message
+
+        // Set up the buttons
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+
+
+
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        // Create and show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 
 }

@@ -27,7 +27,6 @@ public class ActivityAfterSale extends AppCompatActivity {
     ActivityAfterSalesBinding mBinding;
     SharedPreferences mSharedPreferences;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +102,7 @@ mBinding.tvComplete.setOnClickListener(new View.OnClickListener() {
                                 finish();
 
                             } else {
-                                Toast.makeText(ActivityAfterSale.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityAfterSale.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -114,7 +113,7 @@ mBinding.tvComplete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            Toast.makeText(ActivityAfterSale.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityAfterSale.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

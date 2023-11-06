@@ -259,7 +259,23 @@
         android:textStyle="bold" />
 
 </LinearLayout>
-<View
+    <TextView
+        android:id="@+id/tvAddMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/_8sdp"
+        android:foreground="@drawable/ripple"
+        android:background="@drawable/button_background"
+        android:backgroundTint="@color/blue"
+        android:padding="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:text="Custom Message"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="bold" />
+    <View
     android:layout_marginTop="@dimen/_5sdp"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_1sdp"

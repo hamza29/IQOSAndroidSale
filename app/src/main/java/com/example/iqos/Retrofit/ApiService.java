@@ -1,6 +1,11 @@
 package com.example.iqos.Retrofit;
 
 
+import com.example.iqos.AppointmentsModule.ActivityBookAppointment;
+import com.example.iqos.LeadsModule.ActivityHyperAppointments;
+import com.example.iqos.LeadsModule.ActivityHyperCareLeads;
+import com.example.iqos.LeadsModule.ActivityHyperCareLeadsDetail;
+import com.example.iqos.LeadsModule.ActivityLeads;
 import com.example.iqos.MeetingModule.ActivityPackages;
 import com.example.iqos.SalesModule.ActivitySales;
 import com.example.iqos.SalesModule.PerformanceActivity;
@@ -30,6 +35,19 @@ public interface ApiService {
             @Field("type") String type
 
     );
+     @POST("qoach/lead/e-comm")
+    Call<ActivityLeads.EcommLeads> getEcomLeads(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token
+
+    );
+
+     @POST("qoach/lead/device-care/leads")
+    Call<ActivityHyperCareLeads.DeviceCareLeadsModel> getHyperLeads(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token
+
+    );
 
     @FormUrlEncoded
     @POST("qoach/leads/detail")
@@ -40,8 +58,29 @@ public interface ApiService {
     );
 
 
+    @FormUrlEncoded
+    @POST("qoach/lead/device-care/show")
+    Call<ActivityHyperCareLeadsDetail.DeviceCareModel> getHyperLeadsDetails(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token,
+            @Field("id") String id
+    );
+
+
     @GET("qoach/appointments")
-    Call<Model.GetAppointmentModel> getAppointment(
+    Call<ActivityBookAppointment.GetAppointmentModel> getAppointment(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token);
+
+@GET("qoach/lead/e-comm/appointments")
+    Call<ActivityBookAppointment.EcomAppointments> getEcomAppointment(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token);
+
+
+
+    @POST("qoach/lead/device-care/appointments")
+    Call<ActivityHyperAppointments.HyperAppointmentsModel> getHyperAppointments(
             @Header("Accept") String accept,
             @Header("Authorization") String token);
 
@@ -51,6 +90,31 @@ public interface ApiService {
     Call<Model.GenerealModel> bookAppointment(
             @Header("Accept") String accept,
             @Header("Authorization") String token,
+            @Field("id") String id,
+            @Field("appointment_status") String appointment_status,
+            @Field("appointment_at") String appointment_at,
+            @Field("appointment_location") String appointment_location,
+            @Field("lead_status") String lead_status
+    );
+    @FormUrlEncoded
+    @POST("qoach/lead/e-comm/appointments/book")
+    Call<Model.GenerealModel> bookEcomAppointment(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token,
+            @Field("id") String id,
+            @Field("appointment_status") String appointment_status,
+            @Field("appointment_at") String appointment_at,
+            @Field("appointment_location") String appointment_location
+    );
+
+
+
+    @FormUrlEncoded
+    @POST("qoach/lead/device-care/book-appointment")
+    Call<Model.GenerealModel> bookHyperAppointment(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token,
+            @Field("type") String type,
             @Field("id") String id,
             @Field("appointment_status") String appointment_status,
             @Field("appointment_at") String appointment_at,
@@ -89,9 +153,26 @@ public interface ApiService {
 
 
     );
+     @POST("qoach/lead/e-comm/meeting")
+    Call<Model.GenerealModel> updateEcomMeeting(
+
+            @Header("Authorization") String token,
+            @Body RequestBody body
+
+
+    );
 
      @POST("qoach/lead/meeting")
     Call<Model.GenerealModel> updateMeetingChecklist(
+
+            @Header("Authorization") String token,
+            @Body RequestBody body
+
+
+    );
+
+     @POST("qoach/lead/device-care/meeting")
+    Call<Model.GenerealModel> updateHyperMeetingChecklist(
 
             @Header("Authorization") String token,
             @Body RequestBody body
@@ -112,6 +193,24 @@ public interface ApiService {
     ///// Request Product Image ////
     @POST("qoach/lead/update")
     Call<Model.GenerealModel> updateLead(
+            @Header("Authorization") String auth,
+            @Body RequestBody body
+
+
+    );
+
+    ///// Request Product Image ////
+    @POST("qoach/lead/device-care/update")
+    Call<Model.GenerealModel> updateHyperLead(
+            @Header("Authorization") String auth,
+            @Body RequestBody body
+
+
+    );
+
+    ///// Request Product Image ////
+    @POST("qoach/lead/custom-message")
+    Call<Model.GenerealModel> custom_message(
             @Header("Authorization") String auth,
             @Body RequestBody body
 

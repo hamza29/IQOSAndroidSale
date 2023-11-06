@@ -1,5 +1,9 @@
 package com.example.iqos.SalesModule;
 
+import static com.example.iqos.MeetingModule.ActivityAppointmentMeetingCheckList.meetingcehck;
+import static com.example.iqos.MeetingModule.ActivityPackages.packagesActivity;
+import static com.example.iqos.MeetingModule.ActivityVerification.verificationAct;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +31,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.iqos.Constants;
-import com.example.iqos.Retrofit.ApiClient;
+import com.example.iqos.GPSTracker;
+ import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
 import com.example.iqos.databinding.ActivityBookAppointmentBinding;
@@ -46,10 +51,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -76,7 +83,8 @@ public class ActivitySales extends AppCompatActivity {
     String package_id;
     String payment_method;
     String appointment_id;
-
+    String      ending_latitude;
+    String a1,a2,a3,a4,meeting_outcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,18 +92,24 @@ public class ActivitySales extends AppCompatActivity {
         mBinding = ActivitySalesBinding.inflate(getLayoutInflater());
         View view = mBinding.getRoot();
         setContentView(view);
-          appointment_id = getIntent().getStringExtra("app_id");
-        mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
+        appointment_id = getIntent().getStringExtra("app_id");
+         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
          Intent intent = getIntent();
 
-          package_id=intent.getStringExtra("id");
+        package_id=intent.getStringExtra("id");
+        a1 =intent.getStringExtra("a1");
+        a2 =intent.getStringExtra("a2");
+        a3 =intent.getStringExtra("a3");
+        a4 =intent.getStringExtra("a4");
+        meeting_outcome =intent.getStringExtra("meeting_outcome");
+
          getPackageDetail(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),package_id);
 
          List<String> payment_method = new ArrayList<>();
          payment_method.add("cash");
          payment_method.add("card");
          payment_method.add("Bank Transfer");
-        setPaymentMethodSpinner(payment_method);
+         setPaymentMethodSpinner(payment_method);
 
 
             mBinding.tvName.setText(""+intent.getStringExtra("name") );
@@ -125,7 +139,6 @@ public class ActivitySales extends AppCompatActivity {
             }
         });
 
-
     }
 
 
@@ -150,6 +163,12 @@ public class ActivitySales extends AppCompatActivity {
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             if (keyModel.getStatus().equals("1")) {
+
+
+                                List<Inventory> ambers= keyModel.getData().getInventories();
+
+                                ambers.add(new Inventory( "-1" ," "," ","","","","",""," "," ","" ));
+
                                  setNewIQosSerialNumberSpinner(keyModel.getData().getInventories(), pack);
 
                                 mBinding.tvSubmit.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +198,7 @@ public class ActivitySales extends AppCompatActivity {
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                             Toast.makeText(ActivitySales.this, "key model null", Toast.LENGTH_SHORT).show();
+                             Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -233,9 +252,9 @@ ambers.add(new Amber("-1","0","0"));
                                 turqouise.add(new Turqouise("-1","0","0"));
 
 
-                             setTerqSpinner(keyModel.getData().getPackage().getTurqouise());
+                             setTerqSpinner(turqouise);
                             } else {
-                                Toast.makeText(ActivitySales.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -246,7 +265,7 @@ ambers.add(new Amber("-1","0","0"));
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                             Toast.makeText(ActivitySales.this, "key model null", Toast.LENGTH_SHORT).show();
+                             Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -274,12 +293,19 @@ ambers.add(new Amber("-1","0","0"));
         ArrayList<String > serials = new ArrayList<>();
 
             for (int i =0;i< inventories.size();i++){
+                if(inventories.get(i).getId().equalsIgnoreCase("-1")){
+                    serials.add("Select");
 
-                    serials.add(i,""+inventories.get(i).getSrNo());
+                }else{
+                    serials.add(""+inventories.get(i).getSrNo());
+
+                }
+
 
 
         }
-
+       Collections.reverse(serials);
+       Collections.reverse(inventories);
 
         ArrayAdapter ad
                 = new ArrayAdapter(
@@ -293,12 +319,17 @@ ambers.add(new Amber("-1","0","0"));
         mBinding.newIqosSerialNumberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                if(!serials.get(position).equalsIgnoreCase("Select")){
 
 if(inventories.get(position).getSrNo().equalsIgnoreCase(""+ serials.get(position)))
                          newDeviceSrNo = inventories.get(position).getId() + "";
                          mBinding.tvColor.setText("" + inventories.get(position).getColor());
 
 
+
+            }else{
+                    newDeviceSrNo="";
+                }
 
             }
 
@@ -1061,12 +1092,16 @@ else{
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         assert data != null;
-        imagesUriArrayList =data.getParcelableArrayListExtra(FishBun.INTENT_PATH);
-        Glide.with(this).load(getRealPathFromURI(  imagesUriArrayList.get(0)))
-                .into(mBinding.ivTakeImage);
-        mBinding.ivTakeImage.setVisibility(View.VISIBLE);
-        Log.e("TGED","getRealPathFromURI=> "+getRealPathFromURI(  imagesUriArrayList.get(0)));
+       if(data.getParcelableArrayListExtra(FishBun.INTENT_PATH) !=null) {
+           imagesUriArrayList = data.getParcelableArrayListExtra(FishBun.INTENT_PATH);
 
+           if(imagesUriArrayList.size()>0){
+           Glide.with(this).load(getRealPathFromURI(imagesUriArrayList.get(0)))
+                   .into(mBinding.ivTakeImage);
+           mBinding.ivTakeImage.setVisibility(View.VISIBLE);
+           Log.e("TGED", "getRealPathFromURI=> " + getRealPathFromURI(imagesUriArrayList.get(0)));
+       }
+       }
     }
 
     private String getRealPathFromURI(Uri contentUri) {
@@ -1378,6 +1413,45 @@ else{
 
 
         }
+
+        if( mBinding.cbHyperCare  !=null) {
+            if( mBinding.cbHyperCare.isChecked()){
+                builder.addFormDataPart("customer_hyper_care", "1");
+
+            }else{
+                builder.addFormDataPart("customer_hyper_care", "0");
+
+            }
+
+
+        }
+
+
+
+
+
+        if( mBinding.cbcustomerDeviceLinked  !=null) {
+            if( mBinding.cbcustomerDeviceLinked.isChecked()){
+                builder.addFormDataPart("customer_device_linked", "1");
+
+            }else{
+                builder.addFormDataPart("customer_device_linked", "0");
+
+            }
+
+
+        }
+        if( mBinding.cbaccountRegistered  !=null) {
+            if( mBinding.cbaccountRegistered.isChecked()){
+                builder.addFormDataPart("customer_account_registered", "1");
+
+            }else{
+                builder.addFormDataPart("customer_account_registered", "0");
+
+            }
+
+
+        }
         if (imagesUriArrayList != null) {
             if (imagesUriArrayList.size() > 0) {
                 for (int i = 0;i  < imagesUriArrayList.size();i++){
@@ -1409,10 +1483,34 @@ else{
                             if (listofhome.getStatus().equals("1")) {
 //                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
 
-                                Intent intent = new Intent(ActivitySales.this, ActivityAfterSale.class);
-                                intent.putExtra("appointment_id",""+id);
-                                startActivity(intent);
-                                finish();
+
+
+
+
+
+                 GPSTracker gpsTracker = new GPSTracker(ActivitySales.this);
+                 if (gpsTracker.getIsGPSTrackingEnabled())
+                 {
+                      ending_latitude = gpsTracker.getLatitude()+ "," + gpsTracker.getLongitude();
+                 }
+
+
+
+                 Date todayDate = Calendar.getInstance().getTime();
+                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                 String todayString = formatter.format(todayDate);
+             String    ending_date =todayString;
+
+                 updateMeetingChecklist(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
+                         appointment_id,
+                        a1,a2,a3,a4, ending_date,ending_latitude,meeting_outcome);
+
+
+
+
+
+
+
 
                             }
                         }
@@ -1423,7 +1521,7 @@ else{
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            Toast.makeText(ActivitySales.this, "key model null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -1450,5 +1548,129 @@ else{
         });
     }
 
+
+
+    public void updateMeetingChecklist(String token,String id ,
+                                       String answer1 , 
+                                       String answer2 ,  
+                                       String answer3 , 
+                                       String answer4 ,
+                                       String end_meeting,
+                                       String end_meeting_lat_lng,
+                                       String meeting_outcome) {
+        ApiService apiService = ApiClient.getClient(ActivitySales.this).create(ApiService.class);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        builder.addFormDataPart("id", id);
+      
+        if(answer1 !=null) {
+            builder.addFormDataPart("answer1", answer1);
+        }
+         if(answer2 !=null) {
+            builder.addFormDataPart("answer2", answer2);
+        }
+         if(answer3 !=null) {
+            builder.addFormDataPart("answer3", answer3);
+        }
+
+         if(answer4 !=null) {
+            builder.addFormDataPart("answer4", answer4);
+        }
+
+        if(end_meeting !=null) {
+            builder.addFormDataPart("end_meeting", end_meeting);
+        }
+        if(end_meeting_lat_lng !=null) {
+            builder.addFormDataPart("end_meeting_lat_lng", end_meeting_lat_lng);
+        }
+        if(meeting_outcome !=null) {
+            builder.addFormDataPart("meeting_outcome", meeting_outcome);
+        }
+
+        RequestBody requestBody = builder.build();
+
+        Call<Model.GenerealModel> call = apiService.updateMeetingChecklist(token, requestBody);
+
+        call.enqueue(new Callback<Model.GenerealModel>() {
+            @Override
+            public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
+                final Model.GenerealModel listofhome = response.body();
+                if (listofhome != null) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+
+                            if (listofhome.getStatus().equals("1")) {
+
+
+                                Toast.makeText(ActivitySales.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+
+                               Intent intent = new Intent(ActivitySales.this, ActivityAfterSale.class);
+                                intent.putExtra("appointment_id",""+id);
+                                startActivity(intent);
+                                finish();
+
+                                if(   packagesActivity!=null)
+                                {
+                                    packagesActivity.finish();
+                                }
+
+
+
+                                if(   meetingcehck!=null)
+                                {
+                                    meetingcehck.finish();
+                                }
+
+
+
+                                if(   verificationAct!=null)
+                                {
+                                    verificationAct.finish();
+                                }
+
+
+
+                            } else {
+                                Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+                } else {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Model.GenerealModel> call, Throwable t) {
+
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                    }
+
+                });
+
+
+            }
+        });
+    }
 
 }

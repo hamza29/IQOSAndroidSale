@@ -637,7 +637,7 @@ android:visibility="gone"
         android:orientation="vertical">
 
         <CheckBox
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_margin="@dimen/_5sdp"
             android:id="@+id/cbEcommerce"
             android:textColor="@color/blue"
             android:text="Customer has requested to register for e-commerce and receive emails."
@@ -646,7 +646,7 @@ android:visibility="gone"
             android:buttonTint="@color/blue"
             />
         <CheckBox
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_margin="@dimen/_5sdp"
             android:id="@+id/cbRequested"
             android:textColor="@color/blue"
             android:text="Customer has requested for e-commerce account creation"
@@ -654,10 +654,37 @@ android:visibility="gone"
             android:layout_height="wrap_content"
             android:buttonTint="@color/blue"
             />
+        <CheckBox
+            android:layout_margin="@dimen/_5sdp"
+            android:id="@+id/cbHyperCare"
+            android:textColor="@color/blue"
+            android:text="The customer has opted in for device care program."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/blue"
+            />
+        <CheckBox
+            android:layout_margin="@dimen/_5sdp"
+            android:id="@+id/cbaccountRegistered"
+            android:textColor="@color/blue"
+            android:text="Customer Account Registered in DCE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/blue"
+            />
+        <CheckBox
+            android:layout_margin="@dimen/_5sdp"
+            android:id="@+id/cbcustomer_device_linked"
+            android:textColor="@color/blue"
+            android:text="Customer Device Linked in DCE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/blue"
+            />
 
         <TextView
             android:gravity="center"
-android:layout_gravity="center"
+            android:layout_gravity="center"
             android:id="@+id/tvSubmit"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="wrap_content"
