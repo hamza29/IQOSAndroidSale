@@ -58,7 +58,8 @@ mBinding.tvComplete.setOnClickListener(new View.OnClickListener() {
             });
     }
 
-    public void update_ic(String token,String id, String ic_question1,
+    public void update_ic(String token,String id,
+                          String ic_question1,
                            String ic_answer1, String ic_question2,
                            String ic_answer2  ) {
         ApiService apiService = ApiClient.getClient(ActivityAfterSale.this).create(ApiService.class);

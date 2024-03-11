@@ -358,6 +358,18 @@ public class Model {
     } 
     public class Lead {
 
+        @SerializedName("is_external")
+        @Expose
+        private String is_external;
+
+        public String getIs_external() {
+            return is_external;
+        }
+
+        public void setIs_external(String is_external) {
+            this.is_external = is_external;
+        }
+
         @SerializedName("id")
         @Expose
         private Integer id;

@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -30,6 +33,24 @@ public final class DayFourteenDialogBinding implements ViewBinding {
   public final Button btnSubmit;
 
   @NonNull
+  public final CheckBox cbCigrattes;
+
+  @NonNull
+  public final CheckBox cbIQOS;
+
+  @NonNull
+  public final CheckBox cbNicotine;
+
+  @NonNull
+  public final CheckBox cbOther;
+
+  @NonNull
+  public final CheckBox cbPouch;
+
+  @NonNull
+  public final CheckBox cbVpae;
+
+  @NonNull
   public final EditText etQ1a;
 
   @NonNull
@@ -48,7 +69,22 @@ public final class DayFourteenDialogBinding implements ViewBinding {
   public final LinearLayout l1;
 
   @NonNull
+  public final RadioButton rb0;
+
+  @NonNull
+  public final RadioButton rb1plus;
+
+  @NonNull
+  public final RadioButton rb95plus;
+
+  @NonNull
+  public final RadioGroup rbIsNotify;
+
+  @NonNull
   public final RelativeLayout rlHeader;
+
+  @NonNull
+  public final RadioButton rv70plus;
 
   @NonNull
   public final TextView tvBookAppointment;
@@ -72,22 +108,37 @@ public final class DayFourteenDialogBinding implements ViewBinding {
   public final TextView tvQuestion3;
 
   private DayFourteenDialogBinding(@NonNull RelativeLayout rootView, @NonNull Button btnCall,
-      @NonNull Button btnSubmit, @NonNull EditText etQ1a, @NonNull EditText etQ2a,
+      @NonNull Button btnSubmit, @NonNull CheckBox cbCigrattes, @NonNull CheckBox cbIQOS,
+      @NonNull CheckBox cbNicotine, @NonNull CheckBox cbOther, @NonNull CheckBox cbPouch,
+      @NonNull CheckBox cbVpae, @NonNull EditText etQ1a, @NonNull EditText etQ2a,
       @NonNull EditText etQ3a, @NonNull ImageView ivBack, @NonNull ImageView ivLogo,
-      @NonNull LinearLayout l1, @NonNull RelativeLayout rlHeader,
+      @NonNull LinearLayout l1, @NonNull RadioButton rb0, @NonNull RadioButton rb1plus,
+      @NonNull RadioButton rb95plus, @NonNull RadioGroup rbIsNotify,
+      @NonNull RelativeLayout rlHeader, @NonNull RadioButton rv70plus,
       @NonNull TextView tvBookAppointment, @NonNull TextView tvM, @NonNull TextView tvM2,
       @NonNull EditText tvMessage, @NonNull TextView tvQuestion1, @NonNull TextView tvQuestion2,
       @NonNull TextView tvQuestion3) {
     this.rootView = rootView;
     this.btnCall = btnCall;
     this.btnSubmit = btnSubmit;
+    this.cbCigrattes = cbCigrattes;
+    this.cbIQOS = cbIQOS;
+    this.cbNicotine = cbNicotine;
+    this.cbOther = cbOther;
+    this.cbPouch = cbPouch;
+    this.cbVpae = cbVpae;
     this.etQ1a = etQ1a;
     this.etQ2a = etQ2a;
     this.etQ3a = etQ3a;
     this.ivBack = ivBack;
     this.ivLogo = ivLogo;
     this.l1 = l1;
+    this.rb0 = rb0;
+    this.rb1plus = rb1plus;
+    this.rb95plus = rb95plus;
+    this.rbIsNotify = rbIsNotify;
     this.rlHeader = rlHeader;
+    this.rv70plus = rv70plus;
     this.tvBookAppointment = tvBookAppointment;
     this.tvM = tvM;
     this.tvM2 = tvM2;
@@ -136,6 +187,42 @@ public final class DayFourteenDialogBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.cbCigrattes;
+      CheckBox cbCigrattes = ViewBindings.findChildViewById(rootView, id);
+      if (cbCigrattes == null) {
+        break missingId;
+      }
+
+      id = R.id.cbIQOS;
+      CheckBox cbIQOS = ViewBindings.findChildViewById(rootView, id);
+      if (cbIQOS == null) {
+        break missingId;
+      }
+
+      id = R.id.cbNicotine;
+      CheckBox cbNicotine = ViewBindings.findChildViewById(rootView, id);
+      if (cbNicotine == null) {
+        break missingId;
+      }
+
+      id = R.id.cbOther;
+      CheckBox cbOther = ViewBindings.findChildViewById(rootView, id);
+      if (cbOther == null) {
+        break missingId;
+      }
+
+      id = R.id.cbPouch;
+      CheckBox cbPouch = ViewBindings.findChildViewById(rootView, id);
+      if (cbPouch == null) {
+        break missingId;
+      }
+
+      id = R.id.cbVpae;
+      CheckBox cbVpae = ViewBindings.findChildViewById(rootView, id);
+      if (cbVpae == null) {
+        break missingId;
+      }
+
       id = R.id.etQ1a;
       EditText etQ1a = ViewBindings.findChildViewById(rootView, id);
       if (etQ1a == null) {
@@ -172,9 +259,39 @@ public final class DayFourteenDialogBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.rb0;
+      RadioButton rb0 = ViewBindings.findChildViewById(rootView, id);
+      if (rb0 == null) {
+        break missingId;
+      }
+
+      id = R.id.rb1plus;
+      RadioButton rb1plus = ViewBindings.findChildViewById(rootView, id);
+      if (rb1plus == null) {
+        break missingId;
+      }
+
+      id = R.id.rb95plus;
+      RadioButton rb95plus = ViewBindings.findChildViewById(rootView, id);
+      if (rb95plus == null) {
+        break missingId;
+      }
+
+      id = R.id.rbIsNotify;
+      RadioGroup rbIsNotify = ViewBindings.findChildViewById(rootView, id);
+      if (rbIsNotify == null) {
+        break missingId;
+      }
+
       id = R.id.rlHeader;
       RelativeLayout rlHeader = ViewBindings.findChildViewById(rootView, id);
       if (rlHeader == null) {
+        break missingId;
+      }
+
+      id = R.id.rv70plus;
+      RadioButton rv70plus = ViewBindings.findChildViewById(rootView, id);
+      if (rv70plus == null) {
         break missingId;
       }
 
@@ -220,9 +337,10 @@ public final class DayFourteenDialogBinding implements ViewBinding {
         break missingId;
       }
 
-      return new DayFourteenDialogBinding((RelativeLayout) rootView, btnCall, btnSubmit, etQ1a,
-          etQ2a, etQ3a, ivBack, ivLogo, l1, rlHeader, tvBookAppointment, tvM, tvM2, tvMessage,
-          tvQuestion1, tvQuestion2, tvQuestion3);
+      return new DayFourteenDialogBinding((RelativeLayout) rootView, btnCall, btnSubmit,
+          cbCigrattes, cbIQOS, cbNicotine, cbOther, cbPouch, cbVpae, etQ1a, etQ2a, etQ3a, ivBack,
+          ivLogo, l1, rb0, rb1plus, rb95plus, rbIsNotify, rlHeader, rv70plus, tvBookAppointment,
+          tvM, tvM2, tvMessage, tvQuestion1, tvQuestion2, tvQuestion3);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

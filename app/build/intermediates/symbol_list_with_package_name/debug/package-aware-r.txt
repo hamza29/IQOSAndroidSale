@@ -3985,6 +3985,7 @@ id cache_measures
 id callMeasure
 id cancel_button
 id carryVelocity
+id cbCigrattes
 id cbCoach
 id cbConsumer
 id cbCustomer
@@ -3993,11 +3994,16 @@ id cbEcommerce
 id cbEcoomerRegisteration
 id cbHav
 id cbHyperCare
+id cbIQOS
 id cbName
+id cbNicotine
+id cbOther
+id cbPouch
 id cbRequested
 id cbSmokerStatus
 id cbSpace
 id cbTools
+id cbVpae
 id cbaccountRegistered
 id cbcustomer_device_linked
 id center
@@ -4306,6 +4312,10 @@ id progress_circular
 id progress_horizontal
 id radio
 id ratio
+id rb0
+id rb1plus
+id rb95plus
+id rbIsNotify
 id rbQ1a1
 id rbQ1a2
 id rbQ1a3
@@ -4335,6 +4345,7 @@ id rlPerf
 id round
 id rounded
 id row_index_key
+id rv70plus
 id rvAppointments
 id rvConsumables
 id rvDevices

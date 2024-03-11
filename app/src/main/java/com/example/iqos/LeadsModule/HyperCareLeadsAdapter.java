@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +49,10 @@ import retrofit2.Response;
 
 public class HyperCareLeadsAdapter extends RecyclerView.Adapter<HyperCareLeadsAdapter.ViewHolder> {
     private Activity context;
+    String tvAnswer2is="0%";
+    String tvAnswer1is="";
+    String tv14Answer2is="0%";
+    String tv14Answer1is="";
 
 
 
@@ -122,7 +130,8 @@ public class HyperCareLeadsAdapter extends RecyclerView.Adapter<HyperCareLeadsAd
                     // Create and show the AlertDialog
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                }else  if(day.equalsIgnoreCase("Day3")){
+                }
+                else  if(day.equalsIgnoreCase("Day3")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle("Confirmation"); // Set the dialog title
                     builder.setMessage("Are you sure you want to continue starting D3?"); // Set the dialog message
@@ -149,7 +158,8 @@ public class HyperCareLeadsAdapter extends RecyclerView.Adapter<HyperCareLeadsAd
                     AlertDialog dialog = builder.create();
                     dialog.show();
 
-                }else  if(day.equalsIgnoreCase("Day7")){
+                }
+                else  if(day.equalsIgnoreCase("Day7")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle("Confirmation"); // Set the dialog title
                     builder.setMessage("Are you sure you want to continue starting D7?"); // Set the dialog message
@@ -661,8 +671,35 @@ holder.tvAddMessage.setOnClickListener(new View.OnClickListener() {
         TextView tvBookAppointment =   dialog.findViewById(R.id.tvBookAppointment);
         Button btnSubmit =   dialog.findViewById(R.id.btnSubmit);
         EditText tvAnswer1 =   dialog.findViewById(R.id.etQ1a);
+        CheckBox cbIQOS =   dialog.findViewById(R.id.cbIQOS);
+        CheckBox cbCigrattes =   dialog.findViewById(R.id.cbCigrattes);
+        CheckBox cbPouch =   dialog.findViewById(R.id.cbPouch);
+        CheckBox cbOther =   dialog.findViewById(R.id.cbOther);
+        CheckBox cbVpae =   dialog.findViewById(R.id.cbVpae);
+        CheckBox cbNicotine =   dialog.findViewById(R.id.cbNicotine);
+        RadioGroup rbIsNotify =   dialog.findViewById(R.id.rbIsNotify);
+
+
+
+
+
+
+
+
+
+
+
         TextView tvQuestion1 =   dialog.findViewById(R.id.tvQuestion1);
            EditText tvAnswer2 =   dialog.findViewById(R.id.etQ2a);
+
+
+
+
+
+
+
+
+
         TextView tvQuestion2=   dialog.findViewById(R.id.tvQuestion2);
            EditText tvAnswer3 =   dialog.findViewById(R.id.etQ3a);
         TextView tvQuestion3=   dialog.findViewById(R.id.tvQuestion3);
@@ -680,12 +717,61 @@ holder.tvAddMessage.setOnClickListener(new View.OnClickListener() {
 
             }
         });
+
+
+        rbIsNotify.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton  radioButton = (RadioButton) dialog.findViewById(selectedId);
+
+                if(radioButton.getText().toString().equalsIgnoreCase("0%")){
+                    tvAnswer2is = "0%";
+                } else   if(radioButton.getText().toString().equalsIgnoreCase("0.1% - 69%")){
+                    tvAnswer2is = "0.1% - 69%";
+
+                } else   if(radioButton.getText().toString().equalsIgnoreCase("70% - 94%")){
+                    tvAnswer2is = "70% - 94%";
+
+                } else   if(radioButton.getText().toString().equalsIgnoreCase("95% - 100%")){
+                    tvAnswer2is = "95% - 100%";
+
+                }
+             }
+        });
+
+
+
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+if(cbCigrattes.isChecked()){
+    tvAnswer1is = cbCigrattes.getText().toString()+", ";
+}
+if (cbIQOS.isChecked()) {
+    tvAnswer1is = tvAnswer1is+ cbIQOS.getText().toString()+", ";
+
+}if (cbNicotine.isChecked()) {
+    tvAnswer1is = tvAnswer1is+ cbNicotine.getText().toString()+", ";
+
+}if (cbOther.isChecked()) {
+    tvAnswer1is = tvAnswer1is+ cbOther.getText().toString()+", ";
+
+}if (cbPouch.isChecked()) {
+    tvAnswer1is = tvAnswer1is+ cbPouch.getText().toString()+", ";
+
+}if (cbVpae.isChecked()) {
+    tvAnswer1is = tvAnswer1is+ cbVpae.getText().toString()+", ";
+
+}
+                ;
                 lead_status = "Day 7 Feedback submit";
                 updateLeadD7Feedback(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,tvQuestion1.getText().toString(),tvAnswer1.getText().toString(),tvQuestion2.getText().toString(),tvAnswer2.getText().toString(),tvQuestion3.getText().toString(),tvAnswer3.getText().toString());
+                        lead_status,tvQuestion1.getText().toString(),tvAnswer1is.substring(0, tvAnswer1is.length() - 2),
+                        tvQuestion2.getText().toString(),tvAnswer2is,tvQuestion3.getText().toString(),tvAnswer3.getText().toString());
             }
         });
 //        tvTitle.setText(""+ message);
@@ -769,20 +855,82 @@ holder.tvAddMessage.setOnClickListener(new View.OnClickListener() {
         ImageView ivBack =   dialog.findViewById(R.id.ivBack);
         TextView tvBookAppointment =   dialog.findViewById(R.id.tvBookAppointment);
         Button btnSubmit =   dialog.findViewById(R.id.btnSubmit);
-        EditText tvAnswer1 =   dialog.findViewById(R.id.etQ1a);
+//        EditText tvAnswer1 =   dialog.findViewById(R.id.etQ1a);
         TextView tvQuestion1 =   dialog.findViewById(R.id.tvQuestion1);
-        EditText tvAnswer2 =   dialog.findViewById(R.id.etQ2a);
+//        EditText tvAnswer2 =   dialog.findViewById(R.id.etQ2a);
         TextView tvQuestion2=   dialog.findViewById(R.id.tvQuestion2);
         EditText tvAnswer3 =   dialog.findViewById(R.id.etQ3a);
         TextView tvQuestion3=   dialog.findViewById(R.id.tvQuestion3);
+
+        CheckBox cbIQOS =   dialog.findViewById(R.id.cbIQOS);
+        CheckBox cbCigrattes =   dialog.findViewById(R.id.cbCigrattes);
+        CheckBox cbPouch =   dialog.findViewById(R.id.cbPouch);
+        CheckBox cbOther =   dialog.findViewById(R.id.cbOther);
+        CheckBox cbVpae =   dialog.findViewById(R.id.cbVpae);
+        CheckBox cbNicotine =   dialog.findViewById(R.id.cbNicotine);
+        RadioGroup rbIsNotify =   dialog.findViewById(R.id.rbIsNotify);
+
+
+
+        rbIsNotify.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton  radioButton = (RadioButton) dialog.findViewById(selectedId);
+
+                if(radioButton.getText().toString().equalsIgnoreCase("0%")){
+                    tv14Answer2is = "0%";
+                } else   if(radioButton.getText().toString().equalsIgnoreCase("0.1% - 69%")){
+                    tv14Answer2is = "0.1% - 69%";
+
+                } else   if(radioButton.getText().toString().equalsIgnoreCase("70% - 94%")){
+                    tv14Answer2is = "70% - 94%";
+
+                } else   if(radioButton.getText().toString().equalsIgnoreCase("95% - 100%")){
+                    tv14Answer2is = "95% - 100%";
+
+                }
+            }
+        });
 
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                if(cbCigrattes.isChecked()){
+                    tv14Answer1is = cbCigrattes.getText().toString()+", ";
+            }
+                if (cbIQOS.isChecked()) {
+                    tv14Answer1is = tv14Answer1is+ cbIQOS.getText().toString()+", ";
+
+                }if (cbNicotine.isChecked()) {
+                    tv14Answer1is = tv14Answer1is+ cbNicotine.getText().toString()+", ";
+
+                }if (cbOther.isChecked()) {
+                    tv14Answer1is = tv14Answer1is+ cbOther.getText().toString()+", ";
+
+                }
+
+                if (cbPouch.isChecked()) {
+                    tv14Answer1is = tv14Answer1is+ cbPouch.getText().toString()+", ";
+
+                }
+
+                if (cbVpae.isChecked()) {
+                    tv14Answer1is = tv14Answer1is+ cbVpae.getText().toString()+", ";
+
+                }
+
+
+
+
+
                 lead_status = "Day 14 Feedback submit";
                 updateLeadD14Feedback(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,tvQuestion1.getText().toString(),tvAnswer1.getText().toString(),tvQuestion2.getText().toString(),tvAnswer2.getText().toString(),tvQuestion3.getText().toString(),tvAnswer3.getText().toString());
+                        lead_status,tvQuestion1.getText().toString(),tv14Answer1is.substring(0, tv14Answer1is.length() - 2),
+                        tvQuestion2.getText().toString(),tv14Answer2is,tvQuestion3.getText().toString(),tvAnswer3.getText().toString());
             }
         });
         tvBookAppointment.setOnClickListener(new View.OnClickListener() {

@@ -77,6 +77,10 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
                 holder.name.setText("" + item.getFirstName().toString() + " | Device Care 2 | Day 21"  );
             }else if(item.getType().equalsIgnoreCase("hc4") ) {
                 holder.name.setText("" + item.getFirstName().toString() + " | Device Care 2 | Day 30"  );
+            }else if(item.getType().equalsIgnoreCase("hc5") ) {
+                holder.name.setText("" + item.getFirstName().toString() + " | Device Care 3 | Day 60"  );
+            }else if(item.getType().equalsIgnoreCase("hc6") ) {
+                holder.name.setText("" + item.getFirstName().toString() + " | Device Care 3 | Day 90"  );
             }else if(item.getType().equalsIgnoreCase("lead") ) {
                 holder.name.setText("" + item.getFirstName().toString()   );
             }
@@ -97,7 +101,12 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
             @Override
             public void onClick(View v) {
 
-                if(item.getType().equalsIgnoreCase("hc1") || item.getType().equalsIgnoreCase("hc2")|| item.getType().equalsIgnoreCase("hc3")|| item.getType().equalsIgnoreCase("hc4")) {
+                if(item.getType().equalsIgnoreCase("hc1") ||
+                        item.getType().equalsIgnoreCase("hc2")||
+                        item.getType().equalsIgnoreCase("hc3")||
+                        item.getType().equalsIgnoreCase("hc4")||
+                        item.getType().equalsIgnoreCase("hc5")||
+                        item.getType().equalsIgnoreCase("hc6")) {
                     Intent intent = new Intent(context, AppointmentBookingDetailHyperActivity.class);
                     intent.putExtra("lead_id", "" + item.getId().toString());
                     intent.putExtra("name", "" + item.getFirstName().toString());

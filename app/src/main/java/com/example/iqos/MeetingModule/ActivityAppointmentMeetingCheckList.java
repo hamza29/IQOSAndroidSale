@@ -148,29 +148,6 @@ mBinding.tvLeadName.setText("Lead Name: "+ name);
                  q4Answer= mBinding.etbrand.getText().toString();
 
 
-//                 GPSTracker gpsTracker = new GPSTracker(ActivityAppointmentMeetingCheckList.this);
-//                 if (gpsTracker.getIsGPSTrackingEnabled())
-//                 {
-//                     ending_latitude = gpsTracker.getLatitude()+ "," + gpsTracker.getLongitude();
-//                 }
-
-
-
-//                 Date todayDate = Calendar.getInstance().getTime();
-//                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                 String todayString = formatter.format(todayDate);
-//                 ending_date =todayString;
-//
-//                 updateMeetingChecklist(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
-//                         appointment_id,
-//                         starting_date,
-//                         starting_latitude,
-//                         mBinding. tvQuestion1.getText().toString(),q1Answer,
-//                         mBinding. tvQuestion2.getText().toString(),q2Answer,
-//                         mBinding. tvQuestion3.getText().toString(),q3Answer,
-//                         mBinding. tvQuestion4.getText().toString(),q4Answer,
-//                         "","","","","",ending_date,ending_latitude,meeting_outcome);
-
 
                  Intent intent = new Intent(ActivityAppointmentMeetingCheckList.this, ActivityPackages.class);
               intent.putExtra("appointment_id",""+appointment_id);
@@ -188,6 +165,26 @@ mBinding.tvLeadName.setText("Lead Name: "+ name);
              @Override
              public void onClick(View view) {
                  meeting_outcome ="no sale";
+
+                 if(mBinding.rbQ1a1.isChecked()){
+                     q1Answer =mBinding.rbQ1a1.getText().toString();
+                 }else  if(mBinding.rbQ1a2.isChecked()){
+                     q1Answer =mBinding.rbQ1a2.getText().toString();
+                 }else  if(mBinding.rbQ1a3.isChecked()){
+                     q1Answer =mBinding.rbQ1a3.getText().toString();
+                 }else  if(mBinding.rbQ1a4.isChecked()){
+                     q1Answer =mBinding.rbQ1a4.getText().toString();
+                 }
+
+                 if(mBinding.rbQ2a1.isChecked()){
+                     q2Answer =mBinding.rbQ2a1Et.getText().toString();
+                 }else  if(mBinding.rbQ2a2.isChecked()){
+                     q2Answer =mBinding.rbQ2a2Et.getText().toString();
+                 }
+                 q3Answer =mBinding.etQ3a.getText().toString();
+                 q4Answer= mBinding.etbrand.getText().toString();
+
+
                  Intent intent = new Intent(ActivityAppointmentMeetingCheckList.this, ActivityNoSales.class);
                  intent.putExtra("appointment_id",""+appointment_id);
                  intent.putExtra("a1",""+q1Answer);

@@ -386,6 +386,17 @@ public class ActivityBookAppointment extends AppCompatActivity {
         @SerializedName("appointment_type")
         @Expose
         private String appointmentType;
+        @SerializedName("is_external")
+        @Expose
+        private String is_external;
+
+        public String getIs_external() {
+            return is_external;
+        }
+
+        public void setIs_external(String is_external) {
+            this.is_external = is_external;
+        }
 
         public String getId() {
             return id;

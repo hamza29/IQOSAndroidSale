@@ -66,7 +66,12 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
 
     public void onBindViewHolder(AppointmentAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        if(items.get(position).getAppointmentType().equalsIgnoreCase("hc1")||items.get(position).getAppointmentType().equalsIgnoreCase("hc2")||items.get(position).getAppointmentType().equalsIgnoreCase("hc3")||items.get(position).getAppointmentType().equalsIgnoreCase("hc4")){
+        if(items.get(position).getAppointmentType().equalsIgnoreCase("hc1")||
+                items.get(position).getAppointmentType().equalsIgnoreCase("hc2")
+                ||items.get(position).getAppointmentType().equalsIgnoreCase("hc3")
+                ||items.get(position).getAppointmentType().equalsIgnoreCase("hc4")
+                ||items.get(position).getAppointmentType().equalsIgnoreCase("hc5")||
+                items.get(position).getAppointmentType().equalsIgnoreCase("hc6")){
             holder.message.setVisibility(View.GONE);
             holder.tvPreMeeting.setVisibility(View.GONE);
             holder.tvEdit.setVisibility(View.GONE);
@@ -96,7 +101,12 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
      holder.tvStartAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(items.get(position).getAppointmentType().equalsIgnoreCase("hc1")||items.get(position).getAppointmentType().equalsIgnoreCase("hc2")||items.get(position).getAppointmentType().equalsIgnoreCase("hc3")||items.get(position).getAppointmentType().equalsIgnoreCase("hc4")) {
+                if(items.get(position).getAppointmentType().equalsIgnoreCase("hc1")||
+                        items.get(position).getAppointmentType().equalsIgnoreCase("hc2")||
+                        items.get(position).getAppointmentType().equalsIgnoreCase("hc3")||
+                        items.get(position).getAppointmentType().equalsIgnoreCase("hc4")||
+                        items.get(position).getAppointmentType().equalsIgnoreCase("hc5")||
+                        items.get(position).getAppointmentType().equalsIgnoreCase("hc6")) {
 
 
 
@@ -157,13 +167,23 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
                 if(items.get(position).getId() !=null){
 
                     if(items.get(position).getAppointmentType().equalsIgnoreCase("hc1") ) {
-                        holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+ items.get(position).getFirstName()+" |  Device Care 1 | Day 7" );
+                        holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+
+                                items.get(position).getFirstName()+" |  Device Care 1 | Day 7" );
                     } else if(items.get(position).getAppointmentType().equalsIgnoreCase("hc2") ) {
-                        holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+ items.get(position).getFirstName()+" | Device Care 1 | Day 14" );
+                        holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+
+                                items.get(position).getFirstName()+" | Device Care 1 | Day 14" );
                     }else if(items.get(position).getAppointmentType().equalsIgnoreCase("hc3") ) {
-                        holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+ items.get(position).getFirstName()+" | Device Care 2 | Day 21" );
+                        holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+
+                                items.get(position).getFirstName()+" | Device Care 2 | Day 21" );
                     }else if(items.get(position).getAppointmentType().equalsIgnoreCase("hc4") ) {
-                        holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+ items.get(position).getFirstName()+" | Device Care 2 | Day 30" );
+                        holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+
+                                items.get(position).getFirstName()+" | Device Care 2 | Day 30" );
+                    }else if(items.get(position).getAppointmentType().equalsIgnoreCase("hc5") ) {
+                        holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+
+                                items.get(position).getFirstName()+" | Device Care 3 | Day 60" );
+                    }else if(items.get(position).getAppointmentType().equalsIgnoreCase("hc6") ) {
+                        holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+
+                                items.get(position).getFirstName()+" | Device Care 3 | Day 90" );
                     }else if(items.get(position).getAppointmentType().equalsIgnoreCase("lead") ){
                         holder.tvId.setText("Appointment # "+ items.get(position).getId()+" "+ items.get(position).getFirstName()+"" );
                     }
@@ -198,10 +218,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(items.get(position).getAppointmentType().equalsIgnoreCase("hc1")||items.get(position).getAppointmentType().equalsIgnoreCase("hc2")) {
-
-                }
-                else if(items.get(position).getAppointmentType().equalsIgnoreCase("lead")) {
+                if(items.get(position).getAppointmentType().equalsIgnoreCase("lead")) {
 
                 Intent intent = new Intent(context, BookAppointmentDetailActivity.class);
                 intent.putExtra("appointment_id",""+ items.get(position).getId());

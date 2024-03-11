@@ -160,6 +160,9 @@ public class ActivityHyperAppointments extends AppCompatActivity {
     }
     public class Appointment {
 
+        @SerializedName("is_external")
+        @Expose
+        private String is_external;
         @SerializedName("id")
         @Expose
         private Integer id;
@@ -171,7 +174,7 @@ public class ActivityHyperAppointments extends AppCompatActivity {
         private String day1MessageAt;
         @SerializedName("day1_call_at")
         @Expose
-        private Object day1CallAt;
+        private String day1CallAt;
         @SerializedName("day3_message_at")
         @Expose
         private String day3MessageAt;
@@ -189,10 +192,10 @@ public class ActivityHyperAppointments extends AppCompatActivity {
         private String day10MessageAt;
         @SerializedName("day10_call_at")
         @Expose
-        private Object day10CallAt;
+        private String day10CallAt;
         @SerializedName("day14_message_at")
         @Expose
-        private Object day14MessageAt;
+        private String day14MessageAt;
         @SerializedName("day14_call_at")
         @Expose
         private String day14CallAt;
@@ -254,6 +257,14 @@ public class ActivityHyperAppointments extends AppCompatActivity {
         @Expose
         private Lead lead;
 
+        public String getIs_external() {
+            return is_external;
+        }
+
+        public void setIs_external(String is_external) {
+            this.is_external = is_external;
+        }
+
         public Integer getId() {
             return id;
         }
@@ -278,11 +289,11 @@ public class ActivityHyperAppointments extends AppCompatActivity {
             this.day1MessageAt = day1MessageAt;
         }
 
-        public Object getDay1CallAt() {
+        public String getDay1CallAt() {
             return day1CallAt;
         }
 
-        public void setDay1CallAt(Object day1CallAt) {
+        public void setDay1CallAt(String day1CallAt) {
             this.day1CallAt = day1CallAt;
         }
 
@@ -326,19 +337,19 @@ public class ActivityHyperAppointments extends AppCompatActivity {
             this.day10MessageAt = day10MessageAt;
         }
 
-        public Object getDay10CallAt() {
+        public String getDay10CallAt() {
             return day10CallAt;
         }
 
-        public void setDay10CallAt(Object day10CallAt) {
+        public void setDay10CallAt(String day10CallAt) {
             this.day10CallAt = day10CallAt;
         }
 
-        public Object getDay14MessageAt() {
+        public String getDay14MessageAt() {
             return day14MessageAt;
         }
 
-        public void setDay14MessageAt(Object day14MessageAt) {
+        public void setDay14MessageAt(String day14MessageAt) {
             this.day14MessageAt = day14MessageAt;
         }
 
