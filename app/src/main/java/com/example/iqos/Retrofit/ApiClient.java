@@ -19,8 +19,8 @@ public class ApiClient {
 
 
     //public static String BASE_URL = "https://www.myfitwiz.com/api/";
-//    public static String BASE_URL = "http://app.iqoch.com/api/";
-    public static String BASE_URL = "https://8cf2-39-46-241-45.ngrok-free.app/api/";
+    public static String BASE_URL = "http://app.iqoch.com/api/";
+//    public static String BASE_URL = "https://8cf2-39-46-241-45.ngrok-free.app/api/";
 //    public static String BASE_URL = "https://rpm.stagingdesk.net/api/";
 //    public static String BASE_URL_IMAGE = "https://rpm.stagingdesk.net/";
     public static String BASE_URL_IMAGE = "https://rpm.stagingdesk.net/";
