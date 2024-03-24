@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +24,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,7 +36,16 @@ public class ActivityLeads extends AppCompatActivity {
 
     ActivityLeadsBinding mBinding;
     SharedPreferences mSharedPreferences;
-
+    String first_name;
+    String last_name;
+    String age;
+    String email;
+    String phone;
+    String nic_format;
+    String designation;
+    String organization;
+    String city;
+    String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +54,8 @@ public class ActivityLeads extends AppCompatActivity {
         setContentView(view);
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
         mBinding.rvLeads.setVisibility(View.VISIBLE);
-
+        Intent intent = getIntent();
+        type = intent.getStringExtra("type");
         mBinding.tvNormalLeads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,19 +79,128 @@ public class ActivityLeads extends AppCompatActivity {
             }
         });
 
+        if(!type.isEmpty() && type.equals("sales")){
+            getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+            mBinding.fabAddLead.setVisibility(View.GONE);
+            mBinding.tvEcomLeads.setVisibility(View.GONE);
+            mBinding.tvLeads.setText("Sales");
+            mBinding.tvNormalLeads.setText("My Sales");
+        }else{
+            getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+            mBinding.tvEcomLeads.setVisibility(View.VISIBLE);
+            mBinding.tvLeads.setText("Leads");
+            mBinding.tvNormalLeads.setText("My Leads");
+            if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")){
+                mBinding.tvEcomLeads.setVisibility(View.GONE);
+                mBinding.fabAddLead.setVisibility(View.VISIBLE);
+            }else {
+                mBinding.fabAddLead.setVisibility(View.GONE);
+                mBinding.tvEcomLeads.setVisibility(View.VISIBLE);
+            }
+
+        }
+
+        mBinding.fabAddLead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBinding.swipeRefresh.setEnabled(false);
+                mBinding.svForm.setVisibility(View.VISIBLE);
+                mBinding.fabAddLead.setVisibility(View.GONE);
+            }
+        }); mBinding.btnSave.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
+            @Override
+            public void onClick(View view) {
+                first_name = mBinding.etFirstName.getText().toString();
+                last_name = mBinding.etLastName.getText().toString();
+                email = mBinding.etLeadEmail.getText().toString();
+                phone = mBinding.etLeadPhone.getText().toString();
+                designation = mBinding.etDesignation.getText().toString();
+                organization = mBinding.etOrganization.getText().toString();
+                age = mBinding.etAge.getText().toString();
+                city = mBinding.etCity.getText().toString();
+                nic_format = mBinding.etNicFormat.getText().toString();
+                if(first_name.isEmpty()){
+                    mBinding.etFirstName.requestFocus();
+                    mBinding.etFirstName.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                } else{
+                    mBinding.etFirstName.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
+                } 
+                if(last_name.isEmpty()){
+                    mBinding.etLastName.requestFocus();
+                    mBinding.etLastName.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                } else{
+                    mBinding.etLastName.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
+                } 
+                if(email.isEmpty()){
+                    mBinding.etLeadEmail.requestFocus();
+                    mBinding.etLeadEmail.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                } else{
+                    mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
+                }
+                if(phone.isEmpty()){
+                    mBinding.etLeadPhone.requestFocus();
+                    mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                } else{
+                    mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
+
+                } 
+                if(designation.isEmpty()){
+                    mBinding.etDesignation.requestFocus();
+                    mBinding.etDesignation.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                } else{
+                    mBinding.etDesignation.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
+
+                } 
+                if(organization.isEmpty()){
+                    mBinding.etOrganization.requestFocus();
+                    mBinding.etOrganization.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                } else{
+                    mBinding.etOrganization.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
+
+                } 
+                if(age.isEmpty()){
+                    mBinding.etAge.requestFocus();
+                    mBinding.etAge.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                } else{
+                    mBinding.etAge.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
+
+                } 
+                if(city.isEmpty()){
+                    mBinding.etCity.requestFocus();
+                    mBinding.etCity.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                } else{
+                    mBinding.etCity.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
+
+                } 
+                if(nic_format.isEmpty()){
+                    mBinding.etNicFormat.requestFocus();
+                    mBinding.etNicFormat.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                } else{
+                    mBinding.etNicFormat.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
+
+                }
+
+                if(!phone.isEmpty() && !first_name.isEmpty() && !city.isEmpty() && !email.isEmpty() && !last_name.isEmpty() && !designation.isEmpty() && !organization.isEmpty() && !city.isEmpty() && !age.isEmpty() ){
+                    createLead(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                }
+            }
+        });
 
 
-        getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
 
         //LeadsRecycler();
             mBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    if(mBinding.rvLeads.getVisibility() == View.VISIBLE) {
-                        getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                    if(!type.isEmpty() && type.equals("sales")){
+                        getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
                     }else{
-                        getEcomLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
-
+                        if (mBinding.rvLeads.getVisibility() == View.VISIBLE) {
+                            getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
+                        } else {
+                            getEcomLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
+                        }
                     }
 
                 }
@@ -94,11 +218,14 @@ public class ActivityLeads extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(mBinding.rvLeads.getVisibility() == View.VISIBLE) {
-            getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+        if(!type.isEmpty() && type.equals("sales")){
+            getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
         }else{
-            getEcomLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
-
+            if (mBinding.rvLeads.getVisibility() == View.VISIBLE) {
+                getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
+            } else {
+                getEcomLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
+            }
         }
     }
 
@@ -126,6 +253,82 @@ public class ActivityLeads extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityLeads.this).create(ApiService.class);
         Call<Model.GetLeadsModel> call = apiService.getLeads("application/json",token,"");
+        call.enqueue(new Callback<Model.GetLeadsModel>() {
+            @Override
+            public void onResponse(Call<Model.GetLeadsModel> call, Response<Model.GetLeadsModel> response) {
+                ///// Progress Dialog  Dismiss////////////
+                final Model.GetLeadsModel keyModel = response.body();
+                if (keyModel != null) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mBinding.swipeRefresh.setRefreshing(false);
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            if (keyModel.getStatus().equals("1")) {
+                                if (keyModel.getData() != null) {
+
+                                    mBinding.progress.setVisibility(View.GONE);
+
+                                    if (keyModel.getData().getLeads().size() >0){
+                                        mBinding.rvLeads.setVisibility(View.VISIBLE);
+                                        LeadsRecycler(keyModel.getData().getLeads());
+                                    } else     if (keyModel.getData().getLeads().size() ==0){
+                                        mBinding.rvLeads.setVisibility(View.GONE);
+                                        LeadsRecycler(new ArrayList<>());
+                                    }
+
+
+
+                                }
+
+                            } else {
+                                mBinding.rvLeads.setVisibility(View.GONE);
+                                LeadsRecycler(new ArrayList<>());
+
+                                //                                Toast.makeText(ActivityLeads.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                mBinding.progress.setVisibility(View.GONE);
+
+                            }
+                        }
+                    });
+                } else {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mBinding.swipeRefresh.setRefreshing(false);
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            mBinding.progress.setVisibility(View.GONE);
+                            Toast.makeText(ActivityLeads.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Model.GetLeadsModel> call, Throwable t) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mBinding.swipeRefresh.setRefreshing(false);
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        mBinding.progress.setVisibility(View.GONE);
+                        Toast.makeText(ActivityLeads.this, "failure", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+            }
+        });
+    }
+    public void getSales(String token) {
+        mBinding.progress.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        ApiService apiService = ApiClient.getClient(ActivityLeads.this).create(ApiService.class);
+        Call<Model.GetLeadsModel> call = apiService.getSales("application/json",token,"");
         call.enqueue(new Callback<Model.GetLeadsModel>() {
             @Override
             public void onResponse(Call<Model.GetLeadsModel> call, Response<Model.GetLeadsModel> response) {
@@ -277,6 +480,94 @@ public class ActivityLeads extends AppCompatActivity {
         });
     }
 
+    public void createLead(String token) {
+        mBinding.progress.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        ApiService apiService = ApiClient.getClient(ActivityLeads.this).create(ApiService.class);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        builder.addFormDataPart("first_name", first_name);
+        builder.addFormDataPart("last_name", last_name);
+        builder.addFormDataPart("email", email);
+        builder.addFormDataPart("phone", phone);
+        builder.addFormDataPart("designation", designation);
+        builder.addFormDataPart("organization", organization);
+        builder.addFormDataPart("age_group", age);
+        builder.addFormDataPart("city", city);
+        builder.addFormDataPart("nic_format", nic_format);
+        RequestBody requestBody = builder.build();
+        Call<Model.LeadData> call = apiService.createLead("application/json",token, requestBody);
+        call.enqueue(new Callback<Model.LeadData>() {
+            @Override
+            public void onResponse(Call<Model.LeadData> call, Response<Model.LeadData> response) {
+                ///// Progress Dialog  Dismiss////////////
+                final Model.LeadData keyModel = response.body();
+                if (keyModel != null) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (keyModel.getStatus().equals("1")) {
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                mBinding.swipeRefresh.setEnabled(true);
+                                mBinding.svForm.setVisibility(View.GONE);
+                                mBinding.fabAddLead.setVisibility(View.VISIBLE);
+                                mBinding.progress.setVisibility(View.GONE);
+                                Toast.makeText(ActivityLeads.this, "Lead Saved Successfully", Toast.LENGTH_SHORT).show();
+                                if(!type.isEmpty() && type.equals("sales")){
+                                    getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                                }else {
+                                    getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
+                                }
+                            }else{
+                                mBinding.swipeRefresh.setRefreshing(false);
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                if(keyModel.getMessage().contains("email")){
+                                    mBinding.etLeadEmail.requestFocus();
+                                    mBinding.etLeadEmail.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                                }
+                                if(keyModel.getMessage().contains("phone")){
+                                    mBinding.etLeadPhone.requestFocus();
+                                    mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                                }
+                                mBinding.progress.setVisibility(View.GONE);
+                                Toast.makeText(ActivityLeads.this, keyModel.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                } else {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mBinding.swipeRefresh.setRefreshing(false);
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            mBinding.progress.setVisibility(View.GONE);
+                            Toast.makeText(ActivityLeads.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Model.LeadData> call, Throwable t) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mBinding.swipeRefresh.setRefreshing(false);
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        mBinding.progress.setVisibility(View.GONE);
+                        Toast.makeText(ActivityLeads.this, "failure", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+            }
+        });
+    }
     public class Data {
 
         @SerializedName("leads")

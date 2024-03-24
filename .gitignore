@@ -1,3 +1,5 @@
-./app/build/*
+/app/build/*
+/idea/*
+/.idea
+/.idea/*
 .idea/*
-

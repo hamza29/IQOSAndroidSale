@@ -421,6 +421,40 @@ public class Model {
         @SerializedName("last_action")
         @Expose
         private LastAction lastAction;
+
+        public String getDevice() {
+            return device;
+        }
+
+        public void setDevice(String device) {
+            this.device = device;
+        }
+
+        public String getAmberQuantity() {
+            return amber_quantity;
+        }
+
+        public void setAmber_quantity(String amber_quantity) {
+            this.amber_quantity = amber_quantity;
+        }
+
+        public String getTurqoiseQuantity() {
+            return turqoise_quantity;
+        }
+
+        public void setTurqoise_quantity(String turqoise_quantity) {
+            this.turqoise_quantity = turqoise_quantity;
+        }
+
+        @SerializedName("device")
+        @Expose
+        private String device;
+        @SerializedName("amber_quantity")
+        @Expose
+        private String amber_quantity;
+        @SerializedName("turqouise_quantity")
+        @Expose
+        private String turqoise_quantity;
         @SerializedName("next_action")
         @Expose
         private NextAction nextAction;
@@ -2081,5 +2115,116 @@ public class Model {
         }
 
     }
+    public class LeadData {
+        public String getFirstName() {
+            return firstName;
+        }
+        public String getStatus() {
+            return status;
+        }
+        public String getMessage() {
+            return message;
+        }
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
 
+        public String getLastName() {
+            return lastName;
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
+
+        public String getNumber() {
+            return number;
+        }
+
+        public void setNumber(String number) {
+            this.number = number;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getDesignation() {
+            return designation;
+        }
+
+        public void setDesignation(String designation) {
+            this.designation = designation;
+        }
+
+        public String getCompany() {
+            return company;
+        }
+
+        public void setCompany(String company) {
+            this.company = company;
+        }
+
+        public String getAgeGroup() {
+            return ageGroup;
+        }
+
+        public void setAgeGroup(String ageGroup) {
+            this.ageGroup = ageGroup;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public String getNicFormat() {
+            return nicFormat;
+        }
+
+        public void setNicFormat(String nicFormat) {
+            this.nicFormat = nicFormat;
+        }
+
+        @SerializedName("first_name")
+        @Expose
+        private String firstName;
+        @SerializedName("status")
+        @Expose
+        private String status;
+        @SerializedName("last_name")
+        @Expose
+        private String lastName;
+        @SerializedName("number")
+        @Expose
+        private String number;
+        @SerializedName("message")
+        @Expose
+        private String message;
+        @SerializedName("email")
+        @Expose
+        private String email;
+        @SerializedName("designation")
+        @Expose
+        private String designation;
+        @SerializedName("organization")
+        @Expose
+        private String company;
+        @SerializedName("age_group")
+        @Expose
+        private String ageGroup;
+        @SerializedName("city")
+        @Expose
+        private String city;
+        @SerializedName("nic_format")
+        @Expose
+        private String nicFormat;
+    }
 }

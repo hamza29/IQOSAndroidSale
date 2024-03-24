@@ -24,6 +24,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iqos.Constants;
+import com.example.iqos.MeetingModule.ActivityPackages;
 import com.example.iqos.R;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
@@ -84,56 +85,52 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
             }else if(item.getType().equalsIgnoreCase("lead") ) {
                 holder.name.setText("" + item.getFirstName().toString()   );
             }
-
         }
-
-        if (item.getLeadStatus() != null ) {
-            holder.tvStatus.setText(""+item.getLeadStatus().toString());
-        }
-        holder.tvId.setText(""+ item.getId()+" Date: "+ item.getAssigned_at());
+        holder.llSalesText.setVisibility(View.GONE);
 
 
-        holder.tvLastAction.setText(item.getLastAction().getType());
-        holder.tvNextAction.setText(item.getNextAction().getType());
-        holder.tvLastActionOutcome.setText(""+ item.getLastAction().getTime());
-        holder.tvNextActionOutcome.setText(""+ item.getNextAction().getTime());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")){
 
-                if(item.getType().equalsIgnoreCase("hc1") ||
-                        item.getType().equalsIgnoreCase("hc2")||
-                        item.getType().equalsIgnoreCase("hc3")||
-                        item.getType().equalsIgnoreCase("hc4")||
-                        item.getType().equalsIgnoreCase("hc5")||
-                        item.getType().equalsIgnoreCase("hc6")) {
-                    Intent intent = new Intent(context, AppointmentBookingDetailHyperActivity.class);
-                    intent.putExtra("lead_id", "" + item.getId().toString());
-                    intent.putExtra("name", "" + item.getFirstName().toString());
-                    intent.putExtra("type", item.getType());
-                    context.startActivity(intent);
-                }else{
+                    holder.tvAddMessage.setVisibility(View.GONE);
+                    if(!items.get(position).getLeadStatus().equals("Completed")){
+                        Intent intent;
 
+                        intent = new Intent(context, ActivityPackages.class);
+                        intent.putExtra("appointment_id",""+ items.get(position).getId());
+                        intent.putExtra("type","Lead");
+                        intent.putExtra("name",""+ items.get(position).getFirstName());
+                        context.startActivity(intent);
 
+                    }
+                }else {
+                    holder.tvAddMessage.setVisibility(View.VISIBLE);
+                    if(item.getType().equalsIgnoreCase("hc1") ||
+                            item.getType().equalsIgnoreCase("hc2")||
+                            item.getType().equalsIgnoreCase("hc3")||
+                            item.getType().equalsIgnoreCase("hc4")||
+                            item.getType().equalsIgnoreCase("hc5")||
+                            item.getType().equalsIgnoreCase("hc6")) {
+                        Intent intent = new Intent(context, AppointmentBookingDetailHyperActivity.class);
+                        intent.putExtra("lead_id", "" + item.getId().toString());
+                        intent.putExtra("name", "" + item.getFirstName().toString());
+                        intent.putExtra("type", item.getType());
+                        context.startActivity(intent);
+                    }else{
+                        if(item.getIs_appointment().equalsIgnoreCase("0")) {
+                            Intent intent = new Intent(context, ActivityLeadsDetail.class);
+                            intent.putExtra("type", "lead");
 
-
-
-
-
-
-
-
-
-
-
-                if(item.getIs_appointment().equalsIgnoreCase("0")) {
-                    Intent intent = new Intent(context, ActivityLeadsDetail.class);
-                    intent.putExtra("KEY_LEAD_ID", item.getId().toString());
-                    context.startActivity(intent);
-                }else{
-                    Toast.makeText(context, "You have already booked an appointment", Toast.LENGTH_SHORT).show();
-                }
-                }
+                            intent.putExtra("KEY_LEAD_ID", item.getId().toString());
+                            context.startActivity(intent);
+                        }else{
+                            Toast.makeText(context, "You have already booked an appointment", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            }
             }
         });
 
@@ -156,7 +153,28 @@ if(item.getType() !=null){
     holder.  llMain.setVisibility(View.VISIBLE);
     holder.  llSub.setVisibility(View.VISIBLE);
 }
+        if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")) {
+            holder.tvAddMessage.setVisibility(View.GONE);
+        }
+        if(item.getLeadStatus().equals("Completed")){
+            holder.llMain.setVisibility(View.GONE);
+            holder.llSub.setVisibility(View.GONE);
+            holder.llSalesText.setVisibility(View.VISIBLE);
+            holder.tvDevice.setText(item.getDevice());
+            holder.tvTurqouise.setText(item.getTurqoiseQuantity());
+            holder.tvAmber.setText(item.getAmberQuantity());
+            holder.tvStatusSales.setText(item.getLeadStatus());
+        }else{
+            if (item.getLeadStatus() != null ) {
+                holder.tvStatus.setText(""+item.getLeadStatus().toString());
+            }
+            holder.tvId.setText(""+ item.getId()+" Date: "+ item.getAssigned_at());
 
+            holder.tvLastAction.setText(item.getLastAction().getType());
+            holder.tvNextAction.setText(item.getNextAction().getType());
+            holder.tvLastActionOutcome.setText(""+ item.getLastAction().getTime());
+            holder.tvNextActionOutcome.setText(""+ item.getNextAction().getTime());
+        }
 holder.tvAddMessage.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -306,12 +324,17 @@ holder.tvAddMessage.setOnClickListener(new View.OnClickListener() {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
+        LinearLayout llSalesText;
         TextView name;
         TextView tvStatus;
         TextView tvLastAction;
         TextView tvNextAction;
         TextView tvId;
         TextView tvLastActionOutcome;
+        TextView tvDevice;
+        TextView tvTurqouise;
+        TextView tvAmber;
+        TextView tvStatusSales;
         TextView tvNextActionOutcome;
         TextView tvAddMessage;
         LinearLayout llMain;
@@ -331,9 +354,13 @@ holder.tvAddMessage.setOnClickListener(new View.OnClickListener() {
             tvStatus = itemView.findViewById(R.id.tvStatus);
             tvNextAction = itemView.findViewById(R.id.tvNextAction);
             tvId = itemView.findViewById(R.id.tvId);
+            tvDevice = itemView.findViewById(R.id.tvDevice);
+            tvTurqouise = itemView.findViewById(R.id.tvTurqouise);
+            tvAmber = itemView.findViewById(R.id.tvAmber);
             tvLastActionOutcome = itemView.findViewById(R.id.tvLastActionOutcome);
             tvNextActionOutcome = itemView.findViewById(R.id.tvNextActionOutcome);
-
+            llSalesText = itemView.findViewById(R.id.llSalesText);
+            tvStatusSales = itemView.findViewById(R.id.tvStatusSales);
 
         }
     }

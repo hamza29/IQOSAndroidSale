@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.example.iqos.AppointmentsModule.ActivityBookAppointment;
 import com.example.iqos.HomeFragmentModule.HomeFragment;
 import com.example.iqos.LeadsModule.ActivityLeads;
+import com.example.iqos.LoginModule.ActivityLogin;
+import com.example.iqos.MeetingModule.ActivityPackages;
 import com.example.iqos.SalesModule.PerformanceActivity;
 import com.example.iqos.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
@@ -48,6 +50,7 @@ public class MainActivity extends BaseActivity
         LinearLayout llMyPerformance =mBinding.navView.getHeaderView(0).findViewById(R.id.llMyPerformance);
         LinearLayout llAppointment =mBinding.navView.getHeaderView(0).findViewById(R.id.llAppointment);
         LinearLayout llLeads =mBinding.navView.getHeaderView(0).findViewById(R.id.llLeads);
+        LinearLayout llSales =mBinding.navView.getHeaderView(0).findViewById(R.id.llSales);
 
         if(mSharedPreferences.getString(Constants.HYPER_CARE,"").equalsIgnoreCase("1")){
              llMyPerformance.setVisibility(View.GONE);
@@ -58,6 +61,17 @@ public class MainActivity extends BaseActivity
             llMyPerformance.setVisibility(View.VISIBLE);
             llInventory.setVisibility(View.VISIBLE);
             llAppointment.setVisibility(View.VISIBLE);
+        }
+        if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")){
+            llLeads.setVisibility(View.GONE);
+            llAppointment.setVisibility(View.GONE);
+            llSales.setVisibility(View.VISIBLE);
+        }else {
+            llHome.setVisibility(View.VISIBLE);
+            llMyPerformance.setVisibility(View.VISIBLE);
+            llInventory.setVisibility(View.VISIBLE);
+            llAppointment.setVisibility(View.VISIBLE);
+            llSales.setVisibility(View.GONE);
         }
         llHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +110,20 @@ public class MainActivity extends BaseActivity
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, ActivityLeads.class);
+                intent.putExtra("type", "leads");
+
+                startActivity(intent);
+
+
+
+            }
+        });
+        llSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, ActivityLeads.class);
+                intent.putExtra("type", "sales");
                 startActivity(intent);
 
 
@@ -123,7 +151,6 @@ public class MainActivity extends BaseActivity
                 else mBinding.drawerLayout.closeDrawer(GravityCompat.END);
             }
         });
-
         loadFragment(new HomeFragment());
 
 

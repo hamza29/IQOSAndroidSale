@@ -35,6 +35,14 @@ public interface ApiService {
             @Field("type") String type
 
     );
+    @FormUrlEncoded
+    @POST("qoach/leads/sales")
+    Call<Model.GetLeadsModel> getSales(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token,
+            @Field("type") String type
+
+    );
      @POST("qoach/lead/e-comm")
     Call<ActivityLeads.EcommLeads> getEcomLeads(
             @Header("Accept") String accept,
@@ -56,7 +64,12 @@ public interface ApiService {
             @Header("Authorization") String token,
             @Field("id") String id
     );
-
+    @POST("qoach/lead")
+    Call<Model.LeadData> createLead(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token,
+            @Body RequestBody body
+    );
 
     @FormUrlEncoded
     @POST("qoach/lead/device-care/show")

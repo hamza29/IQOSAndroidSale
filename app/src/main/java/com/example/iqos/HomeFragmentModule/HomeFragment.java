@@ -21,6 +21,7 @@ import com.example.iqos.LeadsModule.ActivityLeads;
 import com.example.iqos.LeadsModule.ActivityLeadsDetail;
 import com.example.iqos.LoginModule.ActivityLogin;
 import com.example.iqos.MainActivity;
+import com.example.iqos.MeetingModule.ActivityPackages;
 import com.example.iqos.R;
 import com.example.iqos.SalesModule.PerformanceActivity;
 import com.example.iqos.databinding.FragmentHomeBinding;
@@ -69,14 +70,40 @@ public class HomeFragment extends Fragment {
             mBinding.rlHyperCareAppointment.setVisibility(View.VISIBLE);
         }
 
+        if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")){
+            mBinding.rlAppoints.setVisibility(View.GONE);
+            mBinding.rlHyperCare.setVisibility(View.GONE);
+            mBinding.rlInvent.setVisibility(View.VISIBLE);
+            mBinding.rlPerf.setVisibility(View.VISIBLE);
+            mBinding.rlSales.setVisibility(View.VISIBLE);
+            mBinding.rlHyperCareAppointment.setVisibility(View.GONE);
+        }else{
+            mBinding.rlAppoints.setVisibility(View.VISIBLE);
+            mBinding.rlHyperCare.setVisibility(View.VISIBLE);
+            mBinding.rlInvent.setVisibility(View.VISIBLE);
+            mBinding.rlPerf.setVisibility(View.VISIBLE);
+            mBinding.rlSales.setVisibility(View.GONE);
+            mBinding.rlHyperCareAppointment.setVisibility(View.VISIBLE);
+        }
+
         mBinding.rlLeads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ActivityLeads.class);
-                 startActivity(intent);
+                intent.putExtra("type", "leads");
+                startActivity(intent);
 
 
             }
+
+        });mBinding.rlSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActivityLeads.class);
+                intent.putExtra("type", "sales");
+                startActivity(intent);
+            }
+
         });mBinding.rlAppoints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

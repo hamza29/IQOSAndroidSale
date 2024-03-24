@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.iqos.Constants;
 import com.example.iqos.MainActivity;
+import com.example.iqos.MeetingModule.ActivityPackages;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
@@ -30,6 +31,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -134,6 +136,7 @@ public class ActivityLogin extends AppCompatActivity {
                                     mSharedPreferences.edit().putString(Constants.API_KEY, "skip").commit();
                                     mSharedPreferences.edit().putString(Constants.USER_NAME, ""+ keyModel.getData().getName()).commit();
                                     mSharedPreferences.edit().putString(Constants.EMAIL, ""+ keyModel.getData().getCity()).commit();
+                                    mSharedPreferences.edit().putString(Constants.ROLE, ""+ keyModel.getData().getRole()).commit();
                                     mSharedPreferences.edit().putString(Constants.HYPER_CARE, ""+ keyModel.getData().getHyper_care()).commit();
 
                                     Intent intent = new Intent(ActivityLogin.this, MainActivity.class);

@@ -70,7 +70,31 @@
 
 
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlSales"
+        android:foreground="@drawable/ripple"
+        android:background="@drawable/my_leads"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        >
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Sales"
+            android:textSize="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
     <RelativeLayout
         android:foreground="@drawable/ripple"       android:id="@+id/rlPerf"
         android:layout_below="@+id/rlAppoints"
