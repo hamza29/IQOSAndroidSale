@@ -65,6 +65,8 @@ public class MainActivity extends BaseActivity
         if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")){
             llLeads.setVisibility(View.GONE);
             llAppointment.setVisibility(View.GONE);
+            llInventory.setVisibility(View.GONE);
+
             llSales.setVisibility(View.VISIBLE);
         }else {
             llHome.setVisibility(View.VISIBLE);

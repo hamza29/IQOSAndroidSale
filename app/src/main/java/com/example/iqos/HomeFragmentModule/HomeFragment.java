@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
         if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")){
             mBinding.rlAppoints.setVisibility(View.GONE);
             mBinding.rlHyperCare.setVisibility(View.GONE);
-            mBinding.rlInvent.setVisibility(View.VISIBLE);
+            mBinding.rlInvent.setVisibility(View.GONE);
             mBinding.rlPerf.setVisibility(View.VISIBLE);
             mBinding.rlSales.setVisibility(View.VISIBLE);
             mBinding.rlHyperCareAppointment.setVisibility(View.GONE);

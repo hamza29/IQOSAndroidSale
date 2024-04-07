@@ -101,7 +101,7 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
 
                         intent = new Intent(context, ActivityPackages.class);
                         intent.putExtra("appointment_id",""+ items.get(position).getId());
-                        intent.putExtra("type","Lead");
+                        intent.putExtra("type","sales");
                         intent.putExtra("name",""+ items.get(position).getFirstName());
                         context.startActivity(intent);
 

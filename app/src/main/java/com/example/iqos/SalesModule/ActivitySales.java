@@ -84,7 +84,7 @@ public class ActivitySales extends AppCompatActivity {
     String payment_method;
     String appointment_id;
     String      ending_latitude;
-    String a1,a2,a3,a4,meeting_outcome;
+    String a1,a2,a3,a4,meeting_outcome, type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +101,7 @@ public class ActivitySales extends AppCompatActivity {
         a2 =intent.getStringExtra("a2");
         a3 =intent.getStringExtra("a3");
         a4 =intent.getStringExtra("a4");
+        type =intent.getStringExtra("type");
         meeting_outcome =intent.getStringExtra("meeting_outcome");
 
          getPackageDetail(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),package_id);
@@ -112,15 +113,15 @@ public class ActivitySales extends AppCompatActivity {
          setPaymentMethodSpinner(payment_method);
 
 
-            mBinding.tvName.setText(""+intent.getStringExtra("name") );
+            mBinding.tvName.setText(intent.getStringExtra("name"));
 
             if(intent.getStringExtra("name") !=null) {
-            if (intent.getStringExtra("name").equalsIgnoreCase("Package C")) {
-                mBinding.llEmail.setVisibility(View.VISIBLE);
-            } else {
-                mBinding.llEmail.setVisibility(View.GONE);
+                if (intent.getStringExtra("name").equalsIgnoreCase("Package C")) {
+                    mBinding.llEmail.setVisibility(View.VISIBLE);
+                } else {
+                    mBinding.llEmail.setVisibility(View.GONE);
 
-            }
+                }
             }
 
 
@@ -176,12 +177,22 @@ public class ActivitySales extends AppCompatActivity {
                                     public void onClick(View view) {
                                         Log.e("TGED","id-> "+ newDeviceSrNo);
                                         Log.e("TGEeeeeD","payment_method---> "+ payment_method);
-                                        Toast.makeText(ActivitySales.this, ""+payment_method.toString(), Toast.LENGTH_SHORT).show();
+
+                                        Toast.makeText(ActivitySales.this, payment_method, Toast.LENGTH_SHORT).show();
+                                        if(type.equalsIgnoreCase("sales")){
+                                            newDeviceSrNo = mBinding.etSerialNumber.getText().toString();
+                                        }
                                         if(!newDeviceSrNo.isEmpty()){
                                         updateSale(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
                                                 appointment_id,newDeviceSrNo,package_id,amberid,terqid,mBinding.etEmail.getText().toString(), mBinding.etAmount.getText().toString(),payment_method);
                                     }else {
-                                            Toast.makeText(ActivitySales.this, "Please select device", Toast.LENGTH_SHORT).show();
+                                            if(type.equalsIgnoreCase("sales")){
+                                                Toast.makeText(ActivitySales.this, "Please type Serial Number", Toast.LENGTH_SHORT).show();
+
+                                            }else{
+                                                Toast.makeText(ActivitySales.this, "Please select device", Toast.LENGTH_SHORT).show();
+
+                                            }
 
                                         }
                                     }
@@ -238,12 +249,17 @@ public class ActivitySales extends AppCompatActivity {
                             if (keyModel.getStatus().equals("1")) {
 
                                   price=keyModel.getData().getPackage().getPrice();
-                                mBinding.etAmount.setText(""+ keyModel.getData().getPackage().getPrice());
-                             getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),"");
-List<Amber> ambers= keyModel.getData().getPackage().getAmber();
+                                mBinding.etAmount.setText(keyModel.getData().getPackage().getPrice());
+                                if(type.equalsIgnoreCase("sales")){
+                                    mBinding.newIqosSerialNumberSpinner.setVisibility(View.GONE);
+                                    mBinding.etSerialNumber.setVisibility(View.VISIBLE);
 
-ambers.add(new Amber("-1","0","0"));
-                             setAmberSpinner(ambers);
+                                }
+                                    getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),"");
+
+                                List<Amber> ambers= keyModel.getData().getPackage().getAmber();
+                                ambers.add(new Amber("-1","0","0"));
+                                setAmberSpinner(ambers);
 
 
 
@@ -297,7 +313,7 @@ ambers.add(new Amber("-1","0","0"));
                     serials.add("Select");
 
                 }else{
-                    serials.add(""+inventories.get(i).getSrNo());
+                    serials.add(inventories.get(i).getSrNo());
 
                 }
 
@@ -321,9 +337,9 @@ ambers.add(new Amber("-1","0","0"));
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 if(!serials.get(position).equalsIgnoreCase("Select")){
 
-if(inventories.get(position).getSrNo().equalsIgnoreCase(""+ serials.get(position)))
-                         newDeviceSrNo = inventories.get(position).getId() + "";
-                         mBinding.tvColor.setText("" + inventories.get(position).getColor());
+if(inventories.get(position).getSrNo().equalsIgnoreCase(serials.get(position)))
+                         newDeviceSrNo = inventories.get(position).getId();
+                         mBinding.tvColor.setText(inventories.get(position).getColor());
 
 
 
@@ -368,7 +384,7 @@ if(inventories.get(position).getSrNo().equalsIgnoreCase(""+ serials.get(position
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
-               payment_method = payment_list.get(position).toString();
+               payment_method = payment_list.get(position);
 
 
 
@@ -397,7 +413,7 @@ if(inventories.get(position).getSrNo().equalsIgnoreCase(""+ serials.get(position
                  serials.add("Select" );
 
              }else{
-                 serials.add(""+turqouise.get(i).getQuantity());
+                 serials.add(turqouise.get(i).getQuantity());
 
              }
 
@@ -420,20 +436,30 @@ if(inventories.get(position).getSrNo().equalsIgnoreCase(""+ serials.get(position
 Log.e("TGED","SERIALS-> "+serials.get(position) );
 if(!serials.get(position).equalsIgnoreCase("Select")){
 
-                if(serials.get(position).equalsIgnoreCase(""+ turqouise.get(position).getQuantity())) {
-                    terqQuantity = turqouise.get(position).getQuantity() + "";
-                    terqid = turqouise.get(position).getId() + "";
-                    terqprice = turqouise.get(position).getPrice() + "";
-                    if(!amberprice.equalsIgnoreCase("0")){
-                        int totl= Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(terqprice) + Integer.parseInt(amberprice);
-                        mBinding.etAmount.setText(""+totl );
+        if(serials.get(position).equalsIgnoreCase(turqouise.get(position).getQuantity())) {
+            terqQuantity = turqouise.get(position).getQuantity();
+            terqid = turqouise.get(position).getId();
+            terqprice = turqouise.get(position).getPrice();
+            if(type.equalsIgnoreCase("sales")) {
+                amberprice = "0";
+                terqprice = "0";
+                mBinding.etAmount.setText("0");
 
-                    }else {
-                        int totl= Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(terqprice);
-                        mBinding.etAmount.setText(""+totl );
+            }else{
+                if(!amberprice.equalsIgnoreCase("0")){
+                    int totl= Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(terqprice) + Integer.parseInt(amberprice);
+                    mBinding.etAmount.setText(""+totl );
 
-                    }
+                }else {
+                    int totl= Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(terqprice);
+                    mBinding.etAmount.setText(""+totl );
+
                 }
+            }
+
+        }
+
+
             }
                     else{
                         terqprice =  "0";
@@ -462,7 +488,7 @@ if(!serials.get(position).equalsIgnoreCase("Select")){
                 serials.add("Select" );
 
             }else{
-                serials.add(""+amber.get(i).getQuantity());
+                serials.add(amber.get(i).getQuantity());
 
             }
 
@@ -492,20 +518,27 @@ if(!serials.get(position).equalsIgnoreCase("Select")){
 
         for (int  i =0 ;i< serials.size();i++){
             if (serials.get(i).equalsIgnoreCase(
-                    ""+ amber.get(position).getQuantity())) {
+                    amber.get(position).getQuantity())) {
                 Log.e("TGED","AMBER-> "+  amber.get(position).getQuantity());
                 Log.e("TGED","QUANTITY-> "+ serials.get(i));
-                amberQuantity = amber.get(position).getQuantity() + "";
-                amberid = amber.get(position).getId() + "";
-                amberprice = amber.get(position).getPrice() + "";
-                if(!terqprice.equalsIgnoreCase("0")){
-                    int totl=   Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(amberprice)+ Integer.parseInt(terqprice);
-                    mBinding.etAmount.setText(""+ totl);
+                amberQuantity = amber.get(position).getQuantity();
+                amberid = amber.get(position).getId();
+                amberprice = amber.get(position).getPrice();
+                if(type.equalsIgnoreCase("sales")) {
+                    amberprice = "0";
+                    terqprice = "0";
+                    mBinding.etAmount.setText("0");
                 }else{
+                    if(!terqprice.equalsIgnoreCase("0")){
+                        int totl=   Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(amberprice)+ Integer.parseInt(terqprice);
+                        mBinding.etAmount.setText(""+ totl);
+                    }else{
 
-                    int totl= Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(amberprice);
-                    mBinding.etAmount.setText(""+ totl);
+                        int totl= Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(amberprice);
+                        mBinding.etAmount.setText(""+ totl);
+                    }
                 }
+
 
 
             }
@@ -1606,12 +1639,14 @@ else{
                             if (listofhome.getStatus().equals("1")) {
 
 
-                                Toast.makeText(ActivitySales.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivitySales.this, listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                if(!type.equalsIgnoreCase("sales")){
+                                    Intent intent = new Intent(ActivitySales.this, ActivityAfterSale.class);
+                                    intent.putExtra("appointment_id", id);
+                                    startActivity(intent);
+                                    finish();
+                                }
 
-                               Intent intent = new Intent(ActivitySales.this, ActivityAfterSale.class);
-                                intent.putExtra("appointment_id",""+id);
-                                startActivity(intent);
-                                finish();
 
                                 if(   packagesActivity!=null)
                                 {

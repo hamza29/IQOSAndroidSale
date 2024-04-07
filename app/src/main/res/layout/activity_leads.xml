@@ -324,16 +324,6 @@
                         android:imeOptions="actionNext"
                         android:padding="@dimen/_5sdp"/>
 
-                    <TextView
-                        android:layout_margin="@dimen/_5sdp"
-                        android:layout_width="match_parent"
-                        android:textColor="@color/black"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvQuestion3"
-                        android:text="NIC Format"
-                        android:textSize="@dimen/_11sdp"
-                        android:textStyle="bold" />
-
                     <EditText
                         android:id="@+id/etNicFormat"
                         android:layout_margin="@dimen/_5sdp"

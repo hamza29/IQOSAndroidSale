@@ -41,7 +41,7 @@ public class ActivityPackages extends AppCompatActivity {
     ActivityPackagesBinding mBinding;
 
     SharedPreferences mSharedPreferences;
-    String appointment_id,a1,a2,a3,a4,meeting_outcome;
+    String appointment_id,a1,a2,a3,a4,meeting_outcome, type="lead";
 
     public static Activity  packagesActivity;
 
@@ -58,6 +58,7 @@ public class ActivityPackages extends AppCompatActivity {
         a2 =intent.getStringExtra("a2");
         a3 =intent.getStringExtra("a3");
         a4 =intent.getStringExtra("a4");
+        type =intent.getStringExtra("type");
         meeting_outcome =intent.getStringExtra("meeting_outcome");
 
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
@@ -67,7 +68,6 @@ public class ActivityPackages extends AppCompatActivity {
                 finish();
             }
         });
-
 
 
 
@@ -89,7 +89,7 @@ public class ActivityPackages extends AppCompatActivity {
         a2,
         a3,
         a4,
-        meeting_outcome);
+        meeting_outcome,type);
         mBinding.rvPackages.setAdapter(appointmentAdapter);
     }
     public void getPackages(String token ) {

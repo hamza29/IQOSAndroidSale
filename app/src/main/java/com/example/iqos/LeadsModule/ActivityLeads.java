@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -41,7 +42,6 @@ public class ActivityLeads extends AppCompatActivity {
     String age;
     String email;
     String phone;
-    String nic_format;
     String designation;
     String organization;
     String city;
@@ -93,6 +93,7 @@ public class ActivityLeads extends AppCompatActivity {
             if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")){
                 mBinding.tvEcomLeads.setVisibility(View.GONE);
                 mBinding.fabAddLead.setVisibility(View.VISIBLE);
+                mBinding.rvLeads.setVisibility(View.VISIBLE);
             }else {
                 mBinding.fabAddLead.setVisibility(View.GONE);
                 mBinding.tvEcomLeads.setVisibility(View.VISIBLE);
@@ -119,7 +120,6 @@ public class ActivityLeads extends AppCompatActivity {
                 organization = mBinding.etOrganization.getText().toString();
                 age = mBinding.etAge.getText().toString();
                 city = mBinding.etCity.getText().toString();
-                nic_format = mBinding.etNicFormat.getText().toString();
                 if(first_name.isEmpty()){
                     mBinding.etFirstName.requestFocus();
                     mBinding.etFirstName.setBackground(getDrawable(R.drawable.rounded_corner_red));
@@ -172,13 +172,6 @@ public class ActivityLeads extends AppCompatActivity {
                 } else{
                     mBinding.etCity.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
 
-                } 
-                if(nic_format.isEmpty()){
-                    mBinding.etNicFormat.requestFocus();
-                    mBinding.etNicFormat.setBackground(getDrawable(R.drawable.rounded_corner_red));
-                } else{
-                    mBinding.etNicFormat.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
-
                 }
 
                 if(!phone.isEmpty() && !first_name.isEmpty() && !city.isEmpty() && !email.isEmpty() && !last_name.isEmpty() && !designation.isEmpty() && !organization.isEmpty() && !city.isEmpty() && !age.isEmpty() ){
@@ -186,6 +179,7 @@ public class ActivityLeads extends AppCompatActivity {
                 }
             }
         });
+        Log.e("visibilityleads1", ""+(mBinding.rvLeads.getVisibility()==View.VISIBLE));
 
 
 
@@ -193,6 +187,9 @@ public class ActivityLeads extends AppCompatActivity {
             mBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
+                    Log.e("sales", type);
+                    Log.e("visibilityleads", ""+(mBinding.rvLeads.getVisibility()==View.VISIBLE));
+
                     if(!type.isEmpty() && type.equals("sales")){
                         getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
                     }else{
@@ -496,7 +493,6 @@ public class ActivityLeads extends AppCompatActivity {
         builder.addFormDataPart("organization", organization);
         builder.addFormDataPart("age_group", age);
         builder.addFormDataPart("city", city);
-        builder.addFormDataPart("nic_format", nic_format);
         RequestBody requestBody = builder.build();
         Call<Model.LeadData> call = apiService.createLead("application/json",token, requestBody);
         call.enqueue(new Callback<Model.LeadData>() {
