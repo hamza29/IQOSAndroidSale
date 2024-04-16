@@ -324,17 +324,6 @@
                         android:imeOptions="actionNext"
                         android:padding="@dimen/_5sdp"/>
 
-                    <EditText
-                        android:id="@+id/etNicFormat"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_gravity="start"
-                        android:inputType="text"
-                        android:gravity="start"
-                        android:background="@drawable/rounded_corner_meeting"
-                        android:imeOptions="actionNext"
-                        android:padding="@dimen/_5sdp"/>
                     <Button
                         android:id="@+id/btnSave"
                         android:layout_width="match_parent"

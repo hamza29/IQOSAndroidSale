@@ -658,12 +658,10 @@ android:visibility="gone"
             android:buttonTint="@color/blue"
             />
         <CheckBox
-            android:layout_margin="@dimen/_5sdp"
             android:id="@+id/cbHyperCare"
-            android:textColor="@color/blue"
-            android:text="The customer has opted in for device care program."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
             android:buttonTint="@color/blue"
             />
         <CheckBox

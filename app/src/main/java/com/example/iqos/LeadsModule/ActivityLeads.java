@@ -226,12 +226,12 @@ public class ActivityLeads extends AppCompatActivity {
         }
     }
 
-    private void LeadsRecycler(List<Model.Lead> leads) {
+    private void LeadsRecycler(List<Model.Lead> leads,String leadType) {
 
 
         LeadsAdapter leadsAdapter;
         mBinding.rvLeads.setLayoutManager(new LinearLayoutManager(ActivityLeads.this, LinearLayoutManager.VERTICAL, false));
-        leadsAdapter = new LeadsAdapter(ActivityLeads.this, leads);
+        leadsAdapter = new LeadsAdapter(ActivityLeads.this, leads, leadType);
         mBinding.rvLeads.setAdapter(leadsAdapter);
     }
     private void LeadsEcomRecycler(List<Lead> leads) {
@@ -269,10 +269,10 @@ public class ActivityLeads extends AppCompatActivity {
 
                                     if (keyModel.getData().getLeads().size() >0){
                                         mBinding.rvLeads.setVisibility(View.VISIBLE);
-                                        LeadsRecycler(keyModel.getData().getLeads());
+                                        LeadsRecycler(keyModel.getData().getLeads(), "leads");
                                     } else     if (keyModel.getData().getLeads().size() ==0){
                                         mBinding.rvLeads.setVisibility(View.GONE);
-                                        LeadsRecycler(new ArrayList<>());
+                                        LeadsRecycler(new ArrayList<>(), "leads");
                                     }
 
 
@@ -281,7 +281,7 @@ public class ActivityLeads extends AppCompatActivity {
 
                             } else {
                                 mBinding.rvLeads.setVisibility(View.GONE);
-                                LeadsRecycler(new ArrayList<>());
+                                LeadsRecycler(new ArrayList<>(), "leads");
 
                                 //                                Toast.makeText(ActivityLeads.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
@@ -345,10 +345,10 @@ public class ActivityLeads extends AppCompatActivity {
 
                                     if (keyModel.getData().getLeads().size() >0){
                                         mBinding.rvLeads.setVisibility(View.VISIBLE);
-                                        LeadsRecycler(keyModel.getData().getLeads());
+                                        LeadsRecycler(keyModel.getData().getLeads(), "sales");
                                     } else     if (keyModel.getData().getLeads().size() ==0){
                                         mBinding.rvLeads.setVisibility(View.GONE);
-                                        LeadsRecycler(new ArrayList<>());
+                                        LeadsRecycler(new ArrayList<>(), "sales");
                                     }
 
 
@@ -357,7 +357,7 @@ public class ActivityLeads extends AppCompatActivity {
 
                             } else {
                                 mBinding.rvLeads.setVisibility(View.GONE);
-                                LeadsRecycler(new ArrayList<>());
+                                LeadsRecycler(new ArrayList<>(), "sales");
 
                                 //                                Toast.makeText(ActivityLeads.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
@@ -541,7 +541,7 @@ public class ActivityLeads extends AppCompatActivity {
                             mBinding.swipeRefresh.setRefreshing(false);
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(ActivityLeads.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityLeads.this, keyModel.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

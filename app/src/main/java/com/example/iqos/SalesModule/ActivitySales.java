@@ -84,7 +84,7 @@ public class ActivitySales extends AppCompatActivity {
     String payment_method;
     String appointment_id;
     String      ending_latitude;
-    String a1,a2,a3,a4,meeting_outcome, type;
+    String a1,a2,a3,a4,meeting_outcome, type, name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +119,15 @@ public class ActivitySales extends AppCompatActivity {
                 if (intent.getStringExtra("name").equalsIgnoreCase("Package C")) {
                     mBinding.llEmail.setVisibility(View.VISIBLE);
                 } else {
+                    if (intent.getStringExtra("name").equalsIgnoreCase("Spring")) {
+                        mBinding.cbHyperCare.setVisibility(View.GONE);
+                        mBinding.cbaccountRegistered.setVisibility(View.GONE);
+                        mBinding.cbcustomerDeviceLinked.setVisibility(View.GONE);
+                    }else{
+                        mBinding.cbHyperCare.setVisibility(View.VISIBLE);
+                        mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
+                        mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
+                    }
                     mBinding.llEmail.setVisibility(View.GONE);
 
                 }
@@ -253,7 +262,9 @@ public class ActivitySales extends AppCompatActivity {
                                 if(type.equalsIgnoreCase("sales")){
                                     mBinding.newIqosSerialNumberSpinner.setVisibility(View.GONE);
                                     mBinding.etSerialNumber.setVisibility(View.VISIBLE);
-
+                                    mBinding.cbcustomerDeviceLinked.setVisibility(View.GONE);
+                                    mBinding.cbHyperCare.setVisibility(View.GONE);
+                                    mBinding.cbaccountRegistered.setVisibility(View.GONE);
                                 }
                                     getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),"");
 
@@ -1667,7 +1678,7 @@ else{
                                     verificationAct.finish();
                                 }
 
-
+                                finish();
 
                             } else {
                                 Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
