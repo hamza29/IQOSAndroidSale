@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -50,11 +51,14 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
 
     List<Model.Lead> items;
 
+    String type;
 
 
-    public LeadsAdapter(Activity context, List<Model.Lead> leads) {
+
+    public LeadsAdapter(Activity context, List<Model.Lead> leads, String type) {
         this.context = context;
         this.items = leads;
+        this.type = type;
         mSharedPreferences =context.getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
 
     }
@@ -96,7 +100,7 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
                 if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")){
 
                     holder.tvAddMessage.setVisibility(View.GONE);
-                    if(!items.get(position).getLeadStatus().equals("Completed")){
+                    if(!Objects.equals(type, "sales")){
                         Intent intent;
 
                         intent = new Intent(context, ActivityPackages.class);
@@ -156,7 +160,9 @@ if(item.getType() !=null){
         if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")) {
             holder.tvAddMessage.setVisibility(View.GONE);
         }
-        if(item.getLeadStatus().equals("Completed")){
+        if(Objects.equals(type, "sales")){
+            holder.tvId.setText(""+ item.getId());
+
             holder.llMain.setVisibility(View.GONE);
             holder.llSub.setVisibility(View.GONE);
             holder.llSalesText.setVisibility(View.VISIBLE);
