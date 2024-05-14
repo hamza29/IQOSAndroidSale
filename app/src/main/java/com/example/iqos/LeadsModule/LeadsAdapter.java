@@ -106,6 +106,7 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
                         intent = new Intent(context, ActivityPackages.class);
                         intent.putExtra("appointment_id",""+ items.get(position).getId());
                         intent.putExtra("type","sales");
+                        intent.putExtra("multisale",items.get(position).getIs_multisale());
                         intent.putExtra("name",""+ items.get(position).getFirstName());
                         context.startActivity(intent);
 
@@ -127,7 +128,6 @@ public class LeadsAdapter  extends RecyclerView.Adapter<LeadsAdapter.ViewHolder>
                         if(item.getIs_appointment().equalsIgnoreCase("0")) {
                             Intent intent = new Intent(context, ActivityLeadsDetail.class);
                             intent.putExtra("type", "lead");
-
                             intent.putExtra("KEY_LEAD_ID", item.getId().toString());
                             context.startActivity(intent);
                         }else{

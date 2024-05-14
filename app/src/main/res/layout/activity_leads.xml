@@ -143,186 +143,184 @@
                 android:layout_below="@id/rlHeader2"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:visibility="gone" />
+
             <ScrollView
                 android:id="@+id/svForm"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
-                android:visibility="gone"
                 android:layout_below="@+id/rlHeader"
-                >
+                android:background="@color/white"
+                android:visibility="gone">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
-                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
                         android:text="First Name"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/etFirstName"
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="start"
-                        android:gravity="start"
-                        android:inputType="text"
-
+                        android:layout_margin="@dimen/_5sdp"
                         android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
+
                         android:imeOptions="actionNext"
-                        android:padding="@dimen/_5sdp"/>
+                        android:inputType="text"
+                        android:padding="@dimen/_5sdp" />
 
                     <TextView
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
-                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
                         android:text="Last Name"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/etLastName"
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="start"
-                        android:gravity="start"
-                        android:inputType="text"
+                        android:layout_margin="@dimen/_5sdp"
                         android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
                         android:imeOptions="actionNext"
-                        android:padding="@dimen/_5sdp"/>
+                        android:inputType="text"
+                        android:padding="@dimen/_5sdp" />
 
                     <TextView
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
-                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
                         android:text="Email"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/etLeadEmail"
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="start"
-                        android:gravity="start"
-                        android:inputType="textEmailAddress"
+                        android:layout_margin="@dimen/_5sdp"
                         android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
                         android:imeOptions="actionNext"
-                        android:padding="@dimen/_5sdp"/>
+                        android:inputType="textEmailAddress"
+                        android:padding="@dimen/_5sdp" />
 
                     <TextView
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
-                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
                         android:text="Phone Number"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/etLeadPhone"
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="start"
-                        android:gravity="start"
-                        android:inputType="number"
+                        android:layout_margin="@dimen/_5sdp"
                         android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
                         android:imeOptions="actionNext"
-                        android:padding="@dimen/_5sdp"/>
+                        android:inputType="number"
+                        android:padding="@dimen/_5sdp" />
 
                     <TextView
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
-                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
                         android:text="Designation"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/etDesignation"
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="start"
-                        android:gravity="start"
-                        android:inputType="text"
+                        android:layout_margin="@dimen/_5sdp"
                         android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
                         android:imeOptions="actionNext"
-                        android:padding="@dimen/_5sdp"/>
+                        android:inputType="text"
+                        android:padding="@dimen/_5sdp" />
 
                     <TextView
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
-                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
                         android:text="Company"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/etOrganization"
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="start"
-                        android:inputType="text"
-                        android:gravity="start"
+                        android:layout_margin="@dimen/_5sdp"
                         android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
                         android:imeOptions="actionNext"
-                        android:padding="@dimen/_5sdp"/>
+                        android:inputType="text"
+                        android:padding="@dimen/_5sdp" />
 
                     <TextView
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
-                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
                         android:text="Age Group"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/etAge"
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="start"
-                        android:inputType="number"
-                        android:gravity="start"
+                        android:layout_margin="@dimen/_5sdp"
                         android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
                         android:imeOptions="actionNext"
-                        android:padding="@dimen/_5sdp"/>
+                        android:inputType="number"
+                        android:padding="@dimen/_5sdp" />
 
                     <TextView
-                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="match_parent"
-                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
                         android:text="City"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@+id/etCity"
-                        android:layout_margin="@dimen/_5sdp"
+                    <Spinner
+                        android:id="@+id/city_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="start"
-                        android:inputType="text"
-                        android:gravity="start"
-                        android:background="@drawable/rounded_corner_meeting"
-                        android:imeOptions="actionNext"
-                        android:padding="@dimen/_5sdp"/>
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/rounded_corner_meeting" />
 
                     <Button
                         android:id="@+id/btnSave"

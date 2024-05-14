@@ -146,6 +146,7 @@ public class ActivityLogin extends AppCompatActivity {
                                 }
 
                             } else {
+
                                 Toast.makeText(ActivityLogin.this, "Invalid Email/Password", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
 

@@ -51,7 +51,12 @@ public class MainActivity extends BaseActivity
         LinearLayout llAppointment =mBinding.navView.getHeaderView(0).findViewById(R.id.llAppointment);
         LinearLayout llLeads =mBinding.navView.getHeaderView(0).findViewById(R.id.llLeads);
         LinearLayout llSales =mBinding.navView.getHeaderView(0).findViewById(R.id.llSales);
-
+//        mSharedPreferences.edit().remove(Constants.BAREAR_TOKEN).commit();
+//        mSharedPreferences.edit().remove(Constants.API_KEY).commit();
+//        mSharedPreferences.edit().remove(Constants.USER_NAME).commit();
+//        mSharedPreferences.edit().remove(Constants.EMAIL).commit();
+//        mSharedPreferences.edit().remove(Constants.ROLE).commit();
+//        mSharedPreferences.edit().remove(Constants.HYPER_CARE).commit();
         if(mSharedPreferences.getString(Constants.HYPER_CARE,"").equalsIgnoreCase("1")){
              llMyPerformance.setVisibility(View.GONE);
             llInventory.setVisibility(View.GONE);

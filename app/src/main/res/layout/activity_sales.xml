@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SalesModule.ActivitySales">
+    <FrameLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/root_view">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -256,6 +261,7 @@ android:visibility="gone"
                 android:layout_marginEnd="@dimen/_50sdp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_rectangle_border"
+
                 >
 
                 <Spinner
@@ -269,7 +275,8 @@ android:visibility="gone"
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/etSerialNumber"/>
+                    android:id="@+id/etSerialNumber"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
 
@@ -345,9 +352,9 @@ android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_weight="1"
-             android:textColor="@color/blue"
-            android:textSize="@dimen/_10sdp"
-              />
+            android:shadowColor="#1C1A1A"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/_10sdp" />
 
     </LinearLayout>
 <LinearLayout
@@ -424,7 +431,6 @@ android:visibility="gone"
             <Spinner
                 android:id="@+id/spTurq"
                 android:gravity="center"
-
                 android:layout_width="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_height="wrap_content"
@@ -662,6 +668,7 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5sdp"
+            android:text="The customer has opted in for device care program."
             android:buttonTint="@color/blue"
             />
         <CheckBox
@@ -682,6 +689,26 @@ android:visibility="gone"
             android:layout_height="wrap_content"
             android:buttonTint="@color/blue"
             />
+
+        <TextView
+            android:id="@+id/tv_CreateQR"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|end"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/rectangle_background"
+            android:backgroundTint="@color/blue"
+            android:foreground="@drawable/ripple"
+            android:gravity="center"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingTop="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_3sdp"
+            android:text="Create QR code"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            android:visibility="gone" />
 
         <TextView
             android:gravity="center"
@@ -706,5 +733,43 @@ android:visibility="gone"
     </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
+
+        <FrameLayout
+            android:id="@+id/ll_qr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#040404"
+            android:backgroundTint="#AB252424"
+            android:orientation="vertical"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginVertical="@dimen/_188sdp"
+                android:padding="@dimen/_5sdp"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iv_qr"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="qr" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_cancel"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="top|center_vertical|end"
+                android:layout_marginTop="@dimen/_70sdp"
+                android:backgroundTint="#787676"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/cross_svgrepo_com" />
+        </FrameLayout>
+
+    </FrameLayout>
 </LinearLayout>

@@ -422,6 +422,17 @@ public class Model {
         @Expose
         private LastAction lastAction;
 
+        public String getIs_multisale() {
+            return is_multisale;
+        }
+
+        public void setIs_multisale(String is_multisale) {
+            this.is_multisale = is_multisale;
+        }
+
+        @SerializedName("is_multisale")
+        @Expose
+        private String is_multisale;
         public String getDevice() {
             return device;
         }

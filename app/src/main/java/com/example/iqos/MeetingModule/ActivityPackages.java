@@ -41,7 +41,7 @@ public class ActivityPackages extends AppCompatActivity {
     ActivityPackagesBinding mBinding;
 
     SharedPreferences mSharedPreferences;
-    String appointment_id,a1,a2,a3,a4,meeting_outcome, type="lead";
+    String appointment_id,a1,a2,a3,a4,meeting_outcome, type="lead", multisale = "0";
 
     public static Activity  packagesActivity;
 
@@ -55,6 +55,7 @@ public class ActivityPackages extends AppCompatActivity {
         Intent intent = getIntent();
         appointment_id =intent.getStringExtra("appointment_id");
         a1 =intent.getStringExtra("a1");
+        multisale =intent.getStringExtra("multisale");
         a2 =intent.getStringExtra("a2");
         a3 =intent.getStringExtra("a3");
         a4 =intent.getStringExtra("a4");
@@ -89,7 +90,7 @@ public class ActivityPackages extends AppCompatActivity {
         a2,
         a3,
         a4,
-        meeting_outcome,type);
+        meeting_outcome,type, multisale);
         mBinding.rvPackages.setAdapter(appointmentAdapter);
     }
     public void getPackages(String token ) {

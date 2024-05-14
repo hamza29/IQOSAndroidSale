@@ -265,7 +265,14 @@ public interface ApiService {
             @Header("Authorization") String token
 
     );
-
+    @FormUrlEncoded
+    @POST("qoach/lead/get-qrcode")
+    Call<ActivitySales.GetQRModel> getQRCode(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token,
+            @Field("id") String id,
+            @Field("token") String bearer_token
+    );
 
     @POST("qoach/lead/performance")
     Call<PerformanceActivity.GetPerformanceModel> getPerformance(

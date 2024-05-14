@@ -318,8 +318,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="baseline_add_24" />
+                            <entry key="outputName" value="cross_svgrepo_com" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../cross-svgrepo-com.svg" />
                           </map>
                         </option>
                       </PersistentState>

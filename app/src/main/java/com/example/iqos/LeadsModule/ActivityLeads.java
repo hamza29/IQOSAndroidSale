@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.iqos.Constants;
@@ -65,7 +67,14 @@ public class ActivityLeads extends AppCompatActivity {
                 mBinding.rvEcomLeads.setVisibility(View.GONE);
                 getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
             }
-        });  mBinding.tvEcomLeads.setOnClickListener(new View.OnClickListener() {
+        });
+
+        List<String> city_list = new ArrayList<>();
+        city_list.add("Karachi");
+        city_list.add("Lahore");
+        city_list.add("Islamabdr");
+        setPaymentMethodSpinner(city_list);
+        mBinding.tvEcomLeads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -119,7 +128,6 @@ public class ActivityLeads extends AppCompatActivity {
                 designation = mBinding.etDesignation.getText().toString();
                 organization = mBinding.etOrganization.getText().toString();
                 age = mBinding.etAge.getText().toString();
-                city = mBinding.etCity.getText().toString();
                 if(first_name.isEmpty()){
                     mBinding.etFirstName.requestFocus();
                     mBinding.etFirstName.setBackground(getDrawable(R.drawable.rounded_corner_red));
@@ -167,10 +175,10 @@ public class ActivityLeads extends AppCompatActivity {
 
                 } 
                 if(city.isEmpty()){
-                    mBinding.etCity.requestFocus();
-                    mBinding.etCity.setBackground(getDrawable(R.drawable.rounded_corner_red));
+                    mBinding.citySpinner.requestFocus();
+                    mBinding.citySpinner.setBackground(getDrawable(R.drawable.rounded_corner_red));
                 } else{
-                    mBinding.etCity.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
+                    mBinding.citySpinner.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
 
                 }
 
@@ -730,6 +738,32 @@ public class ActivityLeads extends AppCompatActivity {
         }
 
     }
+    private void setPaymentMethodSpinner(List<String> city_list){
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                city_list);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        mBinding.citySpinner.setAdapter(ad);
+        mBinding.citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                city = city_list.get(position);
+            }
 
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+
+    }
 
 }

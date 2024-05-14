@@ -32,13 +32,14 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     String a3;
     String a4;
     String type;
+    String multisale;
     String meeting_outcome;
 
     public PackageAdapter(Activity context, List<ActivityPackages.Package> leads,String app_id,String a1 ,
                           String a2,
                           String a3,
                           String a4,
-                          String meeting_outcome, String type) {
+                          String meeting_outcome, String type, String multisale) {
         this.context = context;
         this.items = leads;
 //        this.meeting_outcome = meeting_outcome;
@@ -46,6 +47,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
         this.a4 = a4;
         this.a2 = a2;
         this.a3 = a3;
+        this.multisale = multisale;
         this.meeting_outcome = meeting_outcome;
         this.app_id = app_id;
         this.type = type;
@@ -78,6 +80,7 @@ holder.rlLayout.setOnClickListener(new View.OnClickListener() {
         intent.putExtra("a4",""+a4);
         intent.putExtra("meeting_outcome",""+meeting_outcome);
         intent.putExtra("type",""+type);
+        intent.putExtra("multisale",""+multisale);
         context.startActivity(intent);
 //        context.finish();
     }

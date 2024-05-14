@@ -27,6 +27,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -84,7 +86,7 @@ public class ActivitySales extends AppCompatActivity {
     String payment_method;
     String appointment_id;
     String      ending_latitude;
-    String a1,a2,a3,a4,meeting_outcome, type, name;
+    String a1,a2,a3,a4,meeting_outcome, type, name, multisale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +104,7 @@ public class ActivitySales extends AppCompatActivity {
         a3 =intent.getStringExtra("a3");
         a4 =intent.getStringExtra("a4");
         type =intent.getStringExtra("type");
+        multisale =intent.getStringExtra("multisale");
         meeting_outcome =intent.getStringExtra("meeting_outcome");
 
          getPackageDetail(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),package_id);
@@ -111,18 +114,32 @@ public class ActivitySales extends AppCompatActivity {
          payment_method.add("card");
          payment_method.add("Bank Transfer");
          setPaymentMethodSpinner(payment_method);
-
-
+        mBinding.cbHyperCare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(mBinding.cbHyperCare.isChecked()){
+                    mBinding.tvCreateQR.setVisibility(View.VISIBLE);
+                }else{
+                    mBinding.tvCreateQR.setVisibility(View.GONE);
+                }
+            }
+        });
+mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        GetQrCOde(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),appointment_id);
+    }
+});
             mBinding.tvName.setText(intent.getStringExtra("name"));
 
             if(intent.getStringExtra("name") !=null) {
                 if (intent.getStringExtra("name").equalsIgnoreCase("Package C")) {
                     mBinding.llEmail.setVisibility(View.VISIBLE);
                 } else {
-                    if (intent.getStringExtra("name").equalsIgnoreCase("Spring")) {
+                    if (intent.getStringExtra("multisale")!= null && intent.getStringExtra("multisale").equalsIgnoreCase("1")) {
                         mBinding.cbHyperCare.setVisibility(View.GONE);
-                        mBinding.cbaccountRegistered.setVisibility(View.GONE);
-                        mBinding.cbcustomerDeviceLinked.setVisibility(View.GONE);
+                        mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
+                        mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
                     }else{
                         mBinding.cbHyperCare.setVisibility(View.VISIBLE);
                         mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
@@ -148,13 +165,76 @@ public class ActivitySales extends AppCompatActivity {
 
             }
         });
+        mBinding.llQr.setVisibility(View.GONE);
+        mBinding.ivCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBinding.llQr.setVisibility(View.GONE);
 
+            }
+        });
     }
 
 
 
 
+    public void GetQrCOde(String token, String id ) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        ApiService apiService = ApiClient.getClient(ActivitySales.this).create(ApiService.class);
+        Call<GetQRModel> call = apiService.getQRCode("application/json",token, id , token);
+        call.enqueue(new Callback<GetQRModel>() {
+            @Override
+            public void onResponse(Call<GetQRModel> call, Response<GetQRModel> response) {
+                ///// Progress Dialog  Dismiss////////////
+                final GetQRModel keyModel = response.body();
+                if (keyModel != null) {
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            if (keyModel.getStatus().equals("1")) {
+                                Glide
+                                        .with(ActivitySales.this)
+                                        .load(keyModel.getData().getQrCode())
+                                        .into(mBinding.ivQr);
+
+                                mBinding.llQr.setVisibility(View.VISIBLE);
+                            } else {
+                                Toast.makeText(ActivitySales.this, "Error in creating QR code", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+                } else {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GetQRModel> call, Throwable t) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        Log.e("throw",t.getMessage());
+                        Toast.makeText(ActivitySales.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+            }
+        });
+    }
 
     public void getInventories(String token, String pack ) {
          getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -262,9 +342,15 @@ public class ActivitySales extends AppCompatActivity {
                                 if(type.equalsIgnoreCase("sales")){
                                     mBinding.newIqosSerialNumberSpinner.setVisibility(View.GONE);
                                     mBinding.etSerialNumber.setVisibility(View.VISIBLE);
-                                    mBinding.cbcustomerDeviceLinked.setVisibility(View.GONE);
-                                    mBinding.cbHyperCare.setVisibility(View.GONE);
-                                    mBinding.cbaccountRegistered.setVisibility(View.GONE);
+                                    if (multisale!= null && multisale.equalsIgnoreCase("1")) {
+                                        mBinding.cbHyperCare.setVisibility(View.GONE);
+                                        mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
+                                        mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
+                                    }else{
+                                        mBinding.cbHyperCare.setVisibility(View.VISIBLE);
+                                        mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
+                                        mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
+                                    }
                                 }
                                     getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),"");
 
@@ -313,7 +399,6 @@ public class ActivitySales extends AppCompatActivity {
             }
         });
     }
-
     private void setNewIQosSerialNumberSpinner(List<Inventory> inventories, String pack){
 
 
@@ -371,11 +456,6 @@ if(inventories.get(position).getSrNo().equalsIgnoreCase(serials.get(position)))
 
 
     }
-
-
-
-
-
     private void setPaymentMethodSpinner(List<String> payment_list){
 
 
@@ -412,9 +492,6 @@ if(inventories.get(position).getSrNo().equalsIgnoreCase(serials.get(position)))
 
 
     }
-
-
-
      private void setTerqSpinner(List<Turqouise> turqouise){
 
          ArrayList<String > serials = new ArrayList<>();
@@ -606,6 +683,20 @@ else{
         }
 
     }
+    public class QRData {
+
+        @SerializedName("qr_code")
+        @Expose
+        private String qrCode;
+
+        public String getQrCode() {
+            return qrCode;
+        }
+
+        public void setQrCode(String qrCode) {
+            this.qrCode = qrCode;
+        }
+    }
     public class GetInventoriesModel {
 
         @SerializedName("status")
@@ -639,6 +730,43 @@ else{
         }
 
         public void setData(Data data) {
+            this.data = data;
+        }
+
+    }
+    public class GetQRModel {
+
+        @SerializedName("status")
+        @Expose
+        private String status;
+        @SerializedName("message")
+        @Expose
+        private String message;
+        @SerializedName("data")
+        @Expose
+        private QRData data;
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public QRData getData() {
+            return data;
+        }
+
+        public void setData(QRData data) {
             this.data = data;
         }
 
@@ -1458,16 +1586,6 @@ else{
 
         }
 
-        if( mBinding.cbHyperCare  !=null) {
-            if( mBinding.cbHyperCare.isChecked()){
-                builder.addFormDataPart("customer_hyper_care", "1");
-
-            }else{
-                builder.addFormDataPart("customer_hyper_care", "0");
-
-            }
-
-        }
 
 
 
