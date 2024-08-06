@@ -394,7 +394,7 @@
                             android:layout_gravity="start"
                             android:layout_margin="@dimen/_5sdp"
                             android:background="@drawable/rounded_corner_meeting"
-                            android:gravity="start"
+                            android:gravity="center_vertical"
 
                             android:imeOptions="actionNext"
                             android:inputType="text"
@@ -458,7 +458,9 @@
                             android:layout_gravity="start"
                             android:layout_margin="@dimen/_5sdp"
                             android:background="@drawable/rounded_corner_meeting"
+                            android:hint="3231234567"
                             android:gravity="start"
+                            android:maxLength="12"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:padding="@dimen/_5sdp" />
@@ -478,6 +480,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_gravity="start"
                             android:layout_margin="@dimen/_5sdp"
+                            android:maxLength="3"
                             android:background="@drawable/rounded_corner_meeting"
                             android:gravity="start"
                             android:imeOptions="actionNext"

@@ -345,7 +345,32 @@ public class ActivitySales extends AppCompatActivity {
                                         mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
                                     }
                                 }
-                                getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), "");
+//                                getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), "");
+                                mBinding.tvSubmit.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Log.e("TGED", "id-> " + newDeviceSrNo);
+                                        Log.e("TGEeeeeD", "payment_method---> " + payment_method);
+
+                                        Toast.makeText(ActivitySales.this, payment_method, Toast.LENGTH_SHORT).show();
+                                        if (type.equalsIgnoreCase("sales")) {
+                                            newDeviceSrNo = mBinding.etSerialNumber.getText().toString();
+                                        }
+                                        if (!newDeviceSrNo.isEmpty()) {
+                                            updateSale(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""),
+                                                    appointment_id, newDeviceSrNo, package_id, amberid, terqid, mBinding.etEmail.getText().toString(), mBinding.etAmount.getText().toString(), payment_method);
+                                        } else {
+                                            if (type.equalsIgnoreCase("sales")) {
+                                                Toast.makeText(ActivitySales.this, "Please type Serial Number", Toast.LENGTH_SHORT).show();
+
+                                            } else {
+                                                Toast.makeText(ActivitySales.this, "Please select device", Toast.LENGTH_SHORT).show();
+
+                                            }
+
+                                        }
+                                    }
+                                });
 
                                 List<Amber> ambers = keyModel.getData().getPackage().getAmber();
                                 ambers.add(new Amber("-1", "0", "0"));
@@ -786,6 +811,13 @@ public class ActivitySales extends AppCompatActivity {
                 }
 
             }
+        }
+        //device_new == 1 for the case if no inventory already assigned to qoach
+        //device_new == 0 or empty if already device assigned to qoach
+        if (type.equalsIgnoreCase("sales")) {
+            builder.addFormDataPart("device_new", "1");
+        }    else{
+            builder.addFormDataPart("device_new", "0");
         }
 
         RequestBody requestBody = builder.build();

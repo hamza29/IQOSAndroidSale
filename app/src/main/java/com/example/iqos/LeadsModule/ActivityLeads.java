@@ -179,39 +179,39 @@ public class ActivityLeads extends AppCompatActivity {
                 organization = mBinding.etOrganization.getText().toString();
                 age = mBinding.etAge.getText().toString();
                 if (first_name.isEmpty()) {
-                    mBinding.etFirstName.requestFocus();
+//                    mBinding.etFirstName.requestFocus();
                     mBinding.etFirstName.setBackground(getDrawable(R.drawable.rounded_corner_red));
                 } else {
                     mBinding.etFirstName.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
                 }
                 if (last_name.isEmpty()) {
-                    mBinding.etLastName.requestFocus();
+//                    mBinding.etLastName.requestFocus();
                     mBinding.etLastName.setBackground(getDrawable(R.drawable.rounded_corner_red));
                 } else {
                     mBinding.etLastName.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
                 }
                 if (email.isEmpty()) {
-                    mBinding.etLeadEmail.requestFocus();
+//                    mBinding.etLeadEmail.requestFocus();
                     mBinding.etLeadEmail.setBackground(getDrawable(R.drawable.rounded_corner_red));
                 } else {
                     mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
                 }
                 if (phone.isEmpty()) {
-                    mBinding.etLeadPhone.requestFocus();
+//                    mBinding.etLeadPhone.requestFocus();
                     mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_red));
                 } else {
                     mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
 
                 }
                 if (age.isEmpty()) {
-                    mBinding.etAge.requestFocus();
+//                    mBinding.etAge.requestFocus();
                     mBinding.etAge.setBackground(getDrawable(R.drawable.rounded_corner_red));
                 } else {
                     mBinding.etAge.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
 
                 }
                 if (city.isEmpty()) {
-                    mBinding.citySpinner.requestFocus();
+//                    mBinding.citySpinner.requestFocus();
                     mBinding.citySpinner.setBackground(getDrawable(R.drawable.rounded_corner_red));
                 } else {
                     mBinding.citySpinner.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
@@ -219,7 +219,14 @@ public class ActivityLeads extends AppCompatActivity {
                 }
 
                 if (!phone.isEmpty() && !first_name.isEmpty() && !city.isEmpty() && !email.isEmpty() && !last_name.isEmpty() && !designation.isEmpty() && !organization.isEmpty() && !city.isEmpty() && !age.isEmpty()) {
-                    createLead(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
+                    if(mBinding.etLeadPhone.getText().toString().startsWith("3")){
+                        Toast.makeText(ActivityLeads.this, "Phone Number is valid", Toast.LENGTH_SHORT).show();
+
+                        createLead(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
+
+                    }else{
+                        Toast.makeText(ActivityLeads.this, "Phone Number is not valid it should start with 3", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -569,22 +576,17 @@ public class ActivityLeads extends AppCompatActivity {
                                 mBinding.swipeRefresh.setEnabled(true);
                                 mBinding.svForm.setVisibility(View.GONE);
                                 mBinding.fabAddLead.setVisibility(View.VISIBLE);
-                                mBinding.etFirstName.setText("");
-                                mBinding.etLastName.setText("");
-                                mBinding.etLeadEmail.setText("");
-                                mBinding.etLeadPhone.setText("");
-                                mBinding.etDesignation.setText("");
-                                mBinding.etOrganization.setText("");
-                                mBinding.etAge.setText("");
+
+
                             } else {
                                 mBinding.swipeRefresh.setRefreshing(false);
                                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                                 if (keyModel.getMessage().contains("email")) {
-                                    mBinding.etLeadEmail.requestFocus();
+//                                    mBinding.etLeadEmail.requestFocus();
                                     mBinding.etLeadEmail.setBackground(getDrawable(R.drawable.rounded_corner_red));
                                 }
                                 if (keyModel.getMessage().contains("phone")) {
-                                    mBinding.etLeadPhone.requestFocus();
+//                                    mBinding.etLeadPhone.requestFocus();
                                     mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_red));
                                 }
                                 mBinding.progress.setVisibility(View.GONE);
