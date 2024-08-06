@@ -6,9 +6,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:foreground="@drawable/ripple"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
+        android:foreground="@drawable/ripple"
         android:orientation="vertical">
 
 
@@ -35,6 +35,75 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:textColor="@color/blue"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMainSaleshead"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Email"
+                android:textAlignment="center"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SaleNumber"
+                android:textAlignment="center"
+
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Number"
+
+                android:textAlignment="center"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:text="Created at"
+                android:textAlignment="center"
+                android:textColor="@color/blue"
+
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Age"
+
+                android:textAlignment="center"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_9sdp"
                 android:textStyle="bold" />
 
 
@@ -329,8 +398,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@color/blue"/>
-
+            android:background="@color/blue" />
 
 
     </LinearLayout>

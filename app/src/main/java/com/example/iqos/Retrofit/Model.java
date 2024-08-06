@@ -4,7 +4,6 @@ package com.example.iqos.Retrofit;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
@@ -18,7 +17,8 @@ public class Model {
         private Integer id;
         @SerializedName("name")
         @Expose
-        private String name;     @SerializedName("city")
+        private String name;
+        @SerializedName("city")
         @Expose
         private String city;
         @SerializedName("email")
@@ -255,6 +255,7 @@ public class Model {
             this.dayStarted = dayStarted;
         }
     }
+
     public class LoginModel {
 
         @SerializedName("status")
@@ -303,7 +304,7 @@ public class Model {
         }
 
     }
- 
+
     public class DataLead {
 
         @SerializedName("leads")
@@ -318,7 +319,8 @@ public class Model {
             this.leads = leads;
         }
 
-    } 
+    }
+
     public class GetLeadsModel {
 
         @SerializedName("status")
@@ -355,21 +357,57 @@ public class Model {
             this.data = data;
         }
 
-    } 
-    public class Lead {
+    }
 
+    public class Lead {
+        @SerializedName("email")
+        @Expose
+        private String email;
+        @SerializedName("number")
+        @Expose
+        private String number;
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+        @SerializedName("created_at")
+        @Expose
+        private String createdAt;
+
+        public String getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public String getNumber() {
+            return number;
+        }
+
+        public void setNumber(String number) {
+            this.number = number;
+        }
+
+        public String getAgeGroup() {
+            return ageGroup;
+        }
+
+        public void setAgeGroup(String ageGroup) {
+            this.ageGroup = ageGroup;
+        }
+
+        @SerializedName("age_group")
+        @Expose
+        private String ageGroup;
         @SerializedName("is_external")
         @Expose
         private String is_external;
-
-        public String getIs_external() {
-            return is_external;
-        }
-
-        public void setIs_external(String is_external) {
-            this.is_external = is_external;
-        }
-
         @SerializedName("id")
         @Expose
         private Integer id;
@@ -421,6 +459,29 @@ public class Model {
         @SerializedName("last_action")
         @Expose
         private LastAction lastAction;
+        @SerializedName("is_multisale")
+        @Expose
+        private String is_multisale;
+        @SerializedName("device")
+        @Expose
+        private String device;
+        @SerializedName("amber_quantity")
+        @Expose
+        private String amber_quantity;
+        @SerializedName("turqouise_quantity")
+        @Expose
+        private String turqoise_quantity;
+        @SerializedName("next_action")
+        @Expose
+        private NextAction nextAction;
+
+        public String getIs_external() {
+            return is_external;
+        }
+
+        public void setIs_external(String is_external) {
+            this.is_external = is_external;
+        }
 
         public String getIs_multisale() {
             return is_multisale;
@@ -430,9 +491,6 @@ public class Model {
             this.is_multisale = is_multisale;
         }
 
-        @SerializedName("is_multisale")
-        @Expose
-        private String is_multisale;
         public String getDevice() {
             return device;
         }
@@ -456,19 +514,6 @@ public class Model {
         public void setTurqoise_quantity(String turqoise_quantity) {
             this.turqoise_quantity = turqoise_quantity;
         }
-
-        @SerializedName("device")
-        @Expose
-        private String device;
-        @SerializedName("amber_quantity")
-        @Expose
-        private String amber_quantity;
-        @SerializedName("turqouise_quantity")
-        @Expose
-        private String turqoise_quantity;
-        @SerializedName("next_action")
-        @Expose
-        private NextAction nextAction;
 
         public String getType() {
             return type;
@@ -615,6 +660,7 @@ public class Model {
         }
 
     }
+
     public class LastAction {
 
         @SerializedName("type")
@@ -641,6 +687,7 @@ public class Model {
         }
 
     }
+
     public class NextAction {
 
         @SerializedName("type")
@@ -674,6 +721,9 @@ public class Model {
         @SerializedName("lead")
         @Expose
         private LeadDetails lead;
+        @SerializedName("configuration")
+        @Expose
+        private Configuration configuration;
 
         public LeadDetails getLead() {
             return lead;
@@ -683,10 +733,6 @@ public class Model {
             this.lead = lead;
         }
 
-        @SerializedName("configuration")
-        @Expose
-        private Configuration configuration;
-
         public Configuration getConfiguration() {
             return configuration;
         }
@@ -695,6 +741,7 @@ public class Model {
             this.configuration = configuration;
         }
     }
+
     public class LeadDetails {
 
         @SerializedName("id")
@@ -922,8 +969,13 @@ public class Model {
         @SerializedName("next_action")
         @Expose
         private NextAction nextAction;
+
         public String getEmail_message() {
             return email_message;
+        }
+
+        public void setEmail_message(String email_message) {
+            this.email_message = email_message;
         }
 
         public LastAction getLastAction() {
@@ -940,10 +992,6 @@ public class Model {
 
         public void setNextAction(NextAction nextAction) {
             this.nextAction = nextAction;
-        }
-
-        public void setEmail_message(String email_message) {
-            this.email_message = email_message;
         }
 
         public Integer getId() {
@@ -1561,6 +1609,7 @@ public class Model {
         }
 
     }
+
     public class Configuration {
 
         @SerializedName("open_message")
@@ -1782,6 +1831,7 @@ public class Model {
         }
 
     }
+
     public class DataAppointment {
 
         @SerializedName("appointments")
@@ -1797,6 +1847,7 @@ public class Model {
         }
 
     }
+
     public class GetAppointmentModel {
 
         @SerializedName("status")
@@ -1874,6 +1925,7 @@ public class Model {
         }
 
     }
+
     public class GenereModel {
 
         @SerializedName("status")
@@ -2074,7 +2126,7 @@ public class Model {
 
     }
 
-    public class  AppointmentDetailsModel {
+    public class AppointmentDetailsModel {
 
         @SerializedName("status")
         @Expose
@@ -2111,6 +2163,7 @@ public class Model {
         }
 
     }
+
     public class DataBookAppDetails {
 
         @SerializedName("appoinment")
@@ -2126,18 +2179,67 @@ public class Model {
         }
 
     }
+
     public class LeadData {
+        @SerializedName("id")
+        @Expose
+        private String id;
+        @SerializedName("first_name")
+        @Expose
+        private String firstName;
+        @SerializedName("status")
+        @Expose
+        private String status;
+        @SerializedName("last_name")
+        @Expose
+        private String lastName;
+        @SerializedName("number")
+        @Expose
+        private String number;
+        @SerializedName("message")
+        @Expose
+        private String message;
+        @SerializedName("email")
+        @Expose
+        private String email;
+        @SerializedName("designation")
+        @Expose
+        private String designation;
+        @SerializedName("organization")
+        @Expose
+        private String company;
+        @SerializedName("age_group")
+        @Expose
+        private String ageGroup;
+        @SerializedName("city")
+        @Expose
+        private String city;
+        @SerializedName("nic_format")
+        @Expose
+        private String nicFormat;
+
         public String getFirstName() {
             return firstName;
         }
+
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
+
         public String getStatus() {
             return status;
         }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
         public String getMessage() {
             return message;
         }
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
+
+        public void setMessage(String message) {
+            this.message = message;
         }
 
         public String getLastName() {
@@ -2204,38 +2306,12 @@ public class Model {
             this.nicFormat = nicFormat;
         }
 
-        @SerializedName("first_name")
-        @Expose
-        private String firstName;
-        @SerializedName("status")
-        @Expose
-        private String status;
-        @SerializedName("last_name")
-        @Expose
-        private String lastName;
-        @SerializedName("number")
-        @Expose
-        private String number;
-        @SerializedName("message")
-        @Expose
-        private String message;
-        @SerializedName("email")
-        @Expose
-        private String email;
-        @SerializedName("designation")
-        @Expose
-        private String designation;
-        @SerializedName("organization")
-        @Expose
-        private String company;
-        @SerializedName("age_group")
-        @Expose
-        private String ageGroup;
-        @SerializedName("city")
-        @Expose
-        private String city;
-        @SerializedName("nic_format")
-        @Expose
-        private String nicFormat;
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
     }
 }

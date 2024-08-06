@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +16,6 @@ import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
 import com.example.iqos.databinding.ActivityEcomMeetingBinding;
-import com.example.iqos.databinding.ActivityPreMeetingCheckListBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,12 +30,12 @@ import retrofit2.Response;
 public class ActivityEcomMeeting extends AppCompatActivity {
 
     ActivityEcomMeetingBinding mBinding;
-        String tvCoachTime="";
-        String tvConsumerTime="";
-        String tvSpaceTime="";
-        String tvToolsTime="";
-            SharedPreferences mSharedPreferences;
-        String appointment_id ="";
+    String tvCoachTime = "";
+    String tvConsumerTime = "";
+    String tvSpaceTime = "";
+    String tvToolsTime = "";
+    SharedPreferences mSharedPreferences;
+    String appointment_id = "";
     String starting_latitude;
     String starting_date;
     String ending_latitude;
@@ -45,6 +43,7 @@ public class ActivityEcomMeeting extends AppCompatActivity {
     String cbCustomer;
     String cbDeviceLinking;
     String cbEccomerce;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,122 +51,107 @@ public class ActivityEcomMeeting extends AppCompatActivity {
         View view = mBinding.getRoot();
         setContentView(view);
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
-       Intent intent = getIntent();
+        Intent intent = getIntent();
         appointment_id = intent.getStringExtra("appointment_id");
         String name = getIntent().getStringExtra("name");
-        mBinding.tvLeadName.setText("Lead Name: "+ name);
-
-
-
+        mBinding.tvLeadName.setText("Lead Name: " + name);
 
 
         GPSTracker gpsTracker = new GPSTracker(this);
-        if (gpsTracker.getIsGPSTrackingEnabled())
-        {
-            starting_latitude = gpsTracker.getLatitude()+ "," + gpsTracker.getLongitude();
+        if (gpsTracker.getIsGPSTrackingEnabled()) {
+            starting_latitude = gpsTracker.getLatitude() + "," + gpsTracker.getLongitude();
 
         }
         Date todayDate = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayString = formatter.format(todayDate);
-        starting_date =todayString;
+        starting_date = todayString;
 
 
-
-        updateStartEcommMeeting(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
+        updateStartEcommMeeting(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""),
                 appointment_id,
                 starting_date,
-                starting_latitude,"","","","",""
-                 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                starting_latitude, "", "", "", "", ""
+        );
 
 
         mBinding.tvDone.setOnClickListener(new View.OnClickListener() {
-                                       @Override
-                                       public void onClick(View view) {
+                                               @Override
+                                               public void onClick(View view) {
 
-                                           GPSTracker gpsTracker = new GPSTracker(ActivityEcomMeeting.this);
-                                           if (gpsTracker.getIsGPSTrackingEnabled())
-                                           {
-                                               ending_latitude = gpsTracker.getLatitude()+ "," + gpsTracker.getLongitude();
+                                                   GPSTracker gpsTracker = new GPSTracker(ActivityEcomMeeting.this);
+                                                   if (gpsTracker.getIsGPSTrackingEnabled()) {
+                                                       ending_latitude = gpsTracker.getLatitude() + "," + gpsTracker.getLongitude();
 
+                                                   }
+                                                   Date todayDate = Calendar.getInstance().getTime();
+                                                   SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                                   String todayString = formatter.format(todayDate);
+                                                   ending_date = todayString;
+                                                   if (mBinding.cbCustomer.isChecked()) {
+                                                       cbCustomer = "YES";
+                                                   } else {
+                                                       cbCustomer = "NO";
+
+                                                   }
+                                                   if (mBinding.cbDeviceLinking.isChecked()) {
+                                                       cbDeviceLinking = "YES";
+                                                   } else {
+                                                       cbDeviceLinking = "NO";
+
+                                                   }
+                                                   if (mBinding.cbEcoomerRegisteration.isChecked()) {
+                                                       cbEccomerce = "YES";
+                                                   } else {
+                                                       cbEccomerce = "NO";
+
+                                                   }
+
+                                                   updateEcommMeeting(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""),
+                                                           appointment_id,
+                                                           starting_date,
+                                                           starting_latitude, cbCustomer, cbDeviceLinking, cbEccomerce, ending_date, ending_latitude
+                                                   );
+
+                                               }
                                            }
-                                           Date todayDate = Calendar.getInstance().getTime();
-                                           SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                           String todayString = formatter.format(todayDate);
-                                           ending_date =todayString;
-if(mBinding.cbCustomer.isChecked()) {
-    cbCustomer = "YES";
-}else{
-    cbCustomer = "NO";
-
-}if(mBinding.cbDeviceLinking.isChecked()) {
-    cbDeviceLinking = "YES";
-}else{
-                                               cbDeviceLinking = "NO";
-
-}if(mBinding.cbEcoomerRegisteration.isChecked()) {
-    cbEccomerce = "YES";
-}else{
-                                               cbEccomerce = "NO";
-
-}
-
-                                           updateEcommMeeting(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
-                                                   appointment_id,
-                                                   starting_date,
-                                                   starting_latitude,cbCustomer,cbDeviceLinking,cbEccomerce,ending_date,ending_latitude
-                                           );
-
-                                       }
-                                   }
-);
+        );
 
     }
 
     public void updateEcommMeeting(String token,
-                                          String id,
-                                          String start_meeting ,
-    String start_meeting_lat_lng,
-    String customer_registration ,
-    String device_linking,
-    String ecommerce_registration,
-    String end_meeting,
-    String end_meeting_lat_lng) {
-         ApiService apiService = ApiClient.getClient(ActivityEcomMeeting.this).create(ApiService.class);
+                                   String id,
+                                   String start_meeting,
+                                   String start_meeting_lat_lng,
+                                   String customer_registration,
+                                   String device_linking,
+                                   String ecommerce_registration,
+                                   String end_meeting,
+                                   String end_meeting_lat_lng) {
+        ApiService apiService = ApiClient.getClient(ActivityEcomMeeting.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
 
         builder.addFormDataPart("id", id);
-        if(start_meeting !=null) {
+        if (start_meeting != null) {
             builder.addFormDataPart("start_meeting", start_meeting);
         }
-        if(start_meeting_lat_lng !=null) {
+        if (start_meeting_lat_lng != null) {
             builder.addFormDataPart("start_meeting_lat_lng", start_meeting_lat_lng);
         }
-        if(customer_registration !=null) {
+        if (customer_registration != null) {
             builder.addFormDataPart("customer_registration", customer_registration);
         }
-        if(device_linking !=null) {
+        if (device_linking != null) {
             builder.addFormDataPart("device_linking", device_linking);
-        }  if(ecommerce_registration !=null) {
+        }
+        if (ecommerce_registration != null) {
             builder.addFormDataPart("ecommerce_registration", ecommerce_registration);
-        } if(end_meeting !=null) {
+        }
+        if (end_meeting != null) {
             builder.addFormDataPart("end_meeting", end_meeting);
-        } if(end_meeting_lat_lng !=null) {
+        }
+        if (end_meeting_lat_lng != null) {
             builder.addFormDataPart("end_meeting_lat_lng", end_meeting_lat_lng);
         }
 
@@ -186,16 +170,16 @@ if(mBinding.cbCustomer.isChecked()) {
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
- 
+
                             if (listofhome.getStatus().equals("1")) {
-                                 
- 
-                                Toast.makeText(ActivityEcomMeeting.this, "Meeting End" , Toast.LENGTH_SHORT).show();
- finish();
+
+
+                                Toast.makeText(ActivityEcomMeeting.this, "Meeting End", Toast.LENGTH_SHORT).show();
+                                finish();
 
                             } else {
                                 Toast.makeText(ActivityEcomMeeting.this, "Something went wrong", Toast.LENGTH_SHORT).show();
- 
+
                             }
                         }
                     });
@@ -205,7 +189,7 @@ if(mBinding.cbCustomer.isChecked()) {
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                             Toast.makeText(ActivityEcomMeeting.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityEcomMeeting.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -232,36 +216,39 @@ if(mBinding.cbCustomer.isChecked()) {
     }
 
 
-  public void updateStartEcommMeeting(String token,
-                                          String id,
-                                          String start_meeting ,
-    String start_meeting_lat_lng,
-    String customer_registration ,
-    String device_linking,
-    String ecommerce_registration,
-    String end_meeting,
-    String end_meeting_lat_lng) {
-         ApiService apiService = ApiClient.getClient(ActivityEcomMeeting.this).create(ApiService.class);
+    public void updateStartEcommMeeting(String token,
+                                        String id,
+                                        String start_meeting,
+                                        String start_meeting_lat_lng,
+                                        String customer_registration,
+                                        String device_linking,
+                                        String ecommerce_registration,
+                                        String end_meeting,
+                                        String end_meeting_lat_lng) {
+        ApiService apiService = ApiClient.getClient(ActivityEcomMeeting.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
 
         builder.addFormDataPart("id", id);
-        if(start_meeting !=null) {
+        if (start_meeting != null) {
             builder.addFormDataPart("start_meeting", tvCoachTime);
         }
-        if(start_meeting_lat_lng !=null) {
+        if (start_meeting_lat_lng != null) {
             builder.addFormDataPart("start_meeting_lat_lng", tvConsumerTime);
         }
-        if(customer_registration !=null) {
+        if (customer_registration != null) {
             builder.addFormDataPart("customer_registration", tvToolsTime);
         }
-        if(device_linking !=null) {
+        if (device_linking != null) {
             builder.addFormDataPart("device_linking", tvSpaceTime);
-        }  if(ecommerce_registration !=null) {
+        }
+        if (ecommerce_registration != null) {
             builder.addFormDataPart("ecommerce_registration", tvSpaceTime);
-        } if(end_meeting !=null) {
+        }
+        if (end_meeting != null) {
             builder.addFormDataPart("end_meeting", tvSpaceTime);
-        } if(end_meeting_lat_lng !=null) {
+        }
+        if (end_meeting_lat_lng != null) {
             builder.addFormDataPart("end_meeting_lat_lng", tvSpaceTime);
         }
 
@@ -284,7 +271,7 @@ if(mBinding.cbCustomer.isChecked()) {
                             if (listofhome.getStatus().equals("1")) {
 
 
-                                Toast.makeText(ActivityEcomMeeting.this, "Meeting End" , Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityEcomMeeting.this, "Meeting End", Toast.LENGTH_SHORT).show();
 
                             } else {
                                 Toast.makeText(ActivityEcomMeeting.this, "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -298,7 +285,7 @@ if(mBinding.cbCustomer.isChecked()) {
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                             Toast.makeText(ActivityEcomMeeting.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityEcomMeeting.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -323,7 +310,6 @@ if(mBinding.cbCustomer.isChecked()) {
             }
         });
     }
-
 
 
 }

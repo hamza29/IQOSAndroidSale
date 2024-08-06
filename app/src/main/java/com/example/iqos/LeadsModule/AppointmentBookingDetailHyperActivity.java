@@ -1,7 +1,5 @@
 package com.example.iqos.LeadsModule;
 
-import static com.example.iqos.LeadsModule.ActivityLeadsDetail.ivityLeads;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -22,7 +20,6 @@ import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
 import com.example.iqos.databinding.ActivityBookingAppointmentBinding;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import retrofit2.Call;
@@ -40,8 +37,9 @@ public class AppointmentBookingDetailHyperActivity extends AppCompatActivity {
     int month;
     int dayOfMonth;
 
-    String appoint_status="Scheduled";
-    String type="";
+    String appoint_status = "Scheduled";
+    String type = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +47,15 @@ public class AppointmentBookingDetailHyperActivity extends AppCompatActivity {
         View view = mBinding.getRoot();
         setContentView(view);
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
-Intent intent = getIntent();
-; mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
+        Intent intent = getIntent();
+        ;
+        mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-         mBinding.tvName.setText(""+ intent.getStringExtra("name"));
+        mBinding.tvName.setText("" + intent.getStringExtra("name"));
         type = intent.getStringExtra("type");
         mBinding.tvDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +70,7 @@ Intent intent = getIntent();
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 String selectedDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                                mBinding.tvDate.setText(""+ selectedDate);
+                                mBinding.tvDate.setText("" + selectedDate);
                             }
                         }, year, month, day);
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -91,8 +90,8 @@ Intent intent = getIntent();
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                String selectedTime = hourOfDay + ":" + minute+":00";
-                                mBinding.tvTime.setText(""+ selectedTime);
+                                String selectedTime = hourOfDay + ":" + minute + ":00";
+                                mBinding.tvTime.setText("" + selectedTime);
                             }
                         }, hour, minute, false);
 
@@ -100,35 +99,35 @@ Intent intent = getIntent();
             }
         });
 
-mBinding.confirmApp.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        if(!mBinding.tvTime.getText().toString().isEmpty() && !mBinding.tvDate.getText().toString().isEmpty()
-                && !mBinding.tvName.getText().toString().isEmpty() && !mBinding.tvLocation.getText().toString().isEmpty()) {
+        mBinding.confirmApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mBinding.tvTime.getText().toString().isEmpty() && !mBinding.tvDate.getText().toString().isEmpty()
+                        && !mBinding.tvName.getText().toString().isEmpty() && !mBinding.tvLocation.getText().toString().isEmpty()) {
 //          if(!appoint_status.equalsIgnoreCase("Select")) {
-              boookApp(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""),type,
-                      intent.getStringExtra("lead_id"),
-                      appoint_status,
-                      mBinding.tvDate.getText().toString() + " " + mBinding.tvTime.getText().toString(),
-                      mBinding.tvLocation.getText().toString());
+                    boookApp(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), type,
+                            intent.getStringExtra("lead_id"),
+                            appoint_status,
+                            mBinding.tvDate.getText().toString() + " " + mBinding.tvTime.getText().toString(),
+                            mBinding.tvLocation.getText().toString());
 //          }else{
 //              Toast.makeText(AppointmentBookingDetailActivity.this, "Please select status", Toast.LENGTH_SHORT).show();
 //            }
-        }
-        else{
-            Toast.makeText(AppointmentBookingDetailHyperActivity.this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
-        }}
-});
+                } else {
+                    Toast.makeText(AppointmentBookingDetailHyperActivity.this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 //        setAppointStatusSpinner();
 
     }
 
-    public void boookApp(String token,String type,String id,String status,String app_at,String location) {
+    public void boookApp(String token, String type, String id, String status, String app_at, String location) {
         mBinding.progress.setVisibility(View.VISIBLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(AppointmentBookingDetailHyperActivity.this).create(ApiService.class);
-        Call<Model.GenerealModel> call = apiService.bookHyperAppointment("application/json",token,type,id,status,app_at,location, "Device Care Completed");
+        Call<Model.GenerealModel> call = apiService.bookHyperAppointment("application/json", token, type, id, status, app_at, location, "Device Care Completed");
         call.enqueue(new Callback<Model.GenerealModel>() {
             @Override
             public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
@@ -143,11 +142,10 @@ mBinding.confirmApp.setOnClickListener(new View.OnClickListener() {
                             if (keyModel.getStatus().equals("1")) {
 
 
-                                    mBinding.progress.setVisibility(View.GONE);
+                                mBinding.progress.setVisibility(View.GONE);
 
-                                    Toast.makeText(AppointmentBookingDetailHyperActivity.this, "Appointment Book Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AppointmentBookingDetailHyperActivity.this, "Appointment Book Successfully", Toast.LENGTH_SHORT).show();
                                 finish();
-
 
 
                             } else {

@@ -10,6 +10,26 @@
           <theme>@style/Theme.IQOS</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_appointment_meeting_check_list.xml">
+        <config>
+          <theme>@style/Theme.IQOS</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_book_appointment.xml">
+        <config>
+          <theme>@style/Theme.IQOS</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_hyper_care_leads_detail.xml">
+        <config>
+          <theme>@style/Theme.IQOS</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_hyperleads.xml">
+        <config>
+          <theme>@style/Theme.IQOS</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_leads.xml">
         <config>
           <theme>@style/Theme.IQOS</theme>
@@ -196,29 +216,132 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cd393cf-2eda-4fbc-a63c-21b90707c171" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/cross_svgrepo_com.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/iqos/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/iqos/ExampleInstrumentedTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/debug/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/debug/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/debug/res/mipmap-anydpi-v26/ic_launcher_round_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/debug/res/mipmap-anydpi-v26/ic_launcher_round_round.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/ActivityBookAppointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/ActivityBookAppointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/AppointmentAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/AppointmentAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/AppointmentBookingDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/AppointmentBookingDetailActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/BookEcommAppointmentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/BookEcommAppointmentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/EcomAppointmentAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/EcomAppointmentAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/BaseActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/BaseActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/ConsumablesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/ConsumablesAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/DevicesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/DevicesAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/GPSTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/GPSTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/HomeFragmentModule/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/HomeFragmentModule/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/InventoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/InventoryActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityAppointmentHyperMeeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityAppointmentHyperMeeting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityHyperAppointments.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityHyperAppointments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityHyperCareLeads.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityHyperCareLeads.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityHyperCareLeadsDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityHyperCareLeadsDetail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeads.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeads.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeadsDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeadsDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/AppointmentBookingDetailHyperActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/AppointmentBookingDetailHyperActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/AppointmentHyperAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/AppointmentHyperAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/EcomLeadsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/EcomLeadsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/HyperCareLeadsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/HyperCareLeadsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/HyperCareMainLeadsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/HyperCareMainLeadsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/HyperModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/HyperModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/LeadsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/LeadsAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LoginModule/ActivityLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/LoginModule/ActivityLogin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/ActivityAppointmentMeetingCheckList.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/ActivityAppointmentMeetingCheckList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/ActivityEcomMeeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/ActivityEcomMeeting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/ActivityPackages.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/ActivityPackages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/ActivityPreMeetingCheckList.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/ActivityPreMeetingCheckList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/ActivityVerification.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/ActivityVerification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/BookAppointmentDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/BookAppointmentDetailActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/PackageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/PackageAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/PreMeetingAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/PreMeetingAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/Retrofit/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/Retrofit/ApiClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/Retrofit/ApiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/Retrofit/ApiService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/Retrofit/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/Retrofit/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivityAfterSale.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivityAfterSale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivityNoSales.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivityNoSales.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivitySales.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivitySales.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/FeedBackAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/FeedBackAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/PerformanceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/PerformanceActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/WebViewActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/iqos/WebViewActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_baseline_keyboard_arrow_down_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_baseline_keyboard_arrow_down_24.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-v24/rounded_corner_device.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/rounded_corner_device.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-v24/rounded_pacakge.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/rounded_pacakge.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/background_rectangle_border.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/background_rectangle_border.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/baseline_add_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/baseline_add_24.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/border_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/border_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/button_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/button_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/cross_svgrepo_com.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/cross_svgrepo_com.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/eittext_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/eittext_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_arrow_back_white_24dp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_arrow_back_white_24dp.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_profile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/rectangle_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rectangle_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_corner_meeting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_corner_meeting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_corner_red.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_corner_red.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_corner_tv_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_corner_tv_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_top_blue.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_top_blue.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_top_grey.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_top_grey.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_after_sales.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_after_sales.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_appointment_hyper_meeting_check_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_appointment_hyper_meeting_check_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_appointment_meeting_check_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_appointment_meeting_check_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_book_appointment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_book_appointment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_book_appointment_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_book_appointment_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking_appointment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking_appointment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ecom_meeting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ecom_meeting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_hyper_care_leads_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_hyper_care_leads_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_hyperleads.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_hyperleads.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_inventory.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_inventory.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_leads.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_leads.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_leads_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_leads_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_no_sales.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_no_sales.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_performance.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_performance.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_pre_meeting_check_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pre_meeting_check_list.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sales.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sales.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_verification.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_verification.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_web_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_web_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/custom_call_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/custom_call_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/custom_text_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/custom_text_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_custom_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_custom_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_fourteen_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_fourteen_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_one_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_one_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_seven_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_seven_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_seven_message_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_seven_message_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_ten_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_ten_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_three_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_three_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_three_message_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_three_message_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/drawer_header.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/drawer_header.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_appointments.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_appointments.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_consumables.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_consumables.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_device_leads.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_device_leads.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_devices.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_devices.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_ec_appointments.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_ec_appointments.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_ecom_leads.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_ecom_leads.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_feedback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_feedback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_hyper_appointments.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_hyper_appointments.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_hyper_leads.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_hyper_leads.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_leads.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_leads.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_meeting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_meeting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/mainact_design.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/mainact_design.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/iqos/ExampleUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/example/iqos/ExampleUnitTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +351,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R3CR30BNKEL]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/dev/.android/avd/Pixel_7_API_34.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -450,33 +573,88 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivitySales.java</url>
-          <line>196</line>
+          <line>187</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivitySales.java</url>
-          <line>227</line>
+          <line>218</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivitySales.java</url>
-          <line>229</line>
+          <line>220</line>
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivitySales.java</url>
-          <line>215</line>
+          <line>206</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/SalesModule/ActivitySales.java</url>
-          <line>204</line>
+          <line>195</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/MeetingModule/PackageAdapter.java</url>
-          <line>76</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/AppointmentsModule/AppointmentAdapter.java</url>
+          <line>116</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/LeadsAdapter.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/LeadsAdapter.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/LeadsAdapter.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeadsDetail.java</url>
+          <line>94</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeadsDetail.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeadsDetail.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeadsDetail.java</url>
+          <line>172</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeadsDetail.java</url>
+          <line>557</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeadsDetail.java</url>
+          <line>564</line>
           <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeadsDetail.java</url>
+          <line>968</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/iqos/LeadsModule/ActivityLeadsDetail.java</url>
+          <line>956</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

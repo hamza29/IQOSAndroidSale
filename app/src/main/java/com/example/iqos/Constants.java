@@ -1,7 +1,6 @@
 package com.example.iqos;
 
 
-
 public class Constants {
 
     public static final String PREFRENCES = "_Prefrences";

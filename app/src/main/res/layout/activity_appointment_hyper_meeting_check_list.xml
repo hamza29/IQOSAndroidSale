@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivLogo"
             android:layout_centerHorizontal="true"
-             android:text="Device Care Meeting"
+            android:text="Device Care Meeting"
             android:textColor="@color/white"
             android:textSize="@dimen/_13sdp" />
 
@@ -45,196 +44,191 @@
     </RelativeLayout>
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_below="@+id/rlHeader"
         android:layout_height="match_parent"
-        android:background="@color/SkyBase"
+        android:layout_below="@+id/rlHeader"
         android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_5sdp"
-        >
+        android:background="@color/SkyBase">
 
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/rvMeeting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rvMeeting"
             android:layout_marginTop="@dimen/_10sdp">
 
-                <LinearLayout
-                    android:id="@+id/llTasks"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/llTasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tvLeadName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
 
+                        android:layout_weight="1"
 
-                        <TextView
-                            android:id="@+id/tvLeadName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
 
-                            android:layout_weight="1"
+                    <TextView
+                        android:id="@+id/tvQuestion1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="May I ask, if you have used any other nicotine or tobacco products along with IQOS this past week?"
 
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/tvQuestion1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="May I ask, if you have used any other nicotine or tobacco products along with IQOS this past week?"
-                            android:layout_weight="1"
-
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
-
-                        <RadioGroup
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/rbQ1a1"
-                            android:backgroundTint="@color/blue"
                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="start |center_vertical"
+                            android:backgroundTint="@color/blue"
                             android:buttonTint="@color/blue"
                             android:gravity="start|center_vertical"
-                            android:textColor="@color/blue"
-                         android:text="Yes"
-                             />
-                            <RadioButton
-                                android:layout_marginStart="@dimen/_20sdp"
+                            android:text="Yes"
+                            android:textColor="@color/blue" />
+
+                        <RadioButton
                             android:id="@+id/rbQ1a2"
-                            android:backgroundTint="@color/blue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start |center_vertical"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:backgroundTint="@color/blue"
                             android:buttonTint="@color/blue"
                             android:gravity="start|center_vertical"
-                            android:textColor="@color/blue"
                             android:text="No"
-                             />
+                            android:textColor="@color/blue" />
 
-                        </RadioGroup>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            android:id="@+id/tvQuestion2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="What % of the time did you use IQOS this week?"
-                            android:layout_weight="1"
-
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
-
-
-    <EditText
-        android:id="@+id/rbQ2a1Et"
-        android:layout_margin="@dimen/_5sdp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_gravity="start"
-        android:gravity="start"
-        android:background="@drawable/rounded_corner_meeting"
-        android:imeOptions="actionNext"
-        android:padding="@dimen/_5sdp"/>
-
-
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/tvQuestion3"
-                            android:text="If LANU is using other nicotine products, What is your reason for this? (address pin points if identified by LANU)"
-                            android:layout_weight="1"
-
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/etQ3a"
-                            android:layout_margin="@dimen/_5sdp"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_50sdp"
-                            android:layout_gravity="start"
-                            android:gravity="start"
-                            android:background="@drawable/rounded_corner_meeting"
-                            android:imeOptions="actionNext"
-                            android:padding="@dimen/_5sdp"/>
-
-                    </LinearLayout>
-                     <LinearLayout
-                        android:layout_below="@+id/rvMeeting"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-
-
-
-                        <TextView
-                            android:id="@+id/tvEnd"
-                            android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                            android:padding="@dimen/_8sdp"
-                            android:foreground="@drawable/ripple"
-                            android:text="End"
-                            android:background="@drawable/rectangle_background"
-                            android:backgroundTint="@color/blue"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
+                    </RadioGroup>
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tvQuestion2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="What % of the time did you use IQOS this week?"
+
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/rbQ2a1Et"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_gravity="start"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
+                        android:imeOptions="actionNext"
+                        android:padding="@dimen/_5sdp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tvQuestion3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="If LANU is using other nicotine products, What is your reason for this? (address pin points if identified by LANU)"
+
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etQ3a"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_gravity="start"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
+                        android:imeOptions="actionNext"
+                        android:padding="@dimen/_5sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rvMeeting"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvEnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangle_background"
+                        android:backgroundTint="@color/blue"
+                        android:foreground="@drawable/ripple"
+                        android:padding="@dimen/_8sdp"
+                        android:text="End"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
 
         </androidx.core.widget.NestedScrollView>
-
-
 
 
     </RelativeLayout>

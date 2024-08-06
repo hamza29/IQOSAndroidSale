@@ -10,12 +10,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.iqos.AppointmentsModule.AppointmentAdapter;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
-import com.example.iqos.Retrofit.Model;
 import com.example.iqos.SalesModule.ActivitySales;
-import com.example.iqos.databinding.ActivityBookAppointmentBinding;
 import com.example.iqos.databinding.ActivityInventoryBinding;
 
 import java.util.List;
@@ -44,7 +41,7 @@ public class InventoryActivity extends AppCompatActivity {
                 finish();
             }
         });
-            mBinding.tvConsumables.setOnClickListener(new View.OnClickListener() {
+        mBinding.tvConsumables.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -53,30 +50,29 @@ public class InventoryActivity extends AppCompatActivity {
                 mBinding.rvConsumables.setVisibility(View.VISIBLE);
                 mBinding.rvDevices.setVisibility(View.GONE);
 
-                getConsumables(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                getConsumables(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
             }
         });
-             mBinding.tvDevices.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+        mBinding.tvDevices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 mBinding.tvDevices.setBackground(getDrawable(R.drawable.rounded_top_blue));
                 mBinding.tvConsumables.setBackground(getDrawable(R.drawable.rounded_top_grey));
                 mBinding.rvConsumables.setVisibility(View.GONE);
                 mBinding.rvDevices.setVisibility(View.VISIBLE);
-                            getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
 
             }
         });
 
-        getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+        getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
 
     }
 
     private void consumableItem(List<ActivitySales.Consumable> consumables) {
-
 
 
         ConsumablesAdapter appointmentAdapter;
@@ -86,9 +82,7 @@ public class InventoryActivity extends AppCompatActivity {
     }
 
 
-
     private void devicesItem(List<ActivitySales.Inventory> devices) {
-
 
 
         DevicesAdapter appointmentAdapter;
@@ -96,11 +90,12 @@ public class InventoryActivity extends AppCompatActivity {
         appointmentAdapter = new DevicesAdapter(InventoryActivity.this, devices);
         mBinding.rvDevices.setAdapter(appointmentAdapter);
     }
-    public void getInventories(String token ) {
+
+    public void getInventories(String token) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(InventoryActivity.this).create(ApiService.class);
-        Call<ActivitySales.GetInventoriesModel> call = apiService.getInventories("application/json",token );
+        Call<ActivitySales.GetInventoriesModel> call = apiService.getInventories("application/json", token);
         call.enqueue(new Callback<ActivitySales.GetInventoriesModel>() {
             @Override
             public void onResponse(Call<ActivitySales.GetInventoriesModel> call, Response<ActivitySales.GetInventoriesModel> response) {
@@ -149,11 +144,11 @@ public class InventoryActivity extends AppCompatActivity {
         });
     }
 
-    public void getConsumables(String token ) {
+    public void getConsumables(String token) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(InventoryActivity.this).create(ApiService.class);
-        Call<ActivitySales.ConsumeableModel> call = apiService.getConsumeables(token,"" );
+        Call<ActivitySales.ConsumeableModel> call = apiService.getConsumeables(token, "");
         call.enqueue(new Callback<ActivitySales.ConsumeableModel>() {
             @Override
             public void onResponse(Call<ActivitySales.ConsumeableModel> call, Response<ActivitySales.ConsumeableModel> response) {

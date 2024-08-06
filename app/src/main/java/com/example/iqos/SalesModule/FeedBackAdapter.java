@@ -10,18 +10,13 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iqos.LeadsModule.ActivityLeadsDetail;
-import com.example.iqos.LeadsModule.LeadsAdapter;
 import com.example.iqos.R;
 
 import java.util.ArrayList;
 
 public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHolder> {
-    private Activity context;
-
-
-
     ArrayList<String> items = new ArrayList<>();
-
+    private Activity context;
 
 
     public FeedBackAdapter(Activity context, ArrayList<String> leads) {
@@ -65,7 +60,6 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
 
 
         TextView name;
-
 
 
         public ViewHolder(View itemView) {

@@ -92,19 +92,20 @@
         <activity
             android:name=".MeetingModule.ActivityPreMeetingCheckList"
             android:exported="false" />
-         <activity
+        <activity
             android:name=".LeadsModule.ActivityHyperCareLeadsDetail"
             android:exported="false" />
-            <activity
+        <activity
             android:name=".LeadsModule.AppointmentBookingDetailHyperActivity"
             android:exported="false" />
-     <activity
+        <activity
             android:name=".LeadsModule.ActivityHyperAppointments"
             android:exported="false" />
 
         <activity
             android:name=".AppointmentsModule.ActivityBookAppointment"
-            android:exported="false" /> <activity
+            android:exported="false" />
+        <activity
             android:name=".LeadsModule.ActivityAppointmentHyperMeeting"
             android:exported="false" />
         <activity

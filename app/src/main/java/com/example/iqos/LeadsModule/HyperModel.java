@@ -5,9 +5,9 @@ import java.util.List;
 
 public class HyperModel {
     String title;
-   List<ActivityHyperCareLeads.Day1> day1s = new ArrayList<ActivityHyperCareLeads.Day1>();
+    List<ActivityHyperCareLeads.Day1> day1s = new ArrayList<ActivityHyperCareLeads.Day1>();
 
-    public HyperModel(String title,  List<ActivityHyperCareLeads.Day1> day1s) {
+    public HyperModel(String title, List<ActivityHyperCareLeads.Day1> day1s) {
         this.title = title;
         this.day1s = day1s;
     }

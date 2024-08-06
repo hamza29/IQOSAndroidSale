@@ -13,37 +13,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.iqos.Constants;
-import com.example.iqos.DevicesAdapter;
-import com.example.iqos.GPSTracker;
- import com.example.iqos.Retrofit.ApiClient;
+import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
-import com.example.iqos.Retrofit.Model;
-import com.example.iqos.SalesModule.ActivityNoSales;
-import com.example.iqos.SalesModule.ActivitySales;
-import com.example.iqos.databinding.ActivityAppointmentMeetingCheckListBinding;
 import com.example.iqos.databinding.ActivityPackagesBinding;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActivityPackages extends AppCompatActivity {
 
+    public static Activity packagesActivity;
     ActivityPackagesBinding mBinding;
-
     SharedPreferences mSharedPreferences;
-    String appointment_id,a1,a2,a3,a4,meeting_outcome, type="lead", multisale = "0";
-
-    public static Activity  packagesActivity;
+    String appointment_id, name, a1, a2, a3, a4, meeting_outcome, type = "lead", multisale = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +40,18 @@ public class ActivityPackages extends AppCompatActivity {
         setContentView(view);
         packagesActivity = this;
         Intent intent = getIntent();
-        appointment_id =intent.getStringExtra("appointment_id");
-        a1 =intent.getStringExtra("a1");
-        multisale =intent.getStringExtra("multisale");
-        a2 =intent.getStringExtra("a2");
-        a3 =intent.getStringExtra("a3");
-        a4 =intent.getStringExtra("a4");
-        type =intent.getStringExtra("type");
-        meeting_outcome =intent.getStringExtra("meeting_outcome");
+        appointment_id = intent.getStringExtra("appointment_id");
+        if(appointment_id == null){
+            appointment_id = intent.getStringExtra("app_id");
+        }
+        a1 = intent.getStringExtra("a1");
+        multisale = intent.getStringExtra("multisale");
+        a2 = intent.getStringExtra("a2");
+        a3 = intent.getStringExtra("a3");
+        a4 = intent.getStringExtra("a4");
+        name = intent.getStringExtra("name");
+        type = intent.getStringExtra("type");
+        meeting_outcome = intent.getStringExtra("meeting_outcome");
 
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
         mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
@@ -71,33 +62,30 @@ public class ActivityPackages extends AppCompatActivity {
         });
 
 
-
-        getPackages(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
-
+        getPackages(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
 
     }
-
 
 
     private void devicesItem(List<Package> devices) {
 
 
-
         PackageAdapter appointmentAdapter;
         mBinding.rvPackages.setLayoutManager(new LinearLayoutManager(ActivityPackages.this, LinearLayoutManager.VERTICAL, false));
-        appointmentAdapter = new PackageAdapter(ActivityPackages.this, devices,appointment_id,a1 ,
-        a2,
-        a3,
-        a4,
-        meeting_outcome,type, multisale);
+        appointmentAdapter = new PackageAdapter(ActivityPackages.this, devices, appointment_id, a1,
+                a2,
+                a3,
+                a4,
+                meeting_outcome, type, multisale, name);
         mBinding.rvPackages.setAdapter(appointmentAdapter);
     }
-    public void getPackages(String token ) {
+
+    public void getPackages(String token) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityPackages.this).create(ApiService.class);
-        Call<PackagesModel> call = apiService.getpackages("application/json",token );
+        Call<PackagesModel> call = apiService.getpackages("application/json", token);
         call.enqueue(new Callback<PackagesModel>() {
             @Override
             public void onResponse(Call<PackagesModel> call, Response<PackagesModel> response) {
@@ -147,7 +135,6 @@ public class ActivityPackages extends AppCompatActivity {
     }
 
 
-
     public class Data {
 
         @SerializedName("packages")
@@ -163,6 +150,7 @@ public class ActivityPackages extends AppCompatActivity {
         }
 
     }
+
     public class Package {
 
         @SerializedName("id")
@@ -233,6 +221,7 @@ public class ActivityPackages extends AppCompatActivity {
         }
 
     }
+
     public class PackagesModel {
 
         @SerializedName("status")

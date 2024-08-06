@@ -1,31 +1,21 @@
 package com.example.iqos;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.iqos.MeetingModule.ActivityAppointmentMeetingCheckList;
-import com.example.iqos.MeetingModule.ActivityPreMeetingCheckList;
-import com.example.iqos.MeetingModule.BookAppointmentDetailActivity;
-import com.example.iqos.Retrofit.Model;
 import com.example.iqos.SalesModule.ActivitySales;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHolder> {
-    private Activity context;
-
-
-
     List<ActivitySales.Inventory> items = new ArrayList<>();
-
+    private Activity context;
 
 
     public DevicesAdapter(Activity context, List<ActivitySales.Inventory> leads) {
@@ -44,20 +34,15 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
     public void onBindViewHolder(DevicesAdapter.ViewHolder holder, int position) {
 
 
-
-        if(items.get(position).getAssigned_at()!=null){
-            holder.tvTime.setText(""+items.get(position).getAssigned_at() );
+        if (items.get(position).getAssigned_at() != null) {
+            holder.tvTime.setText("" + items.get(position).getAssigned_at());
         }
-        if(items.get(position).getName()!=null){
-            holder.tvDevices.setText(""+/*items.get(position).getName()+" | "+ */items.get(position).getSrNo() );
+        if (items.get(position).getName() != null) {
+            holder.tvDevices.setText("" +/*items.get(position).getName()+" | "+ */items.get(position).getSrNo());
         }
-        if(items.get(position).getColor()!=null){
-            holder.tvColor.setText(""+items.get(position).getColor() );
+        if (items.get(position).getColor() != null) {
+            holder.tvColor.setText("" + items.get(position).getColor());
         }
-
-
-
-
 
 
     }
@@ -71,7 +56,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView tvDevices,tvColor,tvTime ;
+        TextView tvDevices, tvColor, tvTime;
 
 
         public ViewHolder(View itemView) {
@@ -80,7 +65,6 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
             tvDevices = itemView.findViewById(R.id.tvDevices);
             tvColor = itemView.findViewById(R.id.tvColor);
             tvTime = itemView.findViewById(R.id.tvTime);
-
 
 
         }

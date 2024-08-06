@@ -1,7 +1,6 @@
 package com.example.iqos.LeadsModule;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,16 +9,12 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
- import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,22 +25,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.iqos.AppointmentsModule.AppointmentBookingDetailActivity;
 import com.example.iqos.Constants;
 import com.example.iqos.R;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
 import com.example.iqos.databinding.ActivityHyperCareLeadsDetailBinding;
-import com.example.iqos.databinding.ActivityLeadsDetailBinding;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -61,15 +50,15 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
     SharedPreferences mSharedPreferences;
 
     String lead_id = "";
-    String lead_status="";
+    String lead_status = "";
 
-     @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = ActivityHyperCareLeadsDetailBinding.inflate(getLayoutInflater());
         View view = mBinding.getRoot();
         setContentView(view);
-         lead_id = getIntent().getStringExtra("KEY_LEAD_ID");
+        lead_id = getIntent().getStringExtra("KEY_LEAD_ID");
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
 
         mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
@@ -80,28 +69,20 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
-
-        getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+        getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
 
         mBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
 
             }
         });
     }
 
 
-    public void showD1Dialog(  String message , String number ){
-      Dialog  dialog = new Dialog(this);
+    public void showD1Dialog(String message, String number) {
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.day_one_dialog);
@@ -109,31 +90,24 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        Button btnRefresh =   dialog.findViewById(R.id.btnDone);
+        Button btnRefresh = dialog.findViewById(R.id.btnDone);
 //        TextView tvTitle =   dialog.findViewById(R.id.tvTitle);
-        EditText tvMessage =   dialog.findViewById(R.id.tvMessage);
+        EditText tvMessage = dialog.findViewById(R.id.tvMessage);
 
 //        tvTitle.setText(""+ message);
-        tvMessage.setText(""+message );
+        tvMessage.setText("" + message);
 
-        ImageView ivBack =   dialog.findViewById(R.id.ivBack);
+        ImageView ivBack = dialog.findViewById(R.id.ivBack);
 
 
-         ivBack.setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
 
 
-
-
             }
         });
-
-
-
-
-
 
 
         btnRefresh.setOnClickListener(new View.OnClickListener() {
@@ -147,26 +121,25 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
 
                 Intent smsIntent = new Intent(Intent.ACTION_VIEW);
                 smsIntent.setType("vnd.android-dir/mms-sms");
-                smsIntent.putExtra("address", ""+number);
-                smsIntent.putExtra("sms_body",""+ tvMessage.getText().toString());
+                smsIntent.putExtra("address", "" + number);
+                smsIntent.putExtra("sms_body", "" + tvMessage.getText().toString());
                 startActivity(smsIntent);
 
 
-
-
-                updateLeadD1(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,currentDate);
+                updateLeadD1(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                        lead_status, currentDate);
 
 
             }
         });
 
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
         dialog.show();
     }
-    public void showD10Dialog(  String message , String number ){
-        Dialog   dialog = new Dialog(this);
+
+    public void showD10Dialog(String message, String number) {
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.day_ten_dialog);
@@ -174,17 +147,17 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        Button btnRefresh =   dialog.findViewById(R.id.btnDone);
+        Button btnRefresh = dialog.findViewById(R.id.btnDone);
 //        TextView tvTitle =   dialog.findViewById(R.id.tvTitle);
-        EditText tvMessage =   dialog.findViewById(R.id.tvMessage);
+        EditText tvMessage = dialog.findViewById(R.id.tvMessage);
 
 //        tvTitle.setText(""+ message);
-        tvMessage.setText(""+ message );
+        tvMessage.setText("" + message);
 
-        ImageView ivBack =   dialog.findViewById(R.id.ivBack);
+        ImageView ivBack = dialog.findViewById(R.id.ivBack);
 
 
-         ivBack.setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
@@ -205,26 +178,25 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
 
                 Intent smsIntent = new Intent(Intent.ACTION_VIEW);
                 smsIntent.setType("vnd.android-dir/mms-sms");
-                smsIntent.putExtra("address", ""+number);
-                smsIntent.putExtra("sms_body",""+ tvMessage.getText().toString());
+                smsIntent.putExtra("address", "" + number);
+                smsIntent.putExtra("sms_body", "" + tvMessage.getText().toString());
                 startActivity(smsIntent);
 
 
-
-
-                updateLeadD10(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,currentDate);
+                updateLeadD10(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                        lead_status, currentDate);
 
 
             }
         });
 
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
         dialog.show();
     }
-    public void showD3Dialog(  String message , String number ){
-        Dialog  dialog = new Dialog(this);
+
+    public void showD3Dialog(String message, String number) {
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.day_three_dialog);
@@ -232,32 +204,25 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        Button btnCall =   dialog.findViewById(R.id.btnCall);
-        Button btnMessage =   dialog.findViewById(R.id.btnMessage);
+        Button btnCall = dialog.findViewById(R.id.btnCall);
+        Button btnMessage = dialog.findViewById(R.id.btnMessage);
 //        TextView tvTitle =   dialog.findViewById(R.id.tvTitle);
-        EditText tvMessage =   dialog.findViewById(R.id.tvMessage);
+        EditText tvMessage = dialog.findViewById(R.id.tvMessage);
 
 //        tvTitle.setText(""+ message);
-        tvMessage.setText(""+message);
+        tvMessage.setText("" + message);
 
-        ImageView ivBack =   dialog.findViewById(R.id.ivBack);
+        ImageView ivBack = dialog.findViewById(R.id.ivBack);
 
 
-         ivBack.setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
 
 
-
-
             }
         });
-
-
-
-
-
 
 
         btnMessage.setOnClickListener(new View.OnClickListener() {
@@ -266,9 +231,9 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                String message = "Hi "+ mBinding.tvfirstName.getText().toString()+", this is your sales rep "+ mSharedPreferences.getString(Constants.USER_NAME,"")+", \n\n I was calling to ask if you require any assistance with your ILUMA Prime.I\n understand you may be busy & were unable to attend the call.\n\n You can reach me through call or message at any time.\n\n Or you can contact our helpline 0800-04767 or email us at info@iqos.com.pk for\n any product queries or complaints.\n\n This message is for registered adult users only who have independently registered for\n the Device Care Program. Please do not circulate this message further.";
+                String message = "Hi " + mBinding.tvfirstName.getText().toString() + ", this is your sales rep " + mSharedPreferences.getString(Constants.USER_NAME, "") + ", \n\n I was calling to ask if you require any assistance with your ILUMA Prime.I\n understand you may be busy & were unable to attend the call.\n\n You can reach me through call or message at any time.\n\n Or you can contact our helpline 0800-04767 or email us at info@iqos.com.pk for\n any product queries or complaints.\n\n This message is for registered adult users only who have independently registered for\n the Device Care Program. Please do not circulate this message further.";
 
-                showD3MessageDialog(message,number);
+                showD3MessageDialog(message, number);
 
 
 //                String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
@@ -288,7 +253,8 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
 
 
             }
-        });     btnCall.setOnClickListener(new View.OnClickListener() {
+        });
+        btnCall.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("QueryPermissionsNeeded")
             @Override
             public void onClick(View view) {
@@ -298,22 +264,23 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
 
 
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:"+ number));
+                intent.setData(Uri.parse("tel:" + number));
                 startActivity(intent);
 
-                updateLeadD3Call(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,currentDate);
+                updateLeadD3Call(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                        lead_status, currentDate);
 
 
             }
         });
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
 
         dialog.show();
     }
-    public void showD3MessageDialog(  String message , String number ){
-        Dialog  dialog = new Dialog(this);
+
+    public void showD3MessageDialog(String message, String number) {
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.day_three_message_dialog);
@@ -321,31 +288,24 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-         Button btnMessage =   dialog.findViewById(R.id.btnMessage);
+        Button btnMessage = dialog.findViewById(R.id.btnMessage);
 //        TextView tvTitle =   dialog.findViewById(R.id.tvTitle);
-        EditText tvMessage =   dialog.findViewById(R.id.tvMessage);
+        EditText tvMessage = dialog.findViewById(R.id.tvMessage);
 
 //        tvTitle.setText(""+ message);
-        tvMessage.setText(""+ message);
+        tvMessage.setText("" + message);
 
-        ImageView ivBack =   dialog.findViewById(R.id.ivBack);
+        ImageView ivBack = dialog.findViewById(R.id.ivBack);
 
 
-         ivBack.setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
 
 
-
-
             }
         });
-
-
-
-
-
 
 
         btnMessage.setOnClickListener(new View.OnClickListener() {
@@ -354,37 +314,32 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
             public void onClick(View view) {
 
 
-
-
-
-
                 String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
 
                 Intent smsIntent = new Intent(Intent.ACTION_VIEW);
                 smsIntent.setType("vnd.android-dir/mms-sms");
-                smsIntent.putExtra("address", ""+number);
-                smsIntent.putExtra("sms_body",""+ tvMessage.getText().toString());
+                smsIntent.putExtra("address", "" + number);
+                smsIntent.putExtra("sms_body", "" + tvMessage.getText().toString());
                 startActivity(smsIntent);
 
 
-
-
-                updateLeadD3Message(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,currentDate);
+                updateLeadD3Message(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                        lead_status, currentDate);
 
 
             }
         });
 
 
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
 
         dialog.show();
     }
-    public void showD7MessageDialog(  String message , String number ){
-        Dialog      dialog = new Dialog(this);
+
+    public void showD7MessageDialog(String message, String number) {
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.day_seven_message_dialog);
@@ -392,31 +347,24 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-         Button btnMessage =   dialog.findViewById(R.id.btnMessage);
+        Button btnMessage = dialog.findViewById(R.id.btnMessage);
 //        TextView tvTitle =   dialog.findViewById(R.id.tvTitle);
-        EditText tvMessage =   dialog.findViewById(R.id.tvMessage);
+        EditText tvMessage = dialog.findViewById(R.id.tvMessage);
 
 //        tvTitle.setText(""+ message);
-        tvMessage.setText(""+message);
+        tvMessage.setText("" + message);
 
-        ImageView ivBack =   dialog.findViewById(R.id.ivBack);
+        ImageView ivBack = dialog.findViewById(R.id.ivBack);
 
 
-         ivBack.setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
 
 
-
-
             }
         });
-
-
-
-
-
 
 
         btnMessage.setOnClickListener(new View.OnClickListener() {
@@ -425,37 +373,32 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
             public void onClick(View view) {
 
 
-
-
-
-
                 String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
 
                 Intent smsIntent = new Intent(Intent.ACTION_VIEW);
                 smsIntent.setType("vnd.android-dir/mms-sms");
-                smsIntent.putExtra("address", ""+number);
-                smsIntent.putExtra("sms_body",""+ tvMessage.getText().toString());
+                smsIntent.putExtra("address", "" + number);
+                smsIntent.putExtra("sms_body", "" + tvMessage.getText().toString());
                 startActivity(smsIntent);
 
 
-
-
-                updateLeadD7Message(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,currentDate);
+                updateLeadD7Message(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                        lead_status, currentDate);
 
 
             }
         });
 
 
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
 
         dialog.show();
     }
-    public void showD7Dialog(  String message , String number ){
-        Dialog       dialog = new Dialog(this);
+
+    public void showD7Dialog(String message, String number) {
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.day_seven_dialog);
@@ -463,11 +406,11 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        Button btnCall =   dialog.findViewById(R.id.btnCall);
-        Button btnMessage =   dialog.findViewById(R.id.btnMessage);
+        Button btnCall = dialog.findViewById(R.id.btnCall);
+        Button btnMessage = dialog.findViewById(R.id.btnMessage);
 //        TextView tvTitle =   dialog.findViewById(R.id.tvTitle);
-        EditText tvMessage =   dialog.findViewById(R.id.tvMessage);
-        TextView tvBookAppointment =   dialog.findViewById(R.id.tvBookAppointment);
+        EditText tvMessage = dialog.findViewById(R.id.tvMessage);
+        TextView tvBookAppointment = dialog.findViewById(R.id.tvBookAppointment);
 
         tvBookAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -482,9 +425,9 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
             }
         });
 //        tvTitle.setText(""+ message);
-        tvMessage.setText(""+message);
+        tvMessage.setText("" + message);
 
-        ImageView ivBack =   dialog.findViewById(R.id.ivBack);
+        ImageView ivBack = dialog.findViewById(R.id.ivBack);
 
 
         ivBack.setOnClickListener(new View.OnClickListener() {
@@ -493,16 +436,8 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
                 dialog.dismiss();
 
 
-
-
             }
         });
-
-
-
-
-
-
 
 
         btnMessage.setOnClickListener(new View.OnClickListener() {
@@ -511,10 +446,10 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                String message = "Hi "+ mBinding.tvfirstName.getText().toString()+", \n\n Its been a week since you purchased your IQOS device.\n\n If you are facing any challenges, please reach out to me without hesitation.\n\n" +
+                String message = "Hi " + mBinding.tvfirstName.getText().toString() + ", \n\n Its been a week since you purchased your IQOS device.\n\n If you are facing any challenges, please reach out to me without hesitation.\n\n" +
                         "Alternatively you can also contact our helpline 0800-04767 or email us at info@iqos.com.pk for any product queries or complaints.\n\n This message is for registered adult users only who have independently registered for\n the Device Care Program. Please do not circulate this message further.";
 
-                showD7MessageDialog(message,number);
+                showD7MessageDialog(message, number);
 
 
 //                String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
@@ -547,22 +482,23 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
 
 
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:"+ number));
+                intent.setData(Uri.parse("tel:" + number));
                 startActivity(intent);
 
-                updateLeadD7Call(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,currentDate);
+                updateLeadD7Call(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                        lead_status, currentDate);
 
 
             }
         });
 
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
         dialog.show();
     }
-    public void showD14Dialog(  String message , String number ){
-        Dialog   dialog = new Dialog(this);
+
+    public void showD14Dialog(String message, String number) {
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.day_fourteen_dialog);
@@ -570,14 +506,14 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        Button btnCall =   dialog.findViewById(R.id.btnCall);
+        Button btnCall = dialog.findViewById(R.id.btnCall);
 
-        EditText tvMessage =   dialog.findViewById(R.id.tvMessage);
+        EditText tvMessage = dialog.findViewById(R.id.tvMessage);
 
-        tvMessage.setText(""+message);
+        tvMessage.setText("" + message);
 
-        ImageView ivBack =   dialog.findViewById(R.id.ivBack);
-        TextView tvBookAppointment =   dialog.findViewById(R.id.tvBookAppointment);
+        ImageView ivBack = dialog.findViewById(R.id.ivBack);
+        TextView tvBookAppointment = dialog.findViewById(R.id.tvBookAppointment);
 
         tvBookAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -597,12 +533,8 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
                 dialog.dismiss();
 
 
-
-
             }
         });
-
-
 
 
         btnCall.setOnClickListener(new View.OnClickListener() {
@@ -615,16 +547,16 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
 
 
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:"+ number));
+                intent.setData(Uri.parse("tel:" + number));
                 startActivity(intent);
 
-                updateLeadD14Call(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,currentDate);
+                updateLeadD14Call(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                        lead_status, currentDate);
 
 
             }
         });
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
 
         dialog.show();
@@ -636,7 +568,7 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
-        Call<DeviceCareModel> call = apiService.getHyperLeadsDetails("application/json",token, lead_id);
+        Call<DeviceCareModel> call = apiService.getHyperLeadsDetails("application/json", token, lead_id);
         call.enqueue(new Callback<DeviceCareModel>() {
             @Override
             public void onResponse(Call<DeviceCareModel> call, Response<DeviceCareModel> response) {
@@ -680,11 +612,10 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
                                     }
 
 
-
 //                                    if (keyModel.getData().getLead().getLeadStatus() != null) {
 //                                        lead_status = keyModel.getData().getLead().getLeadStatus();
-                                   mBinding.tvStatus.setText(""+ lead_status);
-                                   mBinding.tvLastAction.setText(""+ keyModel.getData().getLead().getLastAction().getType());
+                                    mBinding.tvStatus.setText("" + lead_status);
+                                    mBinding.tvLastAction.setText("" + keyModel.getData().getLead().getLastAction().getType());
 //                                    }
 
                                     mBinding.tvD1.setOnClickListener(new View.OnClickListener() {
@@ -699,17 +630,18 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
 
-                                                    String message = "Hi "+ keyModel.getData().getLead().getFirstName()+ ",\n\n Welcome to th Device Care Program. I'm your sales rep "+ mSharedPreferences.getString(Constants.USER_NAME,"")+". You can reach out to me any time during the next 2 weeks if you have any questions about your device.\n\n You can also contact our helpline 0800-04767 or email us at info@iqos.com.pk.\n\n This message is for registered adult users only who have independently registered for the Device Care Program. Please do not circulate this message further.";
+                                                    String message = "Hi " + keyModel.getData().getLead().getFirstName() + ",\n\n Welcome to th Device Care Program. I'm your sales rep " + mSharedPreferences.getString(Constants.USER_NAME, "") + ". You can reach out to me any time during the next 2 weeks if you have any questions about your device.\n\n You can also contact our helpline 0800-04767 or email us at info@iqos.com.pk.\n\n This message is for registered adult users only who have independently registered for the Device Care Program. Please do not circulate this message further.";
 
 
-                                                    showD1Dialog( message, keyModel.getData().getLead().getNumber() );
+                                                    showD1Dialog(message, keyModel.getData().getLead().getNumber());
                                                 }
                                             });
 
                                             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                 dialog.dismiss();  }
+                                                    dialog.dismiss();
+                                                }
                                             });
 
                                             // Create and show the AlertDialog
@@ -730,17 +662,18 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
 
-                                                    String message = "Hi "+ keyModel.getData().getLead().getFirstName()+", this is your sales rep "+ mSharedPreferences.getString(Constants.USER_NAME,"")+", I hope you are having a great day.\n\n Its been a few days since you purchased your ILUMA Prime. I'm calling since you registered for the device care program to address any queries you may have about your device.\n\n Resolve issues if any using GTPs\n\n Is there anything else I can help you with today?\n\n I understand this device is new to you and I want to remind you that you can call or\n message me anytime if you have a question or require customer care support.\n\n Alternatively, you can contact our helpline 0800-04767 or email us at info@iqos.com.pk for any product queries or complaints.";
+                                                    String message = "Hi " + keyModel.getData().getLead().getFirstName() + ", this is your sales rep " + mSharedPreferences.getString(Constants.USER_NAME, "") + ", I hope you are having a great day.\n\n Its been a few days since you purchased your ILUMA Prime. I'm calling since you registered for the device care program to address any queries you may have about your device.\n\n Resolve issues if any using GTPs\n\n Is there anything else I can help you with today?\n\n I understand this device is new to you and I want to remind you that you can call or\n message me anytime if you have a question or require customer care support.\n\n Alternatively, you can contact our helpline 0800-04767 or email us at info@iqos.com.pk for any product queries or complaints.";
 
 
-                                                    showD3Dialog( message, keyModel.getData().getLead().getNumber() );
+                                                    showD3Dialog(message, keyModel.getData().getLead().getNumber());
                                                 }
                                             });
 
                                             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                 dialog.dismiss();  }
+                                                    dialog.dismiss();
+                                                }
                                             });
 
                                             // Create and show the AlertDialog
@@ -761,17 +694,18 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
 
-                                                    String message = "Hi "+ keyModel.getData().getLead().getFirstName()+", this is your sales rep "+ mSharedPreferences.getString(Constants.USER_NAME,"")+", how are you?\n\n Its been a week since you purchased your IQOS ILUMA Prime device, have faced any challenges with your IQOS device?\n\n";
+                                                    String message = "Hi " + keyModel.getData().getLead().getFirstName() + ", this is your sales rep " + mSharedPreferences.getString(Constants.USER_NAME, "") + ", how are you?\n\n Its been a week since you purchased your IQOS ILUMA Prime device, have faced any challenges with your IQOS device?\n\n";
 
 
-                                                    showD7Dialog( message, keyModel.getData().getLead().getNumber() );
+                                                    showD7Dialog(message, keyModel.getData().getLead().getNumber());
                                                 }
                                             });
 
                                             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                 dialog.dismiss();  }
+                                                    dialog.dismiss();
+                                                }
                                             });
 
                                             // Create and show the AlertDialog
@@ -792,17 +726,18 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
 
-                                                    String message = "Hi "+ keyModel.getData().getLead().getFirstName()+", this is your sales rep "+ mSharedPreferences.getString(Constants.USER_NAME,"")+", how are you?\n\n Its been two weeks since you purchased your IQOS ILUMA Prime device, have faced any challenges with your IQOS device?\n\n";
+                                                    String message = "Hi " + keyModel.getData().getLead().getFirstName() + ", this is your sales rep " + mSharedPreferences.getString(Constants.USER_NAME, "") + ", how are you?\n\n Its been two weeks since you purchased your IQOS ILUMA Prime device, have faced any challenges with your IQOS device?\n\n";
 
 
-                                                    showD14Dialog( message, keyModel.getData().getLead().getNumber() );
+                                                    showD14Dialog(message, keyModel.getData().getLead().getNumber());
                                                 }
                                             });
 
                                             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                 dialog.dismiss();  }
+                                                    dialog.dismiss();
+                                                }
                                             });
 
                                             // Create and show the AlertDialog
@@ -823,18 +758,19 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
 
-                                                    String message = "Hi "+ keyModel.getData().getLead().getFirstName()+",\n\n You are receiving this SMS as you requested to be informed of availability and price of consumables.\n\n " +
+                                                    String message = "Hi " + keyModel.getData().getLead().getFirstName() + ",\n\n You are receiving this SMS as you requested to be informed of availability and price of consumables.\n\n " +
                                                             "Genuine Terea is available at shop.terea.com.pk at pack price PKR 500.\n\n This message is intended for registered adult users only for addressing theie query. Please do not forward,disseminate or circulate this message further.";
 
 
-                                                    showD10Dialog( message, keyModel.getData().getLead().getNumber() );
+                                                    showD10Dialog(message, keyModel.getData().getLead().getNumber());
                                                 }
                                             });
 
                                             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                 dialog.dismiss();  }
+                                                    dialog.dismiss();
+                                                }
                                             });
 
                                             // Create and show the AlertDialog
@@ -845,9 +781,7 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
                                     });
 
 
-
-
-                                    }
+                                }
 
                             } else {
                                 Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -887,18 +821,18 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
             }
         });
     }
- 
-    public void updateLeadD1(String token,String id, String lead_status,
-                                         String day1_message_at ) {
+
+    public void updateLeadD1(String token, String id, String lead_status,
+                             String day1_message_at) {
         mBinding.progress.setVisibility(View.VISIBLE);
         ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
- 
+
         builder.addFormDataPart("id", id);
         builder.addFormDataPart("lead_status", lead_status);
 
-            builder.addFormDataPart("day1_message_at", day1_message_at);
+        builder.addFormDataPart("day1_message_at", day1_message_at);
 
 
         RequestBody requestBody = builder.build();
@@ -920,9 +854,9 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
 
                             if (listofhome.getStatus().equals("1")) {
 
-                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
 
-                                Toast.makeText(ActivityHyperCareLeadsDetail.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
 //                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
 
 
@@ -965,8 +899,9 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
             }
         });
     }
-    public void updateLeadD10(String token,String id, String lead_status,
-                                         String day1_message_at ) {
+
+    public void updateLeadD10(String token, String id, String lead_status,
+                              String day1_message_at) {
         mBinding.progress.setVisibility(View.VISIBLE);
         ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
@@ -975,7 +910,7 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         builder.addFormDataPart("id", id);
         builder.addFormDataPart("lead_status", lead_status);
 
-            builder.addFormDataPart("day10_message_at", day1_message_at);
+        builder.addFormDataPart("day10_message_at", day1_message_at);
 
 
         RequestBody requestBody = builder.build();
@@ -999,9 +934,9 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
 //                                if(dialog!=null) {
 //                                    dialog.dismiss();
 //                                }
-                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
 
-                                Toast.makeText(ActivityHyperCareLeadsDetail.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
 //                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
 
 
@@ -1044,8 +979,9 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
             }
         });
     }
-  public void updateLeadD3Message(String token,String id, String lead_status,
-                                         String day1_message_at ) {
+
+    public void updateLeadD3Message(String token, String id, String lead_status,
+                                    String day1_message_at) {
         mBinding.progress.setVisibility(View.VISIBLE);
         ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
@@ -1054,7 +990,7 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
         builder.addFormDataPart("id", id);
         builder.addFormDataPart("lead_status", lead_status);
 
-            builder.addFormDataPart("day3_message_at", day1_message_at);
+        builder.addFormDataPart("day3_message_at", day1_message_at);
 
 
         RequestBody requestBody = builder.build();
@@ -1078,240 +1014,9 @@ public class ActivityHyperCareLeadsDetail extends AppCompatActivity {
 //                                if(dialog!=null) {
 //                                    dialog.dismiss();
 //                                }
-                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
 
-                                Toast.makeText(ActivityHyperCareLeadsDetail.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
-//                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
-
-
-                            } else {
-                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                mBinding.progress.setVisibility(View.GONE);
-
-                            }
-                        }
-                    });
-                } else {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<Model.GenerealModel> call, Throwable t) {
-
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                    }
-
-                });
-
-
-            }
-        });
-    }
-public void updateLeadD3Call(String token,String id, String lead_status,
-                                         String day1_message_at ) {
-        mBinding.progress.setVisibility(View.VISIBLE);
-        ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
-        MultipartBody.Builder builder = new MultipartBody.Builder();
-        builder.setType(MultipartBody.FORM);
-
-        builder.addFormDataPart("id", id);
-        builder.addFormDataPart("lead_status", lead_status);
-
-            builder.addFormDataPart("day3_call_at", day1_message_at);
-
-
-        RequestBody requestBody = builder.build();
-
-        Call<Model.GenerealModel> call = apiService.updateHyperLead(token, requestBody);
-
-        call.enqueue(new Callback<Model.GenerealModel>() {
-            @Override
-            public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
-                final Model.GenerealModel listofhome = response.body();
-                if (listofhome != null) {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
-                            mBinding.progress.setVisibility(View.GONE);
-
-                            if (listofhome.getStatus().equals("1")) {
-
-                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
-
-                                Toast.makeText(ActivityHyperCareLeadsDetail.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
-//                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
-
-
-                            } else {
-                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                mBinding.progress.setVisibility(View.GONE);
-
-                            }
-                        }
-                    });
-                } else {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<Model.GenerealModel> call, Throwable t) {
-
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                    }
-
-                });
-
-
-            }
-        });
-    }
-public void updateLeadD7Message(String token,String id, String lead_status,
-                                         String day1_message_at ) {
-        mBinding.progress.setVisibility(View.VISIBLE);
-        ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
-        MultipartBody.Builder builder = new MultipartBody.Builder();
-        builder.setType(MultipartBody.FORM);
-
-        builder.addFormDataPart("id", id);
-        builder.addFormDataPart("lead_status", lead_status);
-
-            builder.addFormDataPart("day7_message_at", day1_message_at);
-
-
-        RequestBody requestBody = builder.build();
-
-        Call<Model.GenerealModel> call = apiService.updateHyperLead(token, requestBody);
-
-        call.enqueue(new Callback<Model.GenerealModel>() {
-            @Override
-            public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
-                final Model.GenerealModel listofhome = response.body();
-                if (listofhome != null) {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
-                            mBinding.progress.setVisibility(View.GONE);
-
-                            if (listofhome.getStatus().equals("1")) {
-
-                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
-
-                                Toast.makeText(ActivityHyperCareLeadsDetail.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
-//                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
-
-
-                            } else {
-                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                mBinding.progress.setVisibility(View.GONE);
-
-                            }
-                        }
-                    });
-                } else {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            mBinding.progress.setVisibility(View.GONE);
-                            Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<Model.GenerealModel> call, Throwable t) {
-
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                    }
-
-                });
-
-
-            }
-        });
-    }
-    public void updateLeadD7Call(String token,String id, String lead_status,
-                                         String day1_message_at ) {
-        mBinding.progress.setVisibility(View.VISIBLE);
-        ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
-        MultipartBody.Builder builder = new MultipartBody.Builder();
-        builder.setType(MultipartBody.FORM);
-
-        builder.addFormDataPart("id", id);
-        builder.addFormDataPart("lead_status", lead_status);
-
-            builder.addFormDataPart("day7_call_at", day1_message_at);
-
-
-        RequestBody requestBody = builder.build();
-
-        Call<Model.GenerealModel> call = apiService.updateHyperLead(token, requestBody);
-
-        call.enqueue(new Callback<Model.GenerealModel>() {
-            @Override
-            public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
-                final Model.GenerealModel listofhome = response.body();
-                if (listofhome != null) {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
-                            mBinding.progress.setVisibility(View.GONE);
-
-                            if (listofhome.getStatus().equals("1")) {
-
-                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
-
-                                Toast.makeText(ActivityHyperCareLeadsDetail.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
 //                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
 
 
@@ -1355,11 +1060,8 @@ public void updateLeadD7Message(String token,String id, String lead_status,
         });
     }
 
-
-
-
-    public void updateLeadD14Call(String token,String id, String lead_status,
-                                         String day1_message_at ) {
+    public void updateLeadD3Call(String token, String id, String lead_status,
+                                 String day1_message_at) {
         mBinding.progress.setVisibility(View.VISIBLE);
         ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
@@ -1368,7 +1070,7 @@ public void updateLeadD7Message(String token,String id, String lead_status,
         builder.addFormDataPart("id", id);
         builder.addFormDataPart("lead_status", lead_status);
 
-            builder.addFormDataPart("day14_call_at", day1_message_at);
+        builder.addFormDataPart("day3_call_at", day1_message_at);
 
 
         RequestBody requestBody = builder.build();
@@ -1390,9 +1092,244 @@ public void updateLeadD7Message(String token,String id, String lead_status,
 
                             if (listofhome.getStatus().equals("1")) {
 
-                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
 
-                                Toast.makeText(ActivityHyperCareLeadsDetail.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+//                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+
+
+                            } else {
+                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                mBinding.progress.setVisibility(View.GONE);
+
+                            }
+                        }
+                    });
+                } else {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            mBinding.progress.setVisibility(View.GONE);
+                            Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Model.GenerealModel> call, Throwable t) {
+
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                    }
+
+                });
+
+
+            }
+        });
+    }
+
+    public void updateLeadD7Message(String token, String id, String lead_status,
+                                    String day1_message_at) {
+        mBinding.progress.setVisibility(View.VISIBLE);
+        ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        builder.addFormDataPart("id", id);
+        builder.addFormDataPart("lead_status", lead_status);
+
+        builder.addFormDataPart("day7_message_at", day1_message_at);
+
+
+        RequestBody requestBody = builder.build();
+
+        Call<Model.GenerealModel> call = apiService.updateHyperLead(token, requestBody);
+
+        call.enqueue(new Callback<Model.GenerealModel>() {
+            @Override
+            public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
+                final Model.GenerealModel listofhome = response.body();
+                if (listofhome != null) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                            mBinding.progress.setVisibility(View.GONE);
+
+                            if (listofhome.getStatus().equals("1")) {
+
+                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
+
+                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+//                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+
+
+                            } else {
+                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                mBinding.progress.setVisibility(View.GONE);
+
+                            }
+                        }
+                    });
+                } else {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            mBinding.progress.setVisibility(View.GONE);
+                            Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Model.GenerealModel> call, Throwable t) {
+
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                    }
+
+                });
+
+
+            }
+        });
+    }
+
+    public void updateLeadD7Call(String token, String id, String lead_status,
+                                 String day1_message_at) {
+        mBinding.progress.setVisibility(View.VISIBLE);
+        ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        builder.addFormDataPart("id", id);
+        builder.addFormDataPart("lead_status", lead_status);
+
+        builder.addFormDataPart("day7_call_at", day1_message_at);
+
+
+        RequestBody requestBody = builder.build();
+
+        Call<Model.GenerealModel> call = apiService.updateHyperLead(token, requestBody);
+
+        call.enqueue(new Callback<Model.GenerealModel>() {
+            @Override
+            public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
+                final Model.GenerealModel listofhome = response.body();
+                if (listofhome != null) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                            mBinding.progress.setVisibility(View.GONE);
+
+                            if (listofhome.getStatus().equals("1")) {
+
+                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
+
+                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+//                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+
+
+                            } else {
+                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                mBinding.progress.setVisibility(View.GONE);
+
+                            }
+                        }
+                    });
+                } else {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            mBinding.progress.setVisibility(View.GONE);
+                            Toast.makeText(ActivityHyperCareLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Model.GenerealModel> call, Throwable t) {
+
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                    }
+
+                });
+
+
+            }
+        });
+    }
+
+
+    public void updateLeadD14Call(String token, String id, String lead_status,
+                                  String day1_message_at) {
+        mBinding.progress.setVisibility(View.VISIBLE);
+        ApiService apiService = ApiClient.getClient(ActivityHyperCareLeadsDetail.this).create(ApiService.class);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        builder.addFormDataPart("id", id);
+        builder.addFormDataPart("lead_status", lead_status);
+
+        builder.addFormDataPart("day14_call_at", day1_message_at);
+
+
+        RequestBody requestBody = builder.build();
+
+        Call<Model.GenerealModel> call = apiService.updateHyperLead(token, requestBody);
+
+        call.enqueue(new Callback<Model.GenerealModel>() {
+            @Override
+            public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
+                final Model.GenerealModel listofhome = response.body();
+                if (listofhome != null) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                            mBinding.progress.setVisibility(View.GONE);
+
+                            if (listofhome.getStatus().equals("1")) {
+
+                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
+
+                                Toast.makeText(ActivityHyperCareLeadsDetail.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
 //                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
 
 
@@ -1450,14 +1387,14 @@ public void updateLeadD7Message(String token,String id, String lead_status,
                 finish();
 
 
-
-             }
+            }
         });
 
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();  }
+                dialog.dismiss();
+            }
         });
 
         // Create and show the AlertDialog
@@ -1465,8 +1402,6 @@ public void updateLeadD7Message(String token,String id, String lead_status,
         dialog.show();
 
     }
-
-
 
 
     public class Data {
@@ -1830,6 +1765,7 @@ public void updateLeadD7Message(String token,String id, String lead_status,
         }
 
     }
+
     public class DeviceCareModel {
 
         @SerializedName("status")
@@ -1867,6 +1803,7 @@ public void updateLeadD7Message(String token,String id, String lead_status,
         }
 
     }
+
     public class LastAction {
 
         @SerializedName("type")
@@ -1893,6 +1830,7 @@ public void updateLeadD7Message(String token,String id, String lead_status,
         }
 
     }
+
     public class LastAction__1 {
 
         @SerializedName("type")
@@ -3167,6 +3105,7 @@ public void updateLeadD7Message(String token,String id, String lead_status,
         }
 
     }
+
     public class NextAction {
 
         @SerializedName("type")
@@ -3193,14 +3132,6 @@ public void updateLeadD7Message(String token,String id, String lead_status,
         }
 
     }
-
-
-
-
-
-
-
-
 
 
 }

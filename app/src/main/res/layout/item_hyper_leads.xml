@@ -5,19 +5,19 @@
 
 
     <TextView
-        android:background="@color/blue"
-        android:padding="@dimen/_5sdp"
         android:id="@+id/tvDays"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:padding="@dimen/_5sdp"
         android:text="Day 1"
         android:textColor="@color/white"
         android:textStyle="bold" />
 
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_below="@+id/tvDays"
-    android:id="@+id/tvRecycler"
-    android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tvRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDays" />
 
 </RelativeLayout>

@@ -1,9 +1,5 @@
 package com.example.iqos.LeadsModule;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -31,6 +27,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.iqos.AppointmentsModule.AppointmentBookingDetailActivity;
 import com.example.iqos.Constants;
 import com.example.iqos.R;
@@ -39,9 +39,6 @@ import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
 import com.example.iqos.databinding.ActivityLeadsDetailBinding;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -50,7 +47,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -59,32 +55,30 @@ import retrofit2.Response;
 
 public class ActivityLeadsDetail extends AppCompatActivity {
 
+    public static Activity ivityLeads;
     ActivityLeadsDetailBinding mBinding;
     SharedPreferences mSharedPreferences;
-
     String lead_id = "";
-     String tvCallStatus = "Select";
-
+    String tvCallStatus = "Select";
     Dialog dialog;
     ArrayList<String> leadStatus = new ArrayList<>();
     ArrayList<String> call_outcomes = new ArrayList<>();
     ArrayList<String> call2_outcomes = new ArrayList<>();
     ArrayList<String> call3_outcomes = new ArrayList<>();
     ArrayList<String> call4_outcomes = new ArrayList<>();
+    String enableCallOutcome = "false";
+    String lead_status = "";
+    String opening_msg = "";
+    String call1 = "";
+    String call1_outcome = "";
+    String call2 = "";
+    String call2_outcome = "";
+    String call3 = "";
+    String call4 = "";
+    String call3_outcome = "";
+    String call4_outcome = "";
+    String email_message = "";
 
-    String enableCallOutcome="false";
-    String lead_status="";
-    String opening_msg="";
-    String call1="";
-    String call1_outcome="";
-    String call2="";
-    String call2_outcome="";
-    String call3="";
-    String call4="";
-    String call3_outcome="";
-    String call4_outcome="";
-    String email_message="";
-    public  static Activity  ivityLeads;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +102,7 @@ public class ActivityLeadsDetail extends AppCompatActivity {
         call_outcomes.add("not-verified");
         call_outcomes.add("not-connect");
         call_outcomes.add("call back later");
-         call2_outcomes.clear();
+        call2_outcomes.clear();
 
         call2_outcomes.add("Select");
         call2_outcomes.add("scheduled");
@@ -116,7 +110,7 @@ public class ActivityLeadsDetail extends AppCompatActivity {
         call2_outcomes.add("not-verified");
         call2_outcomes.add("not-connect");
         call2_outcomes.add("call back later");
-         call3_outcomes.clear();
+        call3_outcomes.clear();
 
         call3_outcomes.add("Select");
         call3_outcomes.add("scheduled");
@@ -124,7 +118,7 @@ public class ActivityLeadsDetail extends AppCompatActivity {
         call3_outcomes.add("not-verified");
         call3_outcomes.add("not-connect");
         call3_outcomes.add("call back later");
- call4_outcomes.clear();
+        call4_outcomes.clear();
 
         call4_outcomes.add("Select");
         call4_outcomes.add("scheduled");
@@ -134,17 +128,17 @@ public class ActivityLeadsDetail extends AppCompatActivity {
         call4_outcomes.add("call back later");
 
 
-mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        finish();
-    }
-});
+        mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         mBinding.tvEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(       mBinding.tvEdit.getText().toString().equalsIgnoreCase("Edit")) {
+                if (mBinding.tvEdit.getText().toString().equalsIgnoreCase("Edit")) {
                     mBinding.tvfirstName.setEnabled(true);
                     mBinding.tvlastName.setEnabled(true);
                     mBinding.tvCOmpany.setEnabled(true);
@@ -153,7 +147,7 @@ mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
                     mBinding.tvPhoneNumber.setEnabled(true);
                     mBinding.tvEmail.setEnabled(true);
                     mBinding.tvEdit.setText("Update");
-                }else{
+                } else {
 
                     mBinding.tvfirstName.setEnabled(false);
                     mBinding.tvlastName.setEnabled(false);
@@ -163,66 +157,57 @@ mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
                     mBinding.tvPhoneNumber.setEnabled(false);
                     mBinding.tvEmail.setEnabled(false);
                     mBinding.tvEdit.setText("Edit");
-                    updateLead(  mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
+                    updateLead(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
                             mBinding.tvfirstName.getText().toString(),
                             mBinding.tvlastName.getText().toString(),
                             mBinding.tvCOmpany.getText().toString(),
                             mBinding.tvDesignation.getText().toString(),
                             mBinding.tvAge.getText().toString(),
                             mBinding.tvPhoneNumber.getText().toString(),
-                            mBinding.tvEmail.getText().toString()   );
+                            mBinding.tvEmail.getText().toString());
                 }
             }
         });
 
 
-
-
-
-
-
-
-
-
-        getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+        getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
 
         mBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
 
             }
         });
     }
 
-    private void setLeadStatusSpinner(String status){
+    private void setLeadStatusSpinner(String status) {
 
 
-        ArrayList<String > newLeads = new ArrayList<>();
-        for (int i =0;i< leadStatus.size();i++){
-            if(status .equalsIgnoreCase(leadStatus.get(i))){
-                newLeads .add(0,""+leadStatus.get(i));
-            }else
-            {
-                newLeads.add(""+leadStatus.get(i));
+        ArrayList<String> newLeads = new ArrayList<>();
+        for (int i = 0; i < leadStatus.size(); i++) {
+            if (status.equalsIgnoreCase(leadStatus.get(i))) {
+                newLeads.add(0, "" + leadStatus.get(i));
+            } else {
+                newLeads.add("" + leadStatus.get(i));
 
             }
 
 
         }
-        Log.e("TGED","lead_status-> "+lead_status);
+        Log.e("TGED", "lead_status-> " + lead_status);
         mBinding.spinnerLeadStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                lead_status = newLeads.get(position) ;
-                Log.e("TGED","lead_status-> "+lead_status);
-                Log.e("TGED","status-> "+status);
-                if(!leadStatus.toString().equalsIgnoreCase("Select")) {
+                lead_status = newLeads.get(position);
+                Log.e("TGED", "lead_status-> " + lead_status);
+                Log.e("TGED", "status-> " + status);
+                if (!leadStatus.toString().equalsIgnoreCase("Select")) {
 
-                if(!status.equalsIgnoreCase(""+lead_status)) {
-                    updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                            lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4,call4_outcome,email_message);
-                }
+                    if (!status.equalsIgnoreCase("" + lead_status)) {
+                        updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                                lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
+                    }
                 }
 
             }
@@ -245,81 +230,15 @@ mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
         mBinding.spinnerLeadStatus.setAdapter(ad);
     }
 
-    private void setCall2StatusSpinner(String status){
+    private void setCall2StatusSpinner(String status) {
 
 
-        ArrayList<String > callOutcomes = new ArrayList<>();
-        for (int i =0;i< call2_outcomes.size();i++){
-            if(call2_outcomes.get(i).toString().equalsIgnoreCase(status)){
-                callOutcomes .add(0,""+call2_outcomes.get(i));
-            }else
-            {
-                callOutcomes.add(""+call2_outcomes.get(i));
-
-            }
-
-
-        }
-
-
-                 ArrayAdapter ad
-                        = new ArrayAdapter(
-                        this,
-                        android.R.layout.simple_spinner_item,
-                        callOutcomes);
-                ad.setDropDownViewResource(
-                        android.R.layout
-                                .simple_spinner_dropdown_item);
-                mBinding.spinnerCall2Status.setAdapter(ad);
-                mBinding.spinnerCall2Status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-
-
-                            call2_outcome = callOutcomes.get(position);
-                            Log.e("TGED","HERE IS THE STATUS-> "+ status);
-                            Log.e("TGED","call2_outcome-> "+ call2_outcome);
-                            if (!status.equalsIgnoreCase(""+ call2_outcome)) {
-                                Toast.makeText(ActivityLeadsDetail.this, "Call2 Outcome", Toast.LENGTH_SHORT).show();
-                                updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome,  call4,call4_outcome,email_message);
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-
-
-
-
-    }
-
-    private void setCall3StatusSpinner(String status){
-
-Log.e("TGED","CALL3outcome"+ status);
-        ArrayList<String > callOutcomes = new ArrayList<>();
-        for (int i =0;i< call3_outcomes.size();i++){
-            if(call3_outcomes.get(i).toString().equalsIgnoreCase(status)){
-                callOutcomes .add(0,""+call3_outcomes.get(i));
-            }else
-            {
-                callOutcomes.add(""+call3_outcomes.get(i));
+        ArrayList<String> callOutcomes = new ArrayList<>();
+        for (int i = 0; i < call2_outcomes.size(); i++) {
+            if (call2_outcomes.get(i).toString().equalsIgnoreCase(status)) {
+                callOutcomes.add(0, "" + call2_outcomes.get(i));
+            } else {
+                callOutcomes.add("" + call2_outcomes.get(i));
 
             }
 
@@ -327,61 +246,51 @@ Log.e("TGED","CALL3outcome"+ status);
         }
 
 
-                 ArrayAdapter ad
-                        = new ArrayAdapter(
-                        this,
-                        android.R.layout.simple_spinner_item,
-                        callOutcomes);
-                ad.setDropDownViewResource(
-                        android.R.layout
-                                .simple_spinner_dropdown_item);
-                mBinding.spinnerCall3Status.setAdapter(ad);
-                mBinding.spinnerCall3Status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-
-                            call3_outcome = callOutcomes.get(position);
-                            Log.e("TGED","HERE IS THE STATUS-> "+ status);
-                            Log.e("TGED","call3_outcome-> "+ call3_outcome);
-                            if (!status.equalsIgnoreCase(""+ call3_outcome)) {
-                                Toast.makeText(ActivityLeadsDetail.this, "Call3 Outcome", Toast.LENGTH_SHORT).show();
-                                updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4,call4_outcome, email_message);
-                            }
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                callOutcomes);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        mBinding.spinnerCall2Status.setAdapter(ad);
+        mBinding.spinnerCall2Status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
 
+                call2_outcome = callOutcomes.get(position);
+                Log.e("TGED", "HERE IS THE STATUS-> " + status);
+                Log.e("TGED", "call2_outcome-> " + call2_outcome);
+                if (!status.equalsIgnoreCase("" + call2_outcome)) {
+                    Toast.makeText(ActivityLeadsDetail.this, "Call2 Outcome", Toast.LENGTH_SHORT).show();
+                    updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                            lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
+                }
 
 
+            }
 
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-
-
-
-                    }
-
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-
-
+            }
+        });
 
 
     }
 
-    private void setCall4StatusSpinner(String status){
+    private void setCall3StatusSpinner(String status) {
 
-Log.e("TGED","CALL3outcome"+ status);
-        ArrayList<String > callOutcomes = new ArrayList<>();
-        for (int i =0;i< call4_outcomes.size();i++){
-            if(call4_outcomes.get(i).toString().equalsIgnoreCase(status)){
-                callOutcomes .add(0,""+call4_outcomes.get(i));
-            }else
-            {
-                callOutcomes.add(""+call4_outcomes.get(i));
+        Log.e("TGED", "CALL3outcome" + status);
+        ArrayList<String> callOutcomes = new ArrayList<>();
+        for (int i = 0; i < call3_outcomes.size(); i++) {
+            if (call3_outcomes.get(i).toString().equalsIgnoreCase(status)) {
+                callOutcomes.add(0, "" + call3_outcomes.get(i));
+            } else {
+                callOutcomes.add("" + call3_outcomes.get(i));
 
             }
 
@@ -389,61 +298,50 @@ Log.e("TGED","CALL3outcome"+ status);
         }
 
 
-                 ArrayAdapter ad
-                        = new ArrayAdapter(
-                        this,
-                        android.R.layout.simple_spinner_item,
-                        callOutcomes);
-                ad.setDropDownViewResource(
-                        android.R.layout
-                                .simple_spinner_dropdown_item);
-                mBinding.spinnerCall4Status.setAdapter(ad);
-                mBinding.spinnerCall4Status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                callOutcomes);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        mBinding.spinnerCall3Status.setAdapter(ad);
+        mBinding.spinnerCall3Status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
-                            call4_outcome = callOutcomes.get(position);
-                            Log.e("TGED","HERE IS THE STATUS-> "+ status);
-                            Log.e("TGED","call3_outcome-> "+ call4_outcome);
-                            if (!status.equalsIgnoreCase(""+ call4_outcome)) {
-                                Toast.makeText(ActivityLeadsDetail.this, "Call3 Outcome", Toast.LENGTH_SHORT).show();
-                                updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4,call4_outcome, email_message);
-                            }
-
-
+                call3_outcome = callOutcomes.get(position);
+                Log.e("TGED", "HERE IS THE STATUS-> " + status);
+                Log.e("TGED", "call3_outcome-> " + call3_outcome);
+                if (!status.equalsIgnoreCase("" + call3_outcome)) {
+                    Toast.makeText(ActivityLeadsDetail.this, "Call3 Outcome", Toast.LENGTH_SHORT).show();
+                    updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                            lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
+                }
 
 
+            }
 
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-
-
-
-                    }
-
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-
-
+            }
+        });
 
 
     }
 
-    private void setCallStatusSpinner(String status){
+    private void setCall4StatusSpinner(String status) {
 
-
-        ArrayList<String > callOutcomes = new ArrayList<>();
-        for (int i =0;i< call_outcomes.size();i++){
-            if(call_outcomes.get(i).toString().equalsIgnoreCase(status)){
-                callOutcomes .add(0,""+call_outcomes.get(i));
-            }else
-            {
-                callOutcomes.add(""+call_outcomes.get(i));
+        Log.e("TGED", "CALL3outcome" + status);
+        ArrayList<String> callOutcomes = new ArrayList<>();
+        for (int i = 0; i < call4_outcomes.size(); i++) {
+            if (call4_outcomes.get(i).toString().equalsIgnoreCase(status)) {
+                callOutcomes.add(0, "" + call4_outcomes.get(i));
+            } else {
+                callOutcomes.add("" + call4_outcomes.get(i));
 
             }
 
@@ -451,55 +349,94 @@ Log.e("TGED","CALL3outcome"+ status);
         }
 
 
-                 ArrayAdapter ad
-                        = new ArrayAdapter(
-                        this,
-                        android.R.layout.simple_spinner_item,
-                        callOutcomes);
-                ad.setDropDownViewResource(
-                        android.R.layout
-                                .simple_spinner_dropdown_item);
-                mBinding.spinnerCallStatus.setAdapter(ad);
-                mBinding.spinnerCallStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                callOutcomes);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        mBinding.spinnerCall4Status.setAdapter(ad);
+        mBinding.spinnerCall4Status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+                call4_outcome = callOutcomes.get(position);
+                Log.e("TGED", "HERE IS THE STATUS-> " + status);
+                Log.e("TGED", "call3_outcome-> " + call4_outcome);
+                if (!status.equalsIgnoreCase("" + call4_outcome)) {
+                    Toast.makeText(ActivityLeadsDetail.this, "Call3 Outcome", Toast.LENGTH_SHORT).show();
+                    updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                            lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
+                }
 
 
-                        call1_outcome = callOutcomes.get(position);
-
-                            if (!status.equalsIgnoreCase(""+ call1_outcome)) {
-                                Toast.makeText(ActivityLeadsDetail.this, "Call1 Outcome", Toast.LENGTH_SHORT).show();
-                                updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4,call4_outcome, email_message);
-                            }
+            }
 
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
+    }
+
+    private void setCallStatusSpinner(String status) {
 
 
+        ArrayList<String> callOutcomes = new ArrayList<>();
+        for (int i = 0; i < call_outcomes.size(); i++) {
+            if (call_outcomes.get(i).toString().equalsIgnoreCase(status)) {
+                callOutcomes.add(0, "" + call_outcomes.get(i));
+            } else {
+                callOutcomes.add("" + call_outcomes.get(i));
+
+            }
 
 
+        }
 
 
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                callOutcomes);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        mBinding.spinnerCallStatus.setAdapter(ad);
+        mBinding.spinnerCallStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
 
-                    }
+                call1_outcome = callOutcomes.get(position);
+
+                if (!status.equalsIgnoreCase("" + call1_outcome)) {
+                    Toast.makeText(ActivityLeadsDetail.this, "Call1 Outcome", Toast.LENGTH_SHORT).show();
+                    updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                            lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
+                }
 
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
+            }
 
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
     }
 
 
-    public void showEmailDialog(String title, String message , String number, String email ){
+    public void showEmailDialog(String title, String message, String number, String email) {
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -508,31 +445,24 @@ Log.e("TGED","CALL3outcome"+ status);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        Button btnRefresh =   dialog.findViewById(R.id.btnDone);
-        TextView tvTitle =   dialog.findViewById(R.id.tvTitle);
-        EditText tvMessage =   dialog.findViewById(R.id.tvMessage);
+        Button btnRefresh = dialog.findViewById(R.id.btnDone);
+        TextView tvTitle = dialog.findViewById(R.id.tvTitle);
+        EditText tvMessage = dialog.findViewById(R.id.tvMessage);
 
-        tvTitle.setText(""+ title);
-        tvMessage.setText(""+ Html.fromHtml(message));
+        tvTitle.setText("" + title);
+        tvMessage.setText("" + Html.fromHtml(message));
 
-        ImageView ivBack =   dialog.findViewById(R.id.ivBack);
+        ImageView ivBack = dialog.findViewById(R.id.ivBack);
 
 
-         ivBack.setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
 
 
-
-
             }
         });
-
-
-
-
-
 
 
         btnRefresh.setOnClickListener(new View.OnClickListener() {
@@ -542,9 +472,9 @@ Log.e("TGED","CALL3outcome"+ status);
 
 
                 String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                   email_message = currentDate;
+                email_message = currentDate;
 
-                Uri emailUri = Uri.parse("mailto:"  +email );
+                Uri emailUri = Uri.parse("mailto:" + email);
 
                 // Create an Intent with the ACTION_VIEW action and the mailto: Uri
                 Intent emailIntent = new Intent(Intent.ACTION_VIEW, emailUri);
@@ -556,8 +486,8 @@ Log.e("TGED","CALL3outcome"+ status);
                     startActivity(emailIntent);
                     Toast.makeText(ActivityLeadsDetail.this, "ERROE", Toast.LENGTH_SHORT).show();                    // You can show a toast or display a dialog to inform the user
                 }
-                updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,opening_msg,call1,call1_outcome,call2,call2_outcome,call3,call3_outcome, call4,call4_outcome, email_message);
+                updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
 
 
             }
@@ -566,7 +496,8 @@ Log.e("TGED","CALL3outcome"+ status);
 
         dialog.show();
     }
-    public void showCDialog(String title, String message , String number, String email )  {
+
+    public void showCDialog(String title, String message, String number, String email) {
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -575,22 +506,20 @@ Log.e("TGED","CALL3outcome"+ status);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        Button btnRefresh =   dialog.findViewById(R.id.btnDone);
-        TextView tvTitle =   dialog.findViewById(R.id.tvTitle);
-        EditText tvMessage =   dialog.findViewById(R.id.tvMessage);
+        Button btnRefresh = dialog.findViewById(R.id.btnDone);
+        TextView tvTitle = dialog.findViewById(R.id.tvTitle);
+        EditText tvMessage = dialog.findViewById(R.id.tvMessage);
 
-        tvTitle.setText(""+ title);
-        tvMessage.setText(""+ Html.fromHtml(message));
+        tvTitle.setText("" + title);
+        tvMessage.setText("" + Html.fromHtml(message));
 
-        ImageView ivBack =   dialog.findViewById(R.id.ivBack);
+        ImageView ivBack = dialog.findViewById(R.id.ivBack);
 
 
-         ivBack.setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-
-
 
 
             }
@@ -603,15 +532,15 @@ Log.e("TGED","CALL3outcome"+ status);
 
                 String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
-                  opening_msg = currentDate;
-                  Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-                  smsIntent.setType("vnd.android-dir/mms-sms");
-                  smsIntent.putExtra("address", ""+number);
-                  smsIntent.putExtra("sms_body",""+ tvMessage.getText().toString());
-                  startActivity(smsIntent);
+                opening_msg = currentDate;
+                Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                smsIntent.setType("vnd.android-dir/mms-sms");
+                smsIntent.putExtra("address", "" + number);
+                smsIntent.putExtra("sms_body", "" + tvMessage.getText().toString());
+                startActivity(smsIntent);
 
-                updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id,
-                        lead_status,opening_msg,call1,call1_outcome,call2,call2_outcome,call3,call3_outcome, call4,call4_outcome, email_message);
+                updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
+                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
 
 
             }
@@ -627,7 +556,7 @@ Log.e("TGED","CALL3outcome"+ status);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityLeadsDetail.this).create(ApiService.class);
-        Call<Model.LeadDetailsModel> call = apiService.getLeadsDetails("application/json",token, lead_id);
+        Call<Model.LeadDetailsModel> call = apiService.getLeadsDetails("application/json", token, lead_id);
         call.enqueue(new Callback<Model.LeadDetailsModel>() {
             @Override
             public void onResponse(Call<Model.LeadDetailsModel> call, Response<Model.LeadDetailsModel> response) {
@@ -684,14 +613,16 @@ Log.e("TGED","CALL3outcome"+ status);
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     Intent intent = new Intent(ActivityLeadsDetail.this, AppointmentBookingDetailActivity.class);
                                                     intent.putExtra("lead_id", "" + keyModel.getData().getLead().getId());
-                                                    intent.putExtra("name", "" + keyModel.getData().getLead().getFirstName()+" "+ keyModel.getData().getLead().getLastName());
-                                                    startActivity(intent);                                                }
+                                                    intent.putExtra("name", "" + keyModel.getData().getLead().getFirstName() + " " + keyModel.getData().getLead().getLastName());
+                                                    startActivity(intent);
+                                                }
                                             });
 
                                             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    dialog.dismiss();  }
+                                                    dialog.dismiss();
+                                                }
                                             });
 
                                             // Create and show the AlertDialog
@@ -730,7 +661,7 @@ Log.e("TGED","CALL3outcome"+ status);
                                         mBinding.spinnerCall3Status.setEnabled(true);
                                         mBinding.spinnerCall2Status.setEnabled(true);
                                         mBinding.spinnerCallStatus.setEnabled(true);
-                                    }else{
+                                    } else {
                                         mBinding.btnEmail.setEnabled(false);
                                         mBinding.tvCall.setEnabled(false);
                                         mBinding.llCallStatus.setEnabled(false);
@@ -765,7 +696,8 @@ Log.e("TGED","CALL3outcome"+ status);
                                             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                 dialog.dismiss();  }
+                                                    dialog.dismiss();
+                                                }
                                             });
 
                                             // Create and show the AlertDialog
@@ -776,30 +708,31 @@ Log.e("TGED","CALL3outcome"+ status);
                                     });
 
 
-                                        mBinding.tvMessage.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityLeadsDetail.this);
-                                                builder.setTitle("Confirmation"); // Set the dialog title
-                                                builder.setMessage("Are you sure you want to continue sending Message?"); // Set the dialog message
+                                    mBinding.tvMessage.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(ActivityLeadsDetail.this);
+                                            builder.setTitle("Confirmation"); // Set the dialog title
+                                            builder.setMessage("Are you sure you want to continue sending Message?"); // Set the dialog message
 
-                                                // Set up the buttons
-                                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        showCDialog("Open Message",  keyModel.getData().getConfiguration().getOpen_message(),  keyModel.getData().getLead().getNumber(),  keyModel.getData().getLead().getEmail());
-                                                    }
-                                                });
+                                            // Set up the buttons
+                                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    showCDialog("Open Message", keyModel.getData().getConfiguration().getOpen_message(), keyModel.getData().getLead().getNumber(), keyModel.getData().getLead().getEmail());
+                                                }
+                                            });
 
-                                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        dialog.dismiss();  }
-                                                });
+                                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            });
 
-                                                // Create and show the AlertDialog
-                                                AlertDialog dialog = builder.create();
-                                                dialog.show();
+                                            // Create and show the AlertDialog
+                                            AlertDialog dialog = builder.create();
+                                            dialog.show();
 
 
 //                                                if (keyModel.getData().getLead().getOpeningMsg() == null ) {
@@ -809,63 +742,50 @@ Log.e("TGED","CALL3outcome"+ status);
 //                                                    Toast.makeText(ActivityLeadsDetail.this, "You have already submitted open message", Toast.LENGTH_SHORT).show();
 //
 //                                                }
-                                            }
-                                        });
-                                    mBinding.tvLastAction.setText(keyModel.getData().getLead().getLastAction().getType()  );
-                                    mBinding.tvNextAction.setText(keyModel.getData().getLead().getNextAction().getType() );
+                                        }
+                                    });
+                                    mBinding.tvLastAction.setText(keyModel.getData().getLead().getLastAction().getType());
+                                    mBinding.tvNextAction.setText(keyModel.getData().getLead().getNextAction().getType());
 //
 
 
+                                    Log.e("TGED", "call3_outcome-> " + call3_outcome);
+                                    Log.e("TGED", "call2_outcome-> " + call2_outcome);
+                                    Log.e("TGED", "call1_outcome-> " + call1_outcome);
 
 
-
-
-
-
-Log.e("TGED","call3_outcome-> "+ call3_outcome);
-Log.e("TGED","call2_outcome-> "+ call2_outcome);
-Log.e("TGED","call1_outcome-> "+ call1_outcome);
-
-
-                                    if(call1_outcome == null){
+                                    if (call1_outcome == null) {
                                         call1_outcome = "Select";
                                         setCallStatusSpinner(call1_outcome);
-                                    }else{
+                                    } else {
                                         setCallStatusSpinner(call1_outcome);
 
                                     }
-                                    if(call3_outcome == null){
+                                    if (call3_outcome == null) {
                                         call3_outcome = "Select";
                                         setCall3StatusSpinner(call3_outcome);
-                                    }else{
+                                    } else {
                                         setCall3StatusSpinner(call3_outcome);
 
-                                    } if(call4_outcome == null){
+                                    }
+                                    if (call4_outcome == null) {
                                         call4_outcome = "Select";
                                         setCall4StatusSpinner(call4_outcome);
-                                    }else{
+                                    } else {
                                         setCall4StatusSpinner(call4_outcome);
 
                                     }
-                                    if(call2_outcome == null){
+                                    if (call2_outcome == null) {
                                         call2_outcome = "Select";
                                         setCall2StatusSpinner(call2_outcome);
-                                    }else{
+                                    } else {
                                         setCall2StatusSpinner(call2_outcome);
 
                                     }
-
-
-
-
-
 
 
 //                                    Log.e("TGED","LEAD STATUS=> "+ keyModel.getData().getLead().getLeadStatus());
                                     setLeadStatusSpinner(lead_status);
-
-
-
 
 
                                     mBinding.tvCall.setOnClickListener(new View.OnClickListener() {
@@ -881,26 +801,22 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                                                 public void onClick(DialogInterface dialog, int which) {
 
 
-
-                                                    if(keyModel.getData().getLead().getLastAction().getType().equalsIgnoreCase("N/A"))
-                                                    {
+                                                    if (keyModel.getData().getLead().getLastAction().getType().equalsIgnoreCase("N/A")) {
                                                         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                                                         call1 = currentDate;
                                                         mBinding.tvCall.setEnabled(true);
 
 
                                                         Intent intent = new Intent(Intent.ACTION_DIAL);
-                                                        intent.setData(Uri.parse("tel:"+ keyModel.getData().getLead().getNumber()));
+                                                        intent.setData(Uri.parse("tel:" + keyModel.getData().getLead().getNumber()));
                                                         startActivity(intent);
                                                         updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                                                                lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4,call4_outcome, email_message);
+                                                                lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
 
-                                                    }
-                                                    else if(keyModel.getData().getLead().getNextAction().getType().equalsIgnoreCase("call 1"))
-                                                    {
+                                                    } else if (keyModel.getData().getLead().getNextAction().getType().equalsIgnoreCase("call 1")) {
 
                                                         Intent intent = new Intent(Intent.ACTION_DIAL);
-                                                        intent.setData(Uri.parse("tel:"+ keyModel.getData().getLead().getNumber()));
+                                                        intent.setData(Uri.parse("tel:" + keyModel.getData().getLead().getNumber()));
                                                         startActivity(intent);
                                                         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                                                         call1 = currentDate;
@@ -914,22 +830,21 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
 
                                                         LocalDateTime dateTime = null;
                                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                                            dateTime = LocalDateTime.parse(date,formatter);
+                                                            dateTime = LocalDateTime.parse(date, formatter);
                                                         }
                                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                                            if( dateTime.toLocalDate().equals(LocalDate.now())){
+                                                            if (dateTime.toLocalDate().equals(LocalDate.now())) {
                                                                 updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                                                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4,call4_outcome, email_message);
+                                                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
 
                                                             }
 
                                                         }
 
-                                                    }  else if(keyModel.getData().getLead().getNextAction().getType().equalsIgnoreCase("call 2"))
-                                                    {
+                                                    } else if (keyModel.getData().getLead().getNextAction().getType().equalsIgnoreCase("call 2")) {
 
                                                         Intent intent = new Intent(Intent.ACTION_DIAL);
-                                                        intent.setData(Uri.parse("tel:"+ keyModel.getData().getLead().getNumber()));
+                                                        intent.setData(Uri.parse("tel:" + keyModel.getData().getLead().getNumber()));
                                                         startActivity(intent);
                                                         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                                                         call2 = currentDate;
@@ -942,22 +857,21 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
 
                                                         LocalDateTime dateTime = null;
                                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                                            dateTime = LocalDateTime.parse(date,formatter);
+                                                            dateTime = LocalDateTime.parse(date, formatter);
                                                         }
                                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                                            if( dateTime.toLocalDate().equals(LocalDate.now())){
+                                                            if (dateTime.toLocalDate().equals(LocalDate.now())) {
                                                                 updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                                                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4,call4_outcome, email_message);
+                                                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
 
                                                             }
 
                                                         }
 
-                                                    }   else if(keyModel.getData().getLead().getNextAction().getType().equalsIgnoreCase("call 3"))
-                                                    {
+                                                    } else if (keyModel.getData().getLead().getNextAction().getType().equalsIgnoreCase("call 3")) {
 
                                                         Intent intent = new Intent(Intent.ACTION_DIAL);
-                                                        intent.setData(Uri.parse("tel:"+ keyModel.getData().getLead().getNumber()));
+                                                        intent.setData(Uri.parse("tel:" + keyModel.getData().getLead().getNumber()));
                                                         startActivity(intent);
                                                         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                                                         call3 = currentDate;
@@ -965,7 +879,7 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
 
 
                                                         updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                                                                lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4,call4_outcome, email_message);
+                                                                lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
                                                         DateTimeFormatter formatter = null;
                                                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                                                             formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -974,21 +888,20 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
 
                                                         LocalDateTime dateTime = null;
                                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                                            dateTime = LocalDateTime.parse(date,formatter);
+                                                            dateTime = LocalDateTime.parse(date, formatter);
                                                         }
                                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                                            if( dateTime.toLocalDate().equals(LocalDate.now())){
+                                                            if (dateTime.toLocalDate().equals(LocalDate.now())) {
                                                                 updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                                                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4,call4_outcome, email_message);
+                                                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
 
                                                             }
 
                                                         }
-                                                    } else if(keyModel.getData().getLead().getNextAction().getType().equalsIgnoreCase("call 4"))
-                                                    {
+                                                    } else if (keyModel.getData().getLead().getNextAction().getType().equalsIgnoreCase("call 4")) {
 
                                                         Intent intent = new Intent(Intent.ACTION_DIAL);
-                                                        intent.setData(Uri.parse("tel:"+ keyModel.getData().getLead().getNumber()));
+                                                        intent.setData(Uri.parse("tel:" + keyModel.getData().getLead().getNumber()));
                                                         startActivity(intent);
                                                         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                                                         call4 = currentDate;
@@ -1003,31 +916,20 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
 
                                                         LocalDateTime dateTime = null;
                                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                                            dateTime = LocalDateTime.parse(date,formatter);
+                                                            dateTime = LocalDateTime.parse(date, formatter);
                                                         }
                                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                                            if( dateTime.toLocalDate().equals(LocalDate.now())){
+                                                            if (dateTime.toLocalDate().equals(LocalDate.now())) {
                                                                 updateLeadAndCallsStatus(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id,
-                                                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4,call4_outcome, email_message);
+                                                                        lead_status, opening_msg, call1, call1_outcome, call2, call2_outcome, call3, call3_outcome, call4, call4_outcome, email_message);
 
                                                             }
 
                                                         }
-                                                    } else if(keyModel.getData().getLead().getNextAction().getType().equalsIgnoreCase("appointed"))
-                                                    {
+                                                    } else if (keyModel.getData().getLead().getNextAction().getType().equalsIgnoreCase("appointed")) {
                                                         Toast.makeText(ActivityLeadsDetail.this, "You have completed", Toast.LENGTH_SHORT).show();
                                                         mBinding.tvCall.setEnabled(false);
                                                     }
-
-
-
-
-
-
-
-
-
-
 
 
                                                 }
@@ -1036,7 +938,8 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                                             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    dialog.dismiss();  }
+                                                    dialog.dismiss();
+                                                }
                                             });
 
                                             // Create and show the AlertDialog
@@ -1044,17 +947,11 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                                             dialog.show();
 
 
-
-
                                         }
                                     });
 
 
-
-
-
-
-                                    }
+                                }
 
                             } else {
                                 Toast.makeText(ActivityLeadsDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -1094,45 +991,46 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
             }
         });
     }
- 
-    public void updateLeadAndCallsStatus(String token,String id, String lead_status,
+
+    public void updateLeadAndCallsStatus(String token, String id, String lead_status,
                                          String opening_msg, String call1,
                                          String call1_outcome, String call2,
                                          String call2_outcome, String call3,
-                                         String call3_outcome , String call4 , String call4_outcome ,
-                                         String email_message ) {
+                                         String call3_outcome, String call4, String call4_outcome,
+                                         String email_message) {
         mBinding.progress.setVisibility(View.VISIBLE);
         ApiService apiService = ApiClient.getClient(ActivityLeadsDetail.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
- 
+
         builder.addFormDataPart("id", id);
         builder.addFormDataPart("lead_status", lead_status);
         builder.addFormDataPart("opening_msg", opening_msg);
-        if(call1 !=null) {
+        if (call1 != null) {
             builder.addFormDataPart("call1", call1);
         }
-        if(call1_outcome !=null) {
+        if (call1_outcome != null) {
             builder.addFormDataPart("call1_outcome", call1_outcome);
         }
-        if(call2 !=null) {
+        if (call2 != null) {
             builder.addFormDataPart("call2", call2);
         }
-        if(call2_outcome !=null) {
+        if (call2_outcome != null) {
             builder.addFormDataPart("call2_outcome", call2_outcome);
         }
-        if(call3 !=null) {
+        if (call3 != null) {
             builder.addFormDataPart("call3", call3);
         }
-        if(call3_outcome !=null) {
+        if (call3_outcome != null) {
             builder.addFormDataPart("call3_outcome", call3_outcome);
-        }  if(call4 !=null) {
+        }
+        if (call4 != null) {
             builder.addFormDataPart("call4", call4);
         }
-        if(call4_outcome !=null) {
+        if (call4_outcome != null) {
             builder.addFormDataPart("call4_outcome", call4_outcome);
         }
-        if(email_message !=null) {
+        if (email_message != null) {
             builder.addFormDataPart("email_message", email_message);
         }
         RequestBody requestBody = builder.build();
@@ -1153,12 +1051,12 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                             mBinding.progress.setVisibility(View.GONE);
 
                             if (listofhome.getStatus().equals("1")) {
-                                if(dialog!=null) {
+                                if (dialog != null) {
                                     dialog.dismiss();
                                 }
-                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
 
-                                Toast.makeText(ActivityLeadsDetail.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityLeadsDetail.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
 //                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
 
 
@@ -1202,35 +1100,35 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
         });
     }
 
-    public void updateLead(String token,String id, String fname,
-                                         String lname, String tvCOmpany,
-                                         String tvDesignation, String tvAge,
-                                         String tvPhoneNumber, String tvEmail  ) {
+    public void updateLead(String token, String id, String fname,
+                           String lname, String tvCOmpany,
+                           String tvDesignation, String tvAge,
+                           String tvPhoneNumber, String tvEmail) {
         mBinding.progress.setVisibility(View.VISIBLE);
         ApiService apiService = ApiClient.getClient(ActivityLeadsDetail.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
 
         builder.addFormDataPart("id", id);
-        if(fname !=null) {
+        if (fname != null) {
             builder.addFormDataPart("f_name", fname);
         }
-        if(lname !=null) {
+        if (lname != null) {
             builder.addFormDataPart("l_name", lname);
         }
-        if(tvCOmpany !=null) {
+        if (tvCOmpany != null) {
             builder.addFormDataPart("company", tvCOmpany);
         }
-        if(tvDesignation !=null) {
+        if (tvDesignation != null) {
             builder.addFormDataPart("designation", tvDesignation);
         }
-        if(tvAge !=null) {
+        if (tvAge != null) {
             builder.addFormDataPart("age", tvAge);
         }
-        if(tvPhoneNumber !=null) {
+        if (tvPhoneNumber != null) {
             builder.addFormDataPart("phone_no", tvPhoneNumber);
         }
-        if(tvEmail !=null) {
+        if (tvEmail != null) {
             builder.addFormDataPart("email", tvEmail);
         }
         RequestBody requestBody = builder.build();
@@ -1251,12 +1149,12 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                             mBinding.progress.setVisibility(View.GONE);
 
                             if (listofhome.getStatus().equals("1")) {
-                                if(dialog!=null) {
+                                if (dialog != null) {
                                     dialog.dismiss();
                                 }
-                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), lead_id);
 
-                                Toast.makeText(ActivityLeadsDetail.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityLeadsDetail.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
 //                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
 
 
@@ -1313,14 +1211,14 @@ Log.e("TGED","call1_outcome-> "+ call1_outcome);
                 finish();
 
 
-
-             }
+            }
         });
 
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();  }
+                dialog.dismiss();
+            }
         });
 
         // Create and show the AlertDialog

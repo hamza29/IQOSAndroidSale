@@ -8,25 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.iqos.MeetingModule.ActivityPreMeetingCheckList;
-import com.example.iqos.MeetingModule.ActivityVerification;
 import com.example.iqos.MeetingModule.BookAppointmentDetailActivity;
 import com.example.iqos.R;
-import com.example.iqos.Retrofit.Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentHyperAdapter extends RecyclerView.Adapter<AppointmentHyperAdapter.ViewHolder> {
-    private Activity context;
-
-
-
     List<ActivityHyperAppointments.Appointment> items = new ArrayList<>();
+    private Activity context;
 
     public AppointmentHyperAdapter(Activity context, List<ActivityHyperAppointments.Appointment> leads) {
         this.context = context;
@@ -97,9 +90,9 @@ public class AppointmentHyperAdapter extends RecyclerView.Adapter<AppointmentHyp
                 }
             });
 */
-                if(items.get(position).getId() !=null){
-                    holder.tvId.setText("Appointment # "+ items.get(position).getId());
-                        }
+        if (items.get(position).getId() != null) {
+            holder.tvId.setText("Appointment # " + items.get(position).getId());
+        }
 
                 /*if(items.get(position).getDay1CallAt()!=null){
                     holder.tvDay.setText("Device Care 1");
@@ -128,23 +121,22 @@ public class AppointmentHyperAdapter extends RecyclerView.Adapter<AppointmentHyp
 //holder.tvDay.setText(""+ items.get(position).get);
 
 
-            if(items.get(position).getLead().getFirstName() !=null    ){
-                holder.tvName.setText( items.get(position).getLead().getFirstName()+" " );
-                    }
+        if (items.get(position).getLead().getFirstName() != null) {
+            holder.tvName.setText(items.get(position).getLead().getFirstName() + " ");
+        }
 
 
-            if(items.get(position).getAppointmentAt() !=null){
-                holder.tvDate.setText( items.get(position).getAppointmentAt().split(" ")[0].toString() +"");
-                    }
-            if(items.get(position).getAppointmentAt() !=null){
-                holder.tvTime.setText( items.get(position).getAppointmentAt().split(" ")[1].toString() +"");
-                    }
+        if (items.get(position).getAppointmentAt() != null) {
+            holder.tvDate.setText(items.get(position).getAppointmentAt().split(" ")[0].toString() + "");
+        }
+        if (items.get(position).getAppointmentAt() != null) {
+            holder.tvTime.setText(items.get(position).getAppointmentAt().split(" ")[1].toString() + "");
+        }
 
 
-
-            if(items.get(position).getAppointmentLocation() !=null){
-                holder.tvLocation.setText( items.get(position).getAppointmentLocation() +"");
-                    }
+        if (items.get(position).getAppointmentLocation() != null) {
+            holder.tvLocation.setText(items.get(position).getAppointmentLocation() + "");
+        }
 
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +145,7 @@ public class AppointmentHyperAdapter extends RecyclerView.Adapter<AppointmentHyp
 
 
                 Intent intent = new Intent(context, ActivityAppointmentHyperMeeting.class);
-                intent.putExtra("appointment_id",""+ items.get(position).getLead().getId());
+                intent.putExtra("appointment_id", "" + items.get(position).getLead().getId());
 
                 context.startActivity(intent);
             }
@@ -161,19 +153,15 @@ public class AppointmentHyperAdapter extends RecyclerView.Adapter<AppointmentHyp
 
 
         holder.tvEdit.setVisibility(View.GONE);
-                 holder.tvEdit.setOnClickListener(new View.OnClickListener() {
-                                                      @Override
-                                                      public void onClick(View view) {
-                                                          Intent intent = new Intent(context, BookAppointmentDetailActivity.class);
-                                                          intent.putExtra("appointment_id",""+ items.get(position).getId());
-                                                          context.startActivity(intent);
-                                                      }
-                                                  }
-                 );
-
-
-
-
+        holder.tvEdit.setOnClickListener(new View.OnClickListener() {
+                                             @Override
+                                             public void onClick(View view) {
+                                                 Intent intent = new Intent(context, BookAppointmentDetailActivity.class);
+                                                 intent.putExtra("appointment_id", "" + items.get(position).getId());
+                                                 context.startActivity(intent);
+                                             }
+                                         }
+        );
 
 
     }
@@ -190,7 +178,7 @@ public class AppointmentHyperAdapter extends RecyclerView.Adapter<AppointmentHyp
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView tvName,tvPreMeeting,message,tvDay,tvStartAppointment,tvId,tvTime,tvEdit,tvDate,tvLocation;
+        TextView tvName, tvPreMeeting, message, tvDay, tvStartAppointment, tvId, tvTime, tvEdit, tvDate, tvLocation;
         LinearLayout linearLayout;
 
 

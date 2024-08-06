@@ -11,11 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.iqos.AppointmentsModule.AppointmentAdapter;
 import com.example.iqos.Constants;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
-import com.example.iqos.Retrofit.Model;
 import com.example.iqos.databinding.ActivityBookAppointmentBinding;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -45,35 +43,34 @@ public class ActivityHyperAppointments extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                         finish();
+                finish();
 
-             }
+            }
         });
 
         mBinding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mBinding.swipe.setRefreshing(true);
-                getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
             }
         });
 
         //  appointmentsRecycler();
 
-        getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+        getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+        getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
     }
 
     private void appointmentsRecycler(List<Appointment> appointments) {
-
 
 
         AppointmentHyperAdapter appointmentAdapter;
@@ -89,7 +86,7 @@ public class ActivityHyperAppointments extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityHyperAppointments.this).create(ApiService.class);
-        Call<HyperAppointmentsModel> call = apiService.getHyperAppointments("application/json",token);
+        Call<HyperAppointmentsModel> call = apiService.getHyperAppointments("application/json", token);
         call.enqueue(new Callback<HyperAppointmentsModel>() {
             @Override
             public void onResponse(Call<HyperAppointmentsModel> call, Response<HyperAppointmentsModel> response) {
@@ -107,11 +104,10 @@ public class ActivityHyperAppointments extends AppCompatActivity {
 
                                     mBinding.progress.setVisibility(View.GONE);
 
-                                    if (keyModel.getData().getAppointments().size() >0){
-                                        appointmentsRecycler(keyModel.getData().getAppointments())   ;
+                                    if (keyModel.getData().getAppointments().size() > 0) {
+                                        appointmentsRecycler(keyModel.getData().getAppointments());
                                     }
                                     mBinding.rvAppointments.setVisibility(View.VISIBLE);
-
 
 
                                 }
@@ -119,7 +115,7 @@ public class ActivityHyperAppointments extends AppCompatActivity {
                             } else {
                                 mBinding.rvAppointments.setVisibility(View.GONE);
 
-                                appointmentsRecycler(new ArrayList<>())   ;
+                                appointmentsRecycler(new ArrayList<>());
 
 //                                Toast.makeText(ActivityBookAppointment.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
@@ -158,6 +154,7 @@ public class ActivityHyperAppointments extends AppCompatActivity {
             }
         });
     }
+
     public class Appointment {
 
         @SerializedName("is_external")
@@ -514,6 +511,7 @@ public class ActivityHyperAppointments extends AppCompatActivity {
         }
 
     }
+
     public class Data {
 
         @SerializedName("appointments")
@@ -529,6 +527,7 @@ public class ActivityHyperAppointments extends AppCompatActivity {
         }
 
     }
+
     public class HyperAppointmentsModel {
 
         @SerializedName("status")
@@ -566,6 +565,7 @@ public class ActivityHyperAppointments extends AppCompatActivity {
         }
 
     }
+
     public class LastAction {
 
         @SerializedName("type")
@@ -592,6 +592,7 @@ public class ActivityHyperAppointments extends AppCompatActivity {
         }
 
     }
+
     public class LastAction__1 {
 
         @SerializedName("type")
@@ -618,6 +619,7 @@ public class ActivityHyperAppointments extends AppCompatActivity {
         }
 
     }
+
     public class Lead {
 
         @SerializedName("id")
@@ -732,6 +734,7 @@ public class ActivityHyperAppointments extends AppCompatActivity {
         }
 
     }
+
     public class NextAction {
 
         @SerializedName("type")

@@ -12,9 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.iqos.AppointmentsModule.ActivityBookAppointment;
 import com.example.iqos.Constants;
 import com.example.iqos.GPSTracker;
 import com.example.iqos.Retrofit.ApiClient;
@@ -24,12 +22,11 @@ import com.example.iqos.SalesModule.ActivityNoSales;
 import com.example.iqos.SalesModule.ActivitySales;
 import com.example.iqos.WebViewActivity;
 import com.example.iqos.databinding.ActivityAppointmentMeetingCheckListBinding;
-import com.example.iqos.databinding.ActivityAppointmentMeetingCheckListBinding;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -39,6 +36,7 @@ import retrofit2.Response;
 
 public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
 
+    public static Activity meetingcehck;
     ActivityAppointmentMeetingCheckListBinding mBinding;
     String starting_latitude;
     String starting_date;
@@ -47,13 +45,12 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
     String meeting_outcome;
     SharedPreferences mSharedPreferences;
     String appointment_id;
-    String q4Answer  ="";
-
-    String q3Answer  ="";
-    String q2Answer  ="";
-    String q1Answer  ="";
-    public  static Activity meetingcehck;
-
+    String q4Answer = "";
+    String q3Answer = "";
+    String q2Answer = "";
+    String q1Answer = "", isSale;
+    String package_id, package_name;
+    String a1, a2, a3, a4, type, name, multisale;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,210 +60,189 @@ public class ActivityAppointmentMeetingCheckList extends AppCompatActivity {
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
         meetingcehck = this;
         GPSTracker gpsTracker = new GPSTracker(this);
-        if (gpsTracker.getIsGPSTrackingEnabled())
-        {
-            starting_latitude = gpsTracker.getLatitude()+ "," + gpsTracker.getLongitude();
+        if (gpsTracker.getIsGPSTrackingEnabled()) {
+            starting_latitude = gpsTracker.getLatitude() + "," + gpsTracker.getLongitude();
 
         }
         Date todayDate = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayString = formatter.format(todayDate);
-        starting_date =todayString;
-         appointment_id = getIntent().getStringExtra("appointment_id");
-       String name = getIntent().getStringExtra("name");
-mBinding.tvLeadName.setText("Lead Name: "+ name);
-        updateMeetingChecklist(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
+        starting_date = todayString;
+        appointment_id = getIntent().getStringExtra("appointment_id");
+        isSale = getIntent().getStringExtra("isSale");
+        String name = getIntent().getStringExtra("name");
+
+        package_id = getIntent().getStringExtra("package_id");
+        package_name = getIntent().getStringExtra("package_name");
+        a1 = getIntent().getStringExtra("a1");
+        a2 = getIntent().getStringExtra("a2");
+        a3 = getIntent().getStringExtra("a3");
+        a4 = getIntent().getStringExtra("a4");
+        type = getIntent().getStringExtra("type");
+        multisale = getIntent().getStringExtra("multisale");
+        meeting_outcome = getIntent().getStringExtra("meeting_outcome");
+        mBinding.tvLeadName.setText("Lead Name: " + name);
+        updateMeetingChecklist(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""),
                 appointment_id,
                 starting_date,
                 starting_latitude,
-                mBinding. tvQuestion1.getText().toString(),"",
-                mBinding. tvQuestion2.getText().toString(),"",
-                mBinding. tvQuestion3.getText().toString(),"",
-                mBinding. tvQuestion4.getText().toString(),"",
-                "","","","","","","","");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                mBinding.tvQuestion1.getText().toString(), "",
+                mBinding.tvQuestion2.getText().toString(), "",
+                mBinding.tvQuestion3.getText().toString(), "",
+                mBinding.tvQuestion4.getText().toString(), "",
+                "", "", "", "", "", "", "", "");
 
 
         mBinding.tvSales.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 meeting_outcome ="sale";
+            @Override
+            public void onClick(View view) {
+                meeting_outcome = "sale";
 
-                 if(mBinding.rbQ1a1.isChecked()){
-                     q1Answer =mBinding.rbQ1a1.getText().toString();
-                 }else  if(mBinding.rbQ1a2.isChecked()){
-                     q1Answer =mBinding.rbQ1a2.getText().toString();
-                 }else  if(mBinding.rbQ1a3.isChecked()){
-                     q1Answer =mBinding.rbQ1a3.getText().toString();
-                 }else  if(mBinding.rbQ1a4.isChecked()){
-                     q1Answer =mBinding.rbQ1a4.getText().toString();
-                 }
-
-                 if(mBinding.rbQ2a1.isChecked()){
-                     q2Answer =mBinding.rbQ2a1Et.getText().toString();
-                 }else  if(mBinding.rbQ2a2.isChecked()){
-                     q2Answer =mBinding.rbQ2a2Et.getText().toString();
-                 }
-                 q3Answer =mBinding.etQ3a.getText().toString();
-                 q4Answer= mBinding.etbrand.getText().toString();
-
-
-
-                 Intent intent = new Intent(ActivityAppointmentMeetingCheckList.this, ActivityPackages.class);
-              intent.putExtra("appointment_id",""+appointment_id);
-              intent.putExtra("a1",""+q1Answer);
-              intent.putExtra("a2",""+q2Answer);
-              intent.putExtra("a3",""+q3Answer);
-              intent.putExtra("a4",""+q4Answer);
-              intent.putExtra("meeting_outcome",""+meeting_outcome);
-                 startActivity(intent);
-//                 finish();
-             }
-         });
-
-         mBinding.tvNoSales.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 meeting_outcome ="no sale";
-
-                 if(mBinding.rbQ1a1.isChecked()){
-                     q1Answer =mBinding.rbQ1a1.getText().toString();
-                 }else  if(mBinding.rbQ1a2.isChecked()){
-                     q1Answer =mBinding.rbQ1a2.getText().toString();
-                 }else  if(mBinding.rbQ1a3.isChecked()){
-                     q1Answer =mBinding.rbQ1a3.getText().toString();
-                 }else  if(mBinding.rbQ1a4.isChecked()){
-                     q1Answer =mBinding.rbQ1a4.getText().toString();
-                 }
-
-                 if(mBinding.rbQ2a1.isChecked()){
-                     q2Answer =mBinding.rbQ2a1Et.getText().toString();
-                 }else  if(mBinding.rbQ2a2.isChecked()){
-                     q2Answer =mBinding.rbQ2a2Et.getText().toString();
-                 }
-                 q3Answer =mBinding.etQ3a.getText().toString();
-                 q4Answer= mBinding.etbrand.getText().toString();
-
-
-                 Intent intent = new Intent(ActivityAppointmentMeetingCheckList.this, ActivityNoSales.class);
-                 intent.putExtra("appointment_id",""+appointment_id);
-                 intent.putExtra("a1",""+q1Answer);
-                 intent.putExtra("a2",""+q2Answer);
-                 intent.putExtra("a3",""+q3Answer);
-                 intent.putExtra("a4",""+q4Answer);
-                 intent.putExtra("meeting_outcome",""+meeting_outcome);
-                 startActivity(intent);
-                 finish();
-             }
-         });
-            //
-            mBinding.v1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-            Intent intent=new Intent(ActivityAppointmentMeetingCheckList.this, WebViewActivity.class);
-            intent.putExtra("video_link","https://iqoch.com/videos/B265970_IQOS_ILUMA_Premium_HD1080_.mp4");
-            startActivity(intent);
+                if (mBinding.rbQ1a1.isChecked()) {
+                    q1Answer = mBinding.rbQ1a1.getText().toString();
+                } else if (mBinding.rbQ1a2.isChecked()) {
+                    q1Answer = mBinding.rbQ1a2.getText().toString();
+                } else if (mBinding.rbQ1a3.isChecked()) {
+                    q1Answer = mBinding.rbQ1a3.getText().toString();
+                } else if (mBinding.rbQ1a4.isChecked()) {
+                    q1Answer = mBinding.rbQ1a4.getText().toString();
                 }
-            });
-            mBinding.v2.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent=new Intent(ActivityAppointmentMeetingCheckList.this, WebViewActivity.class);
-                            intent.putExtra("video_link","https://iqoch.com/videos/B265970_ILUMA_Premium_Super_Restricted_How_to_Charging_video_744_A_en_GB_83_HD1080_25p_AE001.mp4");
-                            startActivity(intent);
-                        }
-                    });
-         mBinding.tvComplete.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
 
-                 GPSTracker gpsTracker = new GPSTracker(ActivityAppointmentMeetingCheckList.this);
-                 if (gpsTracker.getIsGPSTrackingEnabled())
-                 {
-                     ending_latitude = gpsTracker.getLatitude()+ "," + gpsTracker.getLongitude();
-                 }
+                if (mBinding.rbQ2a1.isChecked()) {
+                    q2Answer = mBinding.rbQ2a1Et.getText().toString();
+                } else if (mBinding.rbQ2a2.isChecked()) {
+                    q2Answer = mBinding.rbQ2a2Et.getText().toString();
+                }
+                q3Answer = mBinding.etQ3a.getText().toString();
+                q4Answer = mBinding.etbrand.getText().toString();
 
 
-                 if(mBinding.rbQ1a1.isChecked()){
-                     q1Answer =mBinding.rbQ1a1.getText().toString();
-                 }else  if(mBinding.rbQ1a2.isChecked()){
-                     q1Answer =mBinding.rbQ1a2.getText().toString();
-                 }else  if(mBinding.rbQ1a3.isChecked()){
-                     q1Answer =mBinding.rbQ1a3.getText().toString();
-                 }else  if(mBinding.rbQ1a4.isChecked()){
-                     q1Answer =mBinding.rbQ1a4.getText().toString();
-                 }
+                Intent intent = new Intent(ActivityAppointmentMeetingCheckList.this, ActivityPackages.class);
 
-                 if(mBinding.rbQ2a1.isChecked()){
-                     q2Answer =mBinding.rbQ2a1Et.getText().toString();
-                 }else  if(mBinding.rbQ2a2.isChecked()){
-                     q2Answer =mBinding.rbQ2a2Et.getText().toString();
-                 }
+                if (Objects.equals(isSale, "sale")) {
+                    intent = new Intent(ActivityAppointmentMeetingCheckList.this, ActivitySales.class);
+
+                    intent.putExtra("id", package_id);
+                    intent.putExtra("name", package_name);
+                    intent.putExtra("type", "sales");
+                    intent.putExtra("multisale", "" + multisale);
+
+                }
+                intent.putExtra("app_id", "" + appointment_id);
+
+                intent.putExtra("appointment_id", "" + appointment_id);
+                intent.putExtra("a1", "" + q1Answer);
+                intent.putExtra("a2", "" + q2Answer);
+                intent.putExtra("a3", "" + q3Answer);
+                intent.putExtra("a4", "" + q4Answer);
+                intent.putExtra("meeting_outcome", "" + meeting_outcome);
+                startActivity(intent);
+//                 finish();
+            }
+        });
+
+        mBinding.tvNoSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                meeting_outcome = "no sale";
+
+                if (mBinding.rbQ1a1.isChecked()) {
+                    q1Answer = mBinding.rbQ1a1.getText().toString();
+                } else if (mBinding.rbQ1a2.isChecked()) {
+                    q1Answer = mBinding.rbQ1a2.getText().toString();
+                } else if (mBinding.rbQ1a3.isChecked()) {
+                    q1Answer = mBinding.rbQ1a3.getText().toString();
+                } else if (mBinding.rbQ1a4.isChecked()) {
+                    q1Answer = mBinding.rbQ1a4.getText().toString();
+                }
+
+                if (mBinding.rbQ2a1.isChecked()) {
+                    q2Answer = mBinding.rbQ2a1Et.getText().toString();
+                } else if (mBinding.rbQ2a2.isChecked()) {
+                    q2Answer = mBinding.rbQ2a2Et.getText().toString();
+                }
+                q3Answer = mBinding.etQ3a.getText().toString();
+                q4Answer = mBinding.etbrand.getText().toString();
 
 
+                Intent intent = new Intent(ActivityAppointmentMeetingCheckList.this, ActivityNoSales.class);
+                intent.putExtra("appointment_id", "" + appointment_id);
+                intent.putExtra("a1", "" + q1Answer);
+                intent.putExtra("a2", "" + q2Answer);
+                intent.putExtra("a3", "" + q3Answer);
+                intent.putExtra("a4", "" + q4Answer);
+                intent.putExtra("meeting_outcome", "" + meeting_outcome);
+                startActivity(intent);
+                finish();
+            }
+        });
+        //
+        mBinding.v1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityAppointmentMeetingCheckList.this, WebViewActivity.class);
+                intent.putExtra("video_link", "https://iqoch.com/videos/B265970_IQOS_ILUMA_Premium_HD1080_.mp4");
+                startActivity(intent);
+            }
+        });
+        mBinding.v2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityAppointmentMeetingCheckList.this, WebViewActivity.class);
+                intent.putExtra("video_link", "https://iqoch.com/videos/B265970_ILUMA_Premium_Super_Restricted_How_to_Charging_video_744_A_en_GB_83_HD1080_25p_AE001.mp4");
+                startActivity(intent);
+            }
+        });
+        mBinding.tvComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                q3Answer =mBinding.etQ3a.getText().toString();
+                GPSTracker gpsTracker = new GPSTracker(ActivityAppointmentMeetingCheckList.this);
+                if (gpsTracker.getIsGPSTrackingEnabled()) {
+                    ending_latitude = gpsTracker.getLatitude() + "," + gpsTracker.getLongitude();
+                }
 
 
+                if (mBinding.rbQ1a1.isChecked()) {
+                    q1Answer = mBinding.rbQ1a1.getText().toString();
+                } else if (mBinding.rbQ1a2.isChecked()) {
+                    q1Answer = mBinding.rbQ1a2.getText().toString();
+                } else if (mBinding.rbQ1a3.isChecked()) {
+                    q1Answer = mBinding.rbQ1a3.getText().toString();
+                } else if (mBinding.rbQ1a4.isChecked()) {
+                    q1Answer = mBinding.rbQ1a4.getText().toString();
+                }
+
+                if (mBinding.rbQ2a1.isChecked()) {
+                    q2Answer = mBinding.rbQ2a1Et.getText().toString();
+                } else if (mBinding.rbQ2a2.isChecked()) {
+                    q2Answer = mBinding.rbQ2a2Et.getText().toString();
+                }
 
 
-                 q4Answer= mBinding.etbrand.getText().toString();
+                q3Answer = mBinding.etQ3a.getText().toString();
 
 
-                 Date todayDate = Calendar.getInstance().getTime();
-                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                 String todayString = formatter.format(todayDate);
-                 ending_date =todayString;
+                q4Answer = mBinding.etbrand.getText().toString();
 
-                 updateMeetingChecklist(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
-                         appointment_id,
-                         starting_date,
-                         starting_latitude,
-                         mBinding. tvQuestion1.getText().toString(),q1Answer,
-                         mBinding. tvQuestion2.getText().toString(),q2Answer,
-                         mBinding. tvQuestion3.getText().toString(),q3Answer,
-                         mBinding. tvQuestion4.getText().toString(),q4Answer,
-                         "","","","","",ending_date,ending_latitude,meeting_outcome);
 
-             }
-         });
+                Date todayDate = Calendar.getInstance().getTime();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String todayString = formatter.format(todayDate);
+                ending_date = todayString;
+
+                updateMeetingChecklist(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""),
+                        appointment_id,
+                        starting_date,
+                        starting_latitude,
+                        mBinding.tvQuestion1.getText().toString(), q1Answer,
+                        mBinding.tvQuestion2.getText().toString(), q2Answer,
+                        mBinding.tvQuestion3.getText().toString(), q3Answer,
+                        mBinding.tvQuestion4.getText().toString(), q4Answer,
+                        "", "", "", "", "", ending_date, ending_latitude, meeting_outcome);
+
+            }
+        });
 
         mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -279,8 +255,7 @@ mBinding.tvLeadName.setText("Lead Name: "+ name);
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                finish();
-
+                        finish();
 
 
                     }
@@ -300,94 +275,92 @@ mBinding.tvLeadName.setText("Lead Name: "+ name);
         });
 
 
-
-
     }
 
 
-    public void updateMeetingChecklist(String token,String id, String start_meeting ,
-                                          String start_meeting_lat_lng,
-                                          String question1 ,
-                                          String answer1 ,
-                                          String question2 ,
-                                          String answer2 ,
-                                          String question3 ,
-                                          String answer3 ,
-                                          String question4 ,
-                                          String answer4 ,
+    public void updateMeetingChecklist(String token, String id, String start_meeting,
+                                       String start_meeting_lat_lng,
+                                       String question1,
+                                       String answer1,
+                                       String question2,
+                                       String answer2,
+                                       String question3,
+                                       String answer3,
+                                       String question4,
+                                       String answer4,
 
-                                          String video1 ,
-                                          String video2,
-                                          String video3,
-                                          String i1,
-                                          String i2,
-                                          String end_meeting,
-                                          String end_meeting_lat_lng,
-                                          String meeting_outcome) {
+                                       String video1,
+                                       String video2,
+                                       String video3,
+                                       String i1,
+                                       String i2,
+                                       String end_meeting,
+                                       String end_meeting_lat_lng,
+                                       String meeting_outcome) {
         ApiService apiService = ApiClient.getClient(ActivityAppointmentMeetingCheckList.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
 
         builder.addFormDataPart("id", id);
-        if(start_meeting !=null) {
+        if (start_meeting != null) {
             builder.addFormDataPart("start_meeting", start_meeting);
         }
-        if(start_meeting_lat_lng !=null) {
+        if (start_meeting_lat_lng != null) {
             builder.addFormDataPart("start_meeting_lat_lng", start_meeting_lat_lng);
         }
-        if(question1 !=null) {
+        if (question1 != null) {
             builder.addFormDataPart("question1", question1);
         }
-        if(answer1 !=null) {
+        if (answer1 != null) {
             builder.addFormDataPart("answer1", answer1);
         }
-         if(question2 !=null) {
-                    builder.addFormDataPart("question2", question2);
-                }
-         if(answer2 !=null) {
-                    builder.addFormDataPart("answer2", answer2);
-                }
+        if (question2 != null) {
+            builder.addFormDataPart("question2", question2);
+        }
+        if (answer2 != null) {
+            builder.addFormDataPart("answer2", answer2);
+        }
 
-         if(question3 !=null) {
-                    builder.addFormDataPart("question3", question3);
-                }
-         if(answer3 !=null) {
-                    builder.addFormDataPart("answer3", answer3);
-                }
+        if (question3 != null) {
+            builder.addFormDataPart("question3", question3);
+        }
+        if (answer3 != null) {
+            builder.addFormDataPart("answer3", answer3);
+        }
 
-         if(question4 !=null) {
-                    builder.addFormDataPart("question4", question4);
-                }
-         if(answer4 !=null) {
-                    builder.addFormDataPart("answer4", answer4);
-                }
+        if (question4 != null) {
+            builder.addFormDataPart("question4", question4);
+        }
+        if (answer4 != null) {
+            builder.addFormDataPart("answer4", answer4);
+        }
 
 
-         if(video1 !=null) {
-                    builder.addFormDataPart("video1", video1);
-                }
+        if (video1 != null) {
+            builder.addFormDataPart("video1", video1);
+        }
 
-         if(video2 !=null) {
-                    builder.addFormDataPart("video2", video2);
-                }
-         if(video3 !=null) {
-                    builder.addFormDataPart("video3", video3);
-                }
-         if(i1 !=null) {
-                    builder.addFormDataPart("i1", i1);
-                }
-         if(i2 !=null) {
-                    builder.addFormDataPart("i2", i2);
-                }
-         if(end_meeting !=null) {
-                    builder.addFormDataPart("end_meeting", end_meeting);
-                }
-         if(end_meeting_lat_lng !=null) {
-                    builder.addFormDataPart("end_meeting_lat_lng", end_meeting_lat_lng);
-                }
-         if(meeting_outcome !=null) {
-                    builder.addFormDataPart("meeting_outcome", meeting_outcome);
-                }
+        if (video2 != null) {
+            builder.addFormDataPart("video2", video2);
+        }
+        if (video3 != null) {
+            builder.addFormDataPart("video3", video3);
+        }
+        if (i1 != null) {
+            builder.addFormDataPart("i1", i1);
+        }
+        if (i2 != null) {
+            builder.addFormDataPart("i2", i2);
+        }
+        if (end_meeting != null) {
+            builder.addFormDataPart("end_meeting", end_meeting);
+        }
+        if (end_meeting_lat_lng != null) {
+            builder.addFormDataPart("end_meeting_lat_lng", end_meeting_lat_lng);
+        }
+        if (meeting_outcome != null) {
+            builder.addFormDataPart("meeting_outcome", meeting_outcome);
+        }
 
         RequestBody requestBody = builder.build();
 
@@ -408,7 +381,7 @@ mBinding.tvLeadName.setText("Lead Name: "+ name);
                             if (listofhome.getStatus().equals("1")) {
 
 
-                                Toast.makeText(ActivityAppointmentMeetingCheckList.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityAppointmentMeetingCheckList.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
 
 //                                finish();
                             } else {
@@ -448,6 +421,7 @@ mBinding.tvLeadName.setText("Lead Name: "+ name);
             }
         });
     }
+
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityAppointmentMeetingCheckList.this);
@@ -459,7 +433,6 @@ mBinding.tvLeadName.setText("Lead Name: "+ name);
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
-
 
 
             }

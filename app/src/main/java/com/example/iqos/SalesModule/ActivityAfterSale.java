@@ -14,7 +14,6 @@ import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
 import com.example.iqos.databinding.ActivityAfterSalesBinding;
-import com.example.iqos.databinding.ActivityNoSalesBinding;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -43,40 +42,40 @@ public class ActivityAfterSale extends AppCompatActivity {
                 finish();
             }
         });
-mBinding.tvComplete.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        update_ic(
-                mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
-                appointment_id,
-                mBinding.tvQuestion1.getText().toString(),
-                mBinding.tvAnswer1.getText().toString(),
-                mBinding.tvQuestion2.getText().toString(),
-                mBinding.tvAnswer2.getText().toString()
-             );
-                }
-            });
+        mBinding.tvComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_ic(
+                        mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""),
+                        appointment_id,
+                        mBinding.tvQuestion1.getText().toString(),
+                        mBinding.tvAnswer1.getText().toString(),
+                        mBinding.tvQuestion2.getText().toString(),
+                        mBinding.tvAnswer2.getText().toString()
+                );
+            }
+        });
     }
 
-    public void update_ic(String token,String id,
+    public void update_ic(String token, String id,
                           String ic_question1,
-                           String ic_answer1, String ic_question2,
-                           String ic_answer2  ) {
+                          String ic_answer1, String ic_question2,
+                          String ic_answer2) {
         ApiService apiService = ApiClient.getClient(ActivityAfterSale.this).create(ApiService.class);
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
 
         builder.addFormDataPart("id", id);
-         if(ic_question1 !=null) {
+        if (ic_question1 != null) {
             builder.addFormDataPart("ic_question1", ic_question1);
         }
-        if(ic_answer1 !=null) {
+        if (ic_answer1 != null) {
             builder.addFormDataPart("ic_answer1", ic_answer1);
         }
-        if(ic_question2 !=null) {
+        if (ic_question2 != null) {
             builder.addFormDataPart("ic_question2", ic_question2);
         }
-        if(ic_answer2 !=null) {
+        if (ic_answer2 != null) {
             builder.addFormDataPart("ic_answer2", ic_answer2);
         }
 
@@ -98,7 +97,7 @@ mBinding.tvComplete.setOnClickListener(new View.OnClickListener() {
 
 
                             if (listofhome.getStatus().equals("1")) {
-                                Toast.makeText(ActivityAfterSale.this, ""+listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityAfterSale.this, "" + listofhome.getMessage(), Toast.LENGTH_SHORT).show();
 //                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
                                 finish();
 

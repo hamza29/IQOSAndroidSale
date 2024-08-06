@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,13 +15,13 @@
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="@dimen/_25sdp"
-            android:foreground="@drawable/ripple"
             android:layout_height="@dimen/_20sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/ic_arrow_back_white_24dp"
-            android:backgroundTint="@color/white" />
+            android:backgroundTint="@color/white"
+            android:foreground="@drawable/ripple" />
 
 
         <ImageView
@@ -46,68 +45,70 @@
     </RelativeLayout>
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_below="@+id/rlHeader"
         android:layout_height="match_parent"
-        android:background="@color/SkyBase"
+        android:layout_below="@+id/rlHeader"
         android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        >
+        android:background="@color/SkyBase">
 
 
         <TextView
             android:id="@+id/tvMeeting"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Pre Meeting Checklist"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="end"
             android:layout_marginTop="@dimen/_5sdp"
+            android:text="Pre Meeting Checklist"
             android:textColor="@color/blue"
             android:textSize="@dimen/_12sdp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
+
         <ScrollView
-            android:layout_below="@+id/tvMeeting"
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMeeting">
+
             <LinearLayout
                 android:id="@+id/llTasks"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/llCoach"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:background="@drawable/rounded_corner_meeting"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:padding="@dimen/_5sdp"
-                            android:layout_height="wrap_content">
+                            android:padding="@dimen/_5sdp">
+
                             <TextView
                                 android:id="@+id/tvName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="1. Name Verified"
                                 android:layout_weight="1"
+                                android:text="1. Name Verified"
 
                                 android:textColor="@color/blue"
                                 android:textSize="@dimen/_11sdp"
@@ -115,13 +116,12 @@
 
 
                             <CheckBox
-                                android:buttonTint="@color/blue"
                                 android:id="@+id/cbName"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_20sdp"
                                 android:backgroundTint="@color/blue"
-                                android:textAlignment="center"
-                                />
+                                android:buttonTint="@color/blue"
+                                android:textAlignment="center" />
 
                         </LinearLayout>
 
@@ -129,31 +129,34 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/llConsumerKit"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:background="@drawable/rounded_corner_meeting"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:padding="@dimen/_5sdp"
-                            android:layout_height="wrap_content">
+                            android:padding="@dimen/_5sdp">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="2. Hav Verified"
                                 android:layout_weight="1"
+                                android:text="2. Hav Verified"
 
                                 android:textColor="@color/blue"
                                 android:textSize="@dimen/_11sdp"
@@ -161,13 +164,12 @@
 
 
                             <CheckBox
-                                android:buttonTint="@color/blue"
                                 android:id="@+id/cbHav"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_20sdp"
                                 android:backgroundTint="@color/blue"
-                                android:textAlignment="center"
-                                />
+                                android:buttonTint="@color/blue"
+                                android:textAlignment="center" />
 
                         </LinearLayout>
 
@@ -175,31 +177,34 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/llTools"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:background="@drawable/rounded_corner_meeting"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:padding="@dimen/_5sdp"
-                            android:layout_height="wrap_content">
+                            android:padding="@dimen/_5sdp">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="3. Smoker Status Verified"
                                 android:layout_weight="1"
+                                android:text="3. Smoker Status Verified"
 
                                 android:textColor="@color/blue"
                                 android:textSize="@dimen/_11sdp"
@@ -208,13 +213,12 @@
 
                             <CheckBox
                                 android:id="@+id/cbSmokerStatus"
-                                android:buttonTint="@color/blue"
-
                                 android:layout_width="@dimen/_20sdp"
+
                                 android:layout_height="@dimen/_20sdp"
                                 android:backgroundTint="@color/blue"
-                                android:textAlignment="center"
-                                />
+                                android:buttonTint="@color/blue"
+                                android:textAlignment="center" />
 
                         </LinearLayout>
 
@@ -222,30 +226,32 @@
                     </LinearLayout>
 
                 </LinearLayout>
-             </LinearLayout>
+            </LinearLayout>
 
         </ScrollView>
+
         <LinearLayout
-            android:layout_below="@+id/scrollView"
-            android:layout_marginTop="@dimen/_20sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/scrollView"
+            android:layout_marginTop="@dimen/_20sdp"
             android:gravity="center"
             android:orientation="horizontal">
 
 
             <TextView
+                android:id="@+id/tvDone"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_background"
+                android:backgroundTint="@color/blue"
+                android:foreground="@drawable/ripple"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_3sdp"
                 android:text="Done"
                 android:textAlignment="center"
-                android:background="@drawable/rectangle_background"
-                android:foreground="@drawable/ripple"   android:backgroundTint="@color/blue"
-                android:id="@+id/tvDone"
-                android:paddingStart="@dimen/_15sdp"
-                android:paddingEnd="@dimen/_15sdp"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
@@ -255,21 +261,20 @@
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:paddingStart="@dimen/_15sdp"
-                android:paddingEnd="@dimen/_15sdp"
-                android:paddingTop="@dimen/_3sdp"
-                android:textAlignment="center"
-                android:paddingBottom="@dimen/_3sdp"
-                android:text="End"
-                android:visibility="gone"
                 android:background="@drawable/rectangle_background"
                 android:backgroundTint="@color/blue"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:text="End"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
         </LinearLayout>
-
 
 
     </RelativeLayout>

@@ -4,14 +4,8 @@ import static com.example.iqos.MeetingModule.ActivityAppointmentMeetingCheckList
 import static com.example.iqos.MeetingModule.ActivityPackages.packagesActivity;
 import static com.example.iqos.MeetingModule.ActivityVerification.verificationAct;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.content.CursorLoader;
-
 import android.Manifest;
 import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +14,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -28,16 +21,19 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.CursorLoader;
 
 import com.bumptech.glide.Glide;
 import com.example.iqos.Constants;
 import com.example.iqos.GPSTracker;
- import com.example.iqos.Retrofit.ApiClient;
+import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
-import com.example.iqos.databinding.ActivityBookAppointmentBinding;
 import com.example.iqos.databinding.ActivitySalesBinding;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -51,12 +47,9 @@ import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -79,14 +72,14 @@ public class ActivitySales extends AppCompatActivity {
     String terqid;
     String amberQuantity;
     String amberid;
-    String price="0";
-    String amberprice="0";
-    String terqprice="0";
+    String price = "0";
+    String amberprice = "0";
+    String terqprice = "0";
     String package_id;
     String payment_method;
     String appointment_id;
-    String      ending_latitude;
-    String a1,a2,a3,a4,meeting_outcome, type, name, multisale;
+    String ending_latitude;
+    String a1, a2, a3, a4, meeting_outcome, type, name, multisale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,60 +88,60 @@ public class ActivitySales extends AppCompatActivity {
         View view = mBinding.getRoot();
         setContentView(view);
         appointment_id = getIntent().getStringExtra("app_id");
-         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
-         Intent intent = getIntent();
+        mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
+        Intent intent = getIntent();
 
-        package_id=intent.getStringExtra("id");
-        a1 =intent.getStringExtra("a1");
-        a2 =intent.getStringExtra("a2");
-        a3 =intent.getStringExtra("a3");
-        a4 =intent.getStringExtra("a4");
-        type =intent.getStringExtra("type");
-        multisale =intent.getStringExtra("multisale");
-        meeting_outcome =intent.getStringExtra("meeting_outcome");
+        package_id = intent.getStringExtra("id");
+        a1 = intent.getStringExtra("a1");
+        a2 = intent.getStringExtra("a2");
+        a3 = intent.getStringExtra("a3");
+        a4 = intent.getStringExtra("a4");
+        type = intent.getStringExtra("type");
+        multisale = intent.getStringExtra("multisale");
+        meeting_outcome = intent.getStringExtra("meeting_outcome");
 
-         getPackageDetail(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),package_id);
+        getPackageDetail(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), package_id);
 
-         List<String> payment_method = new ArrayList<>();
-         payment_method.add("cash");
-         payment_method.add("card");
-         payment_method.add("Bank Transfer");
-         setPaymentMethodSpinner(payment_method);
+        List<String> payment_method = new ArrayList<>();
+        payment_method.add("cash");
+        payment_method.add("card");
+        payment_method.add("Bank Transfer");
+        setPaymentMethodSpinner(payment_method);
         mBinding.cbHyperCare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(mBinding.cbHyperCare.isChecked()){
+                if (mBinding.cbHyperCare.isChecked()) {
                     mBinding.tvCreateQR.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     mBinding.tvCreateQR.setVisibility(View.GONE);
                 }
             }
         });
-mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        GetQrCOde(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),appointment_id);
-    }
-});
-            mBinding.tvName.setText(intent.getStringExtra("name"));
-
-            if(intent.getStringExtra("name") !=null) {
-                if (intent.getStringExtra("name").equalsIgnoreCase("Package C")) {
-                    mBinding.llEmail.setVisibility(View.VISIBLE);
-                } else {
-                    if (intent.getStringExtra("multisale")!= null && intent.getStringExtra("multisale").equalsIgnoreCase("1")) {
-                        mBinding.cbHyperCare.setVisibility(View.GONE);
-                        mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
-                        mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
-                    }else{
-                        mBinding.cbHyperCare.setVisibility(View.VISIBLE);
-                        mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
-                        mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
-                    }
-                    mBinding.llEmail.setVisibility(View.GONE);
-
-                }
+        mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GetQrCOde(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), appointment_id);
             }
+        });
+        mBinding.tvName.setText(intent.getStringExtra("name"));
+
+        if (intent.getStringExtra("name") != null) {
+            if (intent.getStringExtra("name").equalsIgnoreCase("Package C")) {
+                mBinding.llEmail.setVisibility(View.VISIBLE);
+            } else {
+                if (intent.getStringExtra("multisale") != null && intent.getStringExtra("multisale").equalsIgnoreCase("1")) {
+                    mBinding.cbHyperCare.setVisibility(View.GONE);
+                    mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
+                    mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
+                } else {
+                    mBinding.cbHyperCare.setVisibility(View.VISIBLE);
+                    mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
+                    mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
+                }
+                mBinding.llEmail.setVisibility(View.GONE);
+
+            }
+        }
 
 
         mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
@@ -176,13 +169,11 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
     }
 
 
-
-
-    public void GetQrCOde(String token, String id ) {
+    public void GetQrCOde(String token, String id) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivitySales.this).create(ApiService.class);
-        Call<GetQRModel> call = apiService.getQRCode("application/json",token, id , token);
+        Call<GetQRModel> call = apiService.getQRCode("application/json", token, id, token);
         call.enqueue(new Callback<GetQRModel>() {
             @Override
             public void onResponse(Call<GetQRModel> call, Response<GetQRModel> response) {
@@ -226,7 +217,7 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void run() {
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                        Log.e("throw",t.getMessage());
+                        Log.e("throw", t.getMessage());
                         Toast.makeText(ActivitySales.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -236,11 +227,11 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
         });
     }
 
-    public void getInventories(String token, String pack ) {
-         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+    public void getInventories(String token, String pack) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivitySales.this).create(ApiService.class);
-        Call<GetInventoriesModel> call = apiService.getInventories("application/json",token );
+        Call<GetInventoriesModel> call = apiService.getInventories("application/json", token);
         call.enqueue(new Callback<GetInventoriesModel>() {
             @Override
             public void onResponse(Call<GetInventoriesModel> call, Response<GetInventoriesModel> response) {
@@ -255,30 +246,30 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
                             if (keyModel.getStatus().equals("1")) {
 
 
-                                List<Inventory> ambers= keyModel.getData().getInventories();
+                                List<Inventory> ambers = keyModel.getData().getInventories();
 
-                                ambers.add(new Inventory( "-1" ," "," ","","","","",""," "," ","" ));
+                                ambers.add(new Inventory("-1", " ", " ", "", "", "", "", "", " ", " ", ""));
 
-                                 setNewIQosSerialNumberSpinner(keyModel.getData().getInventories(), pack);
+                                setNewIQosSerialNumberSpinner(keyModel.getData().getInventories(), pack);
 
                                 mBinding.tvSubmit.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Log.e("TGED","id-> "+ newDeviceSrNo);
-                                        Log.e("TGEeeeeD","payment_method---> "+ payment_method);
+                                        Log.e("TGED", "id-> " + newDeviceSrNo);
+                                        Log.e("TGEeeeeD", "payment_method---> " + payment_method);
 
                                         Toast.makeText(ActivitySales.this, payment_method, Toast.LENGTH_SHORT).show();
-                                        if(type.equalsIgnoreCase("sales")){
+                                        if (type.equalsIgnoreCase("sales")) {
                                             newDeviceSrNo = mBinding.etSerialNumber.getText().toString();
                                         }
-                                        if(!newDeviceSrNo.isEmpty()){
-                                        updateSale(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
-                                                appointment_id,newDeviceSrNo,package_id,amberid,terqid,mBinding.etEmail.getText().toString(), mBinding.etAmount.getText().toString(),payment_method);
-                                    }else {
-                                            if(type.equalsIgnoreCase("sales")){
+                                        if (!newDeviceSrNo.isEmpty()) {
+                                            updateSale(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""),
+                                                    appointment_id, newDeviceSrNo, package_id, amberid, terqid, mBinding.etEmail.getText().toString(), mBinding.etAmount.getText().toString(), payment_method);
+                                        } else {
+                                            if (type.equalsIgnoreCase("sales")) {
                                                 Toast.makeText(ActivitySales.this, "Please type Serial Number", Toast.LENGTH_SHORT).show();
 
-                                            }else{
+                                            } else {
                                                 Toast.makeText(ActivitySales.this, "Please select device", Toast.LENGTH_SHORT).show();
 
                                             }
@@ -288,7 +279,7 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
                                 });
                             } else {
                                 Toast.makeText(ActivitySales.this, "No Device Found", Toast.LENGTH_SHORT).show();
- 
+
                             }
                         }
                     });
@@ -298,7 +289,7 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                             Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -311,7 +302,7 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void run() {
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                         Toast.makeText(ActivitySales.this, "failure", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivitySales.this, "failure", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -319,11 +310,12 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
             }
         });
     }
-    public void getPackageDetail(String token, String id ) {
-         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+
+    public void getPackageDetail(String token, String id) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivitySales.this).create(ApiService.class);
-        Call<PackageDetail> call = apiService.getpackageDetails("application/json",token ,id);
+        Call<PackageDetail> call = apiService.getpackageDetails("application/json", token, id);
         call.enqueue(new Callback<PackageDetail>() {
             @Override
             public void onResponse(Call<PackageDetail> call, Response<PackageDetail> response) {
@@ -337,35 +329,35 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             if (keyModel.getStatus().equals("1")) {
 
-                                  price=keyModel.getData().getPackage().getPrice();
+                                price = keyModel.getData().getPackage().getPrice();
                                 mBinding.etAmount.setText(keyModel.getData().getPackage().getPrice());
-                                if(type.equalsIgnoreCase("sales")){
+                                if (type.equalsIgnoreCase("sales")) {
                                     mBinding.newIqosSerialNumberSpinner.setVisibility(View.GONE);
                                     mBinding.etSerialNumber.setVisibility(View.VISIBLE);
-                                    if (multisale!= null && multisale.equalsIgnoreCase("1")) {
+                                    mBinding.llColor.setVisibility(View.GONE);
+                                    if (multisale != null && multisale.equalsIgnoreCase("1")) {
                                         mBinding.cbHyperCare.setVisibility(View.GONE);
                                         mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
                                         mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
-                                    }else{
+                                    } else {
                                         mBinding.cbHyperCare.setVisibility(View.VISIBLE);
                                         mBinding.cbaccountRegistered.setVisibility(View.VISIBLE);
                                         mBinding.cbcustomerDeviceLinked.setVisibility(View.VISIBLE);
                                     }
                                 }
-                                    getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),"");
+                                getInventories(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), "");
 
-                                List<Amber> ambers= keyModel.getData().getPackage().getAmber();
-                                ambers.add(new Amber("-1","0","0"));
+                                List<Amber> ambers = keyModel.getData().getPackage().getAmber();
+                                ambers.add(new Amber("-1", "0", "0"));
                                 setAmberSpinner(ambers);
 
 
+                                List<Turqouise> turqouise = keyModel.getData().getPackage().getTurqouise();
 
-                                List<Turqouise> turqouise= keyModel.getData().getPackage().getTurqouise();
-
-                                turqouise.add(new Turqouise("-1","0","0"));
+                                turqouise.add(new Turqouise("-1", "0", "0"));
 
 
-                             setTerqSpinner(turqouise);
+                                setTerqSpinner(turqouise);
                             } else {
                                 Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
@@ -378,7 +370,7 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void run() {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                             Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -391,7 +383,7 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void run() {
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                         Toast.makeText(ActivitySales.this, "failure", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivitySales.this, "failure", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -399,25 +391,25 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
             }
         });
     }
-    private void setNewIQosSerialNumberSpinner(List<Inventory> inventories, String pack){
+
+    private void setNewIQosSerialNumberSpinner(List<Inventory> inventories, String pack) {
 
 
-        ArrayList<String > serials = new ArrayList<>();
+        ArrayList<String> serials = new ArrayList<>();
 
-            for (int i =0;i< inventories.size();i++){
-                if(inventories.get(i).getId().equalsIgnoreCase("-1")){
-                    serials.add("Select");
+        for (int i = 0; i < inventories.size(); i++) {
+            if (inventories.get(i).getId().equalsIgnoreCase("-1")) {
+                serials.add("Select");
 
-                }else{
-                    serials.add(inventories.get(i).getSrNo());
+            } else {
+                serials.add(inventories.get(i).getSrNo());
 
-                }
-
+            }
 
 
         }
-       Collections.reverse(serials);
-       Collections.reverse(inventories);
+        Collections.reverse(serials);
+        Collections.reverse(inventories);
 
         ArrayAdapter ad
                 = new ArrayAdapter(
@@ -431,16 +423,15 @@ mBinding.tvCreateQR.setOnClickListener(new View.OnClickListener() {
         mBinding.newIqosSerialNumberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if(!serials.get(position).equalsIgnoreCase("Select")){
+                if (!serials.get(position).equalsIgnoreCase("Select")) {
 
-if(inventories.get(position).getSrNo().equalsIgnoreCase(serials.get(position)))
-                         newDeviceSrNo = inventories.get(position).getId();
-                         mBinding.tvColor.setText(inventories.get(position).getColor());
+                    if (inventories.get(position).getSrNo().equalsIgnoreCase(serials.get(position)))
+                        newDeviceSrNo = inventories.get(position).getId();
+                    mBinding.tvColor.setText(inventories.get(position).getColor());
 
 
-
-            }else{
-                    newDeviceSrNo="";
+                } else {
+                    newDeviceSrNo = "";
                 }
 
             }
@@ -453,13 +444,9 @@ if(inventories.get(position).getSrNo().equalsIgnoreCase(serials.get(position)))
         });
 
 
-
-
     }
-    private void setPaymentMethodSpinner(List<String> payment_list){
 
-
-
+    private void setPaymentMethodSpinner(List<String> payment_list) {
 
 
         ArrayAdapter ad
@@ -475,8 +462,7 @@ if(inventories.get(position).getSrNo().equalsIgnoreCase(serials.get(position)))
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
-               payment_method = payment_list.get(position);
-
+                payment_method = payment_list.get(position);
 
 
             }
@@ -489,26 +475,25 @@ if(inventories.get(position).getSrNo().equalsIgnoreCase(serials.get(position)))
         });
 
 
-
-
     }
-     private void setTerqSpinner(List<Turqouise> turqouise){
 
-         ArrayList<String > serials = new ArrayList<>();
+    private void setTerqSpinner(List<Turqouise> turqouise) {
 
-         for (int i =0;i< turqouise.size();i++){
-             if(turqouise.get(i).getId().equalsIgnoreCase("-1")){
-                 serials.add("Select" );
+        ArrayList<String> serials = new ArrayList<>();
 
-             }else{
-                 serials.add(turqouise.get(i).getQuantity());
+        for (int i = 0; i < turqouise.size(); i++) {
+            if (turqouise.get(i).getId().equalsIgnoreCase("-1")) {
+                serials.add("Select");
 
-             }
+            } else {
+                serials.add(turqouise.get(i).getQuantity());
+
+            }
 
 
-         }
-         Collections.reverse(serials);
-         Collections.reverse(turqouise);
+        }
+        Collections.reverse(serials);
+        Collections.reverse(turqouise);
         ArrayAdapter ad
                 = new ArrayAdapter(
                 this,
@@ -521,38 +506,37 @@ if(inventories.get(position).getSrNo().equalsIgnoreCase(serials.get(position)))
         mBinding.spTurq.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-Log.e("TGED","SERIALS-> "+serials.get(position) );
-if(!serials.get(position).equalsIgnoreCase("Select")){
+                Log.e("TGED", "SERIALS-> " + serials.get(position));
+                if (!serials.get(position).equalsIgnoreCase("Select")) {
 
-        if(serials.get(position).equalsIgnoreCase(turqouise.get(position).getQuantity())) {
-            terqQuantity = turqouise.get(position).getQuantity();
-            terqid = turqouise.get(position).getId();
-            terqprice = turqouise.get(position).getPrice();
-            if(type.equalsIgnoreCase("sales")) {
-                amberprice = "0";
-                terqprice = "0";
-                mBinding.etAmount.setText("0");
+                    if (serials.get(position).equalsIgnoreCase(turqouise.get(position).getQuantity())) {
+                        terqQuantity = turqouise.get(position).getQuantity();
+                        terqid = turqouise.get(position).getId();
+                        terqprice = turqouise.get(position).getPrice();
+                        if (type.equalsIgnoreCase("sales")) {
+                            amberprice = "0";
+                            terqprice = "0";
+                            mBinding.etAmount.setText("0");
 
-            }else{
-                if(!amberprice.equalsIgnoreCase("0")){
-                    int totl= Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(terqprice) + Integer.parseInt(amberprice);
-                    mBinding.etAmount.setText(""+totl );
+                        } else {
+                            if (!amberprice.equalsIgnoreCase("0")) {
+                                int totl = Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(terqprice) + Integer.parseInt(amberprice);
+                                mBinding.etAmount.setText("" + totl);
 
-                }else {
-                    int totl= Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(terqprice);
-                    mBinding.etAmount.setText(""+totl );
+                            } else {
+                                int totl = Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(terqprice);
+                                mBinding.etAmount.setText("" + totl);
 
-                }
-            }
-
-        }
-
-
-            }
-                    else{
-                        terqprice =  "0";
+                            }
+                        }
 
                     }
+
+
+                } else {
+                    terqprice = "0";
+
+                }
             }
 
             @Override
@@ -562,20 +546,19 @@ if(!serials.get(position).equalsIgnoreCase("Select")){
         });
 
 
-
-
     }
-    private void setAmberSpinner(List<Amber> amber){
+
+    private void setAmberSpinner(List<Amber> amber) {
 
 
-        ArrayList<String > serials = new ArrayList<>();
+        ArrayList<String> serials = new ArrayList<>();
 
-        for (int i =0;i< amber.size();i++){
+        for (int i = 0; i < amber.size(); i++) {
 
-            if(amber.get(i).getId().equalsIgnoreCase("-1")){
-                serials.add("Select" );
+            if (amber.get(i).getId().equalsIgnoreCase("-1")) {
+                serials.add("Select");
 
-            }else{
+            } else {
                 serials.add(amber.get(i).getQuantity());
 
             }
@@ -596,62 +579,48 @@ if(!serials.get(position).equalsIgnoreCase("Select")){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
-                Log.e("TGED","serials-> "+ serials.size());
-                Log.e("TGED","amber-> "+ amber.size());
+                Log.e("TGED", "serials-> " + serials.size());
+                Log.e("TGED", "amber-> " + amber.size());
 
 
-    if(!serials.get(position).equalsIgnoreCase("Select")){
-        Log.e("TGED","AMBER-> "+  amber.get(position).getQuantity());
-        Log.e("TGED","QUANTITY-> "+ serials.get(position));
+                if (!serials.get(position).equalsIgnoreCase("Select")) {
+                    Log.e("TGED", "AMBER-> " + amber.get(position).getQuantity());
+                    Log.e("TGED", "QUANTITY-> " + serials.get(position));
 
-        for (int  i =0 ;i< serials.size();i++){
-            if (serials.get(i).equalsIgnoreCase(
-                    amber.get(position).getQuantity())) {
-                Log.e("TGED","AMBER-> "+  amber.get(position).getQuantity());
-                Log.e("TGED","QUANTITY-> "+ serials.get(i));
-                amberQuantity = amber.get(position).getQuantity();
-                amberid = amber.get(position).getId();
-                amberprice = amber.get(position).getPrice();
-                if(type.equalsIgnoreCase("sales")) {
-                    amberprice = "0";
-                    terqprice = "0";
-                    mBinding.etAmount.setText("0");
-                }else{
-                    if(!terqprice.equalsIgnoreCase("0")){
-                        int totl=   Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(amberprice)+ Integer.parseInt(terqprice);
-                        mBinding.etAmount.setText(""+ totl);
-                    }else{
+                    for (int i = 0; i < serials.size(); i++) {
+                        if (serials.get(i).equalsIgnoreCase(
+                                amber.get(position).getQuantity())) {
+                            Log.e("TGED", "AMBER-> " + amber.get(position).getQuantity());
+                            Log.e("TGED", "QUANTITY-> " + serials.get(i));
+                            amberQuantity = amber.get(position).getQuantity();
+                            amberid = amber.get(position).getId();
+                            amberprice = amber.get(position).getPrice();
+                            if (type.equalsIgnoreCase("sales")) {
+                                amberprice = "0";
+                                terqprice = "0";
+                                mBinding.etAmount.setText("0");
+                            } else {
+                                if (!terqprice.equalsIgnoreCase("0")) {
+                                    int totl = Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(amberprice) + Integer.parseInt(terqprice);
+                                    mBinding.etAmount.setText("" + totl);
+                                } else {
 
-                        int totl= Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(amberprice);
-                        mBinding.etAmount.setText(""+ totl);
+                                    int totl = Integer.parseInt(price.split("\\.")[0]) + Integer.parseInt(amberprice);
+                                    mBinding.etAmount.setText("" + totl);
+                                }
+                            }
+
+
+                        }
                     }
+
+
+                } else {
+                    amberprice = "0";
+
                 }
 
-
-
-            }
-        }
-
-
-
-
-    }
-else{
-    amberprice =   "0";
-
-}
-
 //}
-
-
-
-
-
-
-
-
-
-
 
 
             }
@@ -664,8 +633,351 @@ else{
         });
 
 
+    }
+
+    public void EnableRuntimePermission() {
+
+        Dexter.withActivity(ActivitySales.this)
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_MEDIA_IMAGES
+                ).withListener(new MultiplePermissionsListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        isStoragePermissionGranted();
+
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+                }).check();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void isStoragePermissionGranted() {
+        FishBun.with(this)
+                .setImageAdapter(new GlideAdapter())
+                .setCamera(true)
+                .setMaxCount(1)
+                .startAlbumWithOnActivityResult(1);
+//        takePhotoFromCamera();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        assert data != null;
+        if (data.getParcelableArrayListExtra(FishBun.INTENT_PATH) != null) {
+            imagesUriArrayList = data.getParcelableArrayListExtra(FishBun.INTENT_PATH);
+
+            if (imagesUriArrayList.size() > 0) {
+                Glide.with(this).load(getRealPathFromURI(imagesUriArrayList.get(0)))
+                        .into(mBinding.ivTakeImage);
+                mBinding.ivTakeImage.setVisibility(View.VISIBLE);
+                Log.e("TGED", "getRealPathFromURI=> " + getRealPathFromURI(imagesUriArrayList.get(0)));
+            }
+        }
+    }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(ActivitySales.this, contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
+
+    public Uri getImageUri(Activity inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "IMG_" + Calendar.getInstance().getTime(), null);
+        return Uri.parse(path);
+    }
+
+    public void updateSale(String token, String id, String sku_id,
+                           String package_id, String amber_id,
+                           String turqouise_id, String email, String total_amount, String payment_method) {
+        ApiService apiService = ApiClient.getClient(ActivitySales.this).create(ApiService.class);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        builder.addFormDataPart("id", id);
+        builder.addFormDataPart("package_id", package_id);
+        builder.addFormDataPart("sku_id", sku_id);
+
+        if (amber_id != null) {
+            builder.addFormDataPart("amber_id", amber_id);
+        }
+        if (turqouise_id != null) {
+            builder.addFormDataPart("turqouise_id", turqouise_id);
+        }
+        if (total_amount != null) {
+            builder.addFormDataPart("total_payment", total_amount);
+        }
+
+        if (email != null) {
+            builder.addFormDataPart("email", email);
+        }
 
 
+        if (payment_method != null) {
+            builder.addFormDataPart("payment_method", payment_method);
+        }
+
+
+        if (mBinding.cbEcommerce != null) {
+            if (mBinding.cbEcommerce.isChecked()) {
+                builder.addFormDataPart("customer_requested", "1");
+
+            } else {
+                builder.addFormDataPart("customer_requested", "0");
+
+            }
+
+
+        }
+        if (mBinding.cbRequested != null) {
+            if (mBinding.cbRequested.isChecked()) {
+                builder.addFormDataPart("customer_requested_account", "1");
+
+            } else {
+                builder.addFormDataPart("customer_requested_account", "0");
+
+            }
+
+
+        }
+
+
+        if (mBinding.cbcustomerDeviceLinked != null) {
+            if (mBinding.cbcustomerDeviceLinked.isChecked()) {
+                builder.addFormDataPart("customer_device_linked", "1");
+
+            } else {
+                builder.addFormDataPart("customer_device_linked", "0");
+
+            }
+
+
+        }
+        if (mBinding.cbaccountRegistered != null) {
+            if (mBinding.cbaccountRegistered.isChecked()) {
+                builder.addFormDataPart("customer_account_registered", "1");
+
+            } else {
+                builder.addFormDataPart("customer_account_registered", "0");
+
+            }
+
+
+        }
+        if (imagesUriArrayList != null) {
+            if (imagesUriArrayList.size() > 0) {
+                for (int i = 0; i < imagesUriArrayList.size(); i++) {
+                    File file = new File(getRealPathFromURI(imagesUriArrayList.get(i)));
+                    builder.addFormDataPart("image",
+                            file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
+
+                }
+
+            }
+        }
+
+        RequestBody requestBody = builder.build();
+
+        Call<UpdateSaleModel> call = apiService.updateinfoSale("application/json", token, requestBody);
+
+        call.enqueue(new Callback<UpdateSaleModel>() {
+            @Override
+            public void onResponse(Call<UpdateSaleModel> call, Response<UpdateSaleModel> response) {
+                final UpdateSaleModel listofhome = response.body();
+                if (listofhome != null) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+
+                            if (listofhome.getStatus().equals("1")) {
+//                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
+
+
+                                GPSTracker gpsTracker = new GPSTracker(ActivitySales.this);
+                                if (gpsTracker.getIsGPSTrackingEnabled()) {
+                                    ending_latitude = gpsTracker.getLatitude() + "," + gpsTracker.getLongitude();
+                                }
+
+
+                                Date todayDate = Calendar.getInstance().getTime();
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                String todayString = formatter.format(todayDate);
+                                String ending_date = todayString;
+
+                                updateMeetingChecklist(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""),
+                                        appointment_id,
+                                        a1, a2, a3, a4, ending_date, ending_latitude, meeting_outcome);
+
+
+                            }
+                        }
+                    });
+                } else {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<UpdateSaleModel> call, Throwable t) {
+
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Toast.makeText(ActivitySales.this, "Failure", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                });
+
+
+            }
+        });
+    }
+
+    public void updateMeetingChecklist(String token, String id,
+                                       String answer1,
+                                       String answer2,
+                                       String answer3,
+                                       String answer4,
+                                       String end_meeting,
+                                       String end_meeting_lat_lng,
+                                       String meeting_outcome) {
+        ApiService apiService = ApiClient.getClient(ActivitySales.this).create(ApiService.class);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        builder.addFormDataPart("id", id);
+
+        if (answer1 != null) {
+            builder.addFormDataPart("answer1", answer1);
+        }
+        if (answer2 != null) {
+            builder.addFormDataPart("answer2", answer2);
+        }
+        if (answer3 != null) {
+            builder.addFormDataPart("answer3", answer3);
+        }
+
+        if (answer4 != null) {
+            builder.addFormDataPart("answer4", answer4);
+        }
+
+        if (end_meeting != null) {
+            builder.addFormDataPart("end_meeting", end_meeting);
+        }
+        if (end_meeting_lat_lng != null) {
+            builder.addFormDataPart("end_meeting_lat_lng", end_meeting_lat_lng);
+        }
+        if (meeting_outcome != null) {
+            builder.addFormDataPart("meeting_outcome", meeting_outcome);
+        }
+
+        RequestBody requestBody = builder.build();
+
+        Call<Model.GenerealModel> call = apiService.updateMeetingChecklist(token, requestBody);
+
+        call.enqueue(new Callback<Model.GenerealModel>() {
+            @Override
+            public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
+                final Model.GenerealModel listofhome = response.body();
+                if (listofhome != null) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+
+                            if (listofhome.getStatus().equals("1")) {
+
+
+                                Toast.makeText(ActivitySales.this, listofhome.getMessage(), Toast.LENGTH_SHORT).show();
+                                if (!type.equalsIgnoreCase("sales")) {
+                                    Intent intent = new Intent(ActivitySales.this, ActivityAfterSale.class);
+                                    intent.putExtra("appointment_id", id);
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+
+                                if (packagesActivity != null) {
+                                    packagesActivity.finish();
+                                }
+
+
+                                if (meetingcehck != null) {
+                                    meetingcehck.finish();
+                                }
+
+
+                                if (verificationAct != null) {
+                                    verificationAct.finish();
+                                }
+
+                                finish();
+
+                            } else {
+                                Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+                } else {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Model.GenerealModel> call, Throwable t) {
+
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                    }
+
+                });
+
+
+            }
+        });
     }
 
     public class Data {
@@ -683,6 +995,7 @@ else{
         }
 
     }
+
     public class QRData {
 
         @SerializedName("qr_code")
@@ -697,6 +1010,7 @@ else{
             this.qrCode = qrCode;
         }
     }
+
     public class GetInventoriesModel {
 
         @SerializedName("status")
@@ -734,6 +1048,7 @@ else{
         }
 
     }
+
     public class GetQRModel {
 
         @SerializedName("status")
@@ -771,6 +1086,7 @@ else{
         }
 
     }
+
     public class Inventory {
 
         @SerializedName("id")
@@ -799,7 +1115,8 @@ else{
         private String createdAt;
         @SerializedName("updated_at")
         @Expose
-        private String updatedAt;  @SerializedName("price")
+        private String updatedAt;
+        @SerializedName("price")
         @Expose
         private String price;
         @SerializedName("assigned_at")
@@ -835,16 +1152,16 @@ else{
             return id;
         }
 
+        public void setId(String id) {
+            this.id = id;
+        }
+
         public String getPrice() {
             return price;
         }
 
         public void setPrice(String price) {
             this.price = price;
-        }
-
-        public void setId(String id) {
-            this.id = id;
         }
 
         public String getQoachId() {
@@ -912,6 +1229,7 @@ else{
         }
 
     }
+
     public class LData {
 
         @SerializedName("pdf_url")
@@ -927,6 +1245,7 @@ else{
         }
 
     }
+
     public class UpdateSaleModel {
 
         @SerializedName("status")
@@ -965,12 +1284,6 @@ else{
 
     }
 
-
-
-
-
-
-
     public class DData {
 
         @SerializedName("discounts")
@@ -986,6 +1299,7 @@ else{
         }
 
     }
+
     public class Discount {
 
         @SerializedName("id")
@@ -1045,6 +1359,7 @@ else{
         }
 
     }
+
     public class DiscountsModel {
 
         @SerializedName("status")
@@ -1082,6 +1397,7 @@ else{
         }
 
     }
+
     public class Consumable {
 
         @SerializedName("id")
@@ -1174,6 +1490,7 @@ else{
         }
 
     }
+
     public class ConsumeableModel {
 
         @SerializedName("status")
@@ -1211,6 +1528,7 @@ else{
         }
 
     }
+
     public class CData {
 
         @SerializedName("consumable")
@@ -1225,74 +1543,6 @@ else{
             this.consumable = consumable;
         }
 
-    }
-    public void EnableRuntimePermission() {
-
-        Dexter.withActivity(ActivitySales.this)
-                .withPermissions(
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_MEDIA_IMAGES
-                ).withListener(new MultiplePermissionsListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport report) {
-                        isStoragePermissionGranted();
-
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
-                }).check();
-    }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void isStoragePermissionGranted() {
-        FishBun.with(this)
-                .setImageAdapter(new GlideAdapter())
-                .setCamera(true)
-                .setMaxCount(1)
-                .startAlbumWithOnActivityResult(1);
-//        takePhotoFromCamera();
-    }
-
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        assert data != null;
-       if(data.getParcelableArrayListExtra(FishBun.INTENT_PATH) !=null) {
-           imagesUriArrayList = data.getParcelableArrayListExtra(FishBun.INTENT_PATH);
-
-           if(imagesUriArrayList.size()>0){
-           Glide.with(this).load(getRealPathFromURI(imagesUriArrayList.get(0)))
-                   .into(mBinding.ivTakeImage);
-           mBinding.ivTakeImage.setVisibility(View.VISIBLE);
-           Log.e("TGED", "getRealPathFromURI=> " + getRealPathFromURI(imagesUriArrayList.get(0)));
-       }
-       }
-    }
-
-    private String getRealPathFromURI(Uri contentUri) {
-        String[] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader loader = new CursorLoader(ActivitySales.this, contentUri, proj, null, null, null);
-        Cursor cursor = loader.loadInBackground();
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String result = cursor.getString(column_index);
-        cursor.close();
-        return result;
-    }
-
-
-
-    public Uri getImageUri(Activity inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "IMG_" + Calendar.getInstance().getTime(), null);
-        return Uri.parse(path);
     }
 
     public class Amber {
@@ -1341,6 +1591,7 @@ else{
         }
 
     }
+
     public class PData {
 
         @SerializedName("package")
@@ -1356,6 +1607,7 @@ else{
         }
 
     }
+
     public class Package {
 
         @SerializedName("id")
@@ -1448,6 +1700,7 @@ else{
         }
 
     }
+
     public class PackageDetail {
 
         @SerializedName("status")
@@ -1485,6 +1738,7 @@ else{
         }
 
     }
+
     public class Turqouise {
 
         @SerializedName("id")
@@ -1514,6 +1768,7 @@ else{
         public void setPrice(String price) {
             this.price = price;
         }
+
         public String getId() {
             return id;
         }
@@ -1530,310 +1785,6 @@ else{
             this.quantity = quantity;
         }
 
-    }
-    public void updateSale(String token,String id, String sku_id,
-                           String package_id, String amber_id,
-                           String turqouise_id, String email, String total_amount,String payment_method   ) {
-        ApiService apiService = ApiClient.getClient(ActivitySales.this).create(ApiService.class);
-        MultipartBody.Builder builder = new MultipartBody.Builder();
-        builder.setType(MultipartBody.FORM);
-
-        builder.addFormDataPart("id", id);
-        builder.addFormDataPart("package_id", package_id);
-        builder.addFormDataPart("sku_id", sku_id);
-
-        if(amber_id !=null) {
-            builder.addFormDataPart("amber_id", amber_id);
-        }
-        if(turqouise_id !=null) {
-            builder.addFormDataPart("turqouise_id", turqouise_id);
-        }
-        if(total_amount !=null) {
-            builder.addFormDataPart("total_payment", total_amount);
-        }
-
-        if(email !=null) {
-            builder.addFormDataPart("email", email);
-        }
-
-
-        if(payment_method !=null) {
-            builder.addFormDataPart("payment_method", payment_method);
-        }
-
-
-
-        if( mBinding.cbEcommerce  !=null) {
-            if( mBinding.cbEcommerce.isChecked()){
-                builder.addFormDataPart("customer_requested", "1");
-
-            }else{
-                builder.addFormDataPart("customer_requested", "0");
-
-            }
-
-
-        }
-        if( mBinding.cbRequested  !=null) {
-            if( mBinding.cbRequested.isChecked()){
-                builder.addFormDataPart("customer_requested_account", "1");
-
-            }else{
-                builder.addFormDataPart("customer_requested_account", "0");
-
-            }
-
-
-        }
-
-
-
-
-
-
-        if( mBinding.cbcustomerDeviceLinked  !=null) {
-            if( mBinding.cbcustomerDeviceLinked.isChecked()){
-                builder.addFormDataPart("customer_device_linked", "1");
-
-            }else{
-                builder.addFormDataPart("customer_device_linked", "0");
-
-            }
-
-
-        }
-        if( mBinding.cbaccountRegistered  !=null) {
-            if( mBinding.cbaccountRegistered.isChecked()){
-                builder.addFormDataPart("customer_account_registered", "1");
-
-            }else{
-                builder.addFormDataPart("customer_account_registered", "0");
-
-            }
-
-
-        }
-        if (imagesUriArrayList != null) {
-            if (imagesUriArrayList.size() > 0) {
-                for (int i = 0;i  < imagesUriArrayList.size();i++){
-                    File file = new File(getRealPathFromURI(imagesUriArrayList.get(i)));
-                    builder.addFormDataPart("image",
-                            file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
-
-                }
-
-            }
-        }
-
-        RequestBody requestBody = builder.build();
-
-        Call<UpdateSaleModel> call = apiService.updateinfoSale("application/json",token, requestBody);
-
-        call.enqueue(new Callback<UpdateSaleModel>() {
-            @Override
-            public void onResponse(Call<UpdateSaleModel> call, Response<UpdateSaleModel> response) {
-                final UpdateSaleModel listofhome = response.body();
-                if (listofhome != null) {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
-
-                            if (listofhome.getStatus().equals("1")) {
-//                                getLeadsDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),lead_id);
-
-
-
-
-
-
-                 GPSTracker gpsTracker = new GPSTracker(ActivitySales.this);
-                 if (gpsTracker.getIsGPSTrackingEnabled())
-                 {
-                      ending_latitude = gpsTracker.getLatitude()+ "," + gpsTracker.getLongitude();
-                 }
-
-
-
-                 Date todayDate = Calendar.getInstance().getTime();
-                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                 String todayString = formatter.format(todayDate);
-             String    ending_date =todayString;
-
-                 updateMeetingChecklist(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
-                         appointment_id,
-                        a1,a2,a3,a4, ending_date,ending_latitude,meeting_outcome);
-
-
-
-
-
-
-
-
-                            }
-                        }
-                    });
-                } else {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<UpdateSaleModel> call, Throwable t) {
-
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        Toast.makeText(ActivitySales.this, "Failure", Toast.LENGTH_SHORT).show();
-
-                    }
-
-                });
-
-
-            }
-        });
-    }
-
-
-
-    public void updateMeetingChecklist(String token,String id ,
-                                       String answer1 , 
-                                       String answer2 ,  
-                                       String answer3 , 
-                                       String answer4 ,
-                                       String end_meeting,
-                                       String end_meeting_lat_lng,
-                                       String meeting_outcome) {
-        ApiService apiService = ApiClient.getClient(ActivitySales.this).create(ApiService.class);
-        MultipartBody.Builder builder = new MultipartBody.Builder();
-        builder.setType(MultipartBody.FORM);
-
-        builder.addFormDataPart("id", id);
-      
-        if(answer1 !=null) {
-            builder.addFormDataPart("answer1", answer1);
-        }
-         if(answer2 !=null) {
-            builder.addFormDataPart("answer2", answer2);
-        }
-         if(answer3 !=null) {
-            builder.addFormDataPart("answer3", answer3);
-        }
-
-         if(answer4 !=null) {
-            builder.addFormDataPart("answer4", answer4);
-        }
-
-        if(end_meeting !=null) {
-            builder.addFormDataPart("end_meeting", end_meeting);
-        }
-        if(end_meeting_lat_lng !=null) {
-            builder.addFormDataPart("end_meeting_lat_lng", end_meeting_lat_lng);
-        }
-        if(meeting_outcome !=null) {
-            builder.addFormDataPart("meeting_outcome", meeting_outcome);
-        }
-
-        RequestBody requestBody = builder.build();
-
-        Call<Model.GenerealModel> call = apiService.updateMeetingChecklist(token, requestBody);
-
-        call.enqueue(new Callback<Model.GenerealModel>() {
-            @Override
-            public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
-                final Model.GenerealModel listofhome = response.body();
-                if (listofhome != null) {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
-
-                            if (listofhome.getStatus().equals("1")) {
-
-
-                                Toast.makeText(ActivitySales.this, listofhome.getMessage(), Toast.LENGTH_SHORT).show();
-                                if(!type.equalsIgnoreCase("sales")){
-                                    Intent intent = new Intent(ActivitySales.this, ActivityAfterSale.class);
-                                    intent.putExtra("appointment_id", id);
-                                    startActivity(intent);
-                                    finish();
-                                }
-
-
-                                if(   packagesActivity!=null)
-                                {
-                                    packagesActivity.finish();
-                                }
-
-
-
-                                if(   meetingcehck!=null)
-                                {
-                                    meetingcehck.finish();
-                                }
-
-
-
-                                if(   verificationAct!=null)
-                                {
-                                    verificationAct.finish();
-                                }
-
-                                finish();
-
-                            } else {
-                                Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-
-                            }
-                        }
-                    });
-                } else {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            Toast.makeText(ActivitySales.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<Model.GenerealModel> call, Throwable t) {
-
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                    }
-
-                });
-
-
-            }
-        });
     }
 
 }

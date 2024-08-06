@@ -13,10 +13,8 @@ import com.example.iqos.R;
 import java.util.ArrayList;
 
 public class PreMeetingAdapter extends RecyclerView.Adapter<PreMeetingAdapter.ViewHolder> {
-    private Activity context;
-
-
     ArrayList<String> items = new ArrayList<>();
+    private Activity context;
 
 
     public PreMeetingAdapter(Activity context, ArrayList<String> leads) {

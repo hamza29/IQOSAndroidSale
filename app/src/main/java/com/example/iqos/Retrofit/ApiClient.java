@@ -20,11 +20,11 @@ public class ApiClient {
 
     //public static String BASE_URL = "https://www.myfitwiz.com/api/";
     public static String BASE_URL = "http://app.iqoch.com/api/";
-//    public static String BASE_URL = "https://f151-39-46-227-132.ngrok-free.app/api/";
+    //    public static String BASE_URL = "https://f151-39-46-227-132.ngrok-free.app/api/";
 //    public static String BASE_URL = "https://rpm.stagingdesk.net/api/";
 //    public static String BASE_URL_IMAGE = "https://rpm.stagingdesk.net/";
     public static String BASE_URL_IMAGE = "https://rpm.stagingdesk.net/";
-   // public static String BASE_URL_IMAGE = "https://www.myfitwiz.com/";
+    // public static String BASE_URL_IMAGE = "https://www.myfitwiz.com/";
 
     private static Retrofit retrofit = null;
 

@@ -1,9 +1,5 @@
 package com.example.iqos.LeadsModule;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +12,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.iqos.Constants;
+import com.example.iqos.MeetingModule.ActivityAppointmentMeetingCheckList;
 import com.example.iqos.R;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
@@ -46,8 +47,12 @@ public class ActivityLeads extends AppCompatActivity {
     String phone;
     String designation;
     String organization;
-    String city;
+    String city, nic_format;
     String type;
+    String cbName = "";
+    String cbHav = "";
+    String cbSmoker = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,15 +70,26 @@ public class ActivityLeads extends AppCompatActivity {
                 mBinding.tvEcomLeads.setBackground(getDrawable(R.drawable.rounded_top_grey));
                 mBinding.rvLeads.setVisibility(View.VISIBLE);
                 mBinding.rvEcomLeads.setVisibility(View.GONE);
-                getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
             }
         });
 
         List<String> city_list = new ArrayList<>();
+        city_list.add("SELECT");
         city_list.add("Karachi");
         city_list.add("Lahore");
-        city_list.add("Islamabdr");
+        city_list.add("Islamabad");
+
+        List<String> nic_list = new ArrayList<>();
+        nic_list.add("SELECT");
+        nic_list.add("IQOS");
+        nic_list.add("Cigarettes");
+        nic_list.add("Nicotine Pouch (ZYN)");
+        nic_list.add("Nicotine Pouch (Other)");
+        nic_list.add("Vape");
+        nic_list.add("Other");
         setPaymentMethodSpinner(city_list);
+        setNICSpinner(nic_list);
         mBinding.tvEcomLeads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,27 +99,27 @@ public class ActivityLeads extends AppCompatActivity {
                 mBinding.rvLeads.setVisibility(View.GONE);
                 mBinding.rvEcomLeads.setVisibility(View.VISIBLE);
 
-                getEcomLeads (mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                getEcomLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
             }
         });
 
-        if(!type.isEmpty() && type.equals("sales")){
-            getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+        if (!type.isEmpty() && type.equals("sales")) {
+            getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
             mBinding.fabAddLead.setVisibility(View.GONE);
             mBinding.tvEcomLeads.setVisibility(View.GONE);
             mBinding.tvLeads.setText("Sales");
             mBinding.tvNormalLeads.setText("My Sales");
-        }else{
-            getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+        } else {
+            getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
             mBinding.tvEcomLeads.setVisibility(View.VISIBLE);
             mBinding.tvLeads.setText("Leads");
             mBinding.tvNormalLeads.setText("My Leads");
-            if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")){
+            if (mSharedPreferences.getString(Constants.ROLE, "").equalsIgnoreCase("sales")) {
                 mBinding.tvEcomLeads.setVisibility(View.GONE);
                 mBinding.fabAddLead.setVisibility(View.VISIBLE);
                 mBinding.rvLeads.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 mBinding.fabAddLead.setVisibility(View.GONE);
                 mBinding.tvEcomLeads.setVisibility(View.VISIBLE);
             }
@@ -116,8 +132,42 @@ public class ActivityLeads extends AppCompatActivity {
                 mBinding.swipeRefresh.setEnabled(false);
                 mBinding.svForm.setVisibility(View.VISIBLE);
                 mBinding.fabAddLead.setVisibility(View.GONE);
+                mBinding.llStepOne.setVisibility(View.VISIBLE);
+                mBinding.llStepTwo.setVisibility(View.GONE);
+
             }
-        }); mBinding.btnSave.setOnClickListener(new View.OnClickListener() {
+        });
+        mBinding.btnSecondStep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (mBinding.cbName.isChecked()) {
+                    cbName = "1";
+                } else {
+                    cbName = "0";
+
+                }
+                if (mBinding.cbHav.isChecked()) {
+                    cbHav = "1";
+                } else {
+                    cbHav = "0";
+
+                }
+                if (mBinding.cbSmokerStatus.isChecked()) {
+                    cbSmoker = "1";
+                } else {
+                    cbSmoker = "0";
+
+                }
+                if (cbName.equalsIgnoreCase("1") && cbHav.equalsIgnoreCase("1") && cbSmoker.equalsIgnoreCase("1")) {
+                    mBinding.llStepOne.setVisibility(View.GONE);
+                    mBinding.llStepTwo.setVisibility(View.VISIBLE);
+                }else{
+                    Toast.makeText(ActivityLeads.this, "Please complete verification form before moving forward", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        mBinding.btnSave.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void onClick(View view) {
@@ -128,88 +178,73 @@ public class ActivityLeads extends AppCompatActivity {
                 designation = mBinding.etDesignation.getText().toString();
                 organization = mBinding.etOrganization.getText().toString();
                 age = mBinding.etAge.getText().toString();
-                if(first_name.isEmpty()){
+                if (first_name.isEmpty()) {
                     mBinding.etFirstName.requestFocus();
                     mBinding.etFirstName.setBackground(getDrawable(R.drawable.rounded_corner_red));
-                } else{
+                } else {
                     mBinding.etFirstName.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
-                } 
-                if(last_name.isEmpty()){
+                }
+                if (last_name.isEmpty()) {
                     mBinding.etLastName.requestFocus();
                     mBinding.etLastName.setBackground(getDrawable(R.drawable.rounded_corner_red));
-                } else{
+                } else {
                     mBinding.etLastName.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
-                } 
-                if(email.isEmpty()){
+                }
+                if (email.isEmpty()) {
                     mBinding.etLeadEmail.requestFocus();
                     mBinding.etLeadEmail.setBackground(getDrawable(R.drawable.rounded_corner_red));
-                } else{
+                } else {
                     mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
                 }
-                if(phone.isEmpty()){
+                if (phone.isEmpty()) {
                     mBinding.etLeadPhone.requestFocus();
                     mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_red));
-                } else{
+                } else {
                     mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
 
-                } 
-                if(designation.isEmpty()){
-                    mBinding.etDesignation.requestFocus();
-                    mBinding.etDesignation.setBackground(getDrawable(R.drawable.rounded_corner_red));
-                } else{
-                    mBinding.etDesignation.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
-
-                } 
-                if(organization.isEmpty()){
-                    mBinding.etOrganization.requestFocus();
-                    mBinding.etOrganization.setBackground(getDrawable(R.drawable.rounded_corner_red));
-                } else{
-                    mBinding.etOrganization.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
-
-                } 
-                if(age.isEmpty()){
+                }
+                if (age.isEmpty()) {
                     mBinding.etAge.requestFocus();
                     mBinding.etAge.setBackground(getDrawable(R.drawable.rounded_corner_red));
-                } else{
+                } else {
                     mBinding.etAge.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
 
-                } 
-                if(city.isEmpty()){
+                }
+                if (city.isEmpty()) {
                     mBinding.citySpinner.requestFocus();
                     mBinding.citySpinner.setBackground(getDrawable(R.drawable.rounded_corner_red));
-                } else{
+                } else {
                     mBinding.citySpinner.setBackground(getDrawable(R.drawable.rounded_corner_meeting));
 
                 }
 
-                if(!phone.isEmpty() && !first_name.isEmpty() && !city.isEmpty() && !email.isEmpty() && !last_name.isEmpty() && !designation.isEmpty() && !organization.isEmpty() && !city.isEmpty() && !age.isEmpty() ){
-                    createLead(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                if (!phone.isEmpty() && !first_name.isEmpty() && !city.isEmpty() && !email.isEmpty() && !last_name.isEmpty() && !designation.isEmpty() && !organization.isEmpty() && !city.isEmpty() && !age.isEmpty()) {
+                    createLead(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
                 }
             }
         });
-        Log.e("visibilityleads1", ""+(mBinding.rvLeads.getVisibility()==View.VISIBLE));
-
+        Log.e("visibilityleads1", "" + (mBinding.rvLeads.getVisibility() == View.VISIBLE));
 
 
         //LeadsRecycler();
-            mBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    Log.e("sales", type);
-                    Log.e("visibilityleads", ""+(mBinding.rvLeads.getVisibility()==View.VISIBLE));
+        mBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.e("sales", type);
+                Log.e("visibilityleads", "" + (mBinding.rvLeads.getVisibility() == View.VISIBLE));
 
-                    if(!type.isEmpty() && type.equals("sales")){
-                        getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
-                    }else{
-                        if (mBinding.rvLeads.getVisibility() == View.VISIBLE) {
-                            getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
-                        } else {
-                            getEcomLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
-                        }
+                if (!type.isEmpty() && type.equals("sales")) {
+                    getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
+                } else {
+                    if (mBinding.rvLeads.getVisibility() == View.VISIBLE) {
+                        getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
+                    } else {
+                        getEcomLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
                     }
-
                 }
-            });
+
+            }
+        });
 
         mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,9 +258,9 @@ public class ActivityLeads extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(!type.isEmpty() && type.equals("sales")){
-            getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
-        }else{
+        if (!type.isEmpty() && type.equals("sales")) {
+            getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
+        } else {
             if (mBinding.rvLeads.getVisibility() == View.VISIBLE) {
                 getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
             } else {
@@ -234,7 +269,7 @@ public class ActivityLeads extends AppCompatActivity {
         }
     }
 
-    private void LeadsRecycler(List<Model.Lead> leads,String leadType) {
+    private void LeadsRecycler(List<Model.Lead> leads, String leadType) {
 
 
         LeadsAdapter leadsAdapter;
@@ -242,6 +277,7 @@ public class ActivityLeads extends AppCompatActivity {
         leadsAdapter = new LeadsAdapter(ActivityLeads.this, leads, leadType);
         mBinding.rvLeads.setAdapter(leadsAdapter);
     }
+
     private void LeadsEcomRecycler(List<Lead> leads) {
 
 
@@ -257,7 +293,7 @@ public class ActivityLeads extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityLeads.this).create(ApiService.class);
-        Call<Model.GetLeadsModel> call = apiService.getLeads("application/json",token,"");
+        Call<Model.GetLeadsModel> call = apiService.getLeads("application/json", token, "");
         call.enqueue(new Callback<Model.GetLeadsModel>() {
             @Override
             public void onResponse(Call<Model.GetLeadsModel> call, Response<Model.GetLeadsModel> response) {
@@ -275,14 +311,13 @@ public class ActivityLeads extends AppCompatActivity {
 
                                     mBinding.progress.setVisibility(View.GONE);
 
-                                    if (keyModel.getData().getLeads().size() >0){
+                                    if (keyModel.getData().getLeads().size() > 0) {
                                         mBinding.rvLeads.setVisibility(View.VISIBLE);
                                         LeadsRecycler(keyModel.getData().getLeads(), "leads");
-                                    } else     if (keyModel.getData().getLeads().size() ==0){
+                                    } else if (keyModel.getData().getLeads().size() == 0) {
                                         mBinding.rvLeads.setVisibility(View.GONE);
                                         LeadsRecycler(new ArrayList<>(), "leads");
                                     }
-
 
 
                                 }
@@ -328,12 +363,13 @@ public class ActivityLeads extends AppCompatActivity {
             }
         });
     }
+
     public void getSales(String token) {
         mBinding.progress.setVisibility(View.VISIBLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityLeads.this).create(ApiService.class);
-        Call<Model.GetLeadsModel> call = apiService.getSales("application/json",token,"");
+        Call<Model.GetLeadsModel> call = apiService.getSales("application/json", token, "");
         call.enqueue(new Callback<Model.GetLeadsModel>() {
             @Override
             public void onResponse(Call<Model.GetLeadsModel> call, Response<Model.GetLeadsModel> response) {
@@ -351,14 +387,13 @@ public class ActivityLeads extends AppCompatActivity {
 
                                     mBinding.progress.setVisibility(View.GONE);
 
-                                    if (keyModel.getData().getLeads().size() >0){
+                                    if (keyModel.getData().getLeads().size() > 0) {
                                         mBinding.rvLeads.setVisibility(View.VISIBLE);
                                         LeadsRecycler(keyModel.getData().getLeads(), "sales");
-                                    } else     if (keyModel.getData().getLeads().size() ==0){
+                                    } else if (keyModel.getData().getLeads().size() == 0) {
                                         mBinding.rvLeads.setVisibility(View.GONE);
                                         LeadsRecycler(new ArrayList<>(), "sales");
                                     }
-
 
 
                                 }
@@ -404,12 +439,13 @@ public class ActivityLeads extends AppCompatActivity {
             }
         });
     }
+
     public void getEcomLeads(String token) {
         mBinding.progress.setVisibility(View.VISIBLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityLeads.this).create(ApiService.class);
-        Call<EcommLeads> call = apiService.getEcomLeads("application/json",token );
+        Call<EcommLeads> call = apiService.getEcomLeads("application/json", token);
         call.enqueue(new Callback<EcommLeads>() {
             @Override
             public void onResponse(Call<EcommLeads> call, Response<EcommLeads> response) {
@@ -427,17 +463,16 @@ public class ActivityLeads extends AppCompatActivity {
 
                                     mBinding.progress.setVisibility(View.GONE);
 
-                                    if (keyModel.getData().getLeads().size() >0){
+                                    if (keyModel.getData().getLeads().size() > 0) {
                                         mBinding.rvEcomLeads.setVisibility(View.VISIBLE);
                                         LeadsEcomRecycler(keyModel.getData().getLeads());
-                                    } else     if (keyModel.getData().getLeads().size() ==0){
+                                    } else if (keyModel.getData().getLeads().size() == 0) {
                                         mBinding.rvEcomLeads.setVisibility(View.GONE);
                                         LeadsEcomRecycler(new ArrayList<>());
                                     }
 
 
-
-                                }else{
+                                } else {
                                     mBinding.progress.setVisibility(View.GONE);
                                     mBinding.rvEcomLeads.setVisibility(View.GONE);
                                     LeadsEcomRecycler(new ArrayList<>());
@@ -501,8 +536,18 @@ public class ActivityLeads extends AppCompatActivity {
         builder.addFormDataPart("organization", organization);
         builder.addFormDataPart("age_group", age);
         builder.addFormDataPart("city", city);
+        builder.addFormDataPart("nic_format", nic_format);
+        if (cbName != null) {
+            builder.addFormDataPart("is_name_verified", cbName);
+        }
+        if (cbHav != null) {
+            builder.addFormDataPart("is_hav_verified", cbHav);
+        }
+        if (cbSmoker != null) {
+            builder.addFormDataPart("is_smoke_status_verified", cbSmoker);
+        }
         RequestBody requestBody = builder.build();
-        Call<Model.LeadData> call = apiService.createLead("application/json",token, requestBody);
+        Call<Model.LeadData> call = apiService.createLead("application/json", token, requestBody);
         call.enqueue(new Callback<Model.LeadData>() {
             @Override
             public void onResponse(Call<Model.LeadData> call, Response<Model.LeadData> response) {
@@ -520,19 +565,25 @@ public class ActivityLeads extends AppCompatActivity {
                                 mBinding.fabAddLead.setVisibility(View.VISIBLE);
                                 mBinding.progress.setVisibility(View.GONE);
                                 Toast.makeText(ActivityLeads.this, "Lead Saved Successfully", Toast.LENGTH_SHORT).show();
-                                if(!type.isEmpty() && type.equals("sales")){
-                                    getSales(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
-                                }else {
-                                    getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
-                                }
-                            }else{
+
+                                mBinding.swipeRefresh.setEnabled(true);
+                                mBinding.svForm.setVisibility(View.GONE);
+                                mBinding.fabAddLead.setVisibility(View.VISIBLE);
+                                mBinding.etFirstName.setText("");
+                                mBinding.etLastName.setText("");
+                                mBinding.etLeadEmail.setText("");
+                                mBinding.etLeadPhone.setText("");
+                                mBinding.etDesignation.setText("");
+                                mBinding.etOrganization.setText("");
+                                mBinding.etAge.setText("");
+                            } else {
                                 mBinding.swipeRefresh.setRefreshing(false);
                                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                                if(keyModel.getMessage().contains("email")){
+                                if (keyModel.getMessage().contains("email")) {
                                     mBinding.etLeadEmail.requestFocus();
                                     mBinding.etLeadEmail.setBackground(getDrawable(R.drawable.rounded_corner_red));
                                 }
-                                if(keyModel.getMessage().contains("phone")){
+                                if (keyModel.getMessage().contains("phone")) {
                                     mBinding.etLeadPhone.requestFocus();
                                     mBinding.etLeadPhone.setBackground(getDrawable(R.drawable.rounded_corner_red));
                                 }
@@ -572,6 +623,67 @@ public class ActivityLeads extends AppCompatActivity {
             }
         });
     }
+
+    private void setPaymentMethodSpinner(List<String> city_list) {
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                city_list);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        mBinding.citySpinner.setAdapter(ad);
+        mBinding.citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                if(Objects.equals(city_list.get(position), "SELECT")){
+                    city = "";
+                }else{
+                    city = city_list.get(position);
+                }
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+    }
+
+    private void setNICSpinner(List<String> nic_list) {
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                nic_list);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        mBinding.nicFormatSpinner.setAdapter(ad);
+        mBinding.nicFormatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                if(Objects.equals(nic_list.get(position), "SELECT")){
+                    nic_format = "";
+                }else{
+                    nic_format = nic_list.get(position);
+                }
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+    }
+
     public class Data {
 
         @SerializedName("leads")
@@ -587,6 +699,7 @@ public class ActivityLeads extends AppCompatActivity {
         }
 
     }
+
     public class EcommLeads {
 
         @SerializedName("status")
@@ -624,6 +737,7 @@ public class ActivityLeads extends AppCompatActivity {
         }
 
     }
+
     public class Lead {
 
         @SerializedName("id")
@@ -738,32 +852,6 @@ public class ActivityLeads extends AppCompatActivity {
         }
 
     }
-    private void setPaymentMethodSpinner(List<String> city_list){
-        ArrayAdapter ad
-                = new ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                city_list);
-        ad.setDropDownViewResource(
-                android.R.layout
-                        .simple_spinner_dropdown_item);
-        mBinding.citySpinner.setAdapter(ad);
-        mBinding.citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                city = city_list.get(position);
-            }
 
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-
-
-    }
 
 }

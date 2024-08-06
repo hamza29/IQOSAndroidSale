@@ -1,16 +1,14 @@
 package com.example.iqos.HomeFragmentModule;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.iqos.AppointmentsModule.ActivityBookAppointment;
 import com.example.iqos.Constants;
@@ -18,11 +16,6 @@ import com.example.iqos.InventoryActivity;
 import com.example.iqos.LeadsModule.ActivityHyperAppointments;
 import com.example.iqos.LeadsModule.ActivityHyperCareLeads;
 import com.example.iqos.LeadsModule.ActivityLeads;
-import com.example.iqos.LeadsModule.ActivityLeadsDetail;
-import com.example.iqos.LoginModule.ActivityLogin;
-import com.example.iqos.MainActivity;
-import com.example.iqos.MeetingModule.ActivityPackages;
-import com.example.iqos.R;
 import com.example.iqos.SalesModule.PerformanceActivity;
 import com.example.iqos.databinding.FragmentHomeBinding;
 
@@ -40,7 +33,6 @@ public class HomeFragment extends Fragment {
     }
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,28 +48,28 @@ public class HomeFragment extends Fragment {
         mSharedPreferences = getActivity().getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
 
         activity = this;
-        if(mSharedPreferences.getString(Constants.HYPER_CARE,"").equalsIgnoreCase("1")){
-             mBinding.rlAppoints.setVisibility(View.GONE);
+        if (mSharedPreferences.getString(Constants.HYPER_CARE, "").equalsIgnoreCase("1")) {
+            mBinding.rlAppoints.setVisibility(View.GONE);
             mBinding.rlHyperCare.setVisibility(View.GONE);
             mBinding.rlInvent.setVisibility(View.GONE);
             mBinding.rlPerf.setVisibility(View.GONE);
             mBinding.rlHyperCareAppointment.setVisibility(View.GONE);
-        }else{
-             mBinding.rlAppoints.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.rlAppoints.setVisibility(View.VISIBLE);
             mBinding.rlHyperCare.setVisibility(View.VISIBLE);
             mBinding.rlInvent.setVisibility(View.VISIBLE);
             mBinding.rlPerf.setVisibility(View.VISIBLE);
             mBinding.rlHyperCareAppointment.setVisibility(View.VISIBLE);
         }
 
-        if(mSharedPreferences.getString(Constants.ROLE,"").equalsIgnoreCase("sales")){
+        if (mSharedPreferences.getString(Constants.ROLE, "").equalsIgnoreCase("sales")) {
             mBinding.rlAppoints.setVisibility(View.GONE);
-            mBinding.rlHyperCare.setVisibility(View.GONE);
+            mBinding.rlHyperCare.setVisibility(View.VISIBLE);
             mBinding.rlInvent.setVisibility(View.GONE);
             mBinding.rlPerf.setVisibility(View.VISIBLE);
             mBinding.rlSales.setVisibility(View.VISIBLE);
-            mBinding.rlHyperCareAppointment.setVisibility(View.GONE);
-        }else{
+            mBinding.rlHyperCareAppointment.setVisibility(View.VISIBLE);
+        } else {
             mBinding.rlAppoints.setVisibility(View.VISIBLE);
             mBinding.rlHyperCare.setVisibility(View.VISIBLE);
             mBinding.rlInvent.setVisibility(View.VISIBLE);
@@ -96,7 +88,8 @@ public class HomeFragment extends Fragment {
 
             }
 
-        });mBinding.rlSales.setOnClickListener(new View.OnClickListener() {
+        });
+        mBinding.rlSales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ActivityLeads.class);
@@ -104,13 +97,13 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
 
-        });mBinding.rlAppoints.setOnClickListener(new View.OnClickListener() {
+        });
+        mBinding.rlAppoints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                        Intent intent = new Intent(getActivity(), ActivityBookAppointment.class);
-                        startActivity(intent);
-
+                Intent intent = new Intent(getActivity(), ActivityBookAppointment.class);
+                startActivity(intent);
 
 
             }
@@ -122,42 +115,38 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                        Intent intent = new Intent(getActivity(), ActivityHyperAppointments.class);
-                        startActivity(intent);
-
-
-
-            }
-        });
-mBinding.rlHyperCare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                        Intent intent = new Intent(getActivity(), ActivityHyperCareLeads.class);
-                        startActivity(intent);
-
+                Intent intent = new Intent(getActivity(), ActivityHyperAppointments.class);
+                startActivity(intent);
 
 
             }
         });
-mBinding.rlInvent.setOnClickListener(new View.OnClickListener() {
+        mBinding.rlHyperCare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                        Intent intent = new Intent(getActivity(), InventoryActivity.class);
-                        startActivity(intent);
-
+                Intent intent = new Intent(getActivity(), ActivityHyperCareLeads.class);
+                startActivity(intent);
 
 
             }
         });
-mBinding.rlPerf.setOnClickListener(new View.OnClickListener() {
+        mBinding.rlInvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                        Intent intent = new Intent(getActivity(), PerformanceActivity.class);
-                        startActivity(intent);
+                Intent intent = new Intent(getActivity(), InventoryActivity.class);
+                startActivity(intent);
 
+
+            }
+        });
+        mBinding.rlPerf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), PerformanceActivity.class);
+                startActivity(intent);
 
 
             }

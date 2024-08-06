@@ -1,15 +1,12 @@
 package com.example.iqos;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
-import android.widget.MediaController;
 
-import com.example.iqos.databinding.ActivitySalesBinding;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.iqos.databinding.ActivityWebViewBinding;
 
 public class WebViewActivity extends AppCompatActivity {
@@ -24,22 +21,17 @@ public class WebViewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         ;
-        WebSettings webSettings = mBinding. webView.getSettings();
+        WebSettings webSettings = mBinding.webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-       mBinding. webView.loadUrl(intent.getStringExtra("video_link"));
+        mBinding.webView.loadUrl(intent.getStringExtra("video_link"));
 
 
-mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        finish();
-    }
-});
-
-
-
-
-
+        mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
     }

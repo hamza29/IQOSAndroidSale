@@ -1,24 +1,20 @@
 package com.example.iqos.AppointmentsModule;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.iqos.Constants;
-import com.example.iqos.LeadsModule.ActivityLeadsDetail;
 import com.example.iqos.R;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
-import com.example.iqos.Retrofit.Model;
 import com.example.iqos.databinding.ActivityBookAppointmentBinding;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -52,9 +48,10 @@ public class ActivityBookAppointment extends AppCompatActivity {
                 mBinding.tvEcomAppointments.setBackground(getDrawable(R.drawable.rounded_top_grey));
                 mBinding.rvAppointments.setVisibility(View.VISIBLE);
                 mBinding.rvEcomAppointments.setVisibility(View.GONE);
-                getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
             }
-        });  mBinding.tvEcomAppointments.setOnClickListener(new View.OnClickListener() {
+        });
+        mBinding.tvEcomAppointments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -63,11 +60,10 @@ public class ActivityBookAppointment extends AppCompatActivity {
                 mBinding.rvAppointments.setVisibility(View.GONE);
                 mBinding.rvEcomAppointments.setVisibility(View.VISIBLE);
 
-                getEcomAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                getEcomAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
             }
         });
-
 
 
         mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +77,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
 //                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                finish();
 //
 //
 //
@@ -98,17 +94,17 @@ public class ActivityBookAppointment extends AppCompatActivity {
 //                // Create and show the AlertDialog
 //                AlertDialog dialog = builder.create();
 //                dialog.show();
-             }
+            }
         });
         mBinding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if(mBinding.rvAppointments.getVisibility() == View.VISIBLE){
+                if (mBinding.rvAppointments.getVisibility() == View.VISIBLE) {
                     mBinding.swipe.setRefreshing(true);
-                    getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                    getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
-                }else{
-                    getEcomAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                } else {
+                    getEcomAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
 
                 }
@@ -118,26 +114,25 @@ public class ActivityBookAppointment extends AppCompatActivity {
 
         //  appointmentsRecycler();
 
-        getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+        getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(mBinding.rvAppointments.getVisibility() == View.VISIBLE){
+        if (mBinding.rvAppointments.getVisibility() == View.VISIBLE) {
             mBinding.swipe.setRefreshing(true);
-            getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+            getAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
-        }else{
-            getEcomAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+        } else {
+            getEcomAppointment(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
 
         }
     }
 
     private void appointmentsRecycler(List<Appointment> appointments) {
-
 
 
         AppointmentAdapter appointmentAdapter;
@@ -147,8 +142,8 @@ public class ActivityBookAppointment extends AppCompatActivity {
 
 
     }
-    private void ecomappointmentsRecycler(List<EcAppointment> appointments) {
 
+    private void ecomappointmentsRecycler(List<EcAppointment> appointments) {
 
 
         EcomAppointmentAdapter appointmentAdapter;
@@ -164,7 +159,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityBookAppointment.this).create(ApiService.class);
-        Call<EcomAppointments> call = apiService.getEcomAppointment("application/json",token);
+        Call<EcomAppointments> call = apiService.getEcomAppointment("application/json", token);
         call.enqueue(new Callback<EcomAppointments>() {
             @Override
             public void onResponse(Call<EcomAppointments> call, Response<EcomAppointments> response) {
@@ -182,10 +177,11 @@ public class ActivityBookAppointment extends AppCompatActivity {
 
                                     mBinding.progress.setVisibility(View.GONE);
 
-                                    if (keyModel.getData().getAppointments().size() >0){
+                                    if (keyModel.getData().getAppointments().size() > 0) {
                                         mBinding.rvEcomAppointments.setVisibility(View.VISIBLE);
-                                        ecomappointmentsRecycler(keyModel.getData().getAppointments());   ;
-                                    }else if (keyModel.getData().getAppointments().size() ==0){
+                                        ecomappointmentsRecycler(keyModel.getData().getAppointments());
+                                        ;
+                                    } else if (keyModel.getData().getAppointments().size() == 0) {
 
                                         mBinding.rvEcomAppointments.setVisibility(View.GONE);
 
@@ -193,15 +189,17 @@ public class ActivityBookAppointment extends AppCompatActivity {
                                     }
 
 
+                                } else {
+                                    mBinding.rvEcomAppointments.setVisibility(View.GONE);
 
-                                }else{ mBinding.rvEcomAppointments.setVisibility(View.GONE);
-
-                                    ecomappointmentsRecycler(new ArrayList<>());  }
+                                    ecomappointmentsRecycler(new ArrayList<>());
+                                }
 
                             } else {
                                 mBinding.rvEcomAppointments.setVisibility(View.GONE);
 
-                                ecomappointmentsRecycler(new ArrayList<>());   ;
+                                ecomappointmentsRecycler(new ArrayList<>());
+                                ;
 
 //                                Toast.makeText(ActivityBookAppointment.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
@@ -240,12 +238,13 @@ public class ActivityBookAppointment extends AppCompatActivity {
             }
         });
     }
+
     public void getAppointment(String token) {
         mBinding.progress.setVisibility(View.VISIBLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityBookAppointment.this).create(ApiService.class);
-        Call<GetAppointmentModel> call = apiService.getAppointment("application/json",token);
+        Call<GetAppointmentModel> call = apiService.getAppointment("application/json", token);
         call.enqueue(new Callback<GetAppointmentModel>() {
             @Override
             public void onResponse(Call<GetAppointmentModel> call, Response<GetAppointmentModel> response) {
@@ -263,14 +262,13 @@ public class ActivityBookAppointment extends AppCompatActivity {
 
                                     mBinding.progress.setVisibility(View.GONE);
 
-                                    if (keyModel.getData().getAppointments().size() >0){
+                                    if (keyModel.getData().getAppointments().size() > 0) {
                                         mBinding.rvAppointments.setVisibility(View.VISIBLE);
-                                        appointmentsRecycler(keyModel.getData().getAppointments())   ;
-                                    }else if (keyModel.getData().getAppointments().size() ==0){
+                                        appointmentsRecycler(keyModel.getData().getAppointments());
+                                    } else if (keyModel.getData().getAppointments().size() == 0) {
                                         mBinding.rvAppointments.setVisibility(View.GONE);
-                                        appointmentsRecycler(new ArrayList<>())   ;
+                                        appointmentsRecycler(new ArrayList<>());
                                     }
-
 
 
                                 }
@@ -278,7 +276,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
                             } else {
                                 mBinding.rvAppointments.setVisibility(View.GONE);
 
-                                appointmentsRecycler(new ArrayList<>())   ;
+                                appointmentsRecycler(new ArrayList<>());
 
 //                                Toast.makeText(ActivityBookAppointment.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
@@ -386,6 +384,18 @@ public class ActivityBookAppointment extends AppCompatActivity {
         @SerializedName("appointment_type")
         @Expose
         private String appointmentType;
+
+        public String getIsMultiSale() {
+            return isMultiSale;
+        }
+
+        public void setIsMultiSale(String isMultiSale) {
+            this.isMultiSale = isMultiSale;
+        }
+
+        @SerializedName("is_multisale")
+        @Expose
+        private String isMultiSale;
         @SerializedName("is_external")
         @Expose
         private String is_external;
@@ -575,6 +585,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
         }
 
     }
+
     public class Data {
 
         @SerializedName("appointments")
@@ -590,7 +601,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
         }
 
     }
- 
+
     public class GetAppointmentModel {
 
         @SerializedName("status")
@@ -627,34 +638,9 @@ public class ActivityBookAppointment extends AppCompatActivity {
             this.data = data;
         }
 
-    } 
+    }
+
     public class LastAction {
-
-        @SerializedName("type")
-        @Expose
-        private String type;
-        @SerializedName("time")
-        @Expose
-        private String time;
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getTime() {
-            return time;
-        }
-
-        public void setTime(String time) {
-            this.time = time;
-        }
-
-    } 
-    public class NextAction {
 
         @SerializedName("type")
         @Expose
@@ -681,42 +667,32 @@ public class ActivityBookAppointment extends AppCompatActivity {
 
     }
 
+    public class NextAction {
 
+        @SerializedName("type")
+        @Expose
+        private String type;
+        @SerializedName("time")
+        @Expose
+        private String time;
 
+        public String getType() {
+            return type;
+        }
 
+        public void setType(String type) {
+            this.type = type;
+        }
 
+        public String getTime() {
+            return time;
+        }
 
+        public void setTime(String time) {
+            this.time = time;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
     public class EcAppointment {
@@ -855,6 +831,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
         }
 
     }
+
     public class EcData {
 
         @SerializedName("appointments")
@@ -870,6 +847,7 @@ public class ActivityBookAppointment extends AppCompatActivity {
         }
 
     }
+
     public class EcomAppointments {
 
         @SerializedName("status")

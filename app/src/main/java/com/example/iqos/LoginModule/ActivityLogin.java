@@ -1,8 +1,5 @@
 package com.example.iqos.LoginModule;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -13,16 +10,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.iqos.Constants;
 import com.example.iqos.MainActivity;
-import com.example.iqos.MeetingModule.ActivityPackages;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
 import com.example.iqos.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -31,7 +29,6 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,44 +50,47 @@ public class ActivityLogin extends AppCompatActivity {
         View view = mBinding.getRoot();
         setContentView(view);
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
-       // FirebaseApp.initializeApp(ActivityLogin.this);
-            if(mSharedPreferences.getString(Constants.API_KEY,"").contains("skip")){
-            Intent intent = new Intent(ActivityLogin.this,MainActivity.class);
+        // FirebaseApp.initializeApp(ActivityLogin.this);
+        if (mSharedPreferences.getString(Constants.API_KEY, "").contains("skip")) {
+            Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
             startActivity(intent);
-            }else{
-                mBinding.ivLogin.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dexter.withContext(ActivityLogin.this)
-                                .withPermissions(
-                                        Manifest.permission.ACCESS_FINE_LOCATION,
-                                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                                        Manifest.permission.RECORD_AUDIO
-                                ).withListener(new MultiplePermissionsListener() {
-                                    @Override public void onPermissionsChecked(MultiplePermissionsReport report) {
+        } else {
+            mBinding.ivLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dexter.withContext(ActivityLogin.this)
+                            .withPermissions(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                                    Manifest.permission.RECORD_AUDIO
+                            ).withListener(new MultiplePermissionsListener() {
+                                @Override
+                                public void onPermissionsChecked(MultiplePermissionsReport report) {
 
 
-                                        username = mBinding.etUsername.getText().toString();
-                                        password = mBinding.etPassword.getText().toString();
-                                        if (username.isEmpty()){
-                                            mBinding.etUsername.setError("Enter Username");
-                                        }else if (password.isEmpty()){
-                                            mBinding.etUsername.setError("Enter Password");
-                                        }else {
-                                            getDeviceToken();
-                                        }
+                                    username = mBinding.etUsername.getText().toString();
+                                    password = mBinding.etPassword.getText().toString();
+                                    if (username.isEmpty()) {
+                                        mBinding.etUsername.setError("Enter Username");
+                                    } else if (password.isEmpty()) {
+                                        mBinding.etUsername.setError("Enter Password");
+                                    } else {
+                                        getDeviceToken();
+                                    }
 
 
-                                        /* ... */}
-                                    @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
-                                }).check();
+                                    /* ... */
+                                }
+
+                                @Override
+                                public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+                            }).check();
                             /*Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
                             startActivity(intent);*/
-                    }
-                });
+                }
+            });
 
-            }
-
+        }
 
 
     }
@@ -101,13 +101,12 @@ public class ActivityLogin extends AppCompatActivity {
             public void onComplete(@NonNull Task<String> task) {
                 String deviceToken = task.getResult();
                 Log.e("TGED", "DEVICE: " + deviceToken);
-                login(username,password,deviceToken);
+                login(username, password, deviceToken);
 
 
             }
         });
     }
-
 
 
     /////////////////////////Function that is used to Login the Delivery Person/////////////////////////////////
@@ -116,7 +115,7 @@ public class ActivityLogin extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityLogin.this).create(ApiService.class);
-        Call<Model.LoginModel> call = apiService.login(email, password,deviceToken);
+        Call<Model.LoginModel> call = apiService.login(email, password, deviceToken);
         call.enqueue(new Callback<Model.LoginModel>() {
             @Override
             public void onResponse(Call<Model.LoginModel> call, Response<Model.LoginModel> response) {
@@ -134,10 +133,10 @@ public class ActivityLogin extends AppCompatActivity {
                                     mBinding.progress.setVisibility(View.GONE);
                                     mSharedPreferences.edit().putString(Constants.BAREAR_TOKEN, "Bearer " + keyModel.getAccessToken().toString()).commit();
                                     mSharedPreferences.edit().putString(Constants.API_KEY, "skip").commit();
-                                    mSharedPreferences.edit().putString(Constants.USER_NAME, ""+ keyModel.getData().getName()).commit();
-                                    mSharedPreferences.edit().putString(Constants.EMAIL, ""+ keyModel.getData().getCity()).commit();
-                                    mSharedPreferences.edit().putString(Constants.ROLE, ""+ keyModel.getData().getRole()).commit();
-                                    mSharedPreferences.edit().putString(Constants.HYPER_CARE, ""+ keyModel.getData().getHyper_care()).commit();
+                                    mSharedPreferences.edit().putString(Constants.USER_NAME, "" + keyModel.getData().getName()).commit();
+                                    mSharedPreferences.edit().putString(Constants.EMAIL, "" + keyModel.getData().getCity()).commit();
+                                    mSharedPreferences.edit().putString(Constants.ROLE, "" + keyModel.getData().getRole()).commit();
+                                    mSharedPreferences.edit().putString(Constants.HYPER_CARE, "" + keyModel.getData().getHyper_care()).commit();
 
                                     Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
                                     startActivity(intent);
@@ -169,7 +168,7 @@ public class ActivityLogin extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Model.LoginModel> call, Throwable t) {
-                 runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);

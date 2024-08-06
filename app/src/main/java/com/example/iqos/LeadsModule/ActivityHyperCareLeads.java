@@ -14,9 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.iqos.Constants;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
-import com.example.iqos.Retrofit.Model;
 import com.example.iqos.databinding.ActivityHyperleadsBinding;
-import com.example.iqos.databinding.ActivityLeadsBinding;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -39,30 +37,30 @@ public class ActivityHyperCareLeads extends AppCompatActivity {
         View view = mBinding.getRoot();
         setContentView(view);
         mSharedPreferences = getSharedPreferences(Constants.PREFRENCES, Context.MODE_PRIVATE);
-        getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+        getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
         //LeadsRecycler();
         mBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+                getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
             }
         });
         mBinding.tvLeads.setText("Device Care");
         mBinding.ivBack.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""));
+        getLeads(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""));
 
     }
 
@@ -81,7 +79,7 @@ public class ActivityHyperCareLeads extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(ActivityHyperCareLeads.this).create(ApiService.class);
-        Call<DeviceCareLeadsModel> call = apiService.getHyperLeads("application/json",token );
+        Call<DeviceCareLeadsModel> call = apiService.getHyperLeads("application/json", token);
         call.enqueue(new Callback<DeviceCareLeadsModel>() {
             @Override
             public void onResponse(Call<DeviceCareLeadsModel> call, Response<DeviceCareLeadsModel> response) {
@@ -99,17 +97,14 @@ public class ActivityHyperCareLeads extends AppCompatActivity {
 
                                     mBinding.progress.setVisibility(View.GONE);
                                     ArrayList<HyperModel> hyperModels = new ArrayList<HyperModel>();
-                 hyperModels.add(new HyperModel("Day1",keyModel.getData().getDay1()));
-                 hyperModels.add(new HyperModel("Day3",keyModel.getData().getDay3()));
-                 hyperModels.add(new HyperModel("Day7",keyModel.getData().getDay7( )));
-                 hyperModels.add(new HyperModel("Day10",keyModel.getData().getDay10()));
-                 hyperModels.add(new HyperModel("Day14",keyModel.getData().getDay14()));
+                                    hyperModels.add(new HyperModel("Day1", keyModel.getData().getDay1()));
+                                    hyperModels.add(new HyperModel("Day3", keyModel.getData().getDay3()));
+                                    hyperModels.add(new HyperModel("Day7", keyModel.getData().getDay7()));
+                                    hyperModels.add(new HyperModel("Day10", keyModel.getData().getDay10()));
+                                    hyperModels.add(new HyperModel("Day14", keyModel.getData().getDay14()));
 
 
-
-                                        LeadsRecycler(hyperModels);
-
-
+                                    LeadsRecycler(hyperModels);
 
 
                                 }
@@ -151,7 +146,8 @@ public class ActivityHyperCareLeads extends AppCompatActivity {
 
             }
         });
-    } 
+    }
+
     public class Data {
 
         @SerializedName("day_1")
@@ -279,7 +275,8 @@ public class ActivityHyperCareLeads extends AppCompatActivity {
         private String meetingComplete;
         @SerializedName("appointment_message")
         @Expose
-        private String appointmentMessage;@SerializedName("number")
+        private String appointmentMessage;
+        @SerializedName("number")
         @Expose
         private String number;
 
@@ -468,6 +465,7 @@ public class ActivityHyperCareLeads extends AppCompatActivity {
         }
 
     }
+
     public class DeviceCareLeadsModel {
 
         @SerializedName("status")
@@ -504,7 +502,8 @@ public class ActivityHyperCareLeads extends AppCompatActivity {
             this.data = data;
         }
 
-    } 
+    }
+
     public class LastAction {
 
         @SerializedName("type")
@@ -530,7 +529,8 @@ public class ActivityHyperCareLeads extends AppCompatActivity {
             this.time = time;
         }
 
-    } 
+    }
+
     public class NextAction {
 
         @SerializedName("type")

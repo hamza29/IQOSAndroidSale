@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivLogo"
             android:layout_centerHorizontal="true"
-             android:text="Meeting CheckList"
+            android:text="Meeting CheckList"
             android:textColor="@color/white"
             android:textSize="@dimen/_13sdp" />
 
@@ -45,428 +44,427 @@
     </RelativeLayout>
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_below="@+id/rlHeader"
         android:layout_height="match_parent"
-        android:background="@color/SkyBase"
+        android:layout_below="@+id/rlHeader"
         android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_5sdp"
-        >
+        android:background="@color/SkyBase">
 
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/rvMeeting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rvMeeting"
             android:layout_marginTop="@dimen/_10sdp">
 
+            <LinearLayout
+                android:id="@+id/llTasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <LinearLayout
-                    android:id="@+id/llTasks"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+
+                    <TextView
+                        android:id="@+id/tvLeadName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
 
+                        android:layout_weight="1"
 
-                        <TextView
-                            android:id="@+id/tvLeadName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
 
-                            android:layout_weight="1"
-
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvQuestion1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Q1. Have you tried any smoke-free alternatives before?
+                    <TextView
+                        android:id="@+id/tvQuestion1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Q1. Have you tried any smoke-free alternatives before?
 "
-                            android:layout_weight="1"
 
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                        <RadioButton
-                            android:id="@+id/rbQ1a1"
-                            android:backgroundTint="@color/blue"
-                            android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                            android:layout_gravity="start |center_vertical"
-                            android:buttonTint="@color/blue"
-                            android:gravity="start|center_vertical"
-                            android:textColor="@color/blue"
-                         android:text="Yes heated tobacco products"
-                             />
-                            <RadioButton
-                            android:id="@+id/rbQ1a2"
-                            android:backgroundTint="@color/blue"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start |center_vertical"
-                            android:buttonTint="@color/blue"
-                            android:gravity="start|center_vertical"
-                            android:textColor="@color/blue"
-                            android:text="Yes vape or e-cigarettes"
-                             />
-                            <RadioButton
-                                android:id="@+id/rbQ1a3"
-
-                            android:backgroundTint="@color/blue"
-                            android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                            android:layout_gravity="start |center_vertical"
-                            android:buttonTint="@color/blue"
-                            android:gravity="start|center_vertical"
-                            android:textColor="@color/blue"
-                         android:text="Yes other"
-                             /> <RadioButton
-                                android:id="@+id/rbQ1a4"
-
-                            android:backgroundTint="@color/blue"
-                            android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                            android:layout_gravity="start |center_vertical"
-                            android:buttonTint="@color/blue"
-                            android:gravity="start|center_vertical"
-                            android:textColor="@color/blue"
-                         android:text="No"
-                             />
-                        </RadioGroup>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            android:id="@+id/tvQuestion2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Q2. Did your choice work for you?"
-                            android:layout_weight="1"
-
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
-
-<RadioGroup
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-                        <RadioButton
-                            android:id="@+id/rbQ2a1"
-                            android:backgroundTint="@color/blue"
-                            android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-android:layout_gravity="start |center_vertical"
-                            android:buttonTint="@color/blue"
-                            android:gravity="start|center_vertical"
-                            android:textColor="@color/blue"
-                         android:text="If yes, why"
-                             />
-    <EditText
-        android:id="@+id/rbQ2a1Et"
-        android:layout_margin="@dimen/_5sdp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_gravity="start"
-        android:gravity="start"
-        android:background="@drawable/rounded_corner_meeting"
-        android:imeOptions="actionNext"
-        android:padding="@dimen/_5sdp"/>
-
-
-    <RadioButton
-                            android:backgroundTint="@color/blue"
-                            android:id="@+id/rbQ2a2"
-                            android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                            android:layout_gravity="start |center_vertical"
-                            android:buttonTint="@color/blue"
-                            android:gravity="start|center_vertical"
-                            android:textColor="@color/blue"
-                         android:text="If no, why did this choice not work for you? did not like taste, too expensive, device issue, ritual was too difficult, poor customer care"
-                             />
-    <EditText
-        android:id="@+id/rbQ2a2Et"
-        android:layout_margin="@dimen/_5sdp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_gravity="start"
-        android:gravity="start"
-        android:background="@drawable/rounded_corner_meeting"
-        android:imeOptions="actionNext"
-        android:padding="@dimen/_5sdp"/>
-
-</RadioGroup>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/tvQuestion3"
-                            android:text="Q3. What are your concerns with the current product you are using?"
-                            android:layout_weight="1"
-
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/etQ3a"
-                            android:layout_margin="@dimen/_5sdp"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_50sdp"
-                            android:layout_gravity="start"
-                            android:gravity="start"
-                            android:background="@drawable/rounded_corner_meeting"
-                            android:imeOptions="actionNext"
-                            android:padding="@dimen/_5sdp"/>
-
-                    </LinearLayout>
-                     <LinearLayout
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:id="@+id/tvQuestion4"
-                            android:layout_height="wrap_content"
-                            android:text="Q4. What is your motivation to consider alternatives today?"
-                            android:layout_weight="1"
-
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/etbrand"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp"
-                         android:layout_gravity="start"
-                        android:gravity="start"
-                        android:background="@drawable/rounded_corner_meeting"
-                        android:imeOptions="actionNext"
-                        android:padding="@dimen/_5sdp"/>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_gravity="center"
-                        android:gravity="center"
+                    <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/v1"
-                            android:layout_margin="@dimen/_5sdp"
-                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/_8sdp"
-                            android:text="how to quick start"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:background="@drawable/rectangle_background"
-                            android:backgroundTint="@color/blue"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_11sdp"
-                            />
-                        <TextView
-                            android:layout_margin="@dimen/_5sdp"
-                            android:id="@+id/v2"
+                        <RadioButton
+                            android:id="@+id/rbQ1a1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/_8sdp"
-                            android:layout_weight="1"
-                            android:text="how to charge"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:background="@drawable/rectangle_background"
+                            android:layout_gravity="start |center_vertical"
                             android:backgroundTint="@color/blue"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_11sdp"
-                            />
-                        <TextView
-                            android:layout_margin="@dimen/_5sdp"
-                       android:visibility="gone"      android:layout_width="@dimen/_80sdp"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/_8sdp"
-                            android:text="v3"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:background="@drawable/rectangle_background"
-                            android:backgroundTint="@color/blue"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_11sdp"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-    android:orientation="horizontal"
-    android:layout_gravity="start"
-                        android:visibility="gone"
-    android:gravity="start"
-                        android:paddingStart="@dimen/_17sdp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+                            android:buttonTint="@color/blue"
+                            android:gravity="start|center_vertical"
+                            android:text="Yes heated tobacco products"
+                            android:textColor="@color/blue" />
 
-    <TextView
-        android:layout_margin="@dimen/_5sdp"
-         android:layout_width="@dimen/_80sdp"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_8sdp"
-        android:text="i1"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@drawable/rectangle_background"
-        android:backgroundTint="@color/blue"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_11sdp"
-        />
-    <TextView
-        android:layout_margin="@dimen/_5sdp"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_8sdp"
-        android:text="i2"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@drawable/rectangle_background"
-        android:backgroundTint="@color/blue"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_11sdp"
-        />
-
-</LinearLayout>
-                    <LinearLayout
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-
-                        <TextView
+                        <RadioButton
+                            android:id="@+id/rbQ1a2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Q6. Did you make a sale or not?"
-                            android:layout_weight="1"
-
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:foreground="@drawable/ripple"
-                            android:id="@+id/tvSales"
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/_8sdp"
-                            android:text="Sale"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:background="@drawable/rectangle_background"
+                            android:layout_gravity="start |center_vertical"
                             android:backgroundTint="@color/blue"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_11sdp"
-                            />
-            <TextView
-                android:foreground="@drawable/ripple"
-                android:layout_margin="@dimen/_5sdp"
-                            android:id="@+id/tvNoSales"
-                            android:layout_width="@dimen/_60sdp"
+                            android:buttonTint="@color/blue"
+                            android:gravity="start|center_vertical"
+                            android:text="Yes vape or e-cigarettes"
+                            android:textColor="@color/blue" />
+
+                        <RadioButton
+                            android:id="@+id/rbQ1a3"
+
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/_8sdp"
-                            android:text="No Sale"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:background="@drawable/rectangle_background"
+                            android:layout_gravity="start |center_vertical"
                             android:backgroundTint="@color/blue"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_11sdp"
-                            />
+                            android:buttonTint="@color/blue"
+                            android:gravity="start|center_vertical"
+                            android:text="Yes other"
+                            android:textColor="@color/blue" />
 
+                        <RadioButton
+                            android:id="@+id/rbQ1a4"
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_below="@+id/rvMeeting"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-
-
-
-                        <TextView
-                            android:id="@+id/tvComplete"
-                            android:layout_width="wrap_content"
-                            android:visibility="gone"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/_8sdp"
-                            android:foreground="@drawable/ripple"
-                            android:text="Complete"
-                            android:background="@drawable/rectangle_background"
+                            android:layout_gravity="start |center_vertical"
                             android:backgroundTint="@color/blue"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
+                            android:buttonTint="@color/blue"
+                            android:gravity="start|center_vertical"
+                            android:text="No"
+                            android:textColor="@color/blue" />
+                    </RadioGroup>
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tvQuestion2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Q2. Did your choice work for you?"
+
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/rbQ2a1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start |center_vertical"
+                            android:backgroundTint="@color/blue"
+                            android:buttonTint="@color/blue"
+                            android:gravity="start|center_vertical"
+                            android:text="If yes, why"
+                            android:textColor="@color/blue" />
+
+                        <EditText
+                            android:id="@+id/rbQ2a1Et"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_gravity="start"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:background="@drawable/rounded_corner_meeting"
+                            android:gravity="start"
+                            android:imeOptions="actionNext"
+                            android:padding="@dimen/_5sdp" />
+
+
+                        <RadioButton
+                            android:id="@+id/rbQ2a2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start |center_vertical"
+                            android:backgroundTint="@color/blue"
+                            android:buttonTint="@color/blue"
+                            android:gravity="start|center_vertical"
+                            android:text="If no, why did this choice not work for you? did not like taste, too expensive, device issue, ritual was too difficult, poor customer care"
+                            android:textColor="@color/blue" />
+
+                        <EditText
+                            android:id="@+id/rbQ2a2Et"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_gravity="start"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:background="@drawable/rounded_corner_meeting"
+                            android:gravity="start"
+                            android:imeOptions="actionNext"
+                            android:padding="@dimen/_5sdp" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tvQuestion3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Q3. What are your concerns with the current product you are using?"
+
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etQ3a"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_gravity="start"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
+                        android:imeOptions="actionNext"
+                        android:padding="@dimen/_5sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tvQuestion4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Q4. What is your motivation to consider alternatives today?"
+
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etbrand"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_gravity="start"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="start"
+                        android:imeOptions="actionNext"
+                        android:padding="@dimen/_5sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/v1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rectangle_background"
+                        android:backgroundTint="@color/blue"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:text="how to quick start"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <TextView
+                        android:id="@+id/v2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rectangle_background"
+                        android:backgroundTint="@color/blue"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:text="how to charge"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <TextView
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/rectangle_background"
+                        android:backgroundTint="@color/blue"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:text="v3"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_17sdp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/rectangle_background"
+                        android:backgroundTint="@color/blue"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:text="i1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <TextView
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/rectangle_background"
+                        android:backgroundTint="@color/blue"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:text="i2"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Q6. Did you make a sale or not?"
+
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/tvSales"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rectangle_background"
+                        android:backgroundTint="@color/blue"
+                        android:foreground="@drawable/ripple"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:text="Sale"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <TextView
+                        android:id="@+id/tvNoSales"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/rectangle_background"
+                        android:backgroundTint="@color/blue"
+                        android:foreground="@drawable/ripple"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:text="No Sale"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rvMeeting"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvComplete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangle_background"
+                        android:backgroundTint="@color/blue"
+                        android:foreground="@drawable/ripple"
+                        android:padding="@dimen/_8sdp"
+                        android:text="Complete"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
 
         </androidx.core.widget.NestedScrollView>
-
-
 
 
     </RelativeLayout>

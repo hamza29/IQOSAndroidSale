@@ -5,13 +5,13 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:fitsSystemWindows="true"
+    android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
     <include
+        android:id="@+id/appBarMain"
         layout="@layout/mainact_design"
         android:layout_width="match_parent"
-        android:id="@+id/appBarMain"
         android:layout_height="@dimen/_80sdp" />
 
 
@@ -20,11 +20,11 @@
         android:layout_width="@dimen/_190sdp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
         android:backgroundTint="@color/darkblue"
+        android:fitsSystemWindows="true"
         app:headerLayout="@layout/drawer_header"
         app:itemIconPadding="@dimen/design_navigation_icon_padding"
-        app:menu="@menu/activity_main_drawer" >
+        app:menu="@menu/activity_main_drawer">
 
     </com.google.android.material.navigation.NavigationView>
 

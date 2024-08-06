@@ -1,12 +1,11 @@
 package com.example.iqos;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BaseActivity  extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity {
 
 
     @Override

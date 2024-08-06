@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,13 +15,13 @@
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="@dimen/_25sdp"
-            android:foreground="@drawable/ripple"
             android:layout_height="@dimen/_20sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/ic_arrow_back_white_24dp"
-            android:backgroundTint="@color/white" />
+            android:backgroundTint="@color/white"
+            android:foreground="@drawable/ripple" />
 
 
         <ImageView
@@ -38,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivLogo"
             android:layout_centerHorizontal="true"
-             android:text="Ecomm Meeting"
+            android:text="Ecomm Meeting"
             android:textColor="@color/white"
             android:textSize="@dimen/_13sdp" />
 
@@ -46,203 +45,210 @@
     </RelativeLayout>
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_below="@+id/rlHeader"
         android:layout_height="match_parent"
-        android:background="@color/SkyBase"
+        android:layout_below="@+id/rlHeader"
         android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        >
+        android:background="@color/SkyBase">
 
 
         <TextView
             android:id="@+id/tvMeeting"
-        android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-             android:text="Pre Meeting Checklist"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="end"
             android:layout_marginTop="@dimen/_5sdp"
+            android:text="Pre Meeting Checklist"
             android:textColor="@color/blue"
             android:textSize="@dimen/_12sdp"
-            android:textStyle="bold" />
-<ScrollView
-    android:layout_below="@+id/tvMeeting"
-    android:id="@+id/scrollView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:id="@+id/llTasks"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tvLeadName"
-            android:layout_margin="@dimen/_5sdp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             android:layout_weight="1"
-android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/_11sdp"
-            android:textStyle="bold" />
+            android:layout_below="@+id/tvMeeting">
 
+            <LinearLayout
+                android:id="@+id/llTasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLeadName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+
+                <LinearLayout
+                    android:id="@+id/llCoach"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@drawable/rounded_corner_meeting"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="DCE Customer Registration"
+
+                                android:textColor="@color/blue"
+                                android:textSize="@dimen/_11sdp"
+                                android:textStyle="bold" />
+
+
+                            <CheckBox
+                                android:id="@+id/cbCustomer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_gravity="center"
+                                android:backgroundTint="@color/blue"
+                                android:buttonTint="@color/blue"
+                                android:gravity="center"
+                                android:text="Yes"
+                                android:textAlignment="center" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Device Linking DCE"
+
+                                android:textColor="@color/blue"
+                                android:textSize="@dimen/_11sdp"
+                                android:textStyle="bold" />
+
+
+                            <CheckBox
+                                android:id="@+id/cbDeviceLinking"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_gravity="center"
+                                android:backgroundTint="@color/blue"
+                                android:buttonTint="@color/blue"
+                                android:gravity="center"
+                                android:text="Yes"
+                                android:textAlignment="center" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="E-Commerce Registration"
+
+                                android:textColor="@color/blue"
+                                android:textSize="@dimen/_11sdp"
+                                android:textStyle="bold" />
+
+
+                            <CheckBox
+                                android:id="@+id/cbEcoomerRegisteration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_gravity="center"
+                                android:backgroundTint="@color/blue"
+                                android:buttonTint="@color/blue"
+                                android:gravity="center"
+                                android:text="Yes"
+                                android:textAlignment="center" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llConsumerKit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@drawable/rounded_corner_meeting"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
 
         <LinearLayout
-            android:id="@+id/llCoach"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="@drawable/rounded_corner_meeting"
-            android:orientation="horizontal">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/_5sdp"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DCE Customer Registration"
-            android:layout_weight="1"
-
-            android:textColor="@color/blue"
-            android:textSize="@dimen/_11sdp"
-            android:textStyle="bold" />
-
-
-        <CheckBox
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:buttonTint="@color/blue"
-            android:id="@+id/cbCustomer"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_20sdp"
-            android:backgroundTint="@color/blue"
-            android:textAlignment="center"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/_5sdp"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Device Linking DCE"
-            android:layout_weight="1"
-
-            android:textColor="@color/blue"
-            android:textSize="@dimen/_11sdp"
-            android:textStyle="bold" />
-
-
-        <CheckBox
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:buttonTint="@color/blue"
-            android:id="@+id/cbDeviceLinking"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_20sdp"
-            android:backgroundTint="@color/blue"
-            android:textAlignment="center"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/_5sdp"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="E-Commerce Registration"
-            android:layout_weight="1"
-
-            android:textColor="@color/blue"
-            android:textSize="@dimen/_11sdp"
-            android:textStyle="bold" />
-
-
-        <CheckBox
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:buttonTint="@color/blue"
-            android:id="@+id/cbEcoomerRegisteration"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_20sdp"
-            android:backgroundTint="@color/blue"
-            android:textAlignment="center"
-            />
-
-    </LinearLayout>
-
-</LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/llConsumerKit"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="@drawable/rounded_corner_meeting"
-            android:orientation="horizontal">
-
-
-        </LinearLayout>
-      </LinearLayout>
-
-</ScrollView>
-        <LinearLayout
             android:layout_below="@+id/scrollView"
-             android:layout_marginTop="@dimen/_20sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
             android:gravity="center"
             android:orientation="horizontal">
 
 
             <TextView
+                android:id="@+id/tvDone"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="wrap_content"
-                 android:text="End"
-                android:textAlignment="center"
                 android:background="@drawable/rectangle_background"
-              android:foreground="@drawable/ripple"   android:backgroundTint="@color/blue"
-                android:id="@+id/tvDone"
+                android:backgroundTint="@color/blue"
+                android:foreground="@drawable/ripple"
                 android:paddingStart="@dimen/_15sdp"
-                android:paddingEnd="@dimen/_15sdp"
                 android:paddingTop="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_15sdp"
                 android:paddingBottom="@dimen/_3sdp"
+                android:text="End"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
@@ -252,21 +258,20 @@ android:layout_gravity="center"
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:paddingStart="@dimen/_15sdp"
-                android:paddingEnd="@dimen/_15sdp"
-                android:paddingTop="@dimen/_3sdp"
-                android:textAlignment="center"
-                android:paddingBottom="@dimen/_3sdp"
-                 android:text="End"
-                android:visibility="gone"
                 android:background="@drawable/rectangle_background"
                 android:backgroundTint="@color/blue"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:text="End"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
         </LinearLayout>
-
 
 
     </RelativeLayout>

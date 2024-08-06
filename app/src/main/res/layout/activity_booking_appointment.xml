@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,13 +15,13 @@
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="@dimen/_25sdp"
-            android:foreground="@drawable/ripple"
             android:layout_height="@dimen/_20sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/ic_arrow_back_white_24dp"
-            android:backgroundTint="@color/white" />
+            android:backgroundTint="@color/white"
+            android:foreground="@drawable/ripple" />
 
 
         <ImageView
@@ -38,68 +37,69 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivLogo"
             android:layout_centerHorizontal="true"
-             android:text="Book Appointment"
+            android:text="Book Appointment"
             android:textColor="@color/white"
             android:textSize="@dimen/_13sdp" />
 
 
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/llAppoint"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/rlHeader"
         android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:orientation="vertical"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_height="wrap_content">
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:orientation="vertical">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_marginBottom="@dimen/_10sdp"
-                     android:layout_width="match_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:orientation="horizontal">
 
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="Name"
-                        android:textSize="@dimen/_11sdp"
                         android:textColor="@color/black"
-                        android:textStyle="bold"/>
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/tvName"
 
-                    android:background="@drawable/rounded_corner_meeting"
-
                         android:layout_width="match_parent"
 
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-
-
-                        android:padding="@dimen/_5sdp"
                         android:layout_height="wrap_content"
-                         android:textSize="@dimen/_10sdp"
+
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_corner_meeting"
+
+
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
                         android:textColor="@color/blue"
-                        android:textStyle="bold"/>
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
@@ -112,148 +112,143 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="Time"
-                        android:textSize="@dimen/_11sdp"
                         android:textColor="@color/black"
-                        android:textStyle="bold"/>
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvTime"
                         android:layout_width="match_parent"
-                        android:text="HH:mm:ss"
-android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        android:gravity="center_vertical"
-                        android:background="@drawable/rounded_corner_meeting"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                         android:textSize="@dimen/_10sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        android:text="HH:mm:ss"
                         android:textColor="@color/blue"
-                        android:textStyle="bold"/>
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
-
-
-
 
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal">
 
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="Date"
-                        android:textSize="@dimen/_11sdp"
                         android:textColor="@color/black"
-                        android:textStyle="bold"/>
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
                         android:id="@+id/tvDate"
                         android:layout_width="match_parent"
-                        android:text="yyyy-mm-dd"
-                        android:padding="@dimen/_5sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:background="@drawable/rounded_corner_meeting"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
 
-                        android:layout_height="wrap_content"
-                         android:textSize="@dimen/_10sdp"
+                        android:text="yyyy-mm-dd"
                         android:textColor="@color/blue"
-                        android:textStyle="bold"/>
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal">
 
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="Location"
-                        android:textSize="@dimen/_11sdp"
                         android:textColor="@color/black"
-                        android:textStyle="bold"/>
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/tvLocation"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:padding="@dimen/_5sdp"
                         android:layout_height="wrap_content"
-                         android:textSize="@dimen/_10sdp"
-                        android:hint="Enter Location"
+                        android:layout_weight="1"
                         android:background="@drawable/rounded_corner_meeting"
+                        android:hint="Enter Location"
+                        android:padding="@dimen/_5sdp"
                         android:textColor="@color/blue"
-                        android:textStyle="bold"/>
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
 
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
 
                     <TextView
-                        android:layout_gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="Appointment Status"
                         android:gravity="start"
+                        android:text="Appointment Status"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold" />
 
                     <RelativeLayout
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
-                          android:background="@drawable/rounded_corner_tv_background"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_corner_tv_background">
 
 
                         <Spinner
+                            android:id="@+id/spinnerAppointStatus"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_30sdp"
-                            android:id="@+id/spinnerAppointStatus"
-                            android:background="@color/transparent"
-                            />
+                            android:background="@color/transparent" />
 
                         <ImageView
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_20sdp"
-                            android:background="@drawable/ic_baseline_keyboard_arrow_down_24"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
-                            />
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:background="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
                     </RelativeLayout>
 
@@ -271,36 +266,33 @@ android:layout_gravity="center_vertical"
                 </LinearLayout>
 
 
-
             </LinearLayout>
-
-
-
 
 
         </LinearLayout>
 
 
     </LinearLayout>
+
     <TextView
 
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
         android:id="@+id/confirmApp"
-        android:foreground="@drawable/ripple"
-        android:layout_below="@+id/llAppoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_below="@+id/llAppoint"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|end"
         android:layout_marginTop="@dimen/_5sdp"
-        android:text="Confirm Appointment"
+
         android:background="@drawable/rectangle_background"
         android:backgroundTint="@color/blue"
-android:padding="@dimen/_10sdp"
-        android:layout_gravity="bottom|end"
-        android:textSize="@dimen/_10sdp"
+        android:foreground="@drawable/ripple"
+        android:gravity="center"
+        android:padding="@dimen/_10sdp"
+        android:text="Confirm Appointment"
         android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold" />
 
 
     <ProgressBar

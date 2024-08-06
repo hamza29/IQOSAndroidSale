@@ -27,6 +27,7 @@ public interface ApiService {
                                  @Field("password") String password,
                                  @Field("device_token") String device_token
     );
+
     @FormUrlEncoded
     @POST("qoach/leads")
     Call<Model.GetLeadsModel> getLeads(
@@ -35,6 +36,7 @@ public interface ApiService {
             @Field("type") String type
 
     );
+
     @FormUrlEncoded
     @POST("qoach/leads/sales")
     Call<Model.GetLeadsModel> getSales(
@@ -43,14 +45,15 @@ public interface ApiService {
             @Field("type") String type
 
     );
-     @POST("qoach/lead/e-comm")
+
+    @POST("qoach/lead/e-comm")
     Call<ActivityLeads.EcommLeads> getEcomLeads(
             @Header("Accept") String accept,
             @Header("Authorization") String token
 
     );
 
-     @POST("qoach/lead/device-care/leads")
+    @POST("qoach/lead/device-care/leads")
     Call<ActivityHyperCareLeads.DeviceCareLeadsModel> getHyperLeads(
             @Header("Accept") String accept,
             @Header("Authorization") String token
@@ -64,6 +67,7 @@ public interface ApiService {
             @Header("Authorization") String token,
             @Field("id") String id
     );
+
     @POST("qoach/lead")
     Call<Model.LeadData> createLead(
             @Header("Accept") String accept,
@@ -85,11 +89,10 @@ public interface ApiService {
             @Header("Accept") String accept,
             @Header("Authorization") String token);
 
-@GET("qoach/lead/e-comm/appointments")
+    @GET("qoach/lead/e-comm/appointments")
     Call<ActivityBookAppointment.EcomAppointments> getEcomAppointment(
             @Header("Accept") String accept,
             @Header("Authorization") String token);
-
 
 
     @POST("qoach/lead/device-care/appointments")
@@ -109,6 +112,7 @@ public interface ApiService {
             @Field("appointment_location") String appointment_location,
             @Field("lead_status") String lead_status
     );
+
     @FormUrlEncoded
     @POST("qoach/lead/e-comm/appointments/book")
     Call<Model.GenerealModel> bookEcomAppointment(
@@ -119,7 +123,6 @@ public interface ApiService {
             @Field("appointment_at") String appointment_at,
             @Field("appointment_location") String appointment_location
     );
-
 
 
     @FormUrlEncoded
@@ -136,8 +139,6 @@ public interface ApiService {
     );
 
 
-
-
     @POST("qoach/lead/sale-information")
     Call<ActivitySales.UpdateSaleModel> updateSale(
             @Header("Accept") String accept,
@@ -148,7 +149,7 @@ public interface ApiService {
     );
 
 
-////
+    ////
     @POST("qoach/lead/update-sale-info")
     Call<ActivitySales.UpdateSaleModel> updateinfoSale(
             @Header("Accept") String accept,
@@ -158,7 +159,7 @@ public interface ApiService {
 
     );
 
-     @POST("qoach/lead/pre-checklist")
+    @POST("qoach/lead/pre-checklist")
     Call<Model.GenerealModel> updatePreMeetingChecklist(
 
             @Header("Authorization") String token,
@@ -166,7 +167,8 @@ public interface ApiService {
 
 
     );
-     @POST("qoach/lead/e-comm/meeting")
+
+    @POST("qoach/lead/e-comm/meeting")
     Call<Model.GenerealModel> updateEcomMeeting(
 
             @Header("Authorization") String token,
@@ -175,7 +177,7 @@ public interface ApiService {
 
     );
 
-     @POST("qoach/lead/meeting")
+    @POST("qoach/lead/meeting")
     Call<Model.GenerealModel> updateMeetingChecklist(
 
             @Header("Authorization") String token,
@@ -184,7 +186,7 @@ public interface ApiService {
 
     );
 
-     @POST("qoach/lead/device-care/meeting")
+    @POST("qoach/lead/device-care/meeting")
     Call<Model.GenerealModel> updateHyperMeetingChecklist(
 
             @Header("Authorization") String token,
@@ -265,6 +267,7 @@ public interface ApiService {
             @Header("Authorization") String token
 
     );
+
     @FormUrlEncoded
     @POST("qoach/lead/get-qrcode")
     Call<ActivitySales.GetQRModel> getQRCode(
@@ -287,6 +290,7 @@ public interface ApiService {
             @Header("Authorization") String token
 
     );
+
     @FormUrlEncoded
     @POST("qoach/lead/get-package-detail")
     Call<ActivitySales.PackageDetail> getpackageDetails(

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -16,15 +15,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.iqos.AppointmentsModule.AppointmentAdapter;
-import com.example.iqos.AppointmentsModule.AppointmentBookingDetailActivity;
 import com.example.iqos.Constants;
 import com.example.iqos.Retrofit.ApiClient;
 import com.example.iqos.Retrofit.ApiService;
 import com.example.iqos.Retrofit.Model;
-import com.example.iqos.databinding.ActivityBookAppointmentBinding;
 import com.example.iqos.databinding.ActivityBookAppointmentDetailBinding;
 
 import java.util.ArrayList;
@@ -41,7 +36,8 @@ public class BookAppointmentDetailActivity extends AppCompatActivity {
     ActivityBookAppointmentDetailBinding mBinding;
     ArrayList<String> AppointStatus = new ArrayList<>();
 
-String appoint_status="Scheduled";
+    String appoint_status = "Scheduled";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +69,7 @@ String appoint_status="Scheduled";
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 String selectedDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                                mBinding.tvDate.setText(""+ selectedDate);
+                                mBinding.tvDate.setText("" + selectedDate);
                             }
                         }, year, month, day);
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -93,8 +89,8 @@ String appoint_status="Scheduled";
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                String selectedTime = hourOfDay + ":" + minute+":00";
-                                mBinding.tvTime.setText(""+ selectedTime);
+                                String selectedTime = hourOfDay + ":" + minute + ":00";
+                                mBinding.tvTime.setText("" + selectedTime);
                             }
                         }, hour, minute, false);
 
@@ -103,32 +99,29 @@ String appoint_status="Scheduled";
         });
 
 
-        appointmentDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),intent.getStringExtra("appointment_id"));
-
-
+        appointmentDetails(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""), intent.getStringExtra("appointment_id"));
 
 
     }
 
-    private void setAppointStatusSpinner(String status){
+    private void setAppointStatusSpinner(String status) {
 
 
-        ArrayList<String > newLeads = new ArrayList<>();
-        for (int i =0;i< AppointStatus.size();i++){
-            if(status .equalsIgnoreCase(AppointStatus.get(i))){
-                newLeads .add(0,""+AppointStatus.get(i));
-            }else
-            {
-                newLeads.add(""+AppointStatus.get(i));
+        ArrayList<String> newLeads = new ArrayList<>();
+        for (int i = 0; i < AppointStatus.size(); i++) {
+            if (status.equalsIgnoreCase(AppointStatus.get(i))) {
+                newLeads.add(0, "" + AppointStatus.get(i));
+            } else {
+                newLeads.add("" + AppointStatus.get(i));
 
             }
 
 
-        } 
+        }
         mBinding.spinnerAppointStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                appoint_status = newLeads.get(position) ;
+                appoint_status = newLeads.get(position);
 
 
             }
@@ -151,12 +144,12 @@ String appoint_status="Scheduled";
         mBinding.spinnerAppointStatus.setAdapter(ad);
     }
 
-    public void appointmentDetails(String token,String id ) {
+    public void appointmentDetails(String token, String id) {
         mBinding.progress.setVisibility(View.VISIBLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(BookAppointmentDetailActivity.this).create(ApiService.class);
-        Call<Model.AppointmentDetailsModel> call = apiService.appointmentDetails("application/json",token,
+        Call<Model.AppointmentDetailsModel> call = apiService.appointmentDetails("application/json", token,
                 id);
         call.enqueue(new Callback<Model.AppointmentDetailsModel>() {
             @Override
@@ -173,25 +166,27 @@ String appoint_status="Scheduled";
                                 if (keyModel.getData() != null) {
 
                                     mBinding.progress.setVisibility(View.GONE);
-mBinding.tvAppointment.setText("Appointment # "+keyModel.getData().getAppoinment().getId());
+                                    mBinding.tvAppointment.setText("Appointment # " + keyModel.getData().getAppoinment().getId());
 
-                                if(keyModel.getData().getAppoinment().getFirstName() !=null ){
-                                    mBinding.tvName.setText(""+ keyModel.getData().getAppoinment().getFirstName() );
-                                }
-                                if(keyModel.getData().getAppoinment().getAppointmentLocation() !=null){
-                                    mBinding.tvLocation.setText(""+ keyModel.getData().getAppoinment().getAppointmentLocation() );
-                                }if(keyModel.getData().getAppoinment().getAppointmentDate() !=null){
-                                    mBinding.tvDate.setText(""+ keyModel.getData().getAppoinment().getAppointmentDate() );
-                                }if(keyModel.getData().getAppoinment().getAppointmentTime() !=null){
-                                    mBinding.tvTime.setText(""+ keyModel.getData().getAppoinment().getAppointmentTime() );
-                                }
+                                    if (keyModel.getData().getAppoinment().getFirstName() != null) {
+                                        mBinding.tvName.setText("" + keyModel.getData().getAppoinment().getFirstName());
+                                    }
+                                    if (keyModel.getData().getAppoinment().getAppointmentLocation() != null) {
+                                        mBinding.tvLocation.setText("" + keyModel.getData().getAppoinment().getAppointmentLocation());
+                                    }
+                                    if (keyModel.getData().getAppoinment().getAppointmentDate() != null) {
+                                        mBinding.tvDate.setText("" + keyModel.getData().getAppoinment().getAppointmentDate());
+                                    }
+                                    if (keyModel.getData().getAppoinment().getAppointmentTime() != null) {
+                                        mBinding.tvTime.setText("" + keyModel.getData().getAppoinment().getAppointmentTime());
+                                    }
                                     mBinding.startAppoint.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
 //                                            if(!appoint_status.equalsIgnoreCase("select")){
-                                            bookApp(mSharedPreferences.getString(Constants.BAREAR_TOKEN,""),
+                                            bookApp(mSharedPreferences.getString(Constants.BAREAR_TOKEN, ""),
                                                     id,
-                                                   appoint_status,
+                                                    appoint_status,
                                                     mBinding.tvDate.getText().toString() + " " + mBinding.tvTime.getText().toString(),
                                                     mBinding.tvLocation.getText().toString());
 //                                        }else{
@@ -207,7 +202,7 @@ mBinding.tvAppointment.setText("Appointment # "+keyModel.getData().getAppoinment
 //                                    setAppointStatusSpinner(keyModel.getData().getAppoinment().getAppointmentStatus());
 //
 //                                }
-                           } else {
+                            } else {
                                 Toast.makeText(BookAppointmentDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 mBinding.progress.setVisibility(View.GONE);
 
@@ -243,12 +238,13 @@ mBinding.tvAppointment.setText("Appointment # "+keyModel.getData().getAppoinment
             }
         });
     }
-    public void bookApp(String token,String id,String status,String app_at,String location) {
+
+    public void bookApp(String token, String id, String status, String app_at, String location) {
         mBinding.progress.setVisibility(View.VISIBLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         ApiService apiService = ApiClient.getClient(BookAppointmentDetailActivity.this).create(ApiService.class);
-        Call<Model.GenerealModel> call = apiService.bookAppointment("application/json",token,id,status,app_at,location,"scheduled");
+        Call<Model.GenerealModel> call = apiService.bookAppointment("application/json", token, id, status, app_at, location, "scheduled");
         call.enqueue(new Callback<Model.GenerealModel>() {
             @Override
             public void onResponse(Call<Model.GenerealModel> call, Response<Model.GenerealModel> response) {
@@ -267,9 +263,6 @@ mBinding.tvAppointment.setText("Appointment # "+keyModel.getData().getAppoinment
 
                                 Toast.makeText(BookAppointmentDetailActivity.this, "Appointment Book Successfully", Toast.LENGTH_SHORT).show();
                                 finish();
-
-
-
 
 
                             } else {
@@ -308,9 +301,6 @@ mBinding.tvAppointment.setText("Appointment # "+keyModel.getData().getAppoinment
             }
         });
     }
-
-
-
 
 
 }
